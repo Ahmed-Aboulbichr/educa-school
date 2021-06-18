@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCondidaturesTable extends Migration
+class CreateCandidaturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateCondidaturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('condidatures', function (Blueprint $table) {
+        Schema::create('candidatures', function (Blueprint $table) {
             $table->id();
+            $table->string('labelle',30);
+            $table->boolean('valide');
+            $table->foreignId('candidat_id')->constrained();
+            $table->foreignId('formation_id')->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateCondidaturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('condidatures');
+        Schema::dropIfExists('candidatures');
     }
 }

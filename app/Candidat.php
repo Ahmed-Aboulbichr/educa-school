@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Condidat extends Model
+class Candidat extends Model
 {
     //
 }
