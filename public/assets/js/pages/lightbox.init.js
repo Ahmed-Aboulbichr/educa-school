@@ -241,7 +241,7 @@ File: Lightbox  Js File
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Admin\resources\js\pages\lightbox.init.js */"./resources/js/pages/lightbox.init.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\educa-school\resources\js\pages\lightbox.init.js */"./resources/js/pages/lightbox.init.js");
 
 
 /***/ })
