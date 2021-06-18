@@ -20,11 +20,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    
+
     //users
     Route::get('utilisateurs', 'UserController@renderView');
     Route::get('renderUsers', 'UserController@renderUsers');
-
 });
 
 
@@ -33,3 +32,14 @@ Route::get('/', 'HomeController@root');
 Route::get('{any}', 'HomeController@index');
 
 Route::get('index/{locale}', 'LocaleController@lang');
+
+//other routes
+Route::resource('/administrateurs', 'AdministrateurController');
+Route::resource('/professeurs', 'ProfesseurController');
+Route::resource('/etudiants', 'EtudiantController');
+Route::resource('/candidats', 'CandidatController');
+Route::resource('/candidatures', 'CandidatureController');
+Route::resource('/sessions', 'SessionController');
+Route::resource('/formations', 'FormationController');
+Route::resource('/seances', 'SeanceController');
+Route::resource('/salles', 'SalleController');

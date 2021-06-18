@@ -15,6 +15,13 @@ class CreateReponsesTable extends Migration
     {
         Schema::create('reponses', function (Blueprint $table) {
             $table->id();
+
+            //columns
+            $table->longText('contenu');
+            //foreign key
+            $table->foreignId('demande_id')->constrained()->onDelete('cascade');
+            $table->foreignId('administrateur_id')->constrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -198,7 +198,7 @@ $("#handle-arrow-dashed").roundSlider({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Admin\resources\js\pages\roundslider.init.js */"./resources/js/pages/roundslider.init.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\educa-school\resources\js\pages\roundslider.init.js */"./resources/js/pages/roundslider.init.js");
 
 
 /***/ })

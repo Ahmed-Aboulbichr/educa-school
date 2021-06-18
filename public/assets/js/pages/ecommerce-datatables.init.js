@@ -141,7 +141,7 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Admin\resources\js\pages\ecommerce-datatables.init.js */"./resources/js/pages/ecommerce-datatables.init.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\educa-school\resources\js\pages\ecommerce-datatables.init.js */"./resources/js/pages/ecommerce-datatables.init.js");
 
 
 /***/ })
