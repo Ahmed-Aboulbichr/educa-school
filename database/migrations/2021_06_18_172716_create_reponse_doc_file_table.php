@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDemandesTable extends Migration
+class CreateReponseDocFileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateDemandesTable extends Migration
      */
     public function up()
     {
-        Schema::create('demandes', function (Blueprint $table) {
+        Schema::create('reponse_doc_file', function (Blueprint $table) {
             $table->id();
 
-            //columns
-            $table->char('statut', '1');
-            $table->string('remarque');
+            //columns foreign key
+            $table->foreignId('reponse_id')->constrained()->onDelete('cascade');
+            $table->foreignId('doc_file_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateDemandesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('demandes');
+        Schema::dropIfExists('reponse_doc_file');
     }
 }

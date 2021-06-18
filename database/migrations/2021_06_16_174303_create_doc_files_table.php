@@ -15,10 +15,19 @@ class CreateDocFilesTable extends Migration
     {
         Schema::create('doc_files', function (Blueprint $table) {
             $table->id();
+            //columns
+            $table->string('type', '30');
+            $table->longText('path');
+            //foreign key
+            //$table->foreign('candidature_id')->references('id')->on('candidature');
+            $table->foreignId('candidature_id')->constrained()->onDelete('cascade');
+            $table->foreignId('document_id')->constrained()->onDelete('cascade');
+            $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
