@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSemestresTable extends Migration
+class CreateSecteurProfessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSemestresTable extends Migration
      */
     public function up()
     {
-        Schema::create('semestres', function (Blueprint $table) {
+        Schema::create('secteur_professions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateSemestresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('semestres');
+        Schema::dropIfExists('secteur_professions');
     }
 }

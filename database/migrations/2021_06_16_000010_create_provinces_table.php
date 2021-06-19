@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdministrateursTable extends Migration
+class CreateProvincesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateAdministrateursTable extends Migration
      */
     public function up()
     {
-        Schema::create('administrateurs', function (Blueprint $table) {
+        Schema::create('provinces', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateAdministrateursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('administrateurs');
+        Schema::dropIfExists('provinces');
     }
 }

@@ -15,6 +15,8 @@ class CreateAbsencesTable extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
+            $table->enum('statut', ['Present(e)','Absent(e)']);
+            $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

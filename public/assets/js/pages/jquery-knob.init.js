@@ -112,7 +112,7 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\Microsoft VS Code Projects\educa-school\resources\js\pages\jquery-knob.init.js */"./resources/js/pages/jquery-knob.init.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\educa-school\resources\js\pages\jquery-knob.init.js */"./resources/js/pages/jquery-knob.init.js");
 
 
 /***/ })

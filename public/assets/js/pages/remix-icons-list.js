@@ -128,7 +128,7 @@ $("#icons").html(iconData);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\Microsoft VS Code Projects\educa-school\resources\js\pages\remix-icons-list.js */"./resources/js/pages/remix-icons-list.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\educa-school\resources\js\pages\remix-icons-list.js */"./resources/js/pages/remix-icons-list.js");
 
 
 /***/ })

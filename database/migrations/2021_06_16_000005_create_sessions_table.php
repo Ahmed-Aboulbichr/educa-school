@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSousGroupesTable extends Migration
+class CreateSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateSousGroupesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sous_groupes', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateSousGroupesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sous_groupes');
+        Schema::dropIfExists('sessions');
     }
 }
