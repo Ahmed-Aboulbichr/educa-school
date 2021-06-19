@@ -5,7 +5,7 @@
 @php $locale = session()->get('locale'); @endphp
 <!-- DataTables css -->
 <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
-
+<script src="{{ URL::asset('/assets/js/users.js')}}" defer></script>
 <style>
     .thead-light>tr>th {
         padding: 9.5px !important;
@@ -55,12 +55,7 @@
                                 <th>
                                     <h6>@lang('manageUsers.email')</h6>
                                 </th>
-                                <th>
-                                    <h6>@lang('manageUsers.tel')</h6>
-                                </th>
-                                <th>
-                                    <h6>@lang('manageUsers.adresse')</h6>
-                                </th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -77,8 +72,13 @@
                 <div id="accordion" class="custom-accordion">
                     <div class="row text-right" style="margin-bottom: 18px;">
                         <div class="col-md-12">
-                            <button class="btn btn-primary btn-sm waves-effect waves-light"><i class='fas fas fa-plus '></i> @lang('manageUsers.nouveau_utilisateur')</button>
-                            <button class="btn btn-danger btn-sm waves-effect waves-light"><i class='fas fas fa-trash-alt'></i> @lang('manageUsers.supprimer_utilisateur')</button>
+                        <form id="userInfoForm" method="post"> 
+                            @csrf 
+                            <div class='btn-group'>
+                            <button type="submit"  name="adduser" class="btn btn-primary btn-sm waves-effect waves-light"><i class='fas fas fa-plus '></i> @lang('manageUsers.nouveau_utilisateur')</button>
+                            <button type="submit" name="deleteuser" class="btn btn-danger btn-sm waves-effect waves-light"><i class='fas fas fa-trash-alt'></i> @lang('manageUsers.supprimer_utilisateur')</button>
+                            <button type="submit" name="edituser" class="btn btn-warning btn-sm waves-effect waves-light"><i class='fas fas fa-pencil-alt'></i> @lang('manageUsers.modifier_utilisateur')</button>
+                            </div>
                         </div>
                     </div>
                     <div class="card mb-1 shadow-none">
@@ -97,6 +97,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
                     <div class="card mb-1 shadow-none">
                         <a href="#collapseTwo" class="text-dark" data-toggle="collapse" aria-expanded="true">
                             <div class="card-header" id="headingTwo">
@@ -138,53 +139,14 @@
     }else{
         url = ""
     }
-    var table = $('#customDatatable').DataTable({
-        serverSide: true,
-        responsive: true,
-
-        ajax: "{{ url('renderUsers') }}",
-        columns: [{
-                data: 'name',
-                name: 'name'
-            },
-            {
-                data: 'email',
-                name: 'email'
-            },
-            {
-                data: 'phone',
-                name: 'phone'
-            },
-            {
-                data: 'address',
-                name: 'address'
-            },
-
-        ],
-
-        "initComplete": function(settings, json) {
-            console.log('dt complet');
-            $('tbody > tr:first-child').click();
-        },
-        "fnCreatedRow": function(nRow, aData, iDataIndex) {
-            $(nRow).attr('id', aData.id);
-        },
-
-        "language": {
-            "url": url,
-            "paginate": {
-                "previous": "<i class='mdi mdi-chevron-left'>",
-                "next": "<i class='mdi mdi-chevron-right'>"
-            }
-        },
-        "drawCallback": function drawCallback() {
-            $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+    var config = {
+        routes: {
+            getUsers: "{{route('getUsers')}}",
+            getUser: "{{route('getUser')}}",
+            addUser: "{{route('addUser')}}",
+            editUser: "{{route('editUser')}}",
+            deleteUser: "{{route('deleteUser')}}",
         }
-    });
-
-    $('tbody').on('click', 'tr', function() {
-        $('tr').removeClass('activeRow')
-        $(this).addClass('activeRow')
-    });
+    };
 </script>
 @endsection

@@ -111,7 +111,7 @@ jQuery.each(val.attributes.membership.free,function(k,iconBrand){console.log('ic
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Admin\resources\js\pages\fontawesome.init.js */"./resources/js/pages/fontawesome.init.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\Microsoft VS Code Projects\educa-school\resources\js\pages\fontawesome.init.js */"./resources/js/pages/fontawesome.init.js");
 
 
 /***/ })

@@ -6,12 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-
+use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
-
+    use HasApiTokens;
+   
     /**
      * The attributes that are mass assignable.
      *
@@ -21,39 +22,8 @@ class User extends Authenticatable
         'firstName', 
         'lastName',
         'email',
-        'password',
-        'address', 
-        'cin', 
-        'phone',
-        'fix',
-        'picture',
-        'companyName', 
-        'companyEmail', 
-        'activities',
-        'fbLinkPage',
-        'igLinkPage',
-        'website',
-        'description',
-        'comission',
-        'transport_id',
-        'livingCity_id',
+        'password'
     ];
-
-    public function workCities(){
-        return $this->belongsToMany(City::class);
-    }
-
-    public function livingCity(){
-        return $this->belongsTo(City::class);
-    }
-
-    public function products(){
-        return $this->hasMany(Product::class);
-    }
-
-    public function transport(){
-        return $this->belongsTo(Transport::class);
-    }
 
     /**
      * The attributes that should be hidden for arrays.

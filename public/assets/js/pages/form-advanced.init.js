@@ -200,7 +200,7 @@ function ($) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\Admin\resources\js\pages\form-advanced.init.js */"./resources/js/pages/form-advanced.init.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\Microsoft VS Code Projects\educa-school\resources\js\pages\form-advanced.init.js */"./resources/js/pages/form-advanced.init.js");
 
 
 /***/ })

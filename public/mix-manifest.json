@@ -2,6 +2,7 @@
     "/assets/js/pages/apexcharts.init.js": "/assets/js/pages/apexcharts.init.js",
     "/assets/css/bootstrap.css": "/assets/css/bootstrap.css",
     "/assets/css/bootstrap-dark.css": "/assets/css/bootstrap-dark.css",
+    "/assets/css/icons.css": "/assets/css/icons.css",
     "/assets/css/app-rtl.css": "/assets/css/app-rtl.css",
     "/assets/css/app.css": "/assets/css/app.css",
     "/assets/css/app-dark.css": "/assets/css/app-dark.css",
@@ -110,6 +111,5 @@
     "/assets/css/app-rtl.min.css": "/assets/css/app-rtl.min.css",
     "/assets/css/app.min.css": "/assets/css/app.min.css",
     "/assets/css/app-dark.min.css": "/assets/css/app-dark.min.css",
-    "/assets/js/app.min.js": "/assets/js/app.min.js",
-    "/assets/css/icons.css": "/assets/css/icons.css"
+    "/assets/js/app.min.js": "/assets/js/app.min.js"
 }

@@ -22,9 +22,12 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     
     //users
-    Route::get('utilisateurs', 'UserController@renderView');
-    Route::get('renderUsers', 'UserController@renderUsers');
-
+    Route::get('utilisateurs', 'UserController@renderView')->name('getView');
+    Route::get('renderUsers', 'UserController@renderUsers')->name('getUsers');
+    Route::get('renderUser', 'UserController@renderUser')->name('getUser');
+    Route::post('storeUser', 'UserController@store')->name('addUser');
+    Route::put('updateUser', 'UserController@update')->name('editUser');
+    Route::delete('destroy', 'UserController@destroy')->name('deleteUser');
 });
 
 
