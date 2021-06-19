@@ -15,6 +15,11 @@ class CreateDemandesTable extends Migration
     {
         Schema::create('demandes', function (Blueprint $table) {
             $table->id();
+
+            //columns
+            $table->char('statut', 20);
+            $table->text('remarque');
+
             $table->timestamps();
         });
     }
