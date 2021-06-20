@@ -41,7 +41,16 @@ Register
                                                     </span>
                                                 @enderror
                                             </div>
-
+                                            <div class="form-group auth-form-group-custom mb-4">
+                                                <i class="ri-user-2-line auti-custom-input-icon"></i>
+                                                <label for="lastName">{{ __('lastName') }}</label>
+                                                <input type="text" id="lastName" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{ old('lastName') }}" required autocomplete="lastName" autofocus placeholder="Enter name">
+                                                @error('lastName')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                             <div class="form-group auth-form-group-custom mb-4">
                                                 <i class="ri-mail-line auti-custom-input-icon"></i>
                                                 <label for="email">{{ __('E-Mail Address') }}</label>

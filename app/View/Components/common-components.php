@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class common-components extends Component
+class common_components extends Component
 {
     /**
      * Create a new component instance.
