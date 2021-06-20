@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('pre-ins', function(){
+
+        return view('pre-inscription.inscription-page')->render();
+    
+    });
 
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
@@ -34,8 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('pages-404', 'NazoxController@index');
 Route::get('/', 'HomeController@root');
 Route::get('{any}', 'HomeController@index');
+Route::get('{any}', 'HomeController@index');
 
-Route::get('index/{locale}', 'LocaleController@lang');
 
 //other routes
 Route::resource('/administrateurs', 'AdministrateurController');
