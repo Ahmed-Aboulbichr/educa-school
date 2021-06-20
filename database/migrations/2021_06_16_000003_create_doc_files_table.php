@@ -19,10 +19,10 @@ class CreateDocFilesTable extends Migration
             $table->string('type', 30);
             $table->longText('path');
             //foreign key
-            
-            $table->foreignId('candidature_id')->constrained()->onDelete('cascade');
+
+            // $table->foreignId('candidature_id')->constrained()->onDelete('cascade');
             $table->foreignId('document_id')->constrained()->onDelete('cascade');
-            $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');
 
 
             $table->timestamps();
