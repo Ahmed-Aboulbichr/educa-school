@@ -64,16 +64,16 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {   
+    {
         $user =  User::create([
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]); 
+        ]);
         $token = $user->createToken("publictoken")->plainTextToken;
-        
-        
+
+
         return $user;
     }
 }
