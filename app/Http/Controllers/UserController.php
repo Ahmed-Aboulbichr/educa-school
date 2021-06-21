@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     public function renderView()
@@ -16,12 +17,11 @@ class UserController extends Controller
     public function renderUsers(Request $request)
     {
         if ($request->ajax()) {
-            $relations = ['pack'];
             $users = User::All();
 
             return Datatables::of($users)
                 ->addColumn('name', function ($row) {
-                    return $row->firstName.' '.$row->lastName;
+                    return $row->firstName . ' ' . $row->lastName;
                 })
 
                 ->rawColumns([''])
@@ -32,18 +32,18 @@ class UserController extends Controller
     public function renderUser(Request $request)
     {
         if ($request->ajax()) {
-            
+
             $user = User::find($request->id);
-           
+
             $response = array(
                 'user' => $user,
             );
-            return  response()->json($response,200);
+            return  response()->json($response, 200);
         }
     }
 
 
-      /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -68,20 +68,19 @@ class UserController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
-    
+
             $user = User::create([
                 'firstName' => $fields['firstName'],
                 'lastName' => $fields['lastName'],
                 'email' => $fields['email'],
                 'password' => Hash::make($fields['password']),
             ]);
-           
+
             $response = array(
                 'user' => $user,
             );
-            return  response()->json($response,200);
+            return  response()->json($response, 200);
         }
-      
     }
 
     /**
@@ -114,31 +113,30 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    { 
+    {
 
         if ($request->ajax()) {
             $fields = $request->validate([
-                'lastName' => [ 'string', 'max:255'],
-                'firstName' => [ 'string', 'max:255'],
-                'email' => ['string', 'email', 'max:255', 'unique:users,email,'.$request->userid,],
+                'lastName' => ['string', 'max:255'],
+                'firstName' => ['string', 'max:255'],
+                'email' => ['string', 'email', 'max:255', 'unique:users,email,' . $request->userid,],
                 'password' => ['string', 'min:8', 'confirmed'],
             ]);
-    
-             $user = User::where('id',$request->userid)->firstOrFail();
-             $user->update([
+
+            $user = User::where('id', $request->userid)->firstOrFail();
+            $user->update([
                 'firstName' => $fields['firstName'],
                 'lastName' => $fields['lastName'],
                 'email' => $fields['email'],
                 'password' => Hash::make($fields['password']),
             ]);
-           
-           
+
+
             $response = array(
                 'user' => $user,
             );
-            return  response()->json($response,200);
+            return  response()->json($response, 200);
         }
-      
     }
 
     /**
@@ -153,5 +151,4 @@ class UserController extends Controller
 
         return "success";
     }
-
 }

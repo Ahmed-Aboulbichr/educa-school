@@ -7,7 +7,8 @@
    
     <!-- Plugins css -->
     <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
-    @endsection
+    <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
 @component('components.breadcrumb')
     @slot('title') Form Wizard @endslot
@@ -59,19 +60,29 @@
                         <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"></div>
                     </div>
                     <div class="tab-content twitter-bs-wizard-tab-content">
+
+
+
+
+
+
+
+
+
+                        <!-- Tab 1 -->
                         <div class="tab-pane" id="progress-seller-details">
                             <form>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-firstname-input">First name</label>
+                                            <label for="progress-basicpill-firstname-input">Nom</label>
                                             <input type="text" class="form-control" id="progress-basicpill-firstname-input">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-lastname-input">Last name</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-lastname-input">
+                                            <label for="progress-basicpill-lastname-input" class="arabic">الإسم</label>
+                                            <input type="text" class="form-control rtl" id="progress-basicpill-lastname-input">
                                         </div>
                                     </div>
                                 </div>
@@ -79,17 +90,121 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-phoneno-input">Phone</label>
+                                            <label for="progress-basicpill-phoneno-input" >Prénom</label>
                                             <input type="text" class="form-control" id="progress-basicpill-phoneno-input">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-email-input">Email</label>
+                                            <label for="progress-basicpill-email-input" class="arabic">النسب</label>
+                                            <input type="email" class="form-control rtl" id="progress-basicpill-email-input">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-phoneno-input" >Lieu de naissance</label>
+                                            <input type="text" class="form-control" id="progress-basicpill-phoneno-input">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-email-input" class="arabic">مكان الإزدياد</label>
+                                            <input type="email" class="form-control rtl" id="progress-basicpill-email-input">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-phoneno-input" >CIN</label>
+                                            <input type="text" class="form-control" id="progress-basicpill-phoneno-input">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-email-input">CNE</label>
                                             <input type="email" class="form-control" id="progress-basicpill-email-input">
                                         </div>
                                     </div>
                                 </div>
+
+                                
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-phoneno-input" >Date de naissance</label>
+                                            <input type="text" class="form-control" id="progress-basicpill-phoneno-input">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-email-input">Téléphone</label>
+                                            <input type="email" class="form-control" id="progress-basicpill-email-input">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-phoneno-input" >Situation familiale</label>
+                                            {{-- <input type="text" class="form-control" id="progress-basicpill-phoneno-input"> --}}
+                                            <select class="form-control">
+                                                <option>marié (M)</option>
+                                                <option>pacsé (O)</option>
+                                                <option>divorcé (D)</option>
+                                                <option>séparé (D)</option>
+                                                <option>célibataire (C)</option>
+                                                <option>veuf (V)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-email-input">Genre</label>
+                                            <div class="row" style="justify-content: space-around">
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="masculin" name="customRadio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="masculin">Masculin</label>
+                                                </div>
+                                                <div class="custom-control custom-radio mb-3">
+                                                    <input type="radio" id="feminin" name="customRadio" class="custom-control-input">
+                                                    <label class="custom-control-label" for="feminin">Féminin</label>
+                                                </div>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-phoneno-input" >Pays</label>
+                                            {{-- <input type="text" class="form-control" id="progress-basicpill-phoneno-input"> --}}
+                                            <select class="form-control" id="paysOptions">
+                                                <option>-----------</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-email-input">Nationalité</label>
+                                            <input type="email" class="form-control" id="progress-basicpill-email-input">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-email-input">Ville</label>
+                                            <input type="email" class="form-control" id="progress-basicpill-email-input">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
@@ -100,6 +215,22 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- End Tab 1 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <div class="tab-pane" id="progress-company-document">
                             <div>
                             <form>
@@ -388,12 +519,20 @@
      <script src="{{ URL::asset('/assets/libs/dropzone/dropzone.min.js')}}"></script>
     <!-- form wizard init -->
     <script src="{{ URL::asset('/assets/js/pages/form-wizard.init.js')}}"></script>
-   <script>
+  
+    <script src="{{ URL::asset('/assets/js/pays.js')}}"></script>
+    <script>
+        var config = {
+            routes: {
+                getPays: "{{route('getPays')}}",
+            }
+        };
+    
 
-$("#datepicker").datepicker({
+      $("#datepicker").datepicker({
     format: "yyyy",
     viewMode: "years", 
     minViewMode: "years"
-});
+      });
    </script>
 @endsection
