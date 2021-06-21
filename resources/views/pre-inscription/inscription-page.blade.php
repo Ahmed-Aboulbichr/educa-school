@@ -62,7 +62,7 @@
 
                         <!-- Tab 1 -->
                         <div class="tab-pane" id="progress-seller-details">
-                            <form>
+                            <form id="infoCandidat">
                                 <div class="row">
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
@@ -220,7 +220,7 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="progress-parent-details">
-                            <form>
+                            <form  id="infoParent">
                                 <div class="row justify-content-between">
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -456,7 +456,7 @@
                         </div>
                         <div class="tab-pane" id="progress-bank-detail">
                             <div>
-                                <form>
+                                <form id="infoBaccalaureat">
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="form-group">
@@ -534,7 +534,7 @@
                                                 </p>
 
                                                 <div>
-                                                    <form action="#" class="dropzone">
+                                                    <form id="fichierBac" action="#" class="dropzone">
                                                         <div class="fallback">
                                                             <input name="file" type="file" multiple="multiple">
                                                         </div>
@@ -557,23 +557,12 @@
 
                         <div class="tab-pane" id="progress-bac-detail">
                             <div>
-                                <form>
+                                <form id="choixFormation">
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label for="progress-basicpill-namecard-input">Département</label>
 
-                                                <select class="custom-select">
-                                                    <option selected>Select Département</option>
-                                                    <option value="Math-Info">Mathematique-Informatique</option>
-                                                    <option value="Ph-Ch">Physique-Chemie</option>
-                                                    <option value="Bio-Geo">Biologie-Geologie</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="progress-basicpill-namecard-input">Année universitaire</label>
+                                                <label for="progress-basicpill-namecard-input">premiere inscription (année universitaire) </label>
 
                                                 <select class="custom-select">
                                                     <option selected>Select Année universitaire</option>
@@ -583,7 +572,40 @@
                                                     <option value="2019-2020">2019/2020</option>
                                                     <option value="2018-2019">2018/2019</option>
                                                     <option value="2017-2018">2017/2018</option>
+                                                    <option value="2016-2017">2016/2017</option>
+                                                    <option value="2015-2016">2015/2016</option>
+                                                    <option value="2014-2015">2014/2015</option>
+                                                    <option value="2013-2014">2013/2014</option>
+                                                    <option value="2012-2013">2012/2013</option>
+                                                    <option value="2011-2012">2011/2012</option>
+                                                    <option value="2010-2011">2010/2011</option>
+                                                    <option value="2009-2010">2009/2010</option>
+                                                    <option value="2008-2009">2008/2009</option>
+                                                    <option value="2007-2008">2007/2008</option>
+                                                    <option value="2006-2007">2006/2007</option>
+                                                    <option value="2005-2006">2005/2006</option>
+                                                    <option value="2004-2005">2004/2005</option>
+                                                    <option value="2003-2004">2003/2004</option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="progress-basicpill-namecard-input">premiere inscription (nom d'université)</label>
+
+                                                <input type="text" class="form-control"  >
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="progress-basicpill-namecard-input">premiere inscription ( département )</label>
+
+                                                <input type="text" class="form-control"  >
+                                        
                                             </div>
                                         </div>
 
@@ -593,7 +615,11 @@
 
                                                 <select class="custom-select">
                                                     <option selected>Selectionner un Choix de formation</option>
-
+                                                    <option value="LF">Licence fondamentale</option>
+                                                    <option value="Master">Master</option>
+                                                    <option value="LP">Licence professionnelle</option>
+                                                    <option value="master-specialise">Master spécialisé</option>
+                                                    <option value="Doctorat">Doctorat</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -623,6 +649,7 @@
                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                         <li class="previous"><a href="#">Previous</a></li>
                         <li class="next"><a href="#">Next</a></li>
+                       <!-- <li class="next"><a href="#">Submit</a></li>-->
                     </ul>
                 </div>
             </div>
@@ -655,6 +682,11 @@
                 getDelegations: "{{route('getDelegations')}}",
                 getAcademies: "{{route('getAcademies')}}",
                 getProvinces: "{{route('getProvinces')}}",
+                saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
+                saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
+                saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
+                saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
+                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
             }
         };
 

@@ -32,11 +32,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('storeUser', 'UserController@store')->name('addUser');
     Route::put('updateUser', 'UserController@update')->name('editUser');
     Route::delete('destroy', 'UserController@destroy')->name('deleteUser');
-
+       //////////////////////////////
     Route::get('getPays', 'PaysController@renderPays')->name('getPays');
     Route::get('getDelegations', 'DelegationController@renderDelegations')->name('getDelegations');
     Route::get('getAcademies', 'AcademieController@renderAcademies')->name('getAcademies');
     Route::get('getProvinces', 'ProvinceController@renderProvinces')->name('getProvinces');
+
+
+    //////////////////////////
+
+
+    
 });
 
 
