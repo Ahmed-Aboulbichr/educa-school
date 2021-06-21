@@ -400,13 +400,13 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-between">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Tel parent</label>
                                             <input type="tel" pattern="\d{10,15}" class="form-control" id="progress-basicpill-vatno-input">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Pays parent</label>
                                             <select class="form-control" id="paysOptionsParent">
@@ -414,7 +414,15 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-phoneno-input" >Region parent</label>
+                                            <select class="form-control" id="regionOptionsParent">
+                                                <option>-----------</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville parent</label>
                                             <select class="form-control" id="villeOptionsParent">
