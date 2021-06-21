@@ -16,6 +16,11 @@ class CreatePaysTable extends Migration
         Schema::create('pays', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('iso')->nullable();
+            $table->string('nicename')->nullable();
+            $table->string('iso3')->nullable();
+            $table->integer('numcode')->nullable();
+            $table->integer('phonecode')->nullable();
             $table->timestamps();
         });
     }

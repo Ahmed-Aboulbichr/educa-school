@@ -20,10 +20,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('pre-ins', function(){
+    Route::get('pre-ins', function () {
 
         return view('pre-inscription.inscription-page')->render();
-    
     });
 
     //users
@@ -33,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('storeUser', 'UserController@store')->name('addUser');
     Route::put('updateUser', 'UserController@update')->name('editUser');
     Route::delete('destroy', 'UserController@destroy')->name('deleteUser');
+
+    Route::get('getPays', 'PaysController@renderPays')->name('getPays');
 });
 
 
