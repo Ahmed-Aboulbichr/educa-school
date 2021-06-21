@@ -31,7 +31,7 @@
                         <li class="nav-item">
                             <a href="#progress-parent-details" class="nav-link" data-toggle="tab">
                                 <span class="step-number">02</span>
-                                <span class="step-title">Informations pour les parents
+                                <span class="step-title">Informations sur les parents
                                 </span>
                             </a>
                         </li>
