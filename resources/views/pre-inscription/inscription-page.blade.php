@@ -60,14 +60,6 @@
                     </div>
                     <div class="tab-content twitter-bs-wizard-tab-content">
 
-
-
-
-
-
-
-
-
                         <!-- Tab 1 -->
                         <div class="tab-pane" id="progress-seller-details">
                             <form>
@@ -215,24 +207,6 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="progress-parent-details">
-                        <!-- End Tab 1 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <div class="tab-pane" id="progress-company-document">
-                            <div>
                             <form>
                                 <div class="row justify-content-between">
                                     <div class="col-lg-4">
@@ -253,7 +227,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CAT père</label>
                                             <select name="CAT_PERE" class="custom-select">
-                                                <option selected>------</option>
+                                                <option selected>-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
                                                 <option value="LIBRE">LIBRE</option>
@@ -264,7 +238,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession père</label>
                                             <select name="CAT_PERE" class="custom-select">
-                                                <option selected>------</option>
+                                                <option selected>-----------</option>
                                                 <option value="151">Activités associatives</option>
                                                 <option value="413">Activités des ménages en tant qu'employeurs de personnel domestique</option>
                                                 <option value="170">Activités extra-territoriales</option>
@@ -342,7 +316,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">CAT mère</label>
                                             <select name="CAT_MERE" class="custom-select">
-                                                <option selected>------</option>
+                                                <option selected>-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
                                                 <option value="LIBRE">LIBRE</option>
@@ -353,7 +327,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession mère</label>
                                             <select name="CAT_MERE" class="custom-select">
-                                                <option selected>------</option>
+                                                <option selected>-----------</option>
                                                 <option value="151">Activités associatives</option>
                                                 <option value="413">Activités des ménages en tant qu'employeurs de personnel domestique</option>
                                                 <option value="170">Activités extra-territoriales</option>
@@ -434,8 +408,18 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
+                                            <label for="progress-basicpill-phoneno-input" >Pays parent</label>
+                                            <select class="form-control" id="paysOptionsParent">
+                                                <option>-----------</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville parent</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-vatno-input">
+                                            <select class="form-control" id="villeOptionsParent">
+                                                <option>-----------</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -449,31 +433,6 @@
                                 </div>
                             </form>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <div class="tab-pane" id="progress-bank-detail">
                             <div>
                                 <form>
@@ -567,8 +526,6 @@
                                                         </div>
                                                     </form>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -579,9 +536,7 @@
 
                         <div class="tab-pane" id="progress-bac-detail">
                             <div>
-
-
-                                    <form>
+                                <form>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -628,27 +583,6 @@
                             </div>
                         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <div class="tab-pane" id="progress-confirm-detail">
                             <div class="row justify-content-center">
                                 <div class="col-lg-6">
@@ -688,6 +622,8 @@
     <script src="{{ URL::asset('/assets/js/pages/form-wizard.init.js')}}"></script>
 
     <script src="{{ URL::asset('/assets/js/pays.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/villes.js')}}"></script>
+
     <script>
         var config = {
             routes: {
