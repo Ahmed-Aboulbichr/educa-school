@@ -82,7 +82,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-lastname-input" class="arabic">الإسم</label>
-                                            <input type="text" class="form-control rtl" id="progress-basicpill-lastname-input">
+                                            <input type="text" class="form-control rtl" id="progress-basicpill-firstname-ar-input">
                                         </div>
                                     </div>
                                 </div>
@@ -91,13 +91,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Prénom</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-phoneno-input">
+                                            <input type="text" class="form-control" id="progress-basicpill-lastname-input">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic">النسب</label>
-                                            <input type="email" class="form-control rtl" id="progress-basicpill-email-input">
+                                            <input type="email" class="form-control rtl" id="progress-basicpill-lastname-ar-input">
                                         </div>
                                     </div>
                                 </div>
@@ -106,13 +106,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Lieu de naissance</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-phoneno-input">
+                                            <input type="text" class="form-control" id="progress-basicpill-birthplace-input">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic">مكان الإزدياد</label>
-                                            <input type="email" class="form-control rtl" id="progress-basicpill-email-input">
+                                            <input type="email" class="form-control rtl" id="progress-basicpill-birthplace-ar-input">
                                         </div>
                                     </div>
                                 </div>
@@ -121,13 +121,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >CIN</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-phoneno-input">
+                                            <input type="text" class="form-control" id="progress-basicpill-CIN-input">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">CNE</label>
-                                            <input type="email" class="form-control" id="progress-basicpill-email-input">
+                                            <input type="email" class="form-control" id="progress-basicpill-CNE-input">
                                         </div>
                                     </div>
                                 </div>
@@ -138,13 +138,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Date de naissance</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-phoneno-input">
+                                            <input type="text" class="form-control" id="progress-basicpill-birthday-input">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Téléphone</label>
-                                            <input type="email" class="form-control" id="progress-basicpill-email-input">
+                                            <input type="email" class="form-control" id="progress-basicpill-phone-input">
                                         </div>
                                     </div>
                                 </div>
@@ -194,13 +194,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Nationalité</label>
-                                            <input type="email" class="form-control" id="progress-basicpill-email-input">
+                                            <input type="email" class="form-control" id="progress-basicpill-Nationalite-input">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Ville</label>
-                                            <input type="email" class="form-control" id="progress-basicpill-email-input">
+                                            <input type="email" class="form-control" id="progress-basicpill-Ville-input">
                                         </div>
                                     </div>
                                 </div>
