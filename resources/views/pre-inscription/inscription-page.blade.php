@@ -39,19 +39,19 @@
                         <li class="nav-item">
                             <a href="#progress-bank-detail" class="nav-link" data-toggle="tab">
                                 <span class="step-number">03</span>
-                                <span class="step-title">Bank Details</span>
+                                <span class="step-title">Details du Baccalauréat</span>
                             </a>
                         </li> 
                         <li class="nav-item">
                             <a href="#progress-bac-detail" class="nav-link" data-toggle="tab">
                                 <span class="step-number">04</span>
-                                <span class="step-title">Bac Details</span>
+                                <span class="step-title">Choix de formation</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#progress-confirm-detail" class="nav-link" data-toggle="tab">
                                 <span class="step-number">05</span>
-                                <span class="step-title">Confirm Detail</span>
+                                <span class="step-title">Confirmation</span>
                             </a>
                         </li>
                     </ul>
@@ -381,9 +381,9 @@
                                         <div class="card">
                                             <div class="card-body">
                                 
-                                                <h4 class="card-title">Upload fichier Bac scanee ( PDF , Max-size : 10Mb )  </h4>
-                                                <p class="card-title-desc">DropzoneJS is an open source library
-                                                    that provides drag’n’drop file uploads with image previews.
+                                                <h4 class="card-title">Upload fichier Bac scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                                                    Quidem autem libero aut laboriosam quibusdam qui repellat. Nulla a ea aspernatur perspiciatis! 
                                                 </p>
                                 
                                                 <div>
@@ -490,7 +490,7 @@
                                             <i class="mdi mdi-check-circle-outline text-success display-4"></i>
                                         </div>
                                         <div>
-                                            <h5>Confirm Detail</h5>
+                                            <h5>Confirmation de candidature</h5>
                                             <p class="text-muted">If several languages coalesce, the grammar of the resulting</p>
                                         </div>
                                     </div>
