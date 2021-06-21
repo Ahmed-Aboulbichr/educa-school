@@ -486,7 +486,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label> ¨Province </label>
-                                                <select class="custom-select">
+                                                <select class="custom-select" id="provincesOptions">
                                                     <option selected>Select ¨Province</option>
                                                 </select>
                                             </div>
@@ -494,7 +494,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label> Delegation </label>
-                                                <select class="custom-select">
+                                                <select class="custom-select" id="delegationsOptions">
                                                     <option selected>Select Delegation</option>
                                                 </select>
                                             </div>
@@ -502,7 +502,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label> Academie </label>
-                                                <select class="custom-select">
+                                                <select class="custom-select" id="academiesOptions">
                                                     <option selected>Select Academie</option>
                                                 </select>
                                             </div>
@@ -631,11 +631,17 @@
 
     <script src="{{ URL::asset('/assets/js/pays.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/villes.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/academies.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/delegations.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/provinces.js')}}"></script>
 
     <script>
         var config = {
             routes: {
                 getPays: "{{route('getPays')}}",
+                getDelegations: "{{route('getDelegations')}}",
+                getAcademies: "{{route('getAcademies')}}",
+                getProvinces: "{{route('getProvinces')}}",
             }
         };
 
