@@ -1,38 +1,44 @@
+    const key = "00000000000000000000000000000000";
 
     $(document).ready(function(){
-        $.getJSON('https://countriesnow.space/api/v0.1/countries/')
-        .done(function(response) {
-            for(data of response.data){
-                var option = `<option>${data.country}</option>`;
+        $.getJSON("https://geo-battuta.net/api/country/all/?key="+key+"&callback=?",function(response){
+            for(pays of response){
+                var option = `<option value=${pays.code}>${pays.name}</option>`;
                 $("#paysOptionsParent").append(option);
-
             }
         })
         .fail((xhr, status) => console.log('error:', status));
     });
 
-
     $("#paysOptionsParent").change(e => {
+        $("#regionOptionsParent").html('<option selected disabled>-----------</option>');
         $("#villeOptionsParent").html('<option selected disabled>-----------</option>');
-        let paySelected = e.target.value;
-        listVilles(paySelected);
+        let codePays = e.target.value;
+        listRegions(codePays);
+    });
+
+    function listRegions(codePays) {
+        $.getJSON("https://geo-battuta.net/api/region/"+codePays+"/all/?key="+key+"&callback=?",function(response){
+            for (data of response) {
+                $("#regionOptionsParent").append(`<option>${data.region}</option>`);
+            }
+        })
+        .fail((xhr, status) => console.log('error:', status));
+    }
+
+    $("#regionOptionsParent").change(e => {
+        $("#villeOptionsParent").html('<option selected disabled>-----------</option>');
+        let regionSelected = e.target.value;
+        listVilles(regionSelected);
     });
 
 
-// Function for list cities
-
-function listVilles(paySelected) {
-    $.getJSON('https://countriesnow.space/api/v0.1/countries/')
-    .done(function(response) {
-
-        let villes = response.data.filter(c => {
-            return c.country.includes(paySelected);
+    function listVilles(region) {
+        currentPays=$("#paysOptionsParent").val();
+        $.getJSON("https://geo-battuta.net/api/city/"+currentPays+"/search/?region="+region+"&key="+key+"&callback=?",function(response){
+            for (data of response) {
+                $("#villeOptionsParent").append(`<option>${data.city}</option>`);
+            }
         })
-        for (data of villes[0].cities) {
-            $("#villeOptionsParent").append(`<option>${data}</option>`);
-        }
-    })
-    .fail((xhr, status) => console.log('error:', status));
-
-}
-
+        .fail((xhr, status) => console.log('error:', status));
+    }

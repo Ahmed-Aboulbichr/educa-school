@@ -31,26 +31,26 @@
                         <li class="nav-item">
                             <a href="#progress-parent-details" class="nav-link" data-toggle="tab">
                                 <span class="step-number">02</span>
-                                <span class="step-title">Informations pour les parents
+                                <span class="step-title">Informations sur les parents
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#progress-bank-detail" class="nav-link" data-toggle="tab">
                                 <span class="step-number">03</span>
-                                <span class="step-title">Bank Details</span>
+                                <span class="step-title">Details du Baccalauréat</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#progress-bac-detail" class="nav-link" data-toggle="tab">
                                 <span class="step-number">04</span>
-                                <span class="step-title">Bac Details</span>
+                                <span class="step-title">Choix de formation</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#progress-confirm-detail" class="nav-link" data-toggle="tab">
                                 <span class="step-number">05</span>
-                                <span class="step-title">Confirm Detail</span>
+                                <span class="step-title">Confirmation</span>
                             </a>
                         </li>
                     </ul>
@@ -413,13 +413,13 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-between">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Tel parent</label>
                                             <input type="tel" pattern="\d{10,15}" class="form-control" id="progress-basicpill-vatno-input">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Pays parent</label>
                                             <select class="form-control" id="paysOptionsParent">
@@ -427,7 +427,15 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label for="progress-basicpill-phoneno-input" >Region parent</label>
+                                            <select class="form-control" id="regionOptionsParent">
+                                                <option>-----------</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville parent</label>
                                             <select class="form-control" id="villeOptionsParent">
@@ -519,10 +527,10 @@
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-body">
-
-                                                <h4 class="card-title">Upload fichier Bac scanee ( PDF , Max-size : 10Mb )  </h4>
-                                                <p class="card-title-desc">DropzoneJS is an open source library
-                                                    that provides drag’n’drop file uploads with image previews.
+                                
+                                                <h4 class="card-title">Upload fichier Bac scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                                                    Quidem autem libero aut laboriosam quibusdam qui repellat. Nulla a ea aspernatur perspiciatis! 
                                                 </p>
 
                                                 <div>
@@ -604,7 +612,7 @@
                                             <i class="mdi mdi-check-circle-outline text-success display-4"></i>
                                         </div>
                                         <div>
-                                            <h5>Confirm Detail</h5>
+                                            <h5>Confirmation de candidature</h5>
                                             <p class="text-muted">If several languages coalesce, the grammar of the resulting</p>
                                         </div>
                                     </div>
