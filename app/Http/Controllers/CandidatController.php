@@ -111,22 +111,22 @@ class CandidatController extends Controller
                 // user doesn't exist
             } else {
                 $candidat =  new Candidat;
-                $candidat->nom_fr;
-                $candidat->nom_ar;
-                $candidat->prenom_fr;
-                $candidat->prenom_ar;
-                $candidat->lieu_naiss_fr;
-                $candidat->lieu_naiss_ar;
-                $candidat->CIN;
-                $candidat->CNE;
-                $candidat->date_naiss;
-                $candidat->tel;
-                $candidat->situation_familiale;
-                $candidat->sexe;
-                $candidat->pay_id;
-                $candidat->nationalities;
-                $candidat->ville;
-                $candidat->adresse_etd;
+                $candidat->nom_fr = $fields['nom_fr'];
+                $candidat->nom_ar = $fields['nom_ar'];
+                $candidat->prenom_fr = $fields['prenom_fr'];
+                $candidat->prenom_ar = $fields['prenom_ar'];
+                $candidat->lieu_naiss_fr = $fields['lieu_naiss_fr'];
+                $candidat->lieu_naiss_ar = $fields['lieu_naiss_ar'];
+                $candidat->CIN = $fields['CIN'];
+                $candidat->CNE = $fields[''];
+                $candidat->date_naiss = $fields[''];
+                $candidat->tel = $fields[''];
+                $candidat->situation_familiale = $fields[''];
+                $candidat->sexe = $fields[''];
+                $candidat->pay_id = $fields[''];
+                $candidat->nationalities = $fields[''];
+                $candidat->ville = $fields[''];
+                $candidat->adresse_etd = $fields[''];
             }
 
             $response = array(
