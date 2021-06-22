@@ -209,40 +209,41 @@ class CandidatController extends Controller
 
 
         if ($request->hasFile('file')) {
-            $path = $this->handleUploadedImage($request->file('file'));
-            $candidat = null;
-            $candidat = Candidat::where('user_id', Auth::id())->first();
+            
+            $candidat =null;
+            $doc_file = null;
+            $candidat = Candidat::where('user_id',Auth::id())->first();
 
-            if (is_object($candidat)) {
-                $candidature = null;
-                $doc_file = null;
-                $candidature = Candidature::where('condidat_id', $candidat->id)->first();
+            if(is_object($candidat)){
 
-
-
-                if (is_object($candidature)) {
-
-                    $doc_file = docFile::create([
-                        'type' => 'bac',
-                        'path' => $path,
-                        'candidature_id' => $candidature->id,
-                    ]);
-                    $candidat->update([
-                        'bac_id' => $doc_file->id,
-                    ]);
-                }
-
+                $path = $this->handleUploadedImage($request->file('file'));
+                $doc_file = docFile::create([
+                    'type' => 'bac',
+                    'path' => $path,
+                ]);
+                $candidat->update([
+                    'bac_id' => $doc_file->id,
+                ]);
 
                 $response = array(
                     'candidat' => $candidat,
                     'candidat' => $candidature,
                 );
+
+                
                 return  response()->json($response, 200);
+               }
+               
+
+               
+          
+            
+                return  response()->json("nothing to update", 200);
             }
 
             return  response()->json("nothing to update" . $request, 200);
         }
-    }
+   
 
 
     public function saveStepFive(Request $request)
@@ -291,14 +292,18 @@ class CandidatController extends Controller
                     'universite_dip_name' => $fields['pre_insc_universite'] . " _-_ " . $fields['universite_dip_name'],
                     'pre_insc_annee_universitaire' => $fields['pre_insc_annee_universitaire'],
                 ]);
+    
+               if(!is_object($candidature)){
+                $candidature = Candidature::create([
+                    'condidat_id' => $fields[$candidat->id],
+                    'formation_id'=> $fields['formation'],
+                ]);
 
-                if (!is_object($candidature)) {
-                    $candidature = Candidature::create([
-                        'condidat_id' => $fields[$candidat->id],
-                        'formation_id' => $fields['formation'],
-                    ]);
-                }
-
+                docFile::where('id',$candidat->bac_id)->first()->update([
+                    'formation_id'=> $fields['formation'],
+                ]);
+               }
+               
 
                 $response = array(
                     'candidat' => $candidat,
