@@ -13,6 +13,6 @@ class pay extends Model
         'nicename',
         'iso3',
         'numcode',
-        'pondecode'  
-    ]
+        'pondecode'
+    ];
 }
