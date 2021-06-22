@@ -40,9 +40,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //////////////////////////
+    Route::post('saveCandidatStepThree', 'CandidatController@saveStepThree')->name('saveCandidatStepThree');
+    Route::post('saveCandidatStepFour', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
+    Route::post('saveCandidatStepFive', 'CandidatController@saveStepFive')->name('saveCandidatStepFive');
 
 
-    
 });
 
 

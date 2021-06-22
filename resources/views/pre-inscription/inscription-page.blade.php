@@ -4,7 +4,7 @@
     <!-- twitter-bootstrap-wizard css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
     <link href="{{ URL::asset('/assets/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css')}}" rel="stylesheet" type="text/css" />
-
+    
     <!-- Plugins css -->
     <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
@@ -219,6 +219,19 @@
                                 </div>
                             </form>
                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <div class="tab-pane" id="progress-parent-details">
                             <form  id="infoParent">
                                 <div class="row justify-content-between">
@@ -457,19 +470,20 @@
                         <div class="tab-pane" id="progress-bank-detail">
                             <div>
                                 <form id="infoBaccalaureat">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">Année baccalauréat</label>
 
-                                                <input type="text" class="form-control" id="datepicker" >
+                                                <input name="annee_bac"  type="text" class="form-control" id="datepicker" >
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>Mention baccalauréat</label>
-                                                <select class="custom-select">
+                                                <select name="mention_bac" class="custom-select">
                                                     <option selected>Select Mention</option>
                                                     <option value="P">Passable</option>
                                                     <option value="AB">Assez-Bien</option>
@@ -483,7 +497,7 @@
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">Moyen general de baccalauréat</label>
 
-                                                <input type="number" min='0' max='20' class="form-control"  >
+                                                <input type="number" name="mg_bac" min='0' max='20' class="form-control"  >
                                             </div>
                                         </div>
                                     </div>
@@ -492,14 +506,14 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-cardno-input">Lycée de baccalauréat</label>
-                                                <input type="text" class="form-control" id="progress-basicpill-cardno-input">
+                                                <input type="text" name="lycee_bac" class="form-control" id="progress-basicpill-cardno-input">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label> ¨Province </label>
-                                                <select class="custom-select" id="provincesOptions">
+                                                <select class="custom-select" name="province" id="provincesOptions">
                                                     <option selected>Select ¨Province</option>
                                                 </select>
                                             </div>
@@ -507,7 +521,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label> Delegation </label>
-                                                <select class="custom-select" id="delegationsOptions">
+                                                <select class="custom-select" name="delegation" id="delegationsOptions">
                                                     <option selected>Select Delegation</option>
                                                 </select>
                                             </div>
@@ -515,7 +529,7 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label> Academie </label>
-                                                <select class="custom-select" id="academiesOptions">
+                                                <select class="custom-select" name="academie" id="academiesOptions">
                                                     <option selected>Select Academie</option>
                                                 </select>
                                             </div>
@@ -534,9 +548,10 @@
                                                 </p>
 
                                                 <div>
-                                                    <form id="fichierBac" action="#" class="dropzone">
+                                                    <form id="fichierBac"  action="{{route('saveCandidatStepFour')}}" enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
                                                         <div class="fallback">
-                                                            <input name="file" type="file" multiple="multiple">
+                                                            <input name="bacFile" type="file" multiple="multiple">
                                                         </div>
                                                         <div class="dz-message needsclick">
                                                             <div class="mb-3">
@@ -558,13 +573,14 @@
                         <div class="tab-pane" id="progress-bac-detail">
                             <div>
                                 <form id="choixFormation">
+                                    @csrf
                                     <div class="row">
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">premiere inscription (année universitaire) </label>
 
-                                                <select class="custom-select">
+                                                <select name="pre_insc_annee_universitaire" class="custom-select">
                                                     <option selected>Select Année universitaire</option>
 
                                                     <option value="2021-2022">2021/2022</option>
@@ -593,7 +609,7 @@
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">premiere inscription (nom d'université)</label>
 
-                                                <input type="text" class="form-control"  >
+                                                <input name="pre_insc_universite" type="text" class="form-control"  >
                                                 
                                             </div>
                                         </div>
@@ -604,7 +620,7 @@
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">premiere inscription ( département )</label>
 
-                                                <input type="text" class="form-control"  >
+                                                <input type="text" name="universite_dip_name" class="form-control"  >
                                         
                                             </div>
                                         </div>
@@ -613,7 +629,7 @@
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">Choix de formation</label>
 
-                                                <select class="custom-select">
+                                                <select name="formation" class="custom-select">
                                                     <option selected>Selectionner un Choix de formation</option>
                                                     <option value="LF">Licence fondamentale</option>
                                                     <option value="Master">Master</option>
@@ -648,7 +664,7 @@
                     </div>
                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                         <li class="previous"><a href="#">Previous</a></li>
-                        <li class="next"><a href="#">Next</a></li>
+                        <li class="next"><a onclick="$('#fichierBac').submit()" href="#">Next</a></li>
                        <!-- <li class="next"><a href="#">Submit</a></li>-->
                     </ul>
                 </div>
@@ -674,6 +690,7 @@
     <script src="{{ URL::asset('/assets/js/academies.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/delegations.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/provinces.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
 
     <script>
         var config = {
@@ -682,13 +699,17 @@
                 getDelegations: "{{route('getDelegations')}}",
                 getAcademies: "{{route('getAcademies')}}",
                 getProvinces: "{{route('getProvinces')}}",
-                saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
-                saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
+
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
                 saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
+
+                
+               {{-- saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
+                saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",--}}
             }
         };
+
 
 
       $("#datepicker").datepicker({
