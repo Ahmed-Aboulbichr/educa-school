@@ -40,20 +40,20 @@ class CreateCandidatsTable extends Migration
             $table->enum('cat_mere', ['PUBLIC','PRIVE','LIBRE'])->nullable();
             $table->string("CIN_pere",10)->nullable();
             $table->string("CIN_mere",10)->nullable();
-            $table->string("profession_pere",20)->nullable();
-            $table->string("profession_mere",20)->nullable();
+            $table->string("profession_pere",50)->nullable();
+            $table->string("profession_mere",50)->nullable();
 
             $table->unsignedBigInteger('ville_id_etud')->nullable();
             $table->unsignedBigInteger('ville_id_parent')->nullable();
             $table->unsignedBigInteger('bac_id')->nullable();
             $table->unsignedBigInteger('sec_profession_pere_id')->nullable();
             $table->unsignedBigInteger('sec_profession_mere_id')->nullable();
-            
+
 
             $table->foreignId('academie_id')->constrained()->onDelete('cascade');
             $table->foreignId('province_id')->constrained()->onDelete('cascade');
             $table->foreignId('delegation_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('pay_id')->constrained()->onDelete('cascade');
             $table->foreignId('nationalite_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreign('ville_id_parent')->references('id')->on('villes')->onDelete('cascade')->nullable();
@@ -61,7 +61,7 @@ class CreateCandidatsTable extends Migration
             $table->foreign('sec_profession_pere_id')->references('id')->on('secteur_professions')->onDelete('cascade')->nullable();
             $table->foreign('sec_profession_mere_id')->references('id')->on('secteur_professions')->onDelete('cascade')->nullable();
             $table->foreign('ville_id_etud')->references('id')->on('villes')->onDelete('cascade')->nullable();
-           
+
 
             $table->timestamps();
         });

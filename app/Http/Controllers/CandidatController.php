@@ -89,23 +89,26 @@ class CandidatController extends Controller
     public function saveStepTwo(Request $request){
         if ($request->ajax()) {
             $fields = $request->validate([
-                'cin_pere' => ['bail', 'required', 'string', 'max:255'],
-                'cin_mere' => ['bail','required', 'string', 'max:255'],
-                'tel_parent' => ['bail','required', 'string', 'max:255']
+                'cin_pere' => ['bail', '', 'string', 'max:255'],
+                'cin_mere' => ['bail','', 'string', 'max:255'],
+                'tel_parent' => ['bail','', 'string', 'max:255']
             ]);
+            $candidat=null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
             if(is_object($candidat)){
-                $candidat = $candidat->update([
+                $candidat->update([
                     'CIN_pere' => $fields['cin_pere'],
                     'CIN_mere' => $fields['cin_mere'],
                     'tel_parent' => $fields['tel_parent'],
                 ]);
-                $response = [
-                    "candidat" => $candidat,
-                ];
+                $response = array(
+                    "candidat" => $candidat
+                );
                 return response()->json($response, 200);
+            }else{
+                 $response = "nothing to update";
+                return response()->json($response,405);
             }
-            return response()->json("nothing to update",405);
         }
     }
 
@@ -155,8 +158,8 @@ class CandidatController extends Controller
     public function saveStepFour(Request $request){
 
 
-        if ($request->ajax()) {
-            $path = $this->handleUploadedImage($request->file('bacFile'));
+        if ($request->hasFile('file')) {
+            $path = $this->handleUploadedImage($request->file('file'));
             $candidat =null;
             $candidat = Candidat::where('user_id',Auth::id())->first();
 
@@ -263,10 +266,8 @@ class CandidatController extends Controller
     public function handleUploadedImage($file)
     {
 
-        $rules = array(
-		    'file' => 'image|max:3000',
-		);
-        if (!is_null($file) && Validator::make($file, $rules)) {
+
+        if (!is_null($file)) {
             $path =  Storage::putFile('Bac', $file);
              return $path;
         }

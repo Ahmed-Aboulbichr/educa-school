@@ -231,7 +231,6 @@
 
                         <div class="tab-pane" id="progress-parent-details">
                             <form  id="infoParent">
-                                @csrf
                                 <div class="row justify-content-between">
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -429,7 +428,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Tel parent</label>
-                                            <input id="input-mask" inputmode="text" name="tel_parent" class="form-control input-mask" data-inputmask="'mask': '09-99999999'">                                        </div>
+                                            <input id="input-mask" inputmode="text" name="tel_parent" class="form-control input-mask" data-inputmask="'mask': '09-99999999'" required>                                        </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
@@ -547,7 +546,7 @@
                                                 </p>
 
                                                 <div>
-                                                    <form id="fichierBac"  action="{{route('saveCandidatStepFour')}}" enctype="multipart/form-data" class="dropzone">
+                                                    <form id="fichierBac"  action="#"  enctype="multipart/form-data" class="dropzone">
                                                         @csrf
                                                         <div class="fallback">
                                                             <input name="bacFile" type="file" multiple="multiple">
@@ -689,26 +688,25 @@
     <script src="{{ URL::asset('/assets/js/academies.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/delegations.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/provinces.js')}}"></script>
-    <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
 
     <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
 
     <script>
+          Dropzone.autoDiscover = false;
         var config = {
             routes: {
                 getPays: "{{route('getPays')}}",
                 getDelegations: "{{route('getDelegations')}}",
                 getAcademies: "{{route('getAcademies')}}",
                 getProvinces: "{{route('getProvinces')}}",
+                getSecteurProfessions : "{{route('getSecteurProfessions'}}",
+                saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
-
-       {{--     saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
-                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}", --}}
+                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
             }
         };
-
 
 
       $("#datepicker").datepicker({

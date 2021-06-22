@@ -44,6 +44,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('saveCandidatStepFour', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
     Route::post('saveCandidatStepFive', 'CandidatController@saveStepFive')->name('saveCandidatStepFive');
 
+    /////////////////////////
+    Route::get('getSecteurProfessions', 'SecteurProfessionController@renderSecteurs')->name('getSecteurProfessions');
+
 
 });
 
