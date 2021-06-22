@@ -96,22 +96,22 @@ class CandidatController extends Controller
     {
         if ($req->ajax()) {
             $fields = $req->validate([
-                'nom_fr' => ['bail', 'required', 'string', 'max:255'],
-                'nom_ar' => ['bail', 'required', 'string', 'max:255'],
-                'prenom_fr' => ['bail', 'required', 'string', 'max:255'],
-                'prenom_ar' => ['bail', 'required', 'string', 'max:255'],
-                'lieu_naiss_fr' => ['bail', 'required', 'string', 'max:255'],
-                'lieu_naiss_ar' => ['bail', 'required', 'string', 'max:255'],
-                'CIN' => ['bail', 'required', 'string', 'max:255'],
-                'CNE' => ['bail', 'required', 'string', 'max:255'],
-                'date_naiss' => ['bail', 'required', 'string', 'max:255'],
-                'tel' => ['bail', 'required', 'string', 'max:255'],
-                'situation_familiale' => ['string', 'max:255'],
-                'sexe' => ['string', 'max:255'],
-                'pay_id' => ['string', 'max:255'],
-                'nationalities' => ['string', 'max:255'],
-                'ville' => ['string', 'max:255'],
-                'adresse_etd' => ['string', 'email', 'max:255'],
+                'nom_fr' => ['bail', 'required', 'string', 'max:20'],
+                'nom_ar' => ['bail', 'required', 'string', 'max:20'],
+                'prenom_fr' => ['bail', 'required', 'string', 'max:20'],
+                'prenom_ar' => ['bail', 'required', 'string', 'max:20'],
+                'lieu_naiss_fr' => ['bail', 'nullable', 'string', 'max:50'],
+                'lieu_naiss_ar' => ['bail', 'nullable', 'string', 'max:50'],
+                'CIN' => ['bail', 'required', 'string', 'max:10'],
+                'CNE' => ['bail', 'required', 'string', 'max:20'],
+                'date_naiss' => ['bail', 'required', 'date', 'date_format:dd/mm/YYYY'],
+                'tel' => ['bail', 'required', 'numeric'],
+                'situation_familiale' => ['nullable', 'string', 'max:20'],
+                'sexe' => ['string', 'max:20'],
+                'pay_id' => ['nullable', 'integer'],
+                'nationalities' => ['nullable', 'integer'],
+                'ville' => ['nullable', 'integer'],
+                'adresse_etd' => ['nullable', 'string', 'max:100'],
             ]);
 
             $candidat = Candidat::where('CIN', '=', $fields['CIN'])->first();
@@ -129,11 +129,11 @@ class CandidatController extends Controller
                 $candidat->date_naiss = $fields['date_naiss'];
                 $candidat->tel = $fields['tel'];
                 $candidat->situation_familiale = $fields['situation_familiale'];
-                $candidat->sexe = $fields[''];
-                $candidat->pay_id = $fields[''];
-                $candidat->nationalities = $fields[''];
-                $candidat->ville = $fields[''];
-                $candidat->adresse_etd = $fields[''];
+                $candidat->sexe = $fields['sexe'];
+                $candidat->pay_id = $fields['pay_id'];
+                $candidat->nationalities = $fields['nationalities'];
+                $candidat->ville = $fields['ville'];
+                $candidat->adresse_etd = $fields['adresse_etd'];
 
                 $candidat->save();
             } else {
@@ -148,17 +148,17 @@ class CandidatController extends Controller
                 $candidat->date_naiss = $fields['date_naiss'];
                 $candidat->tel = $fields['tel'];
                 $candidat->situation_familiale = $fields['situation_familiale'];
-                $candidat->sexe = $fields[''];
-                $candidat->pay_id = $fields[''];
-                $candidat->nationalities = $fields[''];
-                $candidat->ville = $fields[''];
-                $candidat->adresse_etd = $fields[''];
+                $candidat->sexe = $fields['sexe'];
+                $candidat->pay_id = $fields['pay_id'];
+                $candidat->nationalities = $fields['nationalities'];
+                $candidat->ville = $fields['ville'];
+                $candidat->adresse_etd = $fields['adresse_etd'];
 
-                $candidat->save();
+                $candidat->update();
             }
 
             $response = array(
-                'user' => $candidat,
+                'candidat' => $candidat,
             );
             return  response()->json($response, 200);
         }
