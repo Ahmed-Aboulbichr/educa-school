@@ -1,31 +1,49 @@
 $("#infoCandidat ").on('submit',function(e){
   e.preventDefault();
-  $('#NextStepBtn').attr('class',"disabled")
+  $('#NextStepBtn').attr('class',"disabled");
+  action =  $('#NextStepBtn').attr('onclick');
+  $('#NextStepBtn').attr('onclick',"");
     $.ajax({
         url: config.routes.saveCandidatStepOne,
         type: 'post',
         data: $(this).serialize(),
        
         success: function(response) {
-          $('#NextStepBtn').attr('class',"Next")
+          $('#NextStepBtn').attr('class',"Next");
+          $('#NextStepBtn').trigger('click');
+          $('#NextStepBtn').attr('class',"");
+          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepTwo);
+        },
+        error: function(response) {
+          $('#NextStepBtn').attr('class',"");
+          $('#NextStepBtn').attr('onclick',action);
         }
         
-    })
+    });
 });
 
 $("#infoParent").on('submit',function(e){
   e.preventDefault();
+  $('#NextStepBtn').attr('class',"disabled");
+  action =  $('#NextStepBtn').attr('onclick');
+  $('#NextStepBtn').attr('onclick',"");
     $.ajax({
         url: config.routes.saveCandidatStepTwo,
         type: 'post',
-        data:{
-          data : $(this).serialize(),
-        },
+        data: $(this).serialize(),
+       
         success: function(response) {
-          
+          $('#NextStepBtn').attr('class',"Next");
+          $('#NextStepBtn').trigger('click');
+          $('#NextStepBtn').attr('class',"");
+          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
+        },
+        error: function(response) {
+          $('#NextStepBtn').attr('class',"");
+          $('#NextStepBtn').attr('onclick',action);
         }
         
-    })
+    });
 });
 
 
@@ -38,20 +56,26 @@ $("#infoParent").on('submit',function(e){
 $("#infoBaccalaureat").on('submit',function(e){
 
   e.preventDefault();
-
+  $('#NextStepBtn').attr('class',"disabled");
+  action =  $('#NextStepBtn').attr('onclick');
+  $('#NextStepBtn').attr('onclick',"");
     $.ajax({
         url: config.routes.saveCandidatStepThree,
         type: 'post',
-        data: $(this).serializeArray(),
-        
+        data: $(this).serialize(),
+       
         success: function(response) {
-          console.log(response);
+          $('#NextStepBtn').attr('class',"Next");
+          $('#NextStepBtn').trigger('click');
+          $('#NextStepBtn').attr('class',"upload-file");
+          //$('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
         },
         error: function(response) {
-          console.log(response.responseText);
+          $('#NextStepBtn').attr('class',"");
+          $('#NextStepBtn').attr('onclick',action);
         }
         
-    })
+    });
 });
 
 
@@ -60,6 +84,13 @@ $("#infoBaccalaureat").on('submit',function(e){
 
 
 $(function() {
+ $('.upload-file').on('click',function(){
+
+    alert('please upload required files first ');
+
+ });
+ 
+
   var fileList = new Array;
   var i = 0;
   
@@ -80,11 +111,15 @@ $(function() {
                    "fileId": i
                };
                i++;
+
+               $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
+               $('#NextStepBtn').attr('class',"");
            });
 
            this.on("error", function (file, serverFileName) {
+             
+            $('#NextStepBtn').attr('class',"upload-file");
             alert('error accrured');
-              
            });
        }
    });
@@ -108,17 +143,23 @@ $(function() {
 
 $("#choixFormation").on('submit',function(e){
   e.preventDefault();
+  $('#NextStepBtn').attr('class',"disabled");
+  action =  $('#NextStepBtn').attr('onclick');
+  $('#NextStepBtn').attr('onclick',"");
     $.ajax({
-        url: config.routes.saveCandidatStepFive,
+        url: config.routes.saveCandidatStepFour,
         type: 'post',
-        data: $(this).serializeArray(),
-
+        data: $(this).serialize(),
+       
         success: function(response) {
-          console.log(response);
+          $('#NextStepBtn').attr('class',"Next");
+          $('#NextStepBtn').trigger('click');
+          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFive);
         },
         error: function(response) {
-          console.log(response.responseText);
+          $('#NextStepBtn').attr('class',"");
+          $('#NextStepBtn').attr('onclick',action);
         }
         
-    })
+    });
 });
