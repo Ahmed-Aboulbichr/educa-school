@@ -135,38 +135,36 @@ class CandidatController extends Controller
        
       
         if ($request->hasFile('file')) {
-            $path = $this->handleUploadedImage($request->file('file'));
+            
             $candidat =null;
+            $doc_file = null;
             $candidat = Candidat::where('user_id',Auth::id())->first();
 
             if(is_object($candidat)){
-                $candidature = null;
-                $doc_file = null;
-                $candidature = Candidature::where('condidat_id',$candidat->id)->first();
 
-                
-    
-               if(is_object($candidature)){
-              
+                $path = $this->handleUploadedImage($request->file('file'));
                 $doc_file = doc_file::create([
                     'type' => 'bac',
                     'path' => $path,
-                    'candidature_id' => $candidature->id,
                 ]);
                 $candidat->update([
                     'bac_id' => $doc_file->id,
                 ]);
-               }
-               
 
-                $candidature = array(
+                $response = array(
                     'candidat' => $candidat,
                     'candidat' => $candidature,
                 );
+
+                
                 return  response()->json($response, 200);
-            } 
+               }
+               
+
+               
+          
             
-                return  response()->json("nothing to update".$request, 200);
+                return  response()->json("nothing to update", 200);
             }
 
      
@@ -222,10 +220,14 @@ class CandidatController extends Controller
                     'condidat_id' => $fields[$candidat->id],
                     'formation_id'=> $fields['formation'],
                 ]);
+
+                Doc_file::where('id',$candidat->bac_id)->first()->update([
+                    'formation_id'=> $fields['formation'],
+                ]);
                }
                
 
-                $candidature = array(
+                $response = array(
                     'candidat' => $candidat,
                     'candidat' => $candidature,
                 );

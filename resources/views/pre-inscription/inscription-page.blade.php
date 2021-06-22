@@ -664,7 +664,7 @@
                     </div>
                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                         <li class="previous"><a href="#">Previous</a></li>
-                        <li class="next"><a onclick="$('#fichierBac').submit()" href="#">Next</a></li>
+                        <li class="" style="float:right;" id="NextStepBtn" onclick="$('#infoCandidat').submit()" ><a >Next</a></li>
                        <!-- <li class="next"><a href="#">Submit</a></li>-->
                     </ul>
                 </div>
@@ -705,10 +705,8 @@
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
                 saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
-
-                
-               {{-- saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
-                saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",--}}
+                saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
+                saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
             }
         };
 

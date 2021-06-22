@@ -1,13 +1,13 @@
 $("#infoCandidat ").on('submit',function(e){
   e.preventDefault();
+  $('#NextStepBtn').attr('class',"disabled")
     $.ajax({
         url: config.routes.saveCandidatStepOne,
         type: 'post',
-        data:{
-          data : $(this).serialize(),
-        },
+        data: $(this).serialize(),
+       
         success: function(response) {
-          
+          $('#NextStepBtn').attr('class',"Next")
         }
         
     })
