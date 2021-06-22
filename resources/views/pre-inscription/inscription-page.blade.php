@@ -128,9 +128,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
                                 <div class="row">
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
@@ -221,17 +218,18 @@
                         </div>
                         <div class="tab-pane" id="progress-parent-details">
                             <form  id="infoParent">
+                                @csrf
                                 <div class="row justify-content-between">
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CIN père</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-pancard-input">
+                                            <input type="text" name="cin_pere" class="form-control" id="progress-basicpill-pancard-input" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">CIN mère</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-vatno-input">
+                                            <input type="text" name="cin_mere" class="form-control" id="progress-basicpill-vatno-input" required>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +237,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CAT père</label>
-                                            <select name="CAT_PERE" class="custom-select">
+                                            <select name="cat_pere" class="custom-select">
                                                 <option selected>-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
@@ -250,8 +248,9 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession père</label>
-                                            <select name="CAT_PERE" class="custom-select">
+                                            <select name="secteur_pere_name" class="custom-select">
                                                 <option selected>-----------</option>
+                                                <option value="1">OUVRIER</option>
                                                 <option value="151">Activités associatives</option>
                                                 <option value="413">Activités des ménages en tant qu'employeurs de personnel domestique</option>
                                                 <option value="170">Activités extra-territoriales</option>
@@ -319,7 +318,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Profession père</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-vatno-input">
+                                            <input type="text" name="prof_pere" class="form-control" id="progress-basicpill-vatno-input">
                                         </div>
                                     </div>
 
@@ -328,7 +327,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">CAT mère</label>
-                                            <select name="CAT_MERE" class="custom-select">
+                                            <select name="cat_mere" class="custom-select">
                                                 <option selected>-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
@@ -339,8 +338,9 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession mère</label>
-                                            <select name="CAT_MERE" class="custom-select">
+                                            <select name="secteur_mere_name" class="custom-select">
                                                 <option selected>-----------</option>
+                                                <option value="2">FAMME AU FOYER</option>
                                                 <option value="151">Activités associatives</option>
                                                 <option value="413">Activités des ménages en tant qu'employeurs de personnel domestique</option>
                                                 <option value="170">Activités extra-territoriales</option>
@@ -408,7 +408,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Profession mère</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-vatno-input">
+                                            <input type="text" name="prof_mere" class="form-control" id="progress-basicpill-vatno-input">
                                         </div>
                                     </div>
                                 </div>
@@ -416,13 +416,12 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Tel parent</label>
-                                            <input type="tel" pattern="\d{10,15}" class="form-control" id="progress-basicpill-vatno-input">
-                                        </div>
+                                            <input id="input-mask" inputmode="text" name="tel_parent" class="form-control input-mask" data-inputmask="'mask': '09-99999999'">                                        </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Pays parent</label>
-                                            <select class="form-control" id="paysOptionsParent">
+                                            <select name="pays_parent" class="form-control" id="paysOptionsParent">
                                                 <option>-----------</option>
                                             </select>
                                         </div>
@@ -430,7 +429,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Region parent</label>
-                                            <select class="form-control" id="regionOptionsParent">
+                                            <select name="region_parent" class="form-control" id="regionOptionsParent">
                                                 <option>-----------</option>
                                             </select>
                                         </div>
@@ -438,7 +437,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville parent</label>
-                                            <select class="form-control" id="villeOptionsParent">
+                                            <select name="ville_parent" class="form-control" id="villeOptionsParent">
                                                 <option>-----------</option>
                                             </select>
                                         </div>
@@ -447,8 +446,8 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-address-input">Address parent</label>
-                                            <textarea id="progress-basicpill-address-input" class="form-control" rows="2"></textarea>
+                                            <label for="progress-basicpill-address-input">Adresse parent</label>
+                                            <textarea name="adresse_parent" id="progress-basicpill-address-input" class="form-control" rows="2"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -527,10 +526,10 @@
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-body">
-                                
+
                                                 <h4 class="card-title">Upload fichier Bac scanné ( PDF , Max-size : 10Mb )  </h4>
-                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                                                    Quidem autem libero aut laboriosam quibusdam qui repellat. Nulla a ea aspernatur perspiciatis! 
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                    Quidem autem libero aut laboriosam quibusdam qui repellat. Nulla a ea aspernatur perspiciatis!
                                                 </p>
 
                                                 <div>
@@ -594,7 +593,7 @@
                                                 <label for="progress-basicpill-namecard-input">premiere inscription (nom d'université)</label>
 
                                                 <input type="text" class="form-control"  >
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -605,7 +604,7 @@
                                                 <label for="progress-basicpill-namecard-input">premiere inscription ( département )</label>
 
                                                 <input type="text" class="form-control"  >
-                                        
+
                                             </div>
                                         </div>
 
@@ -648,7 +647,7 @@
                     </div>
                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                         <li class="previous"><a href="#">Previous</a></li>
-                        <li class="next"><a href="#">Next</a></li>
+                        <li class="next"><a onclick="$('#infoParent').submit()" href="#">Next</a></li>
                        <!-- <li class="next"><a href="#">Submit</a></li>-->
                     </ul>
                 </div>
@@ -675,6 +674,8 @@
     <script src="{{ URL::asset('/assets/js/delegations.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/provinces.js')}}"></script>
 
+    <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
+
     <script>
         var config = {
             routes: {
@@ -682,19 +683,20 @@
                 getDelegations: "{{route('getDelegations')}}",
                 getAcademies: "{{route('getAcademies')}}",
                 getProvinces: "{{route('getProvinces')}}",
-                saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
+
+       {{--     saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
-                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
+                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}", --}}
             }
         };
 
 
       $("#datepicker").datepicker({
-    format: "yyyy",
-    viewMode: "years",
-    minViewMode: "years"
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years"
       });
    </script>
 @endsection

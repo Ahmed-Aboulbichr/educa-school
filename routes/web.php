@@ -38,11 +38,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getAcademies', 'AcademieController@renderAcademies')->name('getAcademies');
     Route::get('getProvinces', 'ProvinceController@renderProvinces')->name('getProvinces');
 
-
     //////////////////////////
+    Route::post('saveCandidatStepTwo','CandidatController@saveStepTwo')->name('saveCandidatStepTwo');
 
 
-    
 });
 
 
