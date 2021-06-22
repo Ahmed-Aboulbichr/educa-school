@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,19 +33,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('storeUser', 'UserController@store')->name('addUser');
     Route::put('updateUser', 'UserController@update')->name('editUser');
     Route::delete('destroy', 'UserController@destroy')->name('deleteUser');
-       //////////////////////////////
+    //////////////////////////////
     Route::get('getPays', 'PaysController@renderPays')->name('getPays');
+    Route::get('getNationalite', 'NationaliteController@renderNationalite')->name('getNationality');
     Route::get('getDelegations', 'DelegationController@renderDelegations')->name('getDelegations');
     Route::get('getAcademies', 'AcademieController@renderAcademies')->name('getAcademies');
     Route::get('getProvinces', 'ProvinceController@renderProvinces')->name('getProvinces');
 
 
     //////////////////////////
+    Route::get('/stepOne', 'CandidatController@saveStepOne')->name('saveCandidatStepOne');
     Route::post('saveCandidatStepThree', 'CandidatController@saveStepThree')->name('saveCandidatStepThree');
     Route::post('saveCandidatStepFour', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
     Route::post('saveCandidatStepFive', 'CandidatController@saveStepFive')->name('saveCandidatStepFive');
-
-
 });
 
 

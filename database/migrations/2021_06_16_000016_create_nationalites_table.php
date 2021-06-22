@@ -16,6 +16,9 @@ class CreateNationalitesTable extends Migration
         Schema::create('nationalites', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('alpha_2_code');
+            $table->string('alpha_3_code');
+            $table->string('en_short_name');
             $table->timestamps();
         });
     }
