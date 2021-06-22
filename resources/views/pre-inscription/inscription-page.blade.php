@@ -186,7 +186,7 @@
                                             <label for="progress-basicpill-phoneno-input" >Pays</label>
                                             {{-- <input type="text" class="form-control" id="progress-basicpill-phoneno-input"> --}}
                                             <select class="form-control" id="paysOptions" name="pay_id">
-                                                <option>-----------</option>
+                                                <option  >-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@
                                             <label for="progress-basicpill-email-input">Nationalité</label>
                                             {{-- <input type="email" class="form-control" id="progress-basicpill-Nationalite-input"> --}}
                                             <select name="cod_pay_nai" id="nationalities"  class="form-control" name="nationalite_id">
-                                                <option>-----------</option>
+                                                <option  >-----------</option>
                                             </select>
 
                                         </div>
@@ -253,7 +253,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CAT père</label>
                                             <select name="CAT_PERE" class="custom-select">
-                                                <option selected>-----------</option>
+                                                <option selected  >-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
                                                 <option value="LIBRE">LIBRE</option>
@@ -264,7 +264,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession père</label>
                                             <select name="CAT_PERE" class="custom-select">
-                                                <option selected>-----------</option>
+                                                <option selected  >-----------</option>
                                                 <option value="151">Activités associatives</option>
                                                 <option value="413">Activités des ménages en tant qu'employeurs de personnel domestique</option>
                                                 <option value="170">Activités extra-territoriales</option>
@@ -342,7 +342,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">CAT mère</label>
                                             <select name="CAT_MERE" class="custom-select">
-                                                <option selected>-----------</option>
+                                                <option selected  >-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
                                                 <option value="LIBRE">LIBRE</option>
@@ -353,7 +353,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession mère</label>
                                             <select name="CAT_MERE" class="custom-select">
-                                                <option selected>-----------</option>
+                                                <option selected  >-----------</option>
                                                 <option value="151">Activités associatives</option>
                                                 <option value="413">Activités des ménages en tant qu'employeurs de personnel domestique</option>
                                                 <option value="170">Activités extra-territoriales</option>
@@ -436,7 +436,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Pays parent</label>
                                             <select class="form-control" id="paysOptionsParent">
-                                                <option>-----------</option>
+                                                <option  >-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -444,7 +444,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Region parent</label>
                                             <select class="form-control" id="regionOptionsParent">
-                                                <option>-----------</option>
+                                                <option  >-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -452,7 +452,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville parent</label>
                                             <select class="form-control" id="villeOptionsParent">
-                                                <option>-----------</option>
+                                                <option  >-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -484,7 +484,7 @@
                                             <div class="form-group">
                                                 <label>Mention baccalauréat</label>
                                                 <select name="mention_bac" class="custom-select">
-                                                    <option selected>Select Mention</option>
+                                                    <option selected  >Select Mention</option>
                                                     <option value="P">Passable</option>
                                                     <option value="AB">Assez-Bien</option>
                                                     <option value="B">Bien</option>
@@ -514,7 +514,7 @@
                                             <div class="form-group">
                                                 <label> ¨Province </label>
                                                 <select class="custom-select" name="province" id="provincesOptions">
-                                                    <option selected>Select ¨Province</option>
+                                                    <option selected  >Select ¨Province</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -522,7 +522,7 @@
                                             <div class="form-group">
                                                 <label> Delegation </label>
                                                 <select class="custom-select" name="delegation" id="delegationsOptions">
-                                                    <option selected>Select Delegation</option>
+                                                    <option selected  >Select Delegation</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -530,7 +530,7 @@
                                             <div class="form-group">
                                                 <label> Academie </label>
                                                 <select class="custom-select" name="academie" id="academiesOptions">
-                                                    <option selected>Select Academie</option>
+                                                    <option selected  >Select Academie</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -581,7 +581,7 @@
                                                 <label for="progress-basicpill-namecard-input">premiere inscription (année universitaire) </label>
 
                                                 <select name="pre_insc_annee_universitaire" class="custom-select">
-                                                    <option selected>Select Année universitaire</option>
+                                                    <option selected  >Select Année universitaire</option>
 
                                                     <option value="2021-2022">2021/2022</option>
                                                     <option value="2020-2021">2020/2021</option>
@@ -630,7 +630,7 @@
                                                 <label for="progress-basicpill-namecard-input">Choix de formation</label>
 
                                                 <select name="formation" class="custom-select">
-                                                    <option selected>Selectionner un Choix de formation</option>
+                                                    <option selected  >Selectionner un Choix de formation</option>
                                                     <option value="LF">Licence fondamentale</option>
                                                     <option value="Master">Master</option>
                                                     <option value="LP">Licence professionnelle</option>

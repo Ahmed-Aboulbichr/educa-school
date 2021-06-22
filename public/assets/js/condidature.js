@@ -15,6 +15,7 @@ $("#infoCandidat ").on('submit',function(e){
           $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepTwo);
         },
         error: function(response) {
+          console.log(response);
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',action);
         }
@@ -33,12 +34,14 @@ $("#infoParent").on('submit',function(e){
         data: $(this).serialize(),
        
         success: function(response) {
+
           $('#NextStepBtn').attr('class',"Next");
           $('#NextStepBtn').trigger('click');
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
         },
         error: function(response) {
+          console.log(response);
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',action);
         }
@@ -71,6 +74,7 @@ $("#infoBaccalaureat").on('submit',function(e){
           //$('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
         },
         error: function(response) {
+          console.log(response);
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',action);
         }
@@ -157,6 +161,7 @@ $("#choixFormation").on('submit',function(e){
          // $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFive);
         },
         error: function(response) {
+          console.log(response);
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',action);
         }

@@ -104,13 +104,13 @@ class CandidatController extends Controller
                 'lieu_naiss_ar' => ['bail', 'nullable', 'string', 'max:50'],
                 'CIN' => ['bail', 'required', 'string', 'max:10'],
                 'CNE' => ['bail', 'required', 'string', 'max:20'],
-                'date_naiss' => ['bail', 'required', 'date', 'date_format:dd/mm/YYYY'],
+                'date_naiss' => ['bail', 'required', 'date_format:d/m/Y'],
                 'tel' => ['bail', 'required', 'numeric'],
                 'situation_familiale' => ['nullable', 'string', 'max:20'],
                 'sexe' => ['string', 'max:20'],
-                'pay_id' => ['nullable', 'integer'],
-                'nationalities' => ['nullable', 'integer'],
-                'ville' => ['nullable', 'integer'],
+                'pay_id' => 'integer|nullable',
+                'nationalities' => 'nullable|integer',
+                'ville' => 'nullable|integer',
                 'adresse_etd' => ['nullable', 'string', 'max:100'],
             ]);
 
