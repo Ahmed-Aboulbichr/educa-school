@@ -15,8 +15,8 @@ class CreateCandidaturesTable extends Migration
     {
         Schema::create('candidatures', function (Blueprint $table) {
             $table->id();
-            $table->string('labelle',30);
-            $table->boolean('valide');
+            $table->string('labelle',30)->nullable();
+            $table->boolean('valide')->default(false);
             $table->foreignId('candidat_id')->constrained()->onDelete('cascade');
             $table->foreignId('formation_id')->constrained()->onDelete('cascade');
             $table->timestamps();
