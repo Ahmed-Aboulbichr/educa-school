@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CandidatController extends Controller
 {
@@ -80,5 +82,57 @@ class CandidatController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function saveStepOne(Request $req)
+    {
+        if ($req->ajax()) {
+            $fields = $req->validate([
+                'nom_fr' => ['bail', 'required', 'string', 'max:255'],
+                'nom_ar' => ['bail', 'required', 'string', 'max:255'],
+                'prenom_fr' => ['bail', 'required', 'string', 'max:255'],
+                'prenom_ar' => ['bail', 'required', 'string', 'max:255'],
+                'lieu_naiss_fr' => ['bail', 'required', 'string', 'max:255'],
+                'lieu_naiss_ar' => ['bail', 'required', 'string', 'max:255'],
+                'CIN' => ['bail', 'required', 'string', 'max:255'],
+                'CNE' => ['bail', 'required', 'string', 'max:255'],
+                'date_naiss' => ['bail', 'required', 'string', 'max:255'],
+                'tel' => ['bail', 'required', 'string', 'max:255'],
+                'situation_familiale' => ['string', 'max:255'],
+                'sexe' => ['string', 'max:255'],
+                'pay_id' => ['string', 'max:255'],
+                'nationalities' => ['string', 'max:255'],
+                'ville' => ['string', 'max:255'],
+                'adresse_etd' => ['string', 'email', 'max:255'],
+            ]);
+
+            $candidat = Candidat::where('CIN', '=', $fields['CIN'])->first();
+            if ($candidat === null) {
+                // user doesn't exist
+            } else {
+                $candidat =  new Candidat;
+                $candidat->nom_fr;
+                $candidat->nom_ar;
+                $candidat->prenom_fr;
+                $candidat->prenom_ar;
+                $candidat->lieu_naiss_fr;
+                $candidat->lieu_naiss_ar;
+                $candidat->CIN;
+                $candidat->CNE;
+                $candidat->date_naiss;
+                $candidat->tel;
+                $candidat->situation_familiale;
+                $candidat->sexe;
+                $candidat->pay_id;
+                $candidat->nationalities;
+                $candidat->ville;
+                $candidat->adresse_etd;
+            }
+
+            $response = array(
+                'user' => $candidat,
+            );
+            return  response()->json($response, 200);
+        }
     }
 }
