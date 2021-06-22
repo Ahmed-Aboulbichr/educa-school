@@ -147,14 +147,14 @@ $("#choixFormation").on('submit',function(e){
   action =  $('#NextStepBtn').attr('onclick');
   $('#NextStepBtn').attr('onclick',"");
     $.ajax({
-        url: config.routes.saveCandidatStepFour,
+        url: config.routes.saveCandidatStepFive,
         type: 'post',
         data: $(this).serialize(),
        
         success: function(response) {
           $('#NextStepBtn').attr('class',"Next");
           $('#NextStepBtn').trigger('click');
-          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFive);
+         // $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFive);
         },
         error: function(response) {
           $('#NextStepBtn').attr('class',"");
