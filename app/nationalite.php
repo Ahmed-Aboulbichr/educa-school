@@ -9,5 +9,5 @@ class nationalite extends Model
     protected $fillable = [
         'id',
         'name'
-    ]
+    ];
 }
