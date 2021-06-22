@@ -28,6 +28,13 @@ $("#infoParent").on('submit',function(e){
     })
 });
 
+
+
+
+
+
+
+
 $("#infoBaccalaureat").on('submit',function(e){
 
   e.preventDefault();
@@ -47,25 +54,57 @@ $("#infoBaccalaureat").on('submit',function(e){
     })
 });
 
-$("#fichierBac").on('submit',function(e){
-  e.preventDefault();
-  var form = $(this)[0]; // You need to use standard javascript object here
-  var formData = new FormData(form);
-    $.ajax({
-        url: config.routes.saveCandidatStepFour,
-        type: 'post',
-        data: formData,
-        contentType: false, 
-        processData: false,
-        success: function(response) {
-          console.log(response);
-        },
-        error: function(response) {
-          console.log(response.responseText);
-        }
-        
-    })
+
+
+
+
+
+$(function() {
+  var fileList = new Array;
+  var i = 0;
+  
+   $("#fichierBac").dropzone({
+      
+       url: config.routes.saveCandidatStepFour,
+       addRemoveLinks: true,
+       maxFiles: 4,
+       acceptedFiles: 'image/*',
+       maxFilesize: 5,
+       init: function () {
+           this.on("success", function (file, serverFileName) {
+            alert('uploaded successfully');
+               file.serverFn = serverFileName;
+               fileList[i] = {
+                   "serverFileName": serverFileName,
+                   "fileName": file.name,
+                   "fileId": i
+               };
+               i++;
+           });
+
+           this.on("error", function (file, serverFileName) {
+            alert('error accrured');
+              
+           });
+       }
+   });
 });
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $("#choixFormation").on('submit',function(e){
   e.preventDefault();

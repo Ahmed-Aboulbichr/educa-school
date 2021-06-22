@@ -548,7 +548,7 @@
                                                 </p>
 
                                                 <div>
-                                                    <form id="fichierBac"  action="{{route('saveCandidatStepFour')}}" enctype="multipart/form-data" class="dropzone">
+                                                    <form id="fichierBac"  action="#"  enctype="multipart/form-data" class="dropzone">
                                                         @csrf
                                                         <div class="fallback">
                                                             <input name="bacFile" type="file" multiple="multiple">
@@ -690,9 +690,11 @@
     <script src="{{ URL::asset('/assets/js/academies.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/delegations.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/provinces.js')}}"></script>
+    
     <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
 
     <script>
+          Dropzone.autoDiscover = false;
         var config = {
             routes: {
                 getPays: "{{route('getPays')}}",
@@ -709,7 +711,6 @@
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",--}}
             }
         };
-
 
 
       $("#datepicker").datepicker({

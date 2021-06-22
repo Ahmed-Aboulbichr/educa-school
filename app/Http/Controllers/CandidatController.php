@@ -134,8 +134,8 @@ class CandidatController extends Controller
     public function saveStepFour(Request $request){
        
       
-        if ($request->ajax()) {
-            $path = $this->handleUploadedImage($request->file('bacFile'));
+        if ($request->hasFile('file')) {
+            $path = $this->handleUploadedImage($request->file('file'));
             $candidat =null;
             $candidat = Candidat::where('user_id',Auth::id())->first();
 
@@ -242,10 +242,8 @@ class CandidatController extends Controller
     public function handleUploadedImage($file)
     {
 
-        $rules = array(
-		    'file' => 'image|max:3000',
-		);
-        if (!is_null($file) && Validator::make($file, $rules)) {
+       
+        if (!is_null($file)) {
             $path =  Storage::putFile('Bac', $file);
              return $path;
         }
