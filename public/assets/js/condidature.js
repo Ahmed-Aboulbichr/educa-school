@@ -10,15 +10,19 @@ $("#infoCandidat ").on('submit',function(e){
        
         success: function(response) {
           alert('success');
-          $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn')[0].click();
+          
+          $('#NextStepBtn').attr( 'class',"next");
+           $('#progrss-wizard').bootstrapWizard('next');
           $('#NextStepBtn').attr('class',"");
-          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepTwo);
+          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
+         
+         
+          
         },
         error: function(response) {
           console.log(response);
-          $('#NextStepBtn').attr('class',"");
-          $('#NextStepBtn').attr('onclick',action);
+         $('#NextStepBtn').attr('class',"");
+        $('#NextStepBtn').attr('onclick',action);
         }
         
     });
@@ -36,8 +40,8 @@ $("#infoParent").on('submit',function(e){
        
         success: function(response) {
 
-          $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn')[0].click();
+          $('#NextStepBtn').attr( 'class',"next");
+           $('#progrss-wizard').bootstrapWizard('next');
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
         },
@@ -69,8 +73,8 @@ $("#infoBaccalaureat").on('submit',function(e){
         data: $(this).serialize(),
        
         success: function(response) {
-          $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn')[0].click();
+          $('#NextStepBtn').attr( 'class',"next");
+           $('#progrss-wizard').bootstrapWizard('next');
           $('#NextStepBtn').attr('class',"upload-file");
           //$('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
         },
@@ -157,8 +161,8 @@ $("#choixFormation").on('submit',function(e){
         data: $(this).serialize(),
        
         success: function(response) {
-          $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn')[0].click();
+          $('#NextStepBtn').attr( 'class',"next");
+           $('#progrss-wizard').bootstrapWizard('next');
          // $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFive);
         },
         error: function(response) {
