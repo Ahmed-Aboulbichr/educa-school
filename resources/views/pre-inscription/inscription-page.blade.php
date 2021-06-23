@@ -564,6 +564,7 @@
                 getAcademies: "{{route('getAcademies')}}",
                 getProvinces: "{{route('getProvinces')}}",
                 getSecteurProfessions:"{{route('getSecteurProfessions')}}",
+                saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
