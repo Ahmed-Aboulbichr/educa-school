@@ -96,17 +96,17 @@ class CandidatController extends Controller
     public function saveStepTwo(Request $request){
         if ($request->ajax()) {
             $fields = $request->validate([
-                'cin_pere' => ['bail', '', 'string', 'max:10'],
-                'cin_mere' => ['bail','', 'string', 'max:10'],
-                'tel_parent' => ['bail','', 'string', 'max:20'],
-                'cat_pere' => ['bail','', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
-                'cat_mere' => ['bail','', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
-                'secteur_pere_name' => ['bail','', 'id', 'integer', 'exists:secteur_professions'],
-                'secteur_mere_name' => ['bail','', 'id', 'integer', 'exists:secteur_professions'],
-                'prof_pere' => ['bail','', 'string', 'max:50'],
-                'prof_mere' => ['bail','', 'string', 'max:50'],
-                'ville_parent' => ['bail','','id','integer', 'exists:villes'],
-                'adresse_parent' => ['bail','', 'string', 'max:100'],
+                'cin_pere' => ['bail', 'required', 'string', 'max:10'],
+                'cin_mere' => ['bail','required', 'string', 'max:10'],
+                'tel_parent' => ['bail','required', 'string', 'max:20'],
+                'cat_pere' => ['bail','required', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
+                'cat_mere' => ['bail','required', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
+                'secteur_pere_name' => ['bail','required', 'id', 'integer', 'exists:secteur_professions'],
+                'secteur_mere_name' => ['bail','required', 'id', 'integer', 'exists:secteur_professions'],
+                'prof_pere' => ['bail','required', 'string', 'max:50'],
+                'prof_mere' => ['bail','required', 'string', 'max:50'],
+                'ville_parent' => ['bail','required','id','integer', 'exists:villes'],
+                'adresse_parent' => ['bail','required', 'string', 'max:100'],
             ]);
             $candidat=null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
