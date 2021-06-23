@@ -106,6 +106,7 @@ class CandidatController extends Controller
                 'cat_mere' => ['bail','required', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
                 'secteur_pere' => ['bail','required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
                 'secteur_mere' => ['bail','required', 'integer', Rule::exists('secteur_professions','id')->where('id', $request->input('secteur_mere')) ],
+                'ville_parent' => ['bail','required', 'integer', Rule::exists('villes','id')->where('id', $request->input('ville_parent'))],
                 'prof_pere' => ['bail','required', 'string', 'max:50'],
                 'prof_mere' => ['bail','required', 'string', 'max:50'],
                 'adresse_parent' => ['bail','nullable', 'string', 'max:100'],
@@ -121,6 +122,7 @@ class CandidatController extends Controller
                     'cat_mere' => $fields['cat_mere'],
                     'sec_profession_mere_id' => $fields['secteur_pere'],
                     'sec_profession_pere_id' => $fields['secteur_mere'],
+                    'ville_id_parent' => $fields['ville_parent'],
                     'profession_pere' => $fields['prof_pere'],
                     'profession_mere' => $fields['prof_mere'],
                     'adresse_parent' => $fields['adresse_parent'],
@@ -176,7 +178,7 @@ class CandidatController extends Controller
                 $candidat->tel = $fields['tel'];
                 $candidat->situation_familiale = $fields['situation_familiale'];
                 $candidat->sexe = $fields['sexe'];
-                $candidat->pay_id = Pay::where('iso',$fields['pay_id'])->first()->id;
+                $candidat->pay_id = $fields['pay_id'];
                 $candidat->nationalite_id = $fields['nationalite_id'];
                 $candidat->ville_id_etud = $fields['ville_id_etud'];
                 $candidat->adresse_etd = $fields['adresse_etd'];

@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('destroy', 'UserController@destroy')->name('deleteUser');
     //////////////////////////////
     Route::get('getPays', 'PaysController@renderPays')->name('getPays');
+    Route::get('getVilles', 'VillesController@renderVilles')->name('getVilles');
     Route::get('getNationalite', 'NationaliteController@renderNationalite')->name('getNationality');
     Route::get('getDelegations', 'DelegationController@renderDelegations')->name('getDelegations');
     Route::get('getFormations', 'FormationController@renderFormations')->name('getFormations');

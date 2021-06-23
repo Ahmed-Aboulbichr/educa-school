@@ -1,5 +1,4 @@
-    const key = "00000000000000000000000000000000";
-
+/*
     $(document).ready(function(){
         $.getJSON("https://geo-battuta.net/api/country/all/?key="+key+"&callback=?",function(response){
             for(pays of response){
@@ -56,3 +55,23 @@
         })
         .fail((xhr, status) => console.log('error:', status));
     }
+*/
+
+$(document).ready(function(){
+    $.ajax({
+        url: config.routes.getVilles,
+        type: 'get',
+        dataType : 'json',
+        success: function(response) {
+                for(ville of response){
+                    var option = `<option value=${ville.id}>${ville.name}</option>`;
+                    $("#villeOptionsParent").append(option);
+                    $("#ville_id_etud").append(option);
+                }
+        },
+        error: function(response) {
+            console.log(response.responseText);
+        }
+    })
+});
+

@@ -303,12 +303,12 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-between">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Tel parent</label>
                                             <input   value="{{($candidat==null)?'':$candidat->tel_parent}}" id="input-mask" inputmode="text" name="tel_parent" class="form-control input-mask" data-inputmask="'mask': '09-99999999'" >                                        </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Pays parent</label>
                                             <select name="pays_parent" class="form-control" id="paysOptionsParent">
@@ -316,15 +316,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label for="progress-basicpill-phoneno-input" >Region parent</label>
-                                            <select name="region_parent" class="form-control" id="regionOptionsParent">
-                                                <option>-----------</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville parent</label>
                                             <select name="ville_parent" class="form-control" id="villeOptionsParent">
@@ -579,6 +571,7 @@
         var config = {
             routes: {
                 getPays: "{{route('getPays')}}",
+                getVilles: "{{route('getVilles')}}",
                 getNationality : "{{route('getNationality')}}",
                 getDelegations: "{{route('getDelegations')}}",
                 getAcademies: "{{route('getAcademies')}}",

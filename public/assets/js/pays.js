@@ -10,7 +10,10 @@
 
                         var option = "<option value='"+response[i]['id']+"'>"+response[i]['name']+"</option>";
 
-                        $("#paysOptions").append(option);
+                        $("#paysOptionsEtud").append(option);
+                        $("#paysOptionsParent").append(option);
+
+
                     }
                 }
 
