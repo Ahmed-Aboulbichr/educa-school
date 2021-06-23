@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SecteurProfessionController extends Controller
 {
-    public function renderPays(Request $request)
+    public function renderSecteurs(Request $request)
     {
         if ($request->ajax()) {
 

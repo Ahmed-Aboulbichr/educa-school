@@ -217,18 +217,6 @@
                             </form>
                         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
                         <div class="tab-pane" id="progress-parent-details">
                             <form  id="infoParent">
                                 <div class="row justify-content-between">
@@ -260,70 +248,9 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession père</label>
-                                            <select name="secteur_pere_name" class="custom-select">
+                                            <select id="secteur_pere_name" name="secteur_pere_name" class="custom-select">
                                                 <option selected>-----------</option>
-                                                <option value="1">OUVRIER</option>
-                                                <option value="151">Activités associatives</option>
-                                                <option value="413">Activités des ménages en tant qu'employeurs de personnel domestique</option>
-                                                <option value="170">Activités extra-territoriales</option>
-                                                <option value="110">Activités immobilières </option>
-                                                <option value="152">Activités récréatives, culturelles et sportives</option>
-                                                <option value="120">Administration publique</option>
-                                                <option value="10">Agriculture, chasse</option>
-                                                <option value="150">Assainissement, voirie et gestion des déchets </option>
-                                                <option value="101">Assurance</option>
-                                                <option value="0">Autres</option>
-                                                <option value="33">Autres industries extractives</option>
-                                                <option value="102">Auxiliaires financiers et d'assurance </option>
-                                                <option value="51">Captage, traitement et distribution d'eau</option>
-                                                <option value="48">Cokéfaction, raffinage, industries nucléaires</option>
-                                                <option value="72">Commerce de détail et réparation d'articles domestiques</option>
-                                                <option value="71">Commerce de gros et intermédiaires du commerce</option>
-                                                <option value="70">Commerce et réparation automobile</option>
-                                                <option value="112">Conseil en systèmes informatiques </option>
-                                                <option value="60">Construction</option>
-                                                <option value="47">Edition, imprimerie, reproduction</option>
-                                                <option value="130">Education</option>
-                                                <option value="31">Extraction d'hydrocarbures </option>
-                                                <option value="30">Extraction de houille, de lignite et de tourbe</option>
-                                                <option value="32">Extraction, exploitation et enrichissement de minerais métalliques</option>
-                                                <option value="410">Fabrication d'autres matériels de transport</option>
-                                                <option value="401">Fabrication d'autres produits minéraux non métalliques</option>
-                                                <option value="408">Fabrication d'instruments médicaux, de précision d'optique et d'horlogerie</option>
-                                                <option value="407">Fabrication d'équipements de Radio, Télévision et Communication</option>
-                                                <option value="405">Fabrication de machines de bureau et de matériel informatique</option>
-                                                <option value="406">Fabrication de machines et appareils électriques</option>
-                                                <option value="404">Fabrication de machines et équipements</option>
-                                                <option value="411">Fabrication de meubles, industries diverses</option>
-                                                <option value="80">Hôtellerie et restauration</option>
-                                                <option value="409">Industrie automobile</option>
-                                                <option value="49">Industrie chimique</option>
-                                                <option value="43">Industrie de l'habillement et des fourrures</option>
-                                                <option value="41">Industrie du Tabac</option>
-                                                <option value="400">Industrie du caoutchouc et des plastiques</option>
-                                                <option value="44">Industrie du cuir et de la chaussure</option>
-                                                <option value="46">Industrie du papier et du carton</option>
-                                                <option value="42">Industrie textile</option>
-                                                <option value="40">Industries alimentaires</option>
-                                                <option value="100">Intermédiation financière</option>
-                                                <option value="111">Location sans opérateur</option>
-                                                <option value="402">Métallurgie</option>
-                                                <option value="94">Postes et télécommunications</option>
-                                                <option value="50">Production et distribution d'électricité, de gaz et de chaleur </option>
-                                                <option value="20">Pêche, aquaculture</option>
-                                                <option value="113">Recherche et développement</option>
-                                                <option value="412">Récupération</option>
-                                                <option value="140">Santé et action sociale</option>
-                                                <option value="93">Services auxiliaires des transports </option>
-                                                <option value="160">Services domestiques</option>
-                                                <option value="114">Services fournis principalement aux entreprises</option>
-                                                <option value="153">Services personnels</option>
-                                                <option value="11">Sylviculture, exploitation forestière </option>
-                                                <option value="92">Transports aériens</option>
-                                                <option value="91">Transports par eau </option>
-                                                <option value="90">Transports terrestres</option>
-                                                <option value="403">Travail des métaux</option>
-                                                <option value="45">Travail du bois et fabrication d'articles en bois </option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -350,70 +277,8 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession mère</label>
-                                            <select name="secteur_mere_name" class="custom-select">
+                                            <select id="secteur_mere_name" name="secteur_mere_name" class="custom-select">
                                                 <option selected>-----------</option>
-                                                <option value="2">FAMME AU FOYER</option>
-                                                <option value="151">Activités associatives</option>
-                                                <option value="413">Activités des ménages en tant qu'employeurs de personnel domestique</option>
-                                                <option value="170">Activités extra-territoriales</option>
-                                                <option value="110">Activités immobilières </option>
-                                                <option value="152">Activités récréatives, culturelles et sportives</option>
-                                                <option value="120">Administration publique</option>
-                                                <option value="10">Agriculture, chasse</option>
-                                                <option value="150">Assainissement, voirie et gestion des déchets </option>
-                                                <option value="101">Assurance</option>
-                                                <option value="0">Autres</option>
-                                                <option value="33">Autres industries extractives</option>
-                                                <option value="102">Auxiliaires financiers et d'assurance </option>
-                                                <option value="51">Captage, traitement et distribution d'eau</option>
-                                                <option value="48">Cokéfaction, raffinage, industries nucléaires</option>
-                                                <option value="72">Commerce de détail et réparation d'articles domestiques</option>
-                                                <option value="71">Commerce de gros et intermédiaires du commerce</option>
-                                                <option value="70">Commerce et réparation automobile</option>
-                                                <option value="112">Conseil en systèmes informatiques </option>
-                                                <option value="60">Construction</option>
-                                                <option value="47">Edition, imprimerie, reproduction</option>
-                                                <option value="130">Education</option>
-                                                <option value="31">Extraction d'hydrocarbures </option>
-                                                <option value="30">Extraction de houille, de lignite et de tourbe</option>
-                                                <option value="32">Extraction, exploitation et enrichissement de minerais métalliques</option>
-                                                <option value="410">Fabrication d'autres matériels de transport</option>
-                                                <option value="401">Fabrication d'autres produits minéraux non métalliques</option>
-                                                <option value="408">Fabrication d'instruments médicaux, de précision d'optique et d'horlogerie</option>
-                                                <option value="407">Fabrication d'équipements de Radio, Télévision et Communication</option>
-                                                <option value="405">Fabrication de machines de bureau et de matériel informatique</option>
-                                                <option value="406">Fabrication de machines et appareils électriques</option>
-                                                <option value="404">Fabrication de machines et équipements</option>
-                                                <option value="411">Fabrication de meubles, industries diverses</option>
-                                                <option value="80">Hôtellerie et restauration</option>
-                                                <option value="409">Industrie automobile</option>
-                                                <option value="49">Industrie chimique</option>
-                                                <option value="43">Industrie de l'habillement et des fourrures</option>
-                                                <option value="41">Industrie du Tabac</option>
-                                                <option value="400">Industrie du caoutchouc et des plastiques</option>
-                                                <option value="44">Industrie du cuir et de la chaussure</option>
-                                                <option value="46">Industrie du papier et du carton</option>
-                                                <option value="42">Industrie textile</option>
-                                                <option value="40">Industries alimentaires</option>
-                                                <option value="100">Intermédiation financière</option>
-                                                <option value="111">Location sans opérateur</option>
-                                                <option value="402">Métallurgie</option>
-                                                <option value="94">Postes et télécommunications</option>
-                                                <option value="50">Production et distribution d'électricité, de gaz et de chaleur </option>
-                                                <option value="20">Pêche, aquaculture</option>
-                                                <option value="113">Recherche et développement</option>
-                                                <option value="412">Récupération</option>
-                                                <option value="140">Santé et action sociale</option>
-                                                <option value="93">Services auxiliaires des transports </option>
-                                                <option value="160">Services domestiques</option>
-                                                <option value="114">Services fournis principalement aux entreprises</option>
-                                                <option value="153">Services personnels</option>
-                                                <option value="11">Sylviculture, exploitation forestière </option>
-                                                <option value="92">Transports aériens</option>
-                                                <option value="91">Transports par eau </option>
-                                                <option value="90">Transports terrestres</option>
-                                                <option value="403">Travail des métaux</option>
-                                                <option value="45">Travail du bois et fabrication d'articles en bois </option>
                                             </select>
                                         </div>
                                     </div>
@@ -606,9 +471,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">premiere inscription (nom d'université)</label>
-
                                                 <input name="pre_insc_universite" type="text" class="form-control"  >
-
                                             </div>
                                         </div>
                                     </div>
@@ -688,7 +551,7 @@
     <script src="{{ URL::asset('/assets/js/academies.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/delegations.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/provinces.js')}}"></script>
-
+    <script src="{{ URL::asset('/assets/js/secteursProfession.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
 
     <script>
@@ -699,12 +562,11 @@
                 getDelegations: "{{route('getDelegations')}}",
                 getAcademies: "{{route('getAcademies')}}",
                 getProvinces: "{{route('getProvinces')}}",
-                getSecteurProfessions : "{{route('getSecteurProfessions'}}",
-                saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
+                getSecteurProfessions:"{{route('getSecteurProfessions')}}",
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
-                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
+                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}"
             }
         };
 

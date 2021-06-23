@@ -9,7 +9,6 @@ $("#infoCandidat ").on('submit',function(e){
         success: function(response) {
 
         }
-
     })
 });
 
@@ -33,21 +32,17 @@ $("#infoParent").on('submit',function(e){
 
 
 $("#infoBaccalaureat").on('submit',function(e){
-
   e.preventDefault();
-
     $.ajax({
         url: config.routes.saveCandidatStepThree,
         type: 'post',
         data: $(this).serializeArray(),
-
         success: function(response) {
           console.log(response);
         },
         error: function(response) {
           console.log(response.responseText);
         }
-
     })
 });
 
@@ -74,10 +69,8 @@ $(function() {
                };
                i++;
            });
-
            this.on("error", function (file, serverFileName) {
             alert('error accrured');
-
            });
        }
    });
@@ -98,7 +91,6 @@ $("#choixFormation").on('submit',function(e){
         error: function(response) {
           console.log(response.responseText);
         }
-
     })
 });
 // on ready return all values to inputes

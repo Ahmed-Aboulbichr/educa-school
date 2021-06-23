@@ -89,9 +89,17 @@ class CandidatController extends Controller
     public function saveStepTwo(Request $request){
         if ($request->ajax()) {
             $fields = $request->validate([
-                'cin_pere' => ['bail', '', 'string', 'max:255'],
-                'cin_mere' => ['bail','', 'string', 'max:255'],
-                'tel_parent' => ['bail','', 'string', 'max:255']
+                'cin_pere' => ['bail', '', 'string', 'max:10'],
+                'cin_mere' => ['bail','', 'string', 'max:10'],
+                'tel_parent' => ['bail','', 'string', 'max:20'],
+                'cat_pere' => ['bail','', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
+                'cat_mere' => ['bail','', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
+                'secteur_pere_name' => ['bail','', 'id', 'integer', 'exists:secteur_professions'],
+                'secteur_mere_name' => ['bail','', 'id', 'integer', 'exists:secteur_professions'],
+                'prof_pere' => ['bail','', 'string', 'max:50'],
+                'prof_mere' => ['bail','', 'string', 'max:50'],
+                'ville_parent' => ['bail','','id','integer', 'exists:villes'],
+                'adresse_parent' => ['bail','', 'string', 'max:100'],
             ]);
             $candidat=null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
@@ -100,6 +108,14 @@ class CandidatController extends Controller
                     'CIN_pere' => $fields['cin_pere'],
                     'CIN_mere' => $fields['cin_mere'],
                     'tel_parent' => $fields['tel_parent'],
+                    'cat_pere' => $fields['cat_mere'],
+                    'cat_mere' => $fields['cat_mere'],
+                    'secteur_pere_name_id' => $fields['secteur_pere_name'],
+                    'secteur_mere_name_id' => $fields['secteur_mere_name'],
+                    'profession_pere' => $fields['prof_mere'],
+                    'profession_mere' => $fields['prof_mere'],
+                    'ville_id_parent' => $fields['ville_parent'],
+                    'adresse_parent' => $fields['adresse_parent'],
                 ]);
                 $response = array(
                     "candidat" => $candidat
@@ -138,14 +154,11 @@ class CandidatController extends Controller
                     'delegation' => $fields['delegation'],
                     'academie' =>  $fields['academie'],
                 ]);
-
-
                 $response = array(
                     'candidat' => $candidat,
                 );
                 return  response()->json($response, 200);
             }
-
                return  response()->json("nothing to update", 200);
             }
 
@@ -265,8 +278,6 @@ class CandidatController extends Controller
 
     public function handleUploadedImage($file)
     {
-
-
         if (!is_null($file)) {
             $path =  Storage::putFile('Bac', $file);
              return $path;
