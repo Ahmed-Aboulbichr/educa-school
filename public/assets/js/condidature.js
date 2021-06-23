@@ -11,7 +11,7 @@ $("#infoCandidat ").on('submit',function(e){
         success: function(response) {
           alert('success');
           $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn')[0].click();
+         document.getElementById('extStepBtn').click();
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepTwo);
         },
