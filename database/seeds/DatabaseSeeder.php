@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(SecteurProfessionSeeder::class);
+        // $this->call(UserSeeder::class);
+
+        $this->call([SecteurProfessionSeeder::class,academieSeeder::class,delegationSeeder::class,NationaliteSeeder::class,PaySeeder::class,provinceSeeder::class]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class provinceSeeder extends Seeder
 {
@@ -26,5 +27,4 @@ class provinceSeeder extends Seeder
         ,('Boujdour'),('Es-Semara'),('Laâyoune'),('Tarfaya'),('Gueltat Zemmour'),('Jraifia'),('Lamssid')
         ,('Aousserd'),('Oued Ed-Dahab'),('Autre province ')");
     }
-   
 }

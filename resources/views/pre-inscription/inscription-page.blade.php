@@ -67,14 +67,14 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-firstname-input">Nom <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input type="text" class="form-control" id="progress-basicpill-firstname-input">
+                                            <input type="text" name="nom_fr" class="form-control" id="progress-basicpill-firstname-input">
                                             <span class="text-muted">ABOULBICHR</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic"><i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i> النسب</label>
-                                            <input type="email" class="form-control rtl" id="progress-basicpill-lastname-ar-input">
+                                            <input type="email" name="nom_ar" class="form-control rtl" id="progress-basicpill-lastname-ar-input">
                                             <span class="text-muted" style="float: right">أبوالبشر</span>
                                         </div>
                                     </div>
@@ -84,14 +84,14 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Prénom <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input type="text" class="form-control" id="progress-basicpill-lastname-input">
+                                            <input type="text" name="prenom_fr" class="form-control" id="progress-basicpill-lastname-input">
                                             <span class="text-muted">Ahmed</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-lastname-input" class="arabic"><i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i> الإسم</label>
-                                            <input type="text" class="form-control rtl" id="progress-basicpill-firstname-ar-input">
+                                            <input type="text" name="prenom_ar" class="form-control rtl" id="progress-basicpill-firstname-ar-input">
                                             <span class="text-muted"  style="float: right" >أحمد</span>
                                         </div>
                                     </div>
@@ -101,13 +101,13 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Lieu de naissance</label>
-                                            <input type="text" class="form-control" id="progress-basicpill-birthplace-input">
+                                            <input type="text" name="lieu_naiss_fr" class="form-control" id="progress-basicpill-birthplace-input">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic">مكان الإزدياد</label>
-                                            <input type="email" class="form-control rtl" id="progress-basicpill-birthplace-ar-input">
+                                            <input type="text" name="lieu_naiss_ar" class="form-control rtl" id="progress-basicpill-birthplace-ar-input">
                                         </div>
                                     </div>
                                 </div>
@@ -116,14 +116,14 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >CIN <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input type="text" class="form-control" id="progress-basicpill-CIN-input">
+                                            <input type="text" name="CIN" class="form-control" id="progress-basicpill-CIN-input">
                                             <span class="text-muted">BA7060</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">CNE <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input type="email" class="form-control" id="progress-basicpill-CNE-input">
+                                            <input type="email" name="CNE" class="form-control" id="progress-basicpill-CNE-input">
                                             <span class="text-muted">R109218391</span>
                                         </div>
                                     </div>
@@ -132,15 +132,15 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Date de naissance <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input type="text" class="form-control" id="progress-basicpill-birthday-input">
-                                            <span class="text-muted">JJ/MM/AAAA</span>
+                                            <input type="text" name="date_naiss" class="form-control" id="progress-basicpill-birthday-input">
+                                            <span class="text-muted">2000-05-18</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Téléphone <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input type="email" class="form-control" id="progress-basicpill-phone-input">
-                                            <span class="text-muted">+2126.........</span>
+                                            <input type="text" name="tel" class="form-control" id="progress-basicpill-phone-input">
+                                            <span class="text-muted">0654682005</span>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +150,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Situation familiale</label>
                                             {{-- <input type="text" class="form-control" id="progress-basicpill-phoneno-input"> --}}
-                                            <select class="form-control">
+                                            <select class="form-control" name="situation_familiale">
                                                 <option>marié (M)</option>
                                                 <option>pacsé (O)</option>
                                                 <option>divorcé (D)</option>
@@ -165,11 +165,11 @@
                                             <label for="progress-basicpill-email-input">Genre <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <div class="row" style="justify-content: space-around">
                                                 <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="masculin" name="customRadio" class="custom-control-input">
+                                                    <input type="radio" id="masculin" name="sexe" value="Homme" class="custom-control-input">
                                                     <label class="custom-control-label" for="masculin">Masculin</label>
                                                 </div>
                                                 <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="feminin" name="customRadio" class="custom-control-input">
+                                                    <input type="radio" id="feminin" name="sexe" value="Femmme" class="custom-control-input">
                                                     <label class="custom-control-label" for="feminin">Féminin</label>
                                                 </div>
                                             </div>
@@ -182,8 +182,8 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Pays</label>
                                             {{-- <input type="text" class="form-control" id="progress-basicpill-phoneno-input"> --}}
-                                            <select class="form-control" id="paysOptions">
-                                                <option>-----------</option>
+                                            <select class="form-control" id="paysOptions" name="pay_id">
+                                                <option value="">-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -191,8 +191,8 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Nationalité</label>
                                             {{-- <input type="email" class="form-control" id="progress-basicpill-Nationalite-input"> --}}
-                                            <select name="cod_pay_nai"  class="form-control">
-                                                <option value="350" selected="">MAROCAIN(E)</option><option value="212">AFGHAN(E)</option><option value="125">ALBANAIS(E)</option><option value="352">ALGERIEN(NE)</option><option value="109">ALLEMAND(E)</option><option value="404">AMERICAIN(E)</option><option value="527">AMERICAIN(E)</option><option value="130">ANDORRAN(NE)</option><option value="395">ANGOLAIS(E)</option><option value="441">ANTIGUA ET BARBUDA</option><option value="415">ARGENTIN(E)</option><option value="252">ARMENIEN(E)</option><option value="501">AUSTRALIEN(NE)</option><option value="110">AUTRICHIEN(NE)</option><option value="253">AZERI(E)</option><option value="436">BAHAMAS</option><option value="434">BARBADE</option><option value="249">BARHEINIEN(NE)</option><option value="131">BELGE</option><option value="429">BELIZE</option><option value="246">BENGALI(E)</option><option value="327">BENINOIS(E)</option><option value="521">BERMUDIEN(NE)</option><option value="214">BHOUTAN</option><option value="148">BIELORUSSE</option><option value="418">BOLIVIEN(NE)</option><option value="118">BOSNIAQUE</option><option value="347">BOTSWANAIS(E)</option><option value="416">BRESILIEN(NE)</option><option value="528">BRITANNIQUE</option><option value="427">BRITANNIQUE</option><option value="132">BRITANNIQUE</option><option value="225">BRUNEI</option><option value="111">BULGARE</option><option value="331">BURKINABE</option><option value="321">BURUNDAIS(E)</option><option value="525">CAEMANAIS(E)</option><option value="533">CALEDONIEN(NE)</option><option value="234">CAMBODGIEN(NE)</option><option value="322">CAMEROUNAIS(E)</option><option value="401">CANADIEN(NE)</option><option value="396">CAP VERDIEN(NE)</option><option value="323">CENTRAFRICAIN(E)</option><option value="417">CHILIEN(NE)</option><option value="216">CHINOIS(E)</option><option value="254">CHYPRIOTE</option><option value="419">COLOMBIEN(NE)</option><option value="397">COMORIEN(NE)</option><option value="324">CONGOLAIS(E)</option><option value="520">CONGOLAISE (R.D.)</option><option value="406">COSTA RICAIN(E)</option><option value="119">CROATE</option><option value="407">CUBAIN(E)</option><option value="101">DANOIS(E)</option><option value="308">DE CHAGOS</option><option value="537">DE SAINT-KITTS-ET-NEVIS</option><option value="538">DE SAINT-SIEGE</option><option value="306">DE STE HELENE</option><option value="247">DES EMIRATS ARABES UNIS</option><option value="526">DES ILES COOK</option><option value="399">DJIBOUTIEN(NE)</option><option value="438">DOMINICAIN(E)</option><option value="408">DOMINICAIN(E)</option><option value="232">DU MACAO</option><option value="224">DU MYANMAR</option><option value="301">EGYPTIEN(NE)</option><option value="414">EL SALVADORIEN(NE)</option><option value="314">EQUATORIAL GUINEEN(NE)</option><option value="420">EQUATORIEN(NE)</option><option value="317">ERYTHREE</option><option value="134">ESPAGNOL(E)</option><option value="106">ESTONIEN(NE)</option><option value="315">ETHIOPIEN(NE)</option><option value="156">EX. REP YOUGO MACEDOINE I</option><option value="508">FIDJI</option><option value="105">FINLANDAIS(E)</option><option value="996">FRANCAIS(E)</option><option value="100">FRANCAIS(E)</option><option value="328">GABONAIS(E)</option><option value="304">GAMBIEN(NE)</option><option value="255">GEORGIEN(NE)</option><option value="329">GHANEEN(NE)</option><option value="133">GIBRALTARIEN</option><option value="126">GREC(QUE)</option><option value="435">GRENADE ETGRENADINES</option><option value="522">GUADELOUPEEN(NE)</option><option value="523">GUAMIEN(NE)</option><option value="409">GUATEMALTEQUE</option><option value="330">GUINEEN(NE)</option><option value="392">GUINEEN(NE) BISSAU</option><option value="428">GUYANAIS(E)</option><option value="524">GUYANNAIS(E)</option><option value="410">HAITIEN(NE)</option><option value="411">HONDURIEN(NE)</option><option value="230">HONG KONG</option><option value="112">HONGROIS(E)</option><option value="515">ILE MARSHALL</option><option value="990">INCONNUE</option><option value="223">INDIEN(NE)</option><option value="231">INDONESIEN(NE)</option><option value="203">IRAKIEN(NE)</option><option value="204">IRANIEN(NE)</option><option value="136">IRLANDAIS(E)</option><option value="102">ISLANDAIS(E)</option><option value="207">ISRAELIEN(NE)</option><option value="127">ITALIEN(NE)</option><option value="326">IVOIRIEN(NE)</option><option value="426">JAMAICAIN(E)</option><option value="217">JAPONAIS(E)</option><option value="222">JORDANIEN(NE)</option><option value="256">KAZAKH</option><option value="332">KENYAN(NE)</option><option value="257">KIRGHIZE</option><option value="513">KIRIBATI</option><option value="240">KOWEITIEN(NE)</option><option value="241">LAOTIEN(NE)</option><option value="348">LESOTHO</option><option value="107">LETTONIEN(NE)</option><option value="205">LIBANAIS(E)</option><option value="302">LIBERIAN(E)</option><option value="316">LIBYEN(NE)</option><option value="113">LIECHTENSTEIN</option><option value="108">LITHUANIEN(NE)</option><option value="137">LUXEMBOURGEOIS(E)</option><option value="227">MALAIS(E)</option><option value="334">MALAWIEN(NE)</option><option value="229">MALDIVES</option><option value="333">MALGACHE</option><option value="335">MALIEN(NE)</option><option value="144">MALTAIS(E)</option><option value="350">MAROCAIN(E)</option><option value="530">MARTINIQUAIS(E)</option><option value="390">MAURICIEN(NE)</option><option value="336">MAURITANIEN(NE)</option><option value="405">MEXICAIN(E)</option><option value="516">MICRONESIEN(NE)</option><option value="151">MOLDAVE</option><option value="138">MONEGASQUE</option><option value="242">MONGOL(E)</option><option value="393">MOZAMBIQUOIS(E)</option><option value="311">NAMIBIEN(NE)</option><option value="507">NAURU</option><option value="135">NEERLANDAIS(E)</option><option value="431">NEERLANDAIS(E)</option><option value="502">NEO ZELANDAIS(E)</option><option value="215">NEPALAIS(E)</option><option value="412">NICARAGUAIS(E)</option><option value="338">NIGERIAN(E)</option><option value="337">NIGERIEN(NE)</option><option value="532">NIOUEEN(NE)</option><option value="238">NORD COREEN(NE)</option><option value="103">NORVEGIEN(NE)</option><option value="250">OMANAIS(E)</option><option value="339">OUGANDAIS(E)</option><option value="258">OUZBEK</option><option value="213">PAKISTANAIS(E)</option><option value="517">PALAOSIEN(NE)</option><option value="519">PALAOSIEN(NE)</option><option value="261">PALESTINIEN(NE)</option><option value="413">PANAMEEN(NE)</option><option value="510">PAPOUASIE</option><option value="421">PARAGUAYEN(NE)</option><option value="422">PERUVIEN(NE)</option><option value="220">PHILIPPIN(NE)</option><option value="122">POLONAIS(E)</option><option value="535">POLYNESIEN(NE)</option><option value="432">PORTORICAIN(NE)</option><option value="139">PORTUGAIS(E)</option><option value="248">QATARI(E)</option><option value="529">REUNIONNAIS(E)</option><option value="114">ROUMAIN(E)</option><option value="340">RUANDAIS(E)</option><option value="123">RUSSE</option><option value="128">SAINT MARIN</option><option value="440">SAINT VINCENTAIS ET GRENADIN</option><option value="439">SAINTE-LUCIEN(E)</option><option value="512">SALOMON</option><option value="540">SAMOAIN(E)</option><option value="506">SAMOAN(NE)</option><option value="394">SAO TOME ET PRINCIPE</option><option value="201">SAOUDIEN(NE)</option><option value="341">SENEGALAIS(E)</option><option value="398">SEYCHELLES</option><option value="342">SIERRA LEONE</option><option value="226">SINGAPOURIEN(NE)</option><option value="117">SLOVAQUE</option><option value="145">SLOVENE</option><option value="318">SOMALIEN(NE)</option><option value="343">SOUDANAIS(E)</option><option value="235">SRI LANKAIS(E)</option><option value="442">ST CHRISTOPHE NIEVES</option><option value="303">SUD AFRICAIN(E)</option><option value="239">SUD COREEN(NE)</option><option value="104">SUEDOIS(E)</option><option value="140">SUISSE</option><option value="437">SURINAMAIS(E)</option><option value="391">SWAZILANDAIS(E)</option><option value="206">SYRIEN(NE)</option><option value="259">TADJIK</option><option value="236">TAIWANIS(E)</option><option value="309">TANZANIEN(NE)</option><option value="344">TCHADIEN(NE)</option><option value="116">TCHEQUE</option><option value="505">TERRITOIRE USA</option><option value="219">THAILANDAIS(E)</option><option value="345">TOGOLAIS(E)</option><option value="509">TONGA OU FRIENDLY</option><option value="433">TRINITE ET TOBAGO</option><option value="351">TUNISIEN(NE)</option><option value="208">TURC (TURQUE)</option><option value="260">TURKMENE</option><option value="511">TUVALU</option><option value="155">UKRAINIEN(NE)</option><option value="423">URUGUAYEN(NE)</option><option value="514">VANUATU</option><option value="129">VATICAN(E)</option><option value="424">VENEZUELIEN(NE)</option><option value="243">VIETNAMIEN(NE)</option><option value="251">YEMENITE</option><option value="121">YOUGOSLAVE</option><option value="312">ZAIROIS(E)</option><option value="346">ZAMBIEN(NE)</option><option value="310">ZIMBABWEIEN(NE)</option>
+                                            <select id="nationalities"  class="form-control" name="nationalite_id">
+                                                <option></option>
                                             </select>
 
                                         </div>
@@ -200,7 +200,7 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Ville</label>
-                                            <input type="email" class="form-control" id="progress-basicpill-Ville-input">
+                                            <input type="email" name="ville_id_etud" class="form-control" id="progress-basicpill-Ville-input">
                                             <span class="text-muted">Casablanca</span>
                                         </div>
                                     </div>
@@ -210,7 +210,7 @@
                                     <div class="col-lg-12 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-address-input">Address</label>
-                                            <textarea id="progress-basicpill-address-input" class="form-control" rows="2"></textarea>
+                                            <textarea id="progress-basicpill-address-input" name="adresse_etd" class="form-control" rows="2"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CAT père</label>
                                             <select name="cat_pere" class="custom-select">
-                                                <option selected>-----------</option>
+                                                <option selected  >-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
                                                 <option value="LIBRE">LIBRE</option>
@@ -267,7 +267,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">CAT mère</label>
                                             <select name="cat_mere" class="custom-select">
-                                                <option selected>-----------</option>
+                                                <option selected  >-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
                                                 <option value="LIBRE">LIBRE</option>
@@ -347,7 +347,7 @@
                                             <div class="form-group">
                                                 <label>Mention baccalauréat</label>
                                                 <select name="mention_bac" class="custom-select">
-                                                    <option selected>Select Mention</option>
+                                                    <option selected  >Select Mention</option>
                                                     <option value="P">Passable</option>
                                                     <option value="AB">Assez-Bien</option>
                                                     <option value="B">Bien</option>
@@ -377,7 +377,7 @@
                                             <div class="form-group">
                                                 <label> ¨Province </label>
                                                 <select class="custom-select" name="province" id="provincesOptions">
-                                                    <option selected>Select ¨Province</option>
+                                                    <option selected  >Select ¨Province</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -385,7 +385,7 @@
                                             <div class="form-group">
                                                 <label> Delegation </label>
                                                 <select class="custom-select" name="delegation" id="delegationsOptions">
-                                                    <option selected>Select Delegation</option>
+                                                    <option selected  >Select Delegation</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -393,7 +393,7 @@
                                             <div class="form-group">
                                                 <label> Academie </label>
                                                 <select class="custom-select" name="academie" id="academiesOptions">
-                                                    <option selected>Select Academie</option>
+                                                    <option selected  >Select Academie</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -444,7 +444,7 @@
                                                 <label for="progress-basicpill-namecard-input">premiere inscription (année universitaire) </label>
 
                                                 <select name="pre_insc_annee_universitaire" class="custom-select">
-                                                    <option selected>Select Année universitaire</option>
+                                                    <option selected  >Select Année universitaire</option>
 
                                                     <option value="2021-2022">2021/2022</option>
                                                     <option value="2020-2021">2020/2021</option>
@@ -491,7 +491,7 @@
                                                 <label for="progress-basicpill-namecard-input">Choix de formation</label>
 
                                                 <select name="formation" class="custom-select">
-                                                    <option selected>Selectionner un Choix de formation</option>
+                                                    <option selected  >Selectionner un Choix de formation</option>
                                                     <option value="LF">Licence fondamentale</option>
                                                     <option value="Master">Master</option>
                                                     <option value="LP">Licence professionnelle</option>
@@ -525,7 +525,7 @@
                     </div>
                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                         <li class="previous"><a href="#">Previous</a></li>
-                        <li class="next"><a onclick="$('#infoParent').submit()" href="#">Next</a></li>
+                        <li class="" style="float:right;" id="NextStepBtn" onclick="$('#infoCandidat').submit()" ><a >Next</a></li>
                        <!-- <li class="next"><a href="#">Submit</a></li>-->
                     </ul>
                 </div>
@@ -559,6 +559,7 @@
         var config = {
             routes: {
                 getPays: "{{route('getPays')}}",
+                getNationality : "{{route('getNationality')}}",
                 getDelegations: "{{route('getDelegations')}}",
                 getAcademies: "{{route('getAcademies')}}",
                 getProvinces: "{{route('getProvinces')}}",
