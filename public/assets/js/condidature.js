@@ -9,8 +9,9 @@ $("#infoCandidat ").on('submit',function(e){
         data: $(this).serialize(),
        
         success: function(response) {
+          alert('success');
           $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn').trigger('click');
+          $('#NextStepBtn')[0].click();
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepTwo);
         },
@@ -36,7 +37,7 @@ $("#infoParent").on('submit',function(e){
         success: function(response) {
 
           $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn').trigger('click');
+          $('#NextStepBtn')[0].click();
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
         },
@@ -69,7 +70,7 @@ $("#infoBaccalaureat").on('submit',function(e){
        
         success: function(response) {
           $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn').trigger('click');
+          $('#NextStepBtn')[0].click();
           $('#NextStepBtn').attr('class',"upload-file");
           //$('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
         },
@@ -157,7 +158,7 @@ $("#choixFormation").on('submit',function(e){
        
         success: function(response) {
           $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn').trigger('click');
+          $('#NextStepBtn')[0].click();
          // $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFive);
         },
         error: function(response) {

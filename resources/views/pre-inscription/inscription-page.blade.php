@@ -136,14 +136,14 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Date de naissance <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input type="text" name="date_naiss" class="form-control" id="progress-basicpill-birthday-input">
-                                            <span class="text-muted">JJ/MM/AAAA</span>
+                                            <span class="text-muted">2000-05-18</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Téléphone <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input type="text" name="tel" class="form-control" id="progress-basicpill-phone-input">
-                                            <span class="text-muted">+2126.........</span>
+                                            <span class="text-muted">0654682005</span>
                                         </div>
                                     </div>
                                 </div>
@@ -168,11 +168,11 @@
                                             <label for="progress-basicpill-email-input">Genre <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <div class="row" style="justify-content: space-around">
                                                 <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="masculin" name="sexe" value="Masculin" class="custom-control-input">
+                                                    <input type="radio" id="masculin" name="sexe" value="Homme" class="custom-control-input">
                                                     <label class="custom-control-label" for="masculin">Masculin</label>
                                                 </div>
                                                 <div class="custom-control custom-radio mb-3">
-                                                    <input type="radio" id="feminin" name="sexe" value="Féminin" class="custom-control-input">
+                                                    <input type="radio" id="feminin" name="sexe" value="Femmme" class="custom-control-input">
                                                     <label class="custom-control-label" for="feminin">Féminin</label>
                                                 </div>
                                             </div>
@@ -186,7 +186,7 @@
                                             <label for="progress-basicpill-phoneno-input" >Pays</label>
                                             {{-- <input type="text" class="form-control" id="progress-basicpill-phoneno-input"> --}}
                                             <select class="form-control" id="paysOptions" name="pay_id">
-                                                <option  >-----------</option>
+                                                <option value="">-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -194,8 +194,8 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Nationalité</label>
                                             {{-- <input type="email" class="form-control" id="progress-basicpill-Nationalite-input"> --}}
-                                            <select name="cod_pay_nai" id="nationalities"  class="form-control" name="nationalite_id">
-                                                <option  >-----------</option>
+                                            <select id="nationalities"  class="form-control" name="nationalite_id">
+                                                <option></option>
                                             </select>
 
                                         </div>

@@ -10,6 +10,7 @@ use App\Candidat;
 use App\Candidature;
 use App\docFile;
 use App\User;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -104,13 +105,13 @@ class CandidatController extends Controller
                 'lieu_naiss_ar' => ['bail', 'nullable', 'string', 'max:50'],
                 'CIN' => ['bail', 'required', 'string', 'max:10'],
                 'CNE' => ['bail', 'required', 'string', 'max:20'],
-                'date_naiss' => ['bail', 'required', 'date_format:d/m/Y'],
+                'date_naiss' => ['bail', 'required', 'date_format:Y-m-d'],
                 'tel' => ['bail', 'required', 'numeric'],
                 'situation_familiale' => ['nullable', 'string', 'max:20'],
                 'sexe' => ['string', 'max:20'],
                 'pay_id' => 'integer|nullable',
-                'nationalities' => 'nullable|integer',
-                'ville' => 'nullable|integer',
+                'nationalite_id' => 'nullable|integer',
+                'ville_id_etud' => 'nullable|integer',
                 'adresse_etd' => ['nullable', 'string', 'max:100'],
             ]);
 
@@ -126,13 +127,13 @@ class CandidatController extends Controller
                 $candidat->lieu_naiss_ar = $fields['lieu_naiss_ar'];
                 $candidat->CIN = $fields['CIN'];
                 $candidat->CNE = $fields['CNE'];
-                $candidat->date_naiss = $fields['date_naiss'];
+                $candidat->date_naiss = date("Y-m-d", strtotime($fields['date_naiss']));
                 $candidat->tel = $fields['tel'];
                 $candidat->situation_familiale = $fields['situation_familiale'];
                 $candidat->sexe = $fields['sexe'];
                 $candidat->pay_id = $fields['pay_id'];
-                $candidat->nationalities = $fields['nationalities'];
-                $candidat->ville = $fields['ville'];
+                $candidat->nationalite_id = $fields['nationalite_id'];
+                $candidat->ville_id_etud = $fields['ville_id_etud'];
                 $candidat->adresse_etd = $fields['adresse_etd'];
 
                 $candidat->save();
@@ -145,13 +146,13 @@ class CandidatController extends Controller
                 $candidat->lieu_naiss_ar = $fields['lieu_naiss_ar'];
                 $candidat->CIN = $fields['CIN'];
                 $candidat->CNE = $fields['CNE'];
-                $candidat->date_naiss = $fields['date_naiss'];
+                $candidat->date_naiss = date("Y-m-d", strtotime($fields['date_naiss']));
                 $candidat->tel = $fields['tel'];
                 $candidat->situation_familiale = $fields['situation_familiale'];
                 $candidat->sexe = $fields['sexe'];
                 $candidat->pay_id = $fields['pay_id'];
-                $candidat->nationalities = $fields['nationalities'];
-                $candidat->ville = $fields['ville'];
+                $candidat->nationalite_id = $fields['nationalite_id'];
+                $candidat->ville_id_etud = $fields['ville_id_etud'];
                 $candidat->adresse_etd = $fields['adresse_etd'];
 
                 $candidat->update();
