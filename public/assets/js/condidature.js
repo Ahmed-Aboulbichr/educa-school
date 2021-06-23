@@ -9,8 +9,6 @@ $("#infoCandidat ").on('submit',function(e){
         data: $(this).serialize(),
 
         success: function(response) {
-          alert('success');
-          
           $('#NextStepBtn').attr( 'class',"next");
            $('#progrss-wizard').bootstrapWizard('next');
           $('#NextStepBtn').attr('class',"");

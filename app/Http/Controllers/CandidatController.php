@@ -96,7 +96,8 @@ class CandidatController extends Controller
         //
     }
 
-    public function saveStepTwo(Request $request){
+    public function saveStepTwo(Request $request)
+    {
         if ($request->ajax()) {
             $fields = $request->validate([
                 'cin_pere' => ['bail', 'required', 'string', 'max:10'],
@@ -111,9 +112,9 @@ class CandidatController extends Controller
                 'prof_mere' => ['bail','required', 'string', 'max:50'],
                 'adresse_parent' => ['bail','nullable', 'string', 'max:100'],
             ]);
-            $candidat=null;
+            $candidat = null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
-            if(is_object($candidat)){
+            if (is_object($candidat)) {
                 $candidat->update([
                     'CIN_pere' => $fields['cin_pere'],
                     'CIN_mere' => $fields['cin_mere'],
@@ -131,18 +132,17 @@ class CandidatController extends Controller
                     "candidat" => $candidat
                 );
                 return response()->json($response, 200);
-            }else{
-                 $response = "nothing to update".Auth::id();
-                return response()->json($response,200);
+            } else {
+                $response = "nothing to update" . Auth::id();
+                return response()->json($response, 200);
             }
-
         }
     }
 
     public function saveStepOne(Request $req)
     {
         if ($req->ajax()) {
-          $fields = $req->validate([
+            $fields = $req->validate([
                 'nom_fr' => ['bail', 'required', 'string', 'max:20'],
                 'nom_ar' => ['bail', 'required', 'string', 'max:20'],
                 'prenom_fr' => ['bail', 'required', 'string', 'max:20'],
@@ -155,9 +155,9 @@ class CandidatController extends Controller
                 'tel' => ['bail', 'required', 'numeric'],
                 'situation_familiale' => ['nullable', 'string', 'max:20'],
                 'sexe' => ['string', 'max:20'],
-                'pay_id' => 'string|nullable',
-                'nationalite_id' => 'nullable|integer',
-                'ville_id_etud' => 'nullable|string',
+                'pay_id' => ['bail', 'nullable', 'integer', Rule::exists('pays', 'id')->where('id', $req->input('pay_id'))],
+                'nationalite_id' => ['bail', 'nullable', 'integer', Rule::exists('nationalites', 'id')->where('id', $req->input('nationalite_id'))],
+                'ville_id_etud' => ['bail', 'nullable', 'integer', Rule::exists('villes', 'id')->where('id', $req->input('ville_id_etud '))],
                 'adresse_etd' => ['nullable', 'string', 'max:100'],
             ]);
 
@@ -198,7 +198,7 @@ class CandidatController extends Controller
                 $candidat->tel = $fields['tel'];
                 $candidat->situation_familiale = $fields['situation_familiale'];
                 $candidat->sexe = $fields['sexe'];
-                $candidat->pay_id = Pay::where('iso',$fields['pay_id'])->first()->id;
+                $candidat->pay_id = $fields['pay_id'];
                 $candidat->nationalite_id = $fields['nationalite_id'];
                 $candidat->ville_id_etud = $fields['ville_id_etud'];
                 $candidat->adresse_etd = $fields['adresse_etd'];
@@ -328,7 +328,7 @@ class CandidatController extends Controller
 
             if (is_object($candidat)) {
                 $candidature = null;
-               // $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
+                // $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
 
                 $candidat->update([
                     'universite_dip_name' => $fields['pre_insc_universite'] . " _-_ " . $fields['universite_dip_name'],
