@@ -151,6 +151,7 @@
                                             <label for="progress-basicpill-phoneno-input" >Situation familiale</label>
                                             {{-- <input   value="{{($candidat==null)?'':$candidat->}}" type="text" class="form-control" id="progress-basicpill-phoneno-input"> --}}
                                             <select value="{{($candidat==null)?'':$candidat->situation_familiale}}" class="form-control" name="situation_familiale">
+                                                <option></option>
                                                 <option {{(($candidat==null)?'':$candidat->situation_familiale=='marié (M)')?'selected':''}}>marié (M)</option>
                                                 <option {{(($candidat==null)?'':$candidat->situation_familiale=='pacsé (O)')?'selected':''}}>pacsé (O)</option>
                                                 <option {{(($candidat==null)?'':$candidat->situation_familiale=='divorcé (D)')?'selected':''}}>divorcé (D)</option>
@@ -165,11 +166,11 @@
                                             <label for="progress-basicpill-email-input">Genre <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <div class="row" style="justify-content: space-around">
                                                 <div class="custom-control custom-radio mb-3">
-                                                    <input    type="radio" id="masculin" name="sexe" value="Homme" class="custom-control-input">
+                                                    <input {{ (($candidat==null)?'': $candidat->sexe=='Homme')? 'checked':'' }}   type="radio" id="masculin" name="sexe" value="Homme" class="custom-control-input">
                                                     <label class="custom-control-label" for="masculin">Masculin</label>
                                                 </div>
                                                 <div class="custom-control custom-radio mb-3">
-                                                    <input    type="radio" id="feminin" name="sexe" value="Femmme" class="custom-control-input">
+                                                    <input  {{ (($candidat==null)?'': $candidat->sexe=='Femme' )? 'checked' : '' }}  type="radio" id="feminin" name="sexe" value="Femmme" class="custom-control-input">
                                                     <label class="custom-control-label" for="feminin">Féminin</label>
                                                 </div>
                                             </div>
@@ -181,8 +182,8 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Pays</label>
-                                            <select  value="{{($candidat==null)?'':$candidat->pay_id}}" name="pay_id" class="form-control" id="paysOptionsEtud">
-                                                <option>-----------</option>
+                                            <select name="pay_id" class="form-control" id="paysOptionsEtud">
+                                                <option value="">-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -192,25 +193,17 @@
                                             <label for="progress-basicpill-email-input">Nationalité</label>
                                             {{-- <input   value="{{($candidat==null)?'':$candidat->}}" type="email" class="form-control" id="progress-basicpill-Nationalite-input"> --}}
                                             <select   id="nationalities"  class="form-control" name="nationalite_id">
-                                                <option></option>
+                                                <option value=""></option>
                                             </select>
 
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label for="progress-basicpill-phoneno-input" >Region</label>
-                                            <select class="form-control" id="regionOptionsEtud">
-                                                <option>-----------</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville</label>
                                             <select name="ville_id_etud" class="form-control" id="villeOptionsEtud">
-                                                <option>-----------</option>
+                                                <option value="">-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -221,7 +214,7 @@
                                     <div class="col-lg-12 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-address-input">Address</label>
-                                            <textarea  id="progress-basicpill-address-input" name="adresse_etd" class="form-control" rows="2">{{($candidat==null)?'':$candidat->adresse_etd}}</textarea>
+                                            <textarea {{ (($candidat==null)?'': !empty($candidat->adresse_etd)) ? $candidat->adresse_etd : ''}}  id="progress-basicpill-address-input" name="adresse_etd" class="form-control" rows="2">{{($candidat==null)?'':$candidat->adresse_etd}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +243,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CAT père</label>
                                             <select name="cat_pere" class="custom-select">
-                                                <option selected  >-----------</option>
+                                                <option selected>-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
                                                 <option value="PRIVE">PRIVE</option>
                                                 <option value="LIBRE">LIBRE</option>

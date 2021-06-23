@@ -1,4 +1,4 @@
-    const key = "00000000000000000000000000000000";
+/*     const key = "00000000000000000000000000000000";
 
     $(document).ready(function(){
         $.getJSON("https://geo-battuta.net/api/country/all/?key="+key+"&callback=?",function(response){
@@ -56,3 +56,4 @@
         })
         .fail((xhr, status) => console.log('error:', status));
     }
+ */

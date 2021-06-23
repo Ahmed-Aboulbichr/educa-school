@@ -19,8 +19,8 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        $candidat = Candidat::where('user_id',Auth::id())->first();
-        return view('pre-inscription.inscription-page')->with('candidat',$candidat);
+        $candidat = Candidat::where('user_id', Auth::id())->first();
+        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }
 
     /**
@@ -88,6 +88,4 @@ class CandidatureController extends Controller
     {
         //
     }
-
-
 }
