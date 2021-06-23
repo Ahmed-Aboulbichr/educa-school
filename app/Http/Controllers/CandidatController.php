@@ -16,6 +16,7 @@ use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CandidatController extends Controller
 {
@@ -98,16 +99,16 @@ class CandidatController extends Controller
     public function saveStepTwo(Request $request){
         if ($request->ajax()) {
             $fields = $request->validate([
-                'cin_pere' => ['bail', '', 'string', 'max:10'],
-                'cin_mere' => ['bail','', 'string', 'max:10'],
-                'tel_parent' => ['bail','', 'string', 'max:20'],
-                'cat_pere' => ['bail','', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
-                'cat_mere' => ['bail','', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
-                'secteur_pere_name' => ['bail','',  'integer', 'exists:secteur_professions,id'],
-                'secteur_mere_name' => ['bail','',  'integer', 'exists:secteur_professions,id'],
-                'prof_pere' => ['bail','', 'string', 'max:50'],
-                'prof_mere' => ['bail','', 'string', 'max:50'],
-                'adresse_parent' => ['bail','', 'string', 'max:100'],
+                'cin_pere' => ['bail', 'required', 'string', 'max:10'],
+                'cin_mere' => ['bail','required', 'string', 'max:10'],
+                'tel_parent' => ['bail','required', 'string', 'max:20'],
+                'cat_pere' => ['bail','required', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
+                'cat_mere' => ['bail','required', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
+                'secteur_pere' => ['bail','required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
+                'secteur_mere' => ['bail','required', 'integer', Rule::exists('secteur_professions','id')->where('id', $request->input('secteur_mere')) ],
+                'prof_pere' => ['bail','required', 'string', 'max:50'],
+                'prof_mere' => ['bail','required', 'string', 'max:50'],
+                'adresse_parent' => ['bail','nullable', 'string', 'max:100'],
             ]);
             $candidat=null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
@@ -116,11 +117,11 @@ class CandidatController extends Controller
                     'CIN_pere' => $fields['cin_pere'],
                     'CIN_mere' => $fields['cin_mere'],
                     'tel_parent' => $fields['tel_parent'],
-                    'cat_pere' => $fields['cat_mere'],
+                    'cat_pere' => $fields['cat_pere'],
                     'cat_mere' => $fields['cat_mere'],
-                    'secteur_pere_name_id' => $fields['secteur_pere_name'],
-                    'secteur_mere_name_id' => $fields['secteur_mere_name'],
-                    'profession_pere' => $fields['prof_mere'],
+                    'sec_profession_mere_id' => $fields['secteur_pere'],
+                    'sec_profession_pere_id' => $fields['secteur_mere'],
+                    'profession_pere' => $fields['prof_pere'],
                     'profession_mere' => $fields['prof_mere'],
                     'adresse_parent' => $fields['adresse_parent'],
                 ]);
