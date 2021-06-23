@@ -42,9 +42,9 @@ class CreateCandidatsTable extends Migration
             $table->string("CIN_mere",10)->nullable();
             $table->string("profession_pere",50)->nullable();
             $table->string("profession_mere",50)->nullable();
+            $table->string('ville_id_etud')->nullable();
+            $table->string('ville_id_parent')->nullable();
 
-            $table->unsignedBigInteger('ville_id_etud')->nullable();
-            $table->unsignedBigInteger('ville_id_parent')->nullable();
             $table->unsignedBigInteger('bac_id')->nullable();
             $table->unsignedBigInteger('sec_profession_pere_id')->nullable();
             $table->unsignedBigInteger('sec_profession_mere_id')->nullable();
@@ -56,11 +56,11 @@ class CreateCandidatsTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('pay_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('nationalite_id')->nullable()->constrained()->onDelete('cascade')->default(null);
-            $table->foreign('ville_id_parent')->references('id')->on('villes')->onDelete('cascade')->nullable();
+            //$table->foreign('ville_id_parent')->references('id')->on('villes')->onDelete('cascade')->nullable();
             $table->foreign('bac_id')->references('id')->on('doc_files')->onDelete('cascade')->nullable();
             $table->foreign('sec_profession_pere_id')->references('id')->on('secteur_professions')->onDelete('cascade')->nullable();
             $table->foreign('sec_profession_mere_id')->references('id')->on('secteur_professions')->onDelete('cascade')->nullable();
-            $table->foreign('ville_id_etud')->references('id')->on('villes')->onDelete('cascade')->nullable();
+            //$table->foreign('ville_id_etud')->references('id')->on('villes')->onDelete('cascade')->nullable();
 
 
             $table->timestamps();

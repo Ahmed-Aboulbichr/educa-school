@@ -21,10 +21,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('pre-ins', function () {
-
-        return view('pre-inscription.inscription-page')->render();
-    });
+    Route::get('pre-ins','CandidatureController@index')->name('getPreInscr');
 
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
@@ -37,9 +34,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getPays', 'PaysController@renderPays')->name('getPays');
     Route::get('getNationalite', 'NationaliteController@renderNationalite')->name('getNationality');
     Route::get('getDelegations', 'DelegationController@renderDelegations')->name('getDelegations');
+    Route::get('getFormations', 'FormationController@renderFormations')->name('getFormations');
     Route::get('getAcademies', 'AcademieController@renderAcademies')->name('getAcademies');
     Route::get('getProvinces', 'ProvinceController@renderProvinces')->name('getProvinces');
-
+    Route::get('getSecteurProfessions', 'SecteurProfessionController@renderSecteurs')->name('getSecteurProfessions');
     //////////////////////////
 
     Route::post('/stepOne', 'CandidatController@saveStepOne')->name('saveCandidatStepOne');
@@ -49,7 +47,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('saveCandidatStepFive', 'CandidatController@saveStepFive')->name('saveCandidatStepFive');
 
     /////////////////////////
-    Route::get('getSecteurProfessions', 'SecteurProfessionController@renderSecteurs')->name('getSecteurProfessions');
 
 
 });

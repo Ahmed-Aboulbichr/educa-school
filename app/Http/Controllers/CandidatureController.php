@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidat;
+use App\docFile;
+use App\Formation;
 use App\Candidature;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CandidatureController extends Controller
@@ -14,7 +19,8 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        //
+        $candidat = Candidat::where('user_id',Auth::id())->first();
+        return view('pre-inscription.inscription-page')->with('candidat',$candidat);
     }
 
     /**

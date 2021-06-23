@@ -14,7 +14,8 @@ $("#infoCandidat ").on('submit',function(e){
           $('#NextStepBtn').attr( 'class',"next");
            $('#progrss-wizard').bootstrapWizard('next');
           $('#NextStepBtn').attr('class',"");
-          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
+          $('#NextStepBtn').off();
+          $('#NextStepBtn').attr('onclick',"$('#infoParent').submit()");
          
          
           
@@ -37,19 +38,25 @@ $("#infoParent").on('submit',function(e){
     $.ajax({
         url: config.routes.saveCandidatStepTwo,
         type: 'post',
-        data: $(this).serialize(),
+        data: $(this).serializeArray(),
 
         success: function(response) {
-
+          alert('success');
+          console.log(response);
           $('#NextStepBtn').attr( 'class',"next");
            $('#progrss-wizard').bootstrapWizard('next');
-          $('#NextStepBtn').attr('class',"");
-          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
+           $('#NextStepBtn').off();
+          $('#NextStepBtn').attr('class',"upload-file");
+          $('#NextStepBtn').attr('onclick',"$('#infoBaccalaureat').submit()");
+         
+         
+          
         },
         error: function(response) {
           console.log(response);
-          $('#NextStepBtn').attr('class',"");
-          $('#NextStepBtn').attr('onclick',action);
+          $('#NextStepBtn').off();
+         $('#NextStepBtn').attr('class',"");
+        $('#NextStepBtn').attr('onclick',action);
         }
 
     });
@@ -58,7 +65,13 @@ $("#infoParent").on('submit',function(e){
 
 $("#infoBaccalaureat").on('submit',function(e){
   e.preventDefault();
-  $('#NextStepBtn').attr('class',"disabled");
+  if($('#NextStepBtn').hasClass('upload-file')){
+    $('#NextStepBtn').attr('class',"disabled upload-file");
+
+   }else{
+    $('#NextStepBtn').attr('class',"disabled");
+   }
+
   action =  $('#NextStepBtn').attr('onclick');
   $('#NextStepBtn').attr('onclick',"");
     $.ajax({
@@ -67,14 +80,25 @@ $("#infoBaccalaureat").on('submit',function(e){
         data: $(this).serialize(),
 
         success: function(response) {
-          $('#NextStepBtn').attr( 'class',"next");
-           $('#progrss-wizard').bootstrapWizard('next');
-          $('#NextStepBtn').attr('class',"upload-file");
-          //$('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
+
+           if($('#NextStepBtn').hasClass('upload-file')){
+            alert('please upload required files first ');
+            $('#NextStepBtn').attr('onclick',action);
+           }else{
+            $('#progrss-wizard').bootstrapWizard('next');
+             $('#NextStepBtn').off();
+             $('#NextStepBtn').attr('class',"");
+            $('#NextStepBtn').attr('onclick',"$('#choixFormation').submit()");
+           }
         },
         error: function(response) {
           console.log(response);
-          $('#NextStepBtn').attr('class',"");
+          if($('#NextStepBtn').hasClass('upload-file')){
+            $('#NextStepBtn').attr('class',"upload-file");
+
+           }else{
+            $('#NextStepBtn').attr('class',"");
+           }
           $('#NextStepBtn').attr('onclick',action);
         }
 
@@ -111,11 +135,10 @@ $(function() {
                };
                i++;
 
-               $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
                $('#NextStepBtn').attr('class',"");
            });
-           this.on("error", function (file, serverFileName) {
-
+           this.on("error", function (file, error) {
+            console.log(error);
             $('#NextStepBtn').attr('class',"upload-file");
             alert('error accrured');
            });
@@ -138,7 +161,8 @@ $("#choixFormation").on('submit',function(e){
         success: function(response) {
           $('#NextStepBtn').attr( 'class',"next");
            $('#progrss-wizard').bootstrapWizard('next');
-         // $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFive);
+           $('#NextStepBtn').off();
+        $('#NextStepBtn').attr('onclick','');
         },
         error: function(response) {
           console.log(response);

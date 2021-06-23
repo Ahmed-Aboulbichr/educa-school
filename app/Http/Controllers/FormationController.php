@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 class FormationController extends Controller
 {
     /**
@@ -80,5 +81,15 @@ class FormationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function renderFormations(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $formations = DB::table('formations')->select('name', 'id')->get();
+
+            return  response()->json($formations, 200);
+        }
     }
 }
