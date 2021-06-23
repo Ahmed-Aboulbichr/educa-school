@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Etudiant extends User
 {
-    public function doc_files()
+    public function docFiles()
     {
         return $this->hasMany(docFile::class);
     }
