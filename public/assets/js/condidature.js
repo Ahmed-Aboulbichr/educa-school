@@ -7,22 +7,25 @@ $("#infoCandidat ").on('submit',function(e){
         url: config.routes.saveCandidatStepOne,
         type: 'post',
         data: $(this).serialize(),
-       
+
         success: function(response) {
-          alert('success');
-          $('#NextStepBtn').attr('class',"Next");
-         document.getElementById('extStepBtn').click();
+          $('#NextStepBtn').attr( 'class',"next");
+           $('#progrss-wizard').bootstrapWizard('next');
           $('#NextStepBtn').attr('class',"");
-          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepTwo);
+          $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
+         
+         
+          
         },
         error: function(response) {
           console.log(response);
-          $('#NextStepBtn').attr('class',"");
-          $('#NextStepBtn').attr('onclick',action);
+         $('#NextStepBtn').attr('class',"");
+        $('#NextStepBtn').attr('onclick',action);
         }
-        
+
     });
 });
+
 
 $("#infoParent").on('submit',function(e){
   e.preventDefault();
@@ -33,11 +36,11 @@ $("#infoParent").on('submit',function(e){
         url: config.routes.saveCandidatStepTwo,
         type: 'post',
         data: $(this).serialize(),
-       
+
         success: function(response) {
 
-          $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn')[0].click();
+          $('#NextStepBtn').attr( 'class',"next");
+           $('#progrss-wizard').bootstrapWizard('next');
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepThree);
         },
@@ -46,19 +49,12 @@ $("#infoParent").on('submit',function(e){
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',action);
         }
-        
+
     });
 });
 
 
-
-
-
-
-
-
 $("#infoBaccalaureat").on('submit',function(e){
-
   e.preventDefault();
   $('#NextStepBtn').attr('class',"disabled");
   action =  $('#NextStepBtn').attr('onclick');
@@ -67,10 +63,10 @@ $("#infoBaccalaureat").on('submit',function(e){
         url: config.routes.saveCandidatStepThree,
         type: 'post',
         data: $(this).serialize(),
-       
+
         success: function(response) {
-          $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn')[0].click();
+          $('#NextStepBtn').attr( 'class',"next");
+           $('#progrss-wizard').bootstrapWizard('next');
           $('#NextStepBtn').attr('class',"upload-file");
           //$('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
         },
@@ -79,13 +75,9 @@ $("#infoBaccalaureat").on('submit',function(e){
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',action);
         }
-        
+
     });
 });
-
-
-
-
 
 
 $(function() {
@@ -94,13 +86,13 @@ $(function() {
     alert('please upload required files first ');
 
  });
- 
+
 
   var fileList = new Array;
   var i = 0;
-  
+
    $("#fichierBac").dropzone({
-      
+
        url: config.routes.saveCandidatStepFour,
        addRemoveLinks: true,
        maxFiles: 4,
@@ -120,29 +112,14 @@ $(function() {
                $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFour);
                $('#NextStepBtn').attr('class',"");
            });
-
            this.on("error", function (file, serverFileName) {
-             
+
             $('#NextStepBtn').attr('class',"upload-file");
             alert('error accrured');
            });
        }
    });
 });
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -155,10 +132,10 @@ $("#choixFormation").on('submit',function(e){
         url: config.routes.saveCandidatStepFive,
         type: 'post',
         data: $(this).serialize(),
-       
+
         success: function(response) {
-          $('#NextStepBtn').attr('class',"Next");
-          $('#NextStepBtn')[0].click();
+          $('#NextStepBtn').attr( 'class',"next");
+           $('#progrss-wizard').bootstrapWizard('next');
          // $('#NextStepBtn').attr('onclick',config.routes.saveCandidatStepFive);
         },
         error: function(response) {
@@ -166,6 +143,6 @@ $("#choixFormation").on('submit',function(e){
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').attr('onclick',action);
         }
-        
+
     });
 });

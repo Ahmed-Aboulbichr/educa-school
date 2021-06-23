@@ -40,12 +40,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getAcademies', 'AcademieController@renderAcademies')->name('getAcademies');
     Route::get('getProvinces', 'ProvinceController@renderProvinces')->name('getProvinces');
 
-
     //////////////////////////
+
     Route::post('/stepOne', 'CandidatController@saveStepOne')->name('saveCandidatStepOne');
+    Route::post('saveCandidatStepTwo', 'CandidatController@saveStepTwo')->name('saveCandidatStepTwo');
     Route::post('saveCandidatStepThree', 'CandidatController@saveStepThree')->name('saveCandidatStepThree');
     Route::post('saveCandidatStepFour', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
     Route::post('saveCandidatStepFive', 'CandidatController@saveStepFive')->name('saveCandidatStepFive');
+
+    /////////////////////////
+    Route::get('getSecteurProfessions', 'SecteurProfessionController@renderSecteurs')->name('getSecteurProfessions');
 });
 
 

@@ -82,4 +82,6 @@ class CandidatureController extends Controller
     {
         //
     }
+
+
 }
