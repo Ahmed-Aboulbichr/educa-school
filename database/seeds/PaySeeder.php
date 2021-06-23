@@ -12,7 +12,7 @@ class PaySeeder extends Seeder
      */
     public function run()
     {
-        DB::insert("INSERT INTO `payes` (`id`, `name`, `created_at`, `updated_at`) VALUES
+        DB::insert("INSERT INTO `pays` (`id`, `name`, `created_at`, `updated_at`) VALUES
         (1, 'Maroc', NULL, NULL),
         (2, 'Albanie', NULL, NULL),
         (3, 'Algérie', NULL, NULL),
