@@ -6,6 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class docFile extends Model
 {
+
+   /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'path',
+        'type',
+        'formation_id',
+        'etudiant_id',
+        'candidature_id',
+    ];
+
+
+
+
+
+
+
+
     //many to many relation ship
     public function responses()
     {
@@ -13,7 +34,7 @@ class docFile extends Model
     }
 
     //mone to many relation ships
-    public function candidatures()
+    public function candidature()
     {
         return $this->belongsTo(Candidature::class);
     }
@@ -27,4 +48,6 @@ class docFile extends Model
     {
         return $this->belongsTo(Etudiant::class);
     }
+
+
 }

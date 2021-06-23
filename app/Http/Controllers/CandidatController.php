@@ -8,12 +8,15 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Candidat;
 use App\Candidature;
+use App\Formation;
 use App\docFile;
 use App\User;
+use App\Pay;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CandidatController extends Controller
 {
@@ -93,44 +96,43 @@ class CandidatController extends Controller
         //
     }
 
-    public function saveStepTwo(Request $request){
+    public function saveStepTwo(Request $request)
+    {
         if ($request->ajax()) {
             $fields = $request->validate([
-                'cin_pere' => ['bail', '', 'string', 'max:10'],
-                'cin_mere' => ['bail','', 'string', 'max:10'],
-                'tel_parent' => ['bail','', 'string', 'max:20'],
-                'cat_pere' => ['bail','', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
-                'cat_mere' => ['bail','', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
-                'secteur_pere_name' => ['bail','', 'id', 'integer', 'exists:secteur_professions'],
-                'secteur_mere_name' => ['bail','', 'id', 'integer', 'exists:secteur_professions'],
-                'prof_pere' => ['bail','', 'string', 'max:50'],
-                'prof_mere' => ['bail','', 'string', 'max:50'],
-                'ville_parent' => ['bail','','id','integer', 'exists:villes'],
-                'adresse_parent' => ['bail','', 'string', 'max:100'],
+                'cin_pere' => ['bail', 'required', 'string', 'max:10'],
+                'cin_mere' => ['bail', 'required', 'string', 'max:10'],
+                'tel_parent' => ['bail', 'required', 'string', 'max:20'],
+                'cat_pere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'cat_mere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'secteur_pere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
+                'secteur_mere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_mere'))],
+                'prof_pere' => ['bail', 'required', 'string', 'max:50'],
+                'prof_mere' => ['bail', 'required', 'string', 'max:50'],
+                'adresse_parent' => ['bail', 'nullable', 'string', 'max:100'],
             ]);
-            $candidat=null;
+            $candidat = null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
-            if(is_object($candidat)){
+            if (is_object($candidat)) {
                 $candidat->update([
                     'CIN_pere' => $fields['cin_pere'],
                     'CIN_mere' => $fields['cin_mere'],
                     'tel_parent' => $fields['tel_parent'],
-                    'cat_pere' => $fields['cat_mere'],
+                    'cat_pere' => $fields['cat_pere'],
                     'cat_mere' => $fields['cat_mere'],
-                    'secteur_pere_name_id' => $fields['secteur_pere_name'],
-                    'secteur_mere_name_id' => $fields['secteur_mere_name'],
-                    'profession_pere' => $fields['prof_mere'],
+                    'sec_profession_mere_id' => $fields['secteur_pere'],
+                    'sec_profession_pere_id' => $fields['secteur_mere'],
+                    'profession_pere' => $fields['prof_pere'],
                     'profession_mere' => $fields['prof_mere'],
-                    'ville_id_parent' => $fields['ville_parent'],
                     'adresse_parent' => $fields['adresse_parent'],
                 ]);
                 $response = array(
                     "candidat" => $candidat
                 );
                 return response()->json($response, 200);
-            }else{
-                 $response = "nothing to update";
-                return response()->json($response,405);
+            } else {
+                $response = "nothing to update" . Auth::id();
+                return response()->json($response, 200);
             }
         }
     }
@@ -151,9 +153,9 @@ class CandidatController extends Controller
                 'tel' => ['bail', 'required', 'numeric'],
                 'situation_familiale' => ['nullable', 'string', 'max:20'],
                 'sexe' => ['string', 'max:20'],
-                'pay_id' => 'integer|nullable',
+                'pay_id' => 'string|nullable',
                 'nationalite_id' => 'nullable|integer',
-                'ville_id_etud' => 'nullable|integer',
+                'ville_id_etud' => 'nullable|string',
                 'adresse_etd' => ['nullable', 'string', 'max:100'],
             ]);
 
@@ -161,6 +163,7 @@ class CandidatController extends Controller
             if ($candidat === null) {
                 // user doesn't exist
                 $candidat =  new Candidat;
+                $candidat->user_id = Auth::id();
                 $candidat->nom_fr = $fields['nom_fr'];
                 $candidat->nom_ar = $fields['nom_ar'];
                 $candidat->prenom_fr = $fields['prenom_fr'];
@@ -173,13 +176,14 @@ class CandidatController extends Controller
                 $candidat->tel = $fields['tel'];
                 $candidat->situation_familiale = $fields['situation_familiale'];
                 $candidat->sexe = $fields['sexe'];
-                $candidat->pay_id = $fields['pay_id'];
+                $candidat->pay_id = Pay::where('iso', $fields['pay_id'])->first()->id;
                 $candidat->nationalite_id = $fields['nationalite_id'];
                 $candidat->ville_id_etud = $fields['ville_id_etud'];
                 $candidat->adresse_etd = $fields['adresse_etd'];
 
                 $candidat->save();
             } else {
+                $candidat->user_id = Auth::id();
                 $candidat->nom_fr = $fields['nom_fr'];
                 $candidat->nom_ar = $fields['nom_ar'];
                 $candidat->prenom_fr = $fields['prenom_fr'];
@@ -192,14 +196,13 @@ class CandidatController extends Controller
                 $candidat->tel = $fields['tel'];
                 $candidat->situation_familiale = $fields['situation_familiale'];
                 $candidat->sexe = $fields['sexe'];
-                $candidat->pay_id = $fields['pay_id'];
+                $candidat->pay_id = Pay::where('iso', $fields['pay_id'])->first()->id;
                 $candidat->nationalite_id = $fields['nationalite_id'];
                 $candidat->ville_id_etud = $fields['ville_id_etud'];
                 $candidat->adresse_etd = $fields['adresse_etd'];
 
                 $candidat->update();
             }
-
             $response = array(
                 'candidat' => $candidat,
             );
@@ -228,9 +231,9 @@ class CandidatController extends Controller
                     'mention_bac' => $fields['mention_bac'],
                     'mg_bac' => $fields['mg_bac'],
                     'lycee_bac' => $fields['lycee_bac'],
-                    'province' => $fields['province'],
-                    'delegation' => $fields['delegation'],
-                    'academie' =>  $fields['academie'],
+                    'province_id' => $fields['province'],
+                    'delegation_id' => $fields['delegation'],
+                    'academie_id' =>  $fields['academie'],
                 ]);
 
 
@@ -323,7 +326,7 @@ class CandidatController extends Controller
 
             if (is_object($candidat)) {
                 $candidature = null;
-                $candidature = Candidature::where('condidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
+                // $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
 
                 $candidat->update([
                     'universite_dip_name' => $fields['pre_insc_universite'] . " _-_ " . $fields['universite_dip_name'],
@@ -331,20 +334,21 @@ class CandidatController extends Controller
                 ]);
 
                 if (!is_object($candidature)) {
+
                     $candidature = Candidature::create([
-                        'condidat_id' => $fields[$candidat->id],
+                        'candidat_id' => $candidat->id,
                         'formation_id' => $fields['formation'],
                     ]);
 
                     docFile::where('id', $candidat->bac_id)->first()->update([
-                        'formation_id' => $fields['formation'],
+                        'candidature_id' => $candidature->id,
                     ]);
                 }
 
 
                 $response = array(
                     'candidat' => $candidat,
-                    'candidat' => $candidature,
+                    'candidature' => $candidature,
                 );
                 return  response()->json($response, 200);
             }
