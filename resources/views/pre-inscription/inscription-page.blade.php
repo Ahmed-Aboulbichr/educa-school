@@ -17,12 +17,12 @@
           box-shadow: 5px 6px 15px 5px rgba(0.2,0.2,0.2,0.2);
           transition: 0.3s;
         }
-        
+
         /* On mouse-over, add a deeper shadow */
         .card:hover {
           box-shadow: 10px 18px 28px 10px rgba(0.2,0.2,0.2,0.2);
         }
-        
+
         /* Add some padding inside the card container */
         .container {
           padding: 2px 16px;
@@ -253,8 +253,8 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">CIN mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input  value="{{($candidat==null)?'':$candidat->CIN_mere}}" type="text" name="cin_mere" class="form-control" id="progress-basicpill-vatno-input" >
+                                            <label for="progress-basicpill-vatno-inputCIN">CIN mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                            <input  value="{{($candidat==null)?'':$candidat->CIN_mere}}" type="text" name="cin_mere" class="form-control" id="progress-basicpill-vatno-inputCIN" >
                                         </div>
                                     </div>
                                 </div>
@@ -281,8 +281,8 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">Profession père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input   value="{{($candidat==null)?'':$candidat->profession_pere}}" type="text" name="prof_pere" class="form-control" id="progress-basicpill-vatno-input">
+                                            <label for="progress-basicpill-vatno-inputProfPere">Profession père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                            <input   value="{{($candidat==null)?'':$candidat->profession_pere}}" type="text" name="prof_pere" class="form-control" id="progress-basicpill-vatno-inputProfPere">
                                         </div>
                                     </div>
 
@@ -310,8 +310,8 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">Profession mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input  value="{{($candidat==null)?'':$candidat->profession_mere}}" type="text" name="prof_mere" class="form-control" id="progress-basicpill-vatno-input">
+                                            <label for="progress-basicpill-vatno-inputProfMere">Profession mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                            <input  value="{{($candidat==null)?'':$candidat->profession_mere}}" type="text" name="prof_mere" class="form-control" id="progress-basicpill-vatno-inputProfMere">
                                         </div>
                                     </div>
                                 </div>
@@ -334,7 +334,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="progress-basicpill-address-input">Adresse parent</label>
-                                            <textarea name="adresse_parent" id="progress-basicpill-address-input" class="form-control" rows="2">{{($candidat==null)?'':$candidat->adresse_parent}}</textarea>
+                                            <textarea name="adresse_parent" id="progress-basicpill-addressParent-input" class="form-control" rows="2">{{($candidat==null)?'':$candidat->adresse_parent}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -481,14 +481,20 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">premiere inscription (nom d'université)</label>
-                                                @php 
+                                                @php
                                                   if($candidat!=null){
-                                                     $pre_insc_universite = trim(explode('_-_',$candidat->universite_dip_name)[0]);
-                                                     $universite_dip_name = trim(explode('_-_',$candidat->universite_dip_name)[1]);
+                                                      try {
+
+                                                        $pre_insc_universite = trim(explode('_-_',$candidat->universite_dip_name)[0]);
+                                                        $universite_dip_name = trim(explode('_-_',$candidat->universite_dip_name)[1]);
+                                                      } catch (\Throwable $th) {
+                                                        $pre_insc_universite = "";
+                                                        $universite_dip_name = "";
+                                                      }
                                                   }
 
 
-                                                @endphp 
+                                                @endphp
                                                 <input   value="{{($candidat==null)?'':$pre_insc_universite}}" name="pre_insc_universite" type="text" class="form-control"  >
                                             </div>
                                         </div>
@@ -507,10 +513,10 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">Choix de formation</label>
-                                            
+
                                                 <select name="formation"  id="formationOptions" class="custom-select">
                                                     <option selected  >Selectionner un Choix de formation</option>
-                                                
+
                                                 </select>
                                             </div>
                                         </div>
@@ -573,7 +579,7 @@
 
         var candidat = null;
         candidat = @json($candidat ?? '');
-    
+
           Dropzone.autoDiscover = false;
         var config = {
             routes: {
