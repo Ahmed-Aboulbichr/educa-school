@@ -6,7 +6,7 @@
     <link href="{{ URL::asset('/assets/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css')}}" rel="stylesheet" type="text/css" />
 
     <!--Arabic Keyboard -->
-    <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css">
     <!-- Plugins css -->
     <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
@@ -215,8 +215,8 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-address-input">Address</label>
-                                            <textarea {{ (($candidat==null)?'': !empty($candidat->adresse_etd)) ? $candidat->adresse_etd : ''}}  id="progress-basicpill-address-input" name="adresse_etd" class="form-control" rows="2">{{($candidat==null)?'':$candidat->adresse_etd}}</textarea>
+                                            <label for="progress-basicpill-address-input">Adresse</label>
+                                            <textarea  id="progress-basicpill-address-input" name="adresse_etd" class="form-control" rows="2">{{($candidat==null)?'':$candidat->adresse_etd}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -230,13 +230,13 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CIN père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input   value="{{($candidat==null)?'':$candidat->CIN_pere}}" type="text" name="cin_pere" class="form-control" id="progress-basicpill-pancard-input" >
+                                            <input  value="{{($candidat==null)?'':$candidat->CIN_pere}}" type="text" name="cin_pere" class="form-control" id="progress-basicpill-pancard-input" >
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">CIN mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input   value="{{($candidat==null)?'':$candidat->CIN_mere}}" type="text" name="cin_mere" class="form-control" id="progress-basicpill-vatno-input" >
+                                            <input  value="{{($candidat==null)?'':$candidat->CIN_mere}}" type="text" name="cin_mere" class="form-control" id="progress-basicpill-vatno-input" >
                                         </div>
                                     </div>
                                 </div>
@@ -244,11 +244,11 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CAT père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <select name="cat_pere" class="custom-select">
-                                                <option selected>-----------</option>
-                                                <option value="PUBLIC">PUBLIC</option>
-                                                <option value="PRIVE">PRIVE</option>
-                                                <option value="LIBRE">LIBRE</option>
+                                            <select value="{{($candidat==null)?'':$candidat->cat_pere}}" name="cat_pere" class="custom-select">
+                                              <!-- {{--   <option {{($candidat==null)?'selected':''}}>-----------</option>  --}} !-->
+                                                <option {{(($candidat==null)?'':$candidat->cat_pere=="PUBLIC")?'selected':''}}>PUBLIC</option>
+                                                <option {{(($candidat==null)?'':$candidat->cat_pere=="PRIVE")?'selected':''}}>PRIVE</option>
+                                                <option {{(($candidat==null)?'':$candidat->cat_pere=="LIBRE")?'selected':''}}>LIBRE</option>
                                             </select>
                                         </div>
                                     </div>
@@ -256,7 +256,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select id="secteur_pere_name" name="secteur_pere" class="custom-select">
-                                                <option selected>-----------</option>
+                                                <option value="">-----------</option>
 
                                             </select>
                                         </div>
@@ -273,11 +273,11 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">CAT mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <select name="cat_mere" class="custom-select">
-                                                <option selected  >-----------</option>
-                                                <option value="PUBLIC">PUBLIC</option>
-                                                <option value="PRIVE">PRIVE</option>
-                                                <option value="LIBRE">LIBRE</option>
+                                            <select value="{{($candidat==null)?'':$candidat->cat_mere}}" name="cat_mere" class="custom-select">
+                                            <!-- {{--    <option {{($candidat==null)?'selected':''}}>Selectionner un Choix de formation</option> --}} !-->
+                                                <option {{(($candidat==null)?'':$candidat->cat_mere=="PUBLIC")?'selected':''}}>PUBLIC</option>
+                                                <option {{(($candidat==null)?'':$candidat->cat_mere=="PRIVE")?'selected':''}}>PRIVE</option>
+                                                <option {{(($candidat==null)?'':$candidat->cat_mere=="LIBRE")?'selected':''}}>LIBRE</option>
                                             </select>
                                         </div>
                                     </div>
@@ -285,7 +285,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">Secteur profession mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select id="secteur_mere_name" name="secteur_mere" class="custom-select">
-                                                <option selected>-----------</option>
+                                                <option value="">-----------</option>
 
                                             </select>
                                         </div>
@@ -293,29 +293,21 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Profession mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input   value="{{($candidat==null)?'':$candidat->profession_mere}}" type="text" name="prof_mere" class="form-control" id="progress-basicpill-vatno-input">
+                                            <input  value="{{($candidat==null)?'':$candidat->profession_mere}}" type="text" name="prof_mere" class="form-control" id="progress-basicpill-vatno-input">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-between">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Tel parent <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <input   value="{{($candidat==null)?'':$candidat->tel_parent}}" id="input-mask" inputmode="text" name="tel_parent" class="form-control input-mask" data-inputmask="'mask': '09-99999999'" >                                        </div>
+                                            <input  value="{{($candidat==null)?'':$candidat->tel_parent}}" id="input-mask" inputmode="text" name="tel_parent" class="form-control input-mask" data-inputmask="'mask': '09-99999999'" >                                        </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label for="progress-basicpill-phoneno-input" >Pays parent <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                            <select name="pays_parent" class="form-control" id="paysOptionsParent">
-                                                <option>-----------</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville parent <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select name="ville_parent" class="form-control" id="villeOptionsParent">
-                                                <option>-----------</option>
+                                                <option value="">-----------</option>
                                             </select>
                                         </div>
                                     </div>
@@ -548,7 +540,6 @@
      <script src="{{ URL::asset('/assets/libs/dropzone/dropzone.min.js')}}"></script>
     <!-- form wizard init -->
     <script src="{{ URL::asset('/assets/js/pages/form-wizard.init.js')}}"></script>
-
     <script src="{{ URL::asset('/assets/js/pays.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/villes.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/academies.js')}}"></script>
@@ -558,7 +549,7 @@
     <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/formation.js')}}"></script>
     {{-- Arabic keyboard --}}
-    <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script> 
+    <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>
     <script>
 
         var candidat =  @json($candidat ?? '');
