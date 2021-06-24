@@ -39,7 +39,6 @@ $("#infoParent").on('submit',function(e){
         data: $(this).serializeArray(),
 
         success: function(response) {
-          alert('success');
           console.log(response);
           $('#NextStepBtn').attr( 'class',"next");
            $('#progrss-wizard').bootstrapWizard('next');

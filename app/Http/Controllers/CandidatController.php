@@ -101,16 +101,16 @@ class CandidatController extends Controller
         if ($request->ajax()) {
             $fields = $request->validate([
                 'cin_pere' => ['bail', 'required', 'string', 'max:10'],
-                'cin_mere' => ['bail','required', 'string', 'max:10'],
-                'tel_parent' => ['bail','required', 'string', 'max:20'],
-                'cat_pere' => ['bail','required', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
-                'cat_mere' => ['bail','required', 'string', Rule::in(['PUBLIC', 'PRIVE','LIBRE'])],
-                'secteur_pere' => ['bail','required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
-                'secteur_mere' => ['bail','required', 'integer', Rule::exists('secteur_professions','id')->where('id', $request->input('secteur_mere')) ],
-                'ville_parent' => ['bail','required', 'integer', Rule::exists('villes','id')->where('id', $request->input('ville_parent'))],
-                'prof_pere' => ['bail','required', 'string', 'max:50'],
-                'prof_mere' => ['bail','required', 'string', 'max:50'],
-                'adresse_parent' => ['bail','nullable', 'string', 'max:100'],
+                'cin_mere' => ['bail', 'required', 'string', 'max:10'],
+                'tel_parent' => ['bail', 'required', 'string', 'max:20'],
+                'cat_pere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'cat_mere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'secteur_pere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
+                'secteur_mere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_mere'))],
+                'ville_parent' => ['bail', 'required', 'integer', Rule::exists('villes', 'id')->where('id', $request->input('ville_parent'))],
+                'prof_pere' => ['bail', 'required', 'string', 'max:50'],
+                'prof_mere' => ['bail', 'required', 'string', 'max:50'],
+                'adresse_parent' => ['bail', 'nullable', 'string', 'max:100'],
             ]);
             $candidat = null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
@@ -157,7 +157,7 @@ class CandidatController extends Controller
                 'sexe' => ['string', 'max:20'],
                 'pay_id' => ['bail', 'nullable', 'integer', Rule::exists('pays', 'id')->where('id', $req->input('pay_id'))],
                 'nationalite_id' => ['bail', 'nullable', 'integer', Rule::exists('nationalites', 'id')->where('id', $req->input('nationalite_id'))],
-                'ville_id_etud' => ['bail', 'nullable', 'integer', Rule::exists('villes', 'id')->where('id', $req->input('ville_id_etud '))],
+                'ville_id_etud' => ['bail', 'nullable', 'integer', Rule::exists('villes', 'id')->where('id', $req->input('ville_id_etud'))],
                 'adresse_etd' => ['nullable', 'string', 'max:100'],
             ]);
 

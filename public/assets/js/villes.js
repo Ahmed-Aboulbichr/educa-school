@@ -63,10 +63,11 @@ $(document).ready(function(){
         type: 'get',
         dataType : 'json',
         success: function(response) {
-                for(ville of response){
-                    var option = `<option value=${ville.id}>${ville.name}</option>`;
+                for(var i=0; i<response.length; i++){
+                    (candidat.ville_id_etud==response[i]['id']) ? option = "<option selected value="+response[i]['id']+">"+response[i]['name']+"</option>":option = "<option value='"+response[i]['id']+"'>"+response[i]['name']+"</option>";
+                    
                     $("#villeOptionsParent").append(option);
-                    $("#ville_id_etud").append(option);
+                    $("#villeOptionsEtud").append(option);
                 }
         },
         error: function(response) {

@@ -5,6 +5,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
     <link href="{{ URL::asset('/assets/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css')}}" rel="stylesheet" type="text/css" />
 
+    <!--Arabic Keyboard -->
+    <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css"> 
     <!-- Plugins css -->
     <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
@@ -74,7 +76,7 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic"><i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i> النسب</label>
-                                            <input   value="{{($candidat==null)?'':$candidat->nom_ar}}" type="email" name="nom_ar" class="form-control rtl" id="progress-basicpill-lastname-ar-input">
+                                            <input   value="{{($candidat==null)?'':$candidat->nom_ar}}" type="email" name="nom_ar" class="form-control rtl keyboardInput" id="progress-basicpill-lastname-ar-input">
                                             <span class="text-muted" style="float: right">أبوالبشر</span>
                                         </div>
                                     </div>
@@ -91,7 +93,7 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-lastname-input" class="arabic"><i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i> الإسم</label>
-                                            <input   value="{{($candidat==null)?'':$candidat->prenom_ar}}" type="text" name="prenom_ar" class="form-control rtl" id="progress-basicpill-firstname-ar-input">
+                                            <input   value="{{($candidat==null)?'':$candidat->prenom_ar}}" type="text" name="prenom_ar" class="form-control rtl keyboardInput" id="progress-basicpill-firstname-ar-input">
                                             <span class="text-muted"  style="float: right" >أحمد</span>
                                         </div>
                                     </div>
@@ -107,7 +109,7 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic">مكان الإزدياد</label>
-                                            <input   value="{{($candidat==null)?'':$candidat->lieu_naiss_ar}}" type="text" name="lieu_naiss_ar" class="form-control rtl" id="progress-basicpill-birthplace-ar-input">
+                                            <input   value="{{($candidat==null)?'':$candidat->lieu_naiss_ar}}" type="text" name="lieu_naiss_ar" class="form-control rtl keyboardInput" id="progress-basicpill-birthplace-ar-input">
                                         </div>
                                     </div>
                                 </div>
@@ -227,13 +229,13 @@
                                 <div class="row justify-content-between">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-pancard-input">CIN père</label>
+                                            <label for="progress-basicpill-pancard-input">CIN père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->CIN_pere}}" type="text" name="cin_pere" class="form-control" id="progress-basicpill-pancard-input" >
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">CIN mère</label>
+                                            <label for="progress-basicpill-vatno-input">CIN mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->CIN_mere}}" type="text" name="cin_mere" class="form-control" id="progress-basicpill-vatno-input" >
                                         </div>
                                     </div>
@@ -241,7 +243,7 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-pancard-input">CAT père</label>
+                                            <label for="progress-basicpill-pancard-input">CAT père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select name="cat_pere" class="custom-select">
                                                 <option selected>-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
@@ -252,7 +254,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-pancard-input">Secteur profession père</label>
+                                            <label for="progress-basicpill-pancard-input">Secteur profession père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select id="secteur_pere_name" name="secteur_pere" class="custom-select">
                                                 <option selected>-----------</option>
 
@@ -261,7 +263,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">Profession père</label>
+                                            <label for="progress-basicpill-vatno-input">Profession père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->profession_pere}}" type="text" name="prof_pere" class="form-control" id="progress-basicpill-vatno-input">
                                         </div>
                                     </div>
@@ -270,7 +272,7 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">CAT mère</label>
+                                            <label for="progress-basicpill-vatno-input">CAT mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select name="cat_mere" class="custom-select">
                                                 <option selected  >-----------</option>
                                                 <option value="PUBLIC">PUBLIC</option>
@@ -281,7 +283,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-pancard-input">Secteur profession mère</label>
+                                            <label for="progress-basicpill-pancard-input">Secteur profession mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select id="secteur_mere_name" name="secteur_mere" class="custom-select">
                                                 <option selected>-----------</option>
 
@@ -290,7 +292,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">Profession mère</label>
+                                            <label for="progress-basicpill-vatno-input">Profession mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->profession_mere}}" type="text" name="prof_mere" class="form-control" id="progress-basicpill-vatno-input">
                                         </div>
                                     </div>
@@ -298,12 +300,12 @@
                                 <div class="row justify-content-between">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">Tel parent</label>
+                                            <label for="progress-basicpill-vatno-input">Tel parent <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->tel_parent}}" id="input-mask" inputmode="text" name="tel_parent" class="form-control input-mask" data-inputmask="'mask': '09-99999999'" >                                        </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-phoneno-input" >Pays parent</label>
+                                            <label for="progress-basicpill-phoneno-input" >Pays parent <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select name="pays_parent" class="form-control" id="paysOptionsParent">
                                                 <option>-----------</option>
                                             </select>
@@ -311,7 +313,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="progress-basicpill-vatno-input">Ville parent</label>
+                                            <label for="progress-basicpill-vatno-input">Ville parent <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select name="ville_parent" class="form-control" id="villeOptionsParent">
                                                 <option>-----------</option>
                                             </select>
@@ -555,7 +557,8 @@
     <script src="{{ URL::asset('/assets/js/secteursProfession.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/formation.js')}}"></script>
-
+    {{-- Arabic keyboard --}}
+    <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script> 
     <script>
 
         var candidat =  @json($candidat ?? '');
