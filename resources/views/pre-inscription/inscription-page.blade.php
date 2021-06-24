@@ -10,6 +10,24 @@
     <!-- Plugins css -->
     <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
+
+    <style>
+        .card {
+          /* Add shadows to create the "card" effect */
+          box-shadow: 5px 6px 15px 5px rgba(0.2,0.2,0.2,0.2);
+          transition: 0.3s;
+        }
+        
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+          box-shadow: 10px 18px 28px 10px rgba(0.2,0.2,0.2,0.2);
+        }
+        
+        /* Add some padding inside the card container */
+        .container {
+          padding: 2px 16px;
+        }
+            </style>
 @endsection
 @section('content')
 @component('components.breadcrumb')
@@ -76,7 +94,7 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic"><i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i> النسب</label>
-                                            <input   value="{{($candidat==null)?'':$candidat->nom_ar}}" type="email" name="nom_ar" class="form-control rtl keyboardInput" id="progress-basicpill-lastname-ar-input">
+                                            <input   value="{{($candidat==null)?'':$candidat->nom_ar}}" type="text" name="nom_ar" class="form-control rtl keyboardInput" id="progress-basicpill-lastname-ar-input">
                                             <span class="text-muted" style="float: right">أبوالبشر</span>
                                         </div>
                                     </div>
@@ -347,12 +365,12 @@
                                             <div class="form-group">
                                                 <label>Mention baccalauréat</label>
                                                 <select name="mention_bac" class="custom-select">
-                                                    <option selected  >Select Mention</option>
-                                                    <option value="P">Passable</option>
-                                                    <option value="AB">Assez-Bien</option>
-                                                    <option value="B">Bien</option>
-                                                    <option value="TB">Très Bien</option>
-                                                    <option value="E">Excellent</option>
+                                                    <option   >Select Mention</option>
+                                                    <option  {{(($candidat==null)?'':$candidat->mention_bac=='P')?'selected':''}} value="P">Passable</option>
+                                                    <option {{(($candidat==null)?'':$candidat->mention_bac=='AB')?'selected':''}} value="AB">Assez-Bien</option>
+                                                    <option {{(($candidat==null)?'':$candidat->mention_bac=='B')?'selected':''}}  value="B">Bien</option>
+                                                    <option {{(($candidat==null)?'':$candidat->mention_bac=='TB')?'selected':''}} value="TB">Très Bien</option>
+                                                    <option {{(($candidat==null)?'':$candidat->mention_bac=='E')?'selected':''}}  value="E">Excellent</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -446,32 +464,40 @@
                                                 <select name="pre_insc_annee_universitaire" class="custom-select">
                                                     <option selected  >Select Année universitaire</option>
 
-                                                    <option value="2021-2022">2021/2022</option>
-                                                    <option value="2020-2021">2020/2021</option>
-                                                    <option value="2019-2020">2019/2020</option>
-                                                    <option value="2018-2019">2018/2019</option>
-                                                    <option value="2017-2018">2017/2018</option>
-                                                    <option value="2016-2017">2016/2017</option>
-                                                    <option value="2015-2016">2015/2016</option>
-                                                    <option value="2014-2015">2014/2015</option>
-                                                    <option value="2013-2014">2013/2014</option>
-                                                    <option value="2012-2013">2012/2013</option>
-                                                    <option value="2011-2012">2011/2012</option>
-                                                    <option value="2010-2011">2010/2011</option>
-                                                    <option value="2009-2010">2009/2010</option>
-                                                    <option value="2008-2009">2008/2009</option>
-                                                    <option value="2007-2008">2007/2008</option>
-                                                    <option value="2006-2007">2006/2007</option>
-                                                    <option value="2005-2006">2005/2006</option>
-                                                    <option value="2004-2005">2004/2005</option>
-                                                    <option value="2003-2004">2003/2004</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2020-2021')?'selected':''}}    value="2020-2021">2020/2021</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2021-2022')?'selected':''}}    value="2021-2022">2021/2022</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2019-2020')?'selected':''}}    value="2019-2020">2019/2020</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2018-2019')?'selected':''}}    value="2018-2019">2018/2019</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2017-2018')?'selected':''}}    value="2017-2018">2017/2018</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2016-2017')?'selected':''}}    value="2016-2017">2016/2017</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2015-2016')?'selected':''}}    value="2015-2016">2015/2016</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2014-2015')?'selected':''}}    value="2014-2015">2014/2015</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2013-2014')?'selected':''}}    value="2013-2014">2013/2014</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2012-2013')?'selected':''}}    value="2012-2013">2012/2013</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2011-2012')?'selected':''}}    value="2011-2012">2011/2012</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2010-2011')?'selected':''}}    value="2010-2011">2010/2011</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2009-2010')?'selected':''}}    value="2009-2010">2009/2010</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2008-2009')?'selected':''}}    value="2008-2009">2008/2009</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2007-2008')?'selected':''}}    value="2007-2008">2007/2008</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2006-2007')?'selected':''}}    value="2006-2007">2006/2007</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2005-2006')?'selected':''}}    value="2005-2006">2005/2006</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2004-2005')?'selected':''}}    value="2004-2005">2004/2005</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2003-2004')?'selected':''}}    value="2003-2004">2003/2004</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">premiere inscription (nom d'université)</label>
-                                                <input   value="{{($candidat==null)?'':$candidat->pre_insc_annee_universitaire}}" name="pre_insc_universite" type="text" class="form-control"  >
+                                                @php 
+                                                  if($candidat!=null){
+                                                     $pre_insc_universite = trim(explode('_-_',$candidat->universite_dip_name)[0]);
+                                                     $universite_dip_name = trim(explode('_-_',$candidat->universite_dip_name)[1]);
+                                                  }
+
+
+                                                @endphp 
+                                                <input   value="{{($candidat==null)?'':$pre_insc_universite}}" name="pre_insc_universite" type="text" class="form-control"  >
                                             </div>
                                         </div>
                                     </div>
@@ -481,7 +507,7 @@
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">premiere inscription ( département )</label>
 
-                                                <input   value="{{($candidat==null)?'':$candidat->pre_insc_annee_universitaire}}" type="text" name="universite_dip_name" class="form-control"  >
+                                                <input   value="{{($candidat==null)?'':$universite_dip_name}}" type="text" name="universite_dip_name" class="form-control"  >
 
                                             </div>
                                         </div>
@@ -489,17 +515,10 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">Choix de formation</label>
-                                                <!--
-                                                <select name="formation"  id="formationsOptions" class="custom-select">
+                                            
+                                                <select name="formation"  id="formationOptions" class="custom-select">
                                                     <option selected  >Selectionner un Choix de formation</option>
-                                                </select>-->
-                                                <select name="formation" class="custom-select">
-                                                    <option selected  >Selectionner un Choix de formation</option>
-                                                    <option value="LF">Licence fondamentale</option>
-                                                    <option value="Master">Master</option>
-                                                    <option value="LP">Licence professionnelle</option>
-                                                    <option value="master-specialise">Master spécialisé</option>
-                                                    <option value="Doctorat">Doctorat</option>
+                                                
                                                 </select>
                                             </div>
                                         </div>
@@ -561,8 +580,9 @@
     <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script> 
     <script>
 
-        var candidat =  @json($candidat ?? '');
-        console.log(candidat);
+        var candidat = null;
+        candidat = @json($candidat ?? '');
+    
           Dropzone.autoDiscover = false;
         var config = {
             routes: {
