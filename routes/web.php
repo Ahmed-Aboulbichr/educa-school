@@ -22,7 +22,6 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('pre-ins', 'CandidatureController@index')->name('getPreInscr');
-
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
     Route::get('renderUsers', 'UserController@renderUsers')->name('getUsers');

@@ -65,9 +65,10 @@ $(document).ready(function(){
         success: function(response) {
                 for(var i=0; i<response.length; i++){
                     (candidat.ville_id_etud==response[i]['id']) ? option = "<option selected value="+response[i]['id']+">"+response[i]['name']+"</option>":option = "<option value='"+response[i]['id']+"'>"+response[i]['name']+"</option>";
-                    
-                    $("#villeOptionsParent").append(option);
+                    (candidat.ville_id_parent==response[i]['id']) ? option2 = "<option selected value="+response[i]['id']+">"+response[i]['name']+"</option>":option2 = "<option value='"+response[i]['id']+"'>"+response[i]['name']+"</option>";
+
                     $("#villeOptionsEtud").append(option);
+                    $("#villeOptionsParent").append(option2);
                 }
         },
         error: function(response) {
