@@ -169,3 +169,36 @@ $("#choixFormation").on('submit',function(e){
 
     });
 });
+
+
+
+Dropzone.options.ilanFotoAlani = {
+  paramName: "foto", // The name that will be used to transfer the file
+  maxFilesize: 5, // MB
+  maxFiles: 9,
+  resizeWidth: 1000,
+  resizeHeight: 644,
+  resizeMimeType: 'image/jpeg',
+  addRemoveLinks: true,
+  dictDefaultMessage: 'Fotoğraf sürükle veya seç',
+  dictFileTooBig: 'Fotoğraf boyutu en fazla 5MB olmalı',
+  dictRemoveFile: 'Fotoğrafı sil',
+  dictCancelUpload: 'İptal et',
+  dictMaxFilesExceeded: 'En fazla 9 fotoğraf yükleyebilirsin',
+  init: function () {
+      let myDropzone = this;
+      $.ajax({
+          type: 'get',
+          url: '/ilan-fotolari',
+          success: function(mocks){
+              $.each(mocks, function(key,value) {
+                  let mockFile = { name: value.name, size: 1024 };
+                  myDropzone.displayExistingFile(mockFile, value.url);
+              });
+          },
+          error: function(xhr, durum, hata) {
+              alert("Hata: " + hata);
+          }
+      });
+  }
+};
