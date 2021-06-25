@@ -154,7 +154,7 @@ $(function() {
        dictMaxFilesExceeded: 'Max Files Exceeded !',
        url: config.routes.saveCandidatStepFour,
        addRemoveLinks: true,
-       maxFiles: 4,
+       maxFiles: 1,
        acceptedFiles: 'image/*',
        maxFilesize: 5,
        init: function () {
