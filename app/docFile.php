@@ -39,6 +39,11 @@ class docFile extends Model
         return $this->belongsTo(Candidature::class);
     }
 
+    public function candidat()
+    {
+        return $this->belongsTo(candidat::class, 'bac_id', 'id');
+    }
+
     public function documents()
     {
         return $this->belongsTo(Document::class);

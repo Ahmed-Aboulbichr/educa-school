@@ -421,10 +421,10 @@
                                                 </p>
 
                                                 <div>
-                                                    <form id="fichierBac"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                    <form id="fichierBac" {{($candidat==null)?'':$candidat->candidatures->first()->docFile()->first()}}  action="#"  enctype="multipart/form-data" class="dropzone">
                                                         @csrf
                                                         <div class="fallback">
-                                                            <input   value="{{($candidat==null)?'':$candidat->candidatures->first()}}" name="bacFile" type="file" multiple="multiple">
+                                                            <input  value="" name="bacFile" type="file" multiple="multiple">
                                                         </div>
                                                         <div class="dz-message needsclick">
                                                             <div class="mb-3">
@@ -579,7 +579,9 @@
 
         var candidat = null;
         candidat = @json($candidat ?? '');
-
+        var docFiles = null;
+        docFiles = @json(($candidat==null)?null:$candidat->docFiles ?? '');
+        console.log(docFiles)
           Dropzone.autoDiscover = false;
         var config = {
             routes: {

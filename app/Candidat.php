@@ -50,7 +50,7 @@ class Candidat extends Model
     ];
     public function docFiles()
     {
-        return $this->hasMany(docFile::class);
+        return $this->hasMany(docFile::class, 'id', 'bac_id');
     }
 
     public function candidatures(){
