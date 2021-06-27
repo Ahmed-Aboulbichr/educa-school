@@ -6,7 +6,7 @@ use App\Candidat;
 use App\docFile;
 use App\Formation;
 use App\Candidature;
-
+use PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -53,6 +53,36 @@ class CandidatureController extends Controller
     public function show(Candidature $candidature)
     {
         //
+    }
+
+ /**
+     * Display the specified resource.
+     *
+     * @param  \App\Candidature  $candidature
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadPDF($id)
+    {
+        $show = Candidature::find($id);
+        $pdf = PDF::loadView('pre-inscription.attestation', compact('show'));
+        
+        return $pdf->download('attestation.pdf');
+    } 
+    
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Candidature  $candidature
+     * @return \Illuminate\Http\Response
+     */
+    public function showPDF($id)
+    {
+
+
+        $candidat = Candidat::where('id',$id )->first();
+        return view('pre-inscription.attestation')->with('candidat', $candidat);
+       
     }
 
     /**

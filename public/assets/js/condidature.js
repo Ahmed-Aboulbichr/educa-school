@@ -104,6 +104,35 @@ $("#infoBaccalaureat").on('submit',function(e){
 
 
 $(function() {
+
+  Dropzone.options.ilanFotoAlani = {
+    paramName: "foto", // The name that will be used to transfer the file
+    maxFilesize: 5, // MB
+    maxFiles: 9,
+    resizeWidth: 1000,
+    resizeHeight: 644,
+    resizeMimeType: 'image/jpeg',
+    addRemoveLinks: true,
+    dictDefaultMessage: 'Fotoğraf sürükle veya seç',
+    dictFileTooBig: 'Fotoğraf boyutu en fazla 5MB olmalı',
+    dictRemoveFile: 'Fotoğrafı sil',
+    dictCancelUpload: 'İptal et',
+    dictMaxFilesExceeded: 'En fazla 9 fotoğraf yükleyebilirsin',
+    init: function () {
+        let myDropzone = this;
+        (candidat==null)? null :(candidat.candidatures==null)? null :(candidat.candidatures.docFiles==null)? null: files = candidat.candidatures.docFiles;
+   for (const key in files) {
+     if (Object.hasOwnProperty.call(files, key)) {
+       const element = files[key];
+       let mockFile = { name: element.path, size: 1024 };
+        myDropzone.displayExistingFile(mockFile,  element.path  );
+     }
+   }
+        
+               
+    }
+  };
+
  $('.upload-file').on('click',function(){
 
     alert('please upload required files first ');
@@ -115,13 +144,29 @@ $(function() {
   var i = 0;
 
    $("#fichierBac").dropzone({
-
+      
+       resizeWidth: 1000,
+       resizeHeight: 644,
+       dictDefaultMessage: 'Default Message',
+       dictFileTooBig: 'File Too Big >5MB ',
+       dictRemoveFile: 'Remove File',
+       dictCancelUpload: 'Cancel Upload',
+       dictMaxFilesExceeded: 'Max Files Exceeded !',
        url: config.routes.saveCandidatStepFour,
        addRemoveLinks: true,
-       maxFiles: 4,
+       maxFiles: 1,
        acceptedFiles: 'image/*',
        maxFilesize: 5,
        init: function () {
+        let myDropzone = this;
+       
+        for (const key in docFiles) {
+         if (Object.hasOwnProperty.call(docFiles, key)) {
+          const element = docFiles[key];
+          let mockFile = { name: element.path, size: 1024 };
+          myDropzone.displayExistingFile(mockFile,  'storage/'+element.path  );
+           }
+          } 
            this.on("success", function (file, serverFileName) {
             alert('uploaded successfully');
                file.serverFn = serverFileName;
@@ -169,3 +214,5 @@ $("#choixFormation").on('submit',function(e){
 
     });
 });
+
+
