@@ -14,4 +14,9 @@ class Formation extends Model
     protected $fillable = [
         'name',
     ];
+
+
+     public function candidatures(){
+        return $this->hasMany(Candidature::class);
+    }  
 }

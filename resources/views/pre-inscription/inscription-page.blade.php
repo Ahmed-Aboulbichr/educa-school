@@ -421,7 +421,7 @@
                                                 </p>
 
                                                 <div>
-                                                    <form id="fichierBac" {{($candidat==null)?'':$candidat->candidatures->first()->docFile()->first()}}  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                    <form id="fichierBac"  action="#"  enctype="multipart/form-data" class="dropzone">
                                                         @csrf
                                                         <div class="fallback">
                                                             <input  value="" name="bacFile" type="file" multiple="multiple">
@@ -581,7 +581,7 @@
         candidat = @json($candidat ?? '');
         var docFiles = null;
         docFiles = @json(($candidat==null)?null:$candidat->docFiles ?? '');
-        console.log(docFiles)
+    
           Dropzone.autoDiscover = false;
         var config = {
             routes: {

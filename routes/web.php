@@ -70,6 +70,14 @@ Route::resource('/sessions', 'SessionController');
 Route::resource('/formations', 'FormationController');
 Route::resource('/seances', 'SeanceController');
 Route::resource('/salles', 'SalleController');
+
+
+
+
+
+//////////// PDF ////////////
+Route::get('candidature/showPDF/{id}','CandidatureController@showPDF');
+Route::get('candidature/downloadPDF/{id}','CandidatureController@downloadPDF');
 });
 
 
