@@ -22,7 +22,7 @@ class Candidature extends Model
         return $this->belongsTo(Candidat::class);
     }
 
-    public function docFiles(){
+    public function docFile(){
         return $this->hasMany(docFile::class);
     }
 }

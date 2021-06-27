@@ -18,9 +18,12 @@ use Illuminate\Support\Facades\Route;
 //     return redirect('/index');
 // });
 
-Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
+
+Auth::routes(['verify' => true]);
+
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::group(['middleware' => 'verified'], function () {
     Route::get('pre-ins', 'CandidatureController@index')->name('getPreInscr');
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
@@ -48,8 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /////////////////////////
 
-
-});
+    Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
 
 
 Route::get('pages-404', 'NazoxController@index');
@@ -68,3 +70,7 @@ Route::resource('/sessions', 'SessionController');
 Route::resource('/formations', 'FormationController');
 Route::resource('/seances', 'SeanceController');
 Route::resource('/salles', 'SalleController');
+});
+
+
+
