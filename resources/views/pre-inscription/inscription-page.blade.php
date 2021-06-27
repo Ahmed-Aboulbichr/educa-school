@@ -1,6 +1,5 @@
-@extends('layouts.master-without-side-bar')
+@extends('layouts.master-without-side-bar-candidat')
 @php  
-
 //loading candidatures
 ($candidat==null)?'':$candidat->candidatures @endphp
 @section('css')
@@ -37,7 +36,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Wizard with progressbar</h4>
+                <h4 class="card-title mb-4">Suivi les étaps d'inscription</h4>
                 <div id="progrss-wizard" class="twitter-bs-wizard">
                     <ul class="twitter-bs-wizard-nav nav-justified">
                         <li class="nav-item">
