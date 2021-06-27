@@ -30,11 +30,6 @@
             </style>
 @endsection
 @section('content')
-@component('components.breadcrumb')
-    @slot('title') Form Wizard @endslot
-    @slot('li_1') Forms @endslot
-    @slot('li_2') Form Wizard @endslot
-@endcomponent
 
     <div class="col-lg-12">
         <div class="card">
