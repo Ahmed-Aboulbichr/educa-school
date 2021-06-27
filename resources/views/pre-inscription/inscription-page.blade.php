@@ -595,7 +595,7 @@
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
                 saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
-                showPDF:"{{route('showPDF',$candidat->id)}}",
+                showPDF:"",
             }
         };
 

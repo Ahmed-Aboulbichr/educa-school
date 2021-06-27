@@ -143,7 +143,7 @@ $(function() {
           myDropzone.displayExistingFile(mockFile,  'storage/'+element.path  );
            }
           } 
-           this.on("success", function (file, serverFileName) {
+           this.on("success", function (response,file, serverFileName) {
             alert('uploaded successfully');
                file.serverFn = serverFileName;
                fileList[i] = {
@@ -152,7 +152,6 @@ $(function() {
                    "fileId": i
                };
                i++;
-
                $('#NextStepBtn').attr('class',"");
            });
            this.on("error", function (file, error) {
@@ -182,7 +181,7 @@ $("#choixFormation").on('submit',function(e){
           $('#NextStepBtn').removeClass('disabled');
            $('#progrss-wizard').bootstrapWizard('next');
            $('#NextStepBtn').off();
-
+           config.routes.showPDF = response.url;
            $('#NextStepBtnA').attr('href',config.routes.showPDF);
         },
         error: function(response) {
