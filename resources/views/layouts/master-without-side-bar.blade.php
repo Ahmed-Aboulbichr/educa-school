@@ -14,19 +14,17 @@
 <body data-sidebar="dark">
      <!-- Begin page -->
      <div id="layout-wrapper">
-        @include('layouts.topbar')
+        @include('layouts.topbar-candidat')
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
-        <div class="main-content">
         <div class="page-content">
-            <div class="container-fluid">
+            <div class="container">
                 @yield('content')
             </div>
             <!-- container-fluid -->
         </div>
         <!-- End Page-content -->
-        @include('layouts.footer')
         </div>
         <!-- end main content-->
 </div>
