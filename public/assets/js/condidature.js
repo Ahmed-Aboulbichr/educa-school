@@ -42,8 +42,8 @@ $("#infoParent").on('submit',function(e){
           console.log(response);
           $('#NextStepBtn').attr( 'class',"next");
            $('#progrss-wizard').bootstrapWizard('next');
+           (uploadFile)? $('#NextStepBtn').attr( 'class',"upload-file"):$('#NextStepBtn').attr( 'class',"");
            $('#NextStepBtn').off();
-          $('#NextStepBtn').attr('class',"upload-file");
           $('#NextStepBtn').attr('onclick',"$('#infoBaccalaureat').submit()");
          
          
@@ -102,43 +102,18 @@ $("#infoBaccalaureat").on('submit',function(e){
     });
 });
 
-
+var uploadFile = true;
 $(function() {
 
-  Dropzone.options.ilanFotoAlani = {
-    paramName: "foto", // The name that will be used to transfer the file
-    maxFilesize: 5, // MB
-    maxFiles: 9,
-    resizeWidth: 1000,
-    resizeHeight: 644,
-    resizeMimeType: 'image/jpeg',
-    addRemoveLinks: true,
-    dictDefaultMessage: 'Fotoğraf sürükle veya seç',
-    dictFileTooBig: 'Fotoğraf boyutu en fazla 5MB olmalı',
-    dictRemoveFile: 'Fotoğrafı sil',
-    dictCancelUpload: 'İptal et',
-    dictMaxFilesExceeded: 'En fazla 9 fotoğraf yükleyebilirsin',
-    init: function () {
-        let myDropzone = this;
-        (candidat==null)? null :(candidat.candidatures==null)? null :(candidat.candidatures.docFiles==null)? null: files = candidat.candidatures.docFiles;
-   for (const key in files) {
-     if (Object.hasOwnProperty.call(files, key)) {
-       const element = files[key];
-       let mockFile = { name: element.path, size: 1024 };
-        myDropzone.displayExistingFile(mockFile,  element.path  );
-     }
-   }
-        
-               
-    }
-  };
-
- $('.upload-file').on('click',function(){
+  $('.upload-file').on('click',function(){
 
     alert('please upload required files first ');
 
  });
 
+
+  
+ 
 
   var fileList = new Array;
   var i = 0;
@@ -164,6 +139,7 @@ $(function() {
          if (Object.hasOwnProperty.call(docFiles, key)) {
           const element = docFiles[key];
           let mockFile = { name: element.path, size: 1024 };
+          uploadFile = false ;
           myDropzone.displayExistingFile(mockFile,  'storage/'+element.path  );
            }
           } 
@@ -201,10 +177,13 @@ $("#choixFormation").on('submit',function(e){
         data: $(this).serialize(),
 
         success: function(response) {
-          $('#NextStepBtn').attr( 'class',"next");
+          
+          $('#NextStepBtnA').html('generer l\'attestation de préinscription');
+          $('#NextStepBtn').removeClass('disabled');
            $('#progrss-wizard').bootstrapWizard('next');
            $('#NextStepBtn').off();
-        $('#NextStepBtn').attr('onclick','');
+
+           $('#NextStepBtnA').attr('href',config.routes.showPDF);
         },
         error: function(response) {
           console.log(response);

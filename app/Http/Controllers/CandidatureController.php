@@ -63,10 +63,11 @@ class CandidatureController extends Controller
      */
     public function downloadPDF($id)
     {
-        $show = Candidature::find($id);
-        $pdf = PDF::loadView('pre-inscription.attestation', compact('show'));
-        
-        return $pdf->download('attestation.pdf');
+        $candidat = Candidat::where('id',$id )->first();
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        set_time_limit(300);
+
+        return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat'))->stream();
     } 
     
     

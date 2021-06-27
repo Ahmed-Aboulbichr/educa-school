@@ -76,8 +76,8 @@ Route::resource('/salles', 'SalleController');
 
 
 //////////// PDF ////////////
-Route::get('candidature/showPDF/{id}','CandidatureController@showPDF');
-Route::get('candidature/downloadPDF/{id}','CandidatureController@downloadPDF');
+Route::get('candidature/showPDF/{id}','CandidatureController@showPDF')->name('showPDF');
+Route::get('candidature/downloadPDF/{id}','CandidatureController@downloadPDF')->name('downloadPDF');
 });
 
 
