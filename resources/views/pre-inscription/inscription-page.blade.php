@@ -1,4 +1,4 @@
-@extends('layouts.master-without-side-bar')
+@extends('layouts.master-without-side-bar-candidat')
 
 @section('css')
     <!-- twitter-bootstrap-wizard css -->
@@ -6,22 +6,17 @@
     <link href="{{ URL::asset('/assets/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css')}}" rel="stylesheet" type="text/css" />
 
     <!--Arabic Keyboard -->
-    <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css">
     <!-- Plugins css -->
     <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-@component('components.breadcrumb')
-    @slot('title') Form Wizard @endslot
-    @slot('li_1') Forms @endslot
-    @slot('li_2') Form Wizard @endslot
-@endcomponent
 
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Wizard with progressbar</h4>
+                <h4 class="card-title mb-4">Suivi les étaps d'inscription</h4>
                 <div id="progrss-wizard" class="twitter-bs-wizard">
                     <ul class="twitter-bs-wizard-nav nav-justified">
                         <li class="nav-item">
@@ -558,7 +553,7 @@
     <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/formation.js')}}"></script>
     {{-- Arabic keyboard --}}
-    <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script> 
+    <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>
     <script>
 
         var candidat =  @json($candidat ?? '');
