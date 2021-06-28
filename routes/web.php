@@ -64,6 +64,18 @@ Route::resource('/sessions', 'SessionController');
 Route::resource('/formations', 'FormationController');
 Route::resource('/seances', 'SeanceController');
 Route::resource('/salles', 'SalleController');
+<<<<<<< HEAD
+=======
+
+
+
+
+
+//////////// PDF ////////////
+Route::get('candidature/showPDF/{id}','CandidatureController@showPDF')->name('showPDF');
+Route::get('candidature/downloadPDF/{id}','CandidatureController@downloadPDF')->name('downloadPDF');
+});
+>>>>>>> 71cc9818443f35f13655f866319a7f803636b0ca
 
 //Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
 

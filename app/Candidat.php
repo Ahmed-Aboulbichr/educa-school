@@ -56,4 +56,15 @@ class Candidat extends Model
     public function candidatures(){
         return $this->hasMany(Candidature::class);
     }
+    public function academie(){
+        return $this->belongsTo(Academie::class);
+    }
+    
+    public function delegation(){
+        return $this->belongsTo(Delegation::class);
+    }
+
+    public function province(){
+        return $this->belongsTo(Province::class);
+    }
 }

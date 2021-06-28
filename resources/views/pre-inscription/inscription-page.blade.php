@@ -1,5 +1,7 @@
-@extends('layouts.master-without-side-bar')
-
+@extends('layouts.master-without-side-bar-candidat')
+@php  
+//loading candidatures
+($candidat==null)?'':$candidat->candidatures @endphp
 @section('css')
     <!-- twitter-bootstrap-wizard css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
@@ -34,7 +36,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Wizard with progressbar</h4>
+                <h4 class="card-title mb-4">Suivi les étaps d'inscription</h4>
                 <div id="progrss-wizard" class="twitter-bs-wizard">
                     <ul class="twitter-bs-wizard-nav nav-justified">
                         <li class="nav-item">
@@ -416,7 +418,7 @@
                                                 </p>
 
                                                 <div>
-                                                    <form id="fichierBac" {{($candidat==null)?'':$candidat->candidatures->first()->docFile()->first()}}  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                    <form id="fichierBac"  action="#"  enctype="multipart/form-data" class="dropzone">
                                                         @csrf
                                                         <div class="fallback">
                                                             <input  value="" name="bacFile" type="file" multiple="multiple">
@@ -540,7 +542,7 @@
                     </div>
                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                         <li class="previous"><a href="#">Previous</a></li>
-                        <li class="" style="float:right;" id="NextStepBtn" onclick="$('#infoCandidat').submit()" ><a href="#">Next</a></li>
+                        <li class="" style="float:right;" id="NextStepBtn" onclick="$('#infoCandidat').submit()" ><a id="NextStepBtnA" href="#">Next</a></li>
                        <!-- <li class="next"><a href="#">Submit</a></li>-->
                     </ul>
                 </div>
@@ -576,7 +578,7 @@
         candidat = @json($candidat ?? '');
         var docFiles = null;
         docFiles = @json(($candidat==null)?null:$candidat->docFiles ?? '');
-        console.log(docFiles)
+    
           Dropzone.autoDiscover = false;
         var config = {
             routes: {
@@ -592,7 +594,8 @@
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
-                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}"
+                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
+                showPDF:"",
             }
         };
 

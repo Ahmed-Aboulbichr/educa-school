@@ -354,6 +354,7 @@ class CandidatController extends Controller
                 $response = array(
                     'candidat' => $candidat,
                     'candidature' => $candidature,
+                    'url'     => route('showPDF',$candidat->id),
                 );
                 return  response()->json($response, 200);
             }
