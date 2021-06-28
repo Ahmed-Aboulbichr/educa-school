@@ -11323,7 +11323,7 @@ a {
 .dropdown-menu[x-placement^=right],
 .dropdown-menu[x-placement^=top],
 .dropdown-menu[x-placement^=left] {
-  top: auto !important;
+  top: 80px !important;
   -webkit-animation: none !important;
           animation: none !important;
 }

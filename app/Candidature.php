@@ -12,6 +12,7 @@ class Candidature extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'labelle',
         'valide',
         'candidat_id',

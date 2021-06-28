@@ -8,7 +8,7 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-    @slot('title') Editable Tables @endslot
+    @slot('title') candidatures @endslot
     @slot('li_1') Tables @endslot
     @slot('li_2') Editable Tables @endslot
 @endcomponent
@@ -18,48 +18,51 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Datatable Editable</h4>
+                <h4 class="card-title">Liste des candidatures</h4>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap">
                         <thead>
                             <tr>
                             <th>ID</th>
-                            <th>Age (AutoFill)</th>
-                            <th>Qty (AutoFill and Editable)</th>
-                            <th>Cost (Editable)</th>
+                            <th>labelle</th>
+                            <th>valide</th>
+                            <th>candidat_id</th>
+                            <th>formation_id</th>
+                            <th>action</th>
                             </tr>
                         </thead>
+                        @foreach ($candidatures as $candidature)
                         <tr>
-                            <td>1</td>
-                            <td data-original-value="11">11</td>
-                            <td data-original-value="1"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">1</a></td>
-                            <td data-original-value="1.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">1.99</a></td>
+                            <td>{{ $candidature->id }}</td>
+                            <td data-original-value="11">{{ $candidature->labelle }}</td>
+                        {{--<form  action="{{ route('setValidate') }}" method="POST">--}}
+                            <td data-original-value="11">
+                                @if ($candidature->valide=="0")
+                                    <button type="submit" class="btn btn-warning waves-effect waves-light btn-sm" id="btnGroupVerticalDrop1"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ri-error-warning-line align-middle mr-2"></i> non validé
+                                    </button>
+                                @else
+                                    <button type="submit" class="btn btn-success waves-effect waves-light btn-sm">
+                                        <i class="ri-check-line align-middle mr-2"></i> validé
+                                    </button>
+                                @endif
+                            </td>
+                        {{--</form>--}}
+                            <td data-original-value="1"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->candidat_id }}</a></td>
+                            <td data-original-value="1.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->formation_id }}</a></td>
+                            <td>
+                                <form method="POST" action="{{ route('candidatures.destroy', $candidature->id) }}">
+                                <a href="{{ route('candidatures.edit', $candidature->id) }}">
+                                    <button type="button" class="btn btn-light waves-effect btn-sm"><i class="mdi mdi-24px mdi-file-edit"></i></button>
+                                </a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-light waves-effect btn-sm"><i class="mdi mdi-24px mdi-delete-forever"></i></a>
+                                </form>
+                            </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td data-original-value="22">22</td>
-                            <td data-original-value="2"><a href="#" data-type="text" data-pk="2" class="editable" data-url="" data-title="Edit Quantity">2</a></td>
-                            <td data-original-value="2.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">2.99</a></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td data-original-value="33">33</td>
-                            <td data-original-value="3"><a href="#" data-type="text" data-pk="3" class="editable" data-url="" data-title="Edit Quantity">3</a></td>
-                            <td data-original-value="3.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">3.99</a></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td data-original-value="44">44</td>
-                            <td data-original-value="4"><a href="#" data-type="text" data-pk="4" class="editable" data-url="" data-title="Edit Quantity">4</a></td>
-                            <td data-original-value="4.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">4.99</a></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td data-original-value="55">55</td>
-                            <td data-original-value="5"><a href="#" data-type="text" data-pk="5" class="editable" data-url="" data-title="Edit Quantity">5</a></td>
-                            <td data-original-value="5.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">5.99</a></td>
-                        </tr>
+                        @endforeach
                     </table>
                 </div>
 
@@ -76,6 +79,5 @@
 
 <script src="{{ URL::asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.js')}}"></script>
 
-<script src="{{ URL::asset('/assets/js/pages/table-editable.init.js')}}"></script>
 
 @endsection

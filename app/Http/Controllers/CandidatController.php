@@ -27,7 +27,9 @@ class CandidatController extends Controller
      */
     public function index()
     {
-        //
+        //i change it from candidature to candidat
+        $candidat = Candidat::where('user_id', Auth::id())->first();
+        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }
 
     /**
@@ -338,6 +340,7 @@ class CandidatController extends Controller
                 if (!is_object($candidature)) {
 
                     $candidature = Candidature::create([
+                        'labelle'=>$candidat->nom_fr." candidat",
                         'candidat_id' => $candidat->id,
                         'formation_id' => $fields['formation'],
                     ]);

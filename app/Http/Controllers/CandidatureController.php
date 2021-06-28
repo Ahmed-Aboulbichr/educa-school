@@ -19,8 +19,10 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        $candidat = Candidat::where('user_id', Auth::id())->first();
-        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
+
+        $candidatures = Candidature::all();
+
+        return view('tables-editable', compact('candidatures'));
     }
 
     /**
@@ -63,7 +65,7 @@ class CandidatureController extends Controller
      */
     public function edit(Candidature $candidature)
     {
-        //
+        return redirect()->route('getPreInscr');
     }
 
     /**
@@ -86,6 +88,20 @@ class CandidatureController extends Controller
      */
     public function destroy(Candidature $candidature)
     {
-        //
+        $candidature = Candidature::findOrFail($candidature->id);
+
+        $candidature->delete();
+
+        return redirect()->route('candidatures.index');
     }
+
+    /* public function setValidate(Request $request){
+
+        dd($request->get('id'));
+        if($id=="1"){
+            Candidature::where('id', $id)->update(array('valide' => '0'));
+        }else{
+            Candidature::where('id', $id)->update(array('valide' => '1'));
+        }
+    } */
 }
