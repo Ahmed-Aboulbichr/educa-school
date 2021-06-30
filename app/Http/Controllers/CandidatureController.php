@@ -57,7 +57,7 @@ class CandidatureController extends Controller
         //
     }
 
- /**
+    /**
      * Display the specified resource.
      *
      * @param  \App\Candidature  $candidature
@@ -65,14 +65,14 @@ class CandidatureController extends Controller
      */
     public function downloadPDF($id)
     {
-        $candidat = Candidat::where('id',$id )->first();
+        $candidat = Candidat::where('id', $id)->first();
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         set_time_limit(300);
 
         return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat'))->stream();
-    } 
-    
-    
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -83,9 +83,8 @@ class CandidatureController extends Controller
     {
 
 
-        $candidat = Candidat::where('id',$id )->first();
+        $candidat = Candidat::where('id', $id)->first();
         return view('pre-inscription.attestation')->with('candidat', $candidat);
-       
     }
 
     /**
