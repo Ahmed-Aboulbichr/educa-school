@@ -12,6 +12,7 @@
     @slot('li_1') Candidature @endslot
     @slot('li_2') Inscription @endslot
 @endcomponent
+
     <div class="row">
 
     </div>

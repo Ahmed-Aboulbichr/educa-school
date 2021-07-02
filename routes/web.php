@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/etudiants', 'EtudiantController');
     Route::resource('/candidats', 'CandidatController');
     Route::resource('/candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit']);
+    Route::get('candidatures/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
     Route::resource('/sessions', 'SessionController');
     Route::resource('/formations', 'FormationController');
     Route::resource('/seances', 'SeanceController');

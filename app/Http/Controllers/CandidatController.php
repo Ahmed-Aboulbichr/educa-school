@@ -340,7 +340,7 @@ class CandidatController extends Controller
                 if (!is_object($candidature)) {
 
                     $candidature = Candidature::create([
-                        'labelle'=>$candidat->nom_fr." candidat",
+                        'labelle' => $candidat->nom_fr,
                         'candidat_id' => $candidat->id,
                         'formation_id' => $fields['formation'],
                     ]);
@@ -354,7 +354,7 @@ class CandidatController extends Controller
                 $response = array(
                     'candidat' => $candidat,
                     'candidature' => $candidature,
-                    'url'     => route('showPDF',$candidat->id),
+                    'url'     => route('showPDF', $candidat->id),
                 );
                 return  response()->json($response, 200);
             }

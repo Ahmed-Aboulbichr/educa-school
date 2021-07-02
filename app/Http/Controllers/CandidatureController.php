@@ -9,6 +9,7 @@ use App\Candidature;
 use PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CandidatureController extends Controller
 {
@@ -20,9 +21,13 @@ class CandidatureController extends Controller
     public function index()
     {
 
-        $candidatures = Candidature::all();
+        $candidatures = DB::table('candidatures')
+            ->join('candidats', 'candidat_id', '=', 'candidats.id')
+            ->join('formations', 'formation_id', '=', 'formations.id')
+            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.name')
+            ->get();
 
-        return view('tables-editable', compact('candidatures'));
+        return view('admin.candidature.liste', compact('candidatures'));
     }
 
     /**
@@ -97,6 +102,17 @@ class CandidatureController extends Controller
     {
         return redirect()->route('getPreInscr');
     }
+    public function editValidation(Candidature $candidature, $id)
+    {
+
+        $candidature = Candidature::findOrFail($id);
+
+        ($candidature->valide == 1) ? ($candidature->valide = 0) : ($candidature->valide = 1);
+
+        $candidature->save();
+
+        return redirect()->route('candidatures.index');
+    }
 
     /**
      * Update the specified resource in storage.
@@ -107,9 +123,8 @@ class CandidatureController extends Controller
      */
     public function update(Request $request, Candidature $candidature)
     {
-        //
+        dd(\App\Candidature::all());
     }
-
     /**
      * Remove the specified resource from storage.
      *
