@@ -54,25 +54,32 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
 
 
-//other routes
-Route::resource('/administrateurs', 'AdministrateurController');
-Route::resource('/professeurs', 'ProfesseurController');
-Route::resource('/etudiants', 'EtudiantController');
-Route::resource('/candidats', 'CandidatController');
-Route::resource('/candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit']);
-Route::resource('/sessions', 'SessionController');
-Route::resource('/formations', 'FormationController');
-Route::resource('/seances', 'SeanceController');
-Route::resource('/salles', 'SalleController');
-
-//Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
+    //other routes
+    Route::resource('/administrateurs', 'AdministrateurController');
+    Route::resource('/professeurs', 'ProfesseurController');
+    Route::resource('/etudiants', 'EtudiantController');
+    Route::resource('/candidats', 'CandidatController');
+    Route::resource('/candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit']);
+    Route::resource('/sessions', 'SessionController');
+    Route::resource('/formations', 'FormationController');
+    Route::resource('/seances', 'SeanceController');
+    Route::resource('/salles', 'SalleController');
 
 
 
-Route::get('pages-404', 'NazoxController@index');
-Route::get('/', 'HomeController@root');
-Route::get('{any}', 'HomeController@index');
-Route::get('{any}', 'HomeController@index');
 
 
+    //////////// PDF ////////////
+    Route::get('candidature/showPDF/{id}', 'CandidatureController@showPDF')->name('showPDF');
+    Route::get('candidature/downloadPDF/{id}', 'CandidatureController@downloadPDF')->name('downloadPDF');
+
+
+    //Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
+
+
+
+    Route::get('pages-404', 'NazoxController@index');
+    Route::get('/', 'HomeController@root');
+    Route::get('{any}', 'HomeController@index');
+    Route::get('{any}', 'HomeController@index');
 });
