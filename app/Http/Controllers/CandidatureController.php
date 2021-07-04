@@ -98,10 +98,15 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function edit(Candidature $candidature)
+    public function edit( $id )
     {
-        return redirect()->route('getPreInscr');
+
+       
+        $candidat = Candidat::where('id',Candidature::where('id',$id)->first()->candidat_id)->first();
+
+        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }
+
     public function editValidation(Candidature $candidature, $id)
     {
 
@@ -131,9 +136,9 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Candidature $candidature)
+    public function destroy($id)
     {
-        $candidature = Candidature::findOrFail($candidature->id);
+        $candidature = Candidature::findOrFail($id);
 
         $candidature->delete();
 
