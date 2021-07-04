@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-Route::group(['middleware' => 'verified'], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('pre-ins', 'CandidatureController@index')->name('getPreInscr');
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
