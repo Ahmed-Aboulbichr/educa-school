@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-educa')
 @section('title') Editable Tables @endsection
 @section('css')
 
@@ -25,32 +25,34 @@
                         <thead>
                             <tr>
                             <th>ID</th>
-                            <th>labelle</th>
-                            <th>valide</th>
-                            <th>candidat_id</th>
-                            <th>formation_id</th>
-                            <th>action</th>
+                            <th>Labelle</th>
+                            <th>Valide</th>
+                            <th>Candidat</th>
+                            <th>Formation</th>
+                            <th>Action</th>
                             </tr>
                         </thead>
+                        {{-- @if ($candidatures == null)
+                            {{ $candidatures = [] }}
+                        @endif --}}
                         @foreach ($candidatures as $candidature)
                         <tr>
                             <td>{{ $candidature->id }}</td>
                             <td data-original-value="11">{{ $candidature->labelle }}</td>
-                        {{--<form  action="{{ route('setValidate') }}" method="POST">--}}
                             <td data-original-value="11">
+                                
                                 @if ($candidature->valide=="0")
-                                    <button type="submit" class="btn btn-warning waves-effect waves-light btn-sm" id="btnGroupVerticalDrop1"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a href="{{ route('candidatures.editValidation', $candidature->id) }}" class="btn btn-warning waves-effect waves-light btn-sm">
                                         <i class="ri-error-warning-line align-middle mr-2"></i> non validé
-                                    </button>
+                                    </a>
                                 @else
-                                    <button type="submit" class="btn btn-success waves-effect waves-light btn-sm">
+                                    <a href="{{ route('candidatures.editValidation', $candidature->id) }}" class="btn btn-success waves-effect waves-light btn-sm">
                                         <i class="ri-check-line align-middle mr-2"></i> validé
-                                    </button>
+                                    </a>
                                 @endif
                             </td>
-                        {{--</form>--}}
-                            <td data-original-value="1"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->candidat_id }}</a></td>
-                            <td data-original-value="1.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->formation_id }}</a></td>
+                            <td data-original-value="1"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->nom_fr }} {{ $candidature->prenom_fr }}</a></td>
+                            <td data-original-value="1.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->name }}</a></td>
                             <td>
                                 <form method="POST" action="{{ route('candidatures.destroy', $candidature->id) }}">
                                 <a href="{{ route('candidatures.edit', $candidature->id) }}">

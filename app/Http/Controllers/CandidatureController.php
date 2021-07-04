@@ -9,6 +9,7 @@ use App\Candidature;
 use PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CandidatureController extends Controller
 {
@@ -19,8 +20,14 @@ class CandidatureController extends Controller
      */
     public function index()
     {
-        $candidat = Candidat::where('user_id', Auth::id())->first();
-        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
+
+        $candidatures = DB::table('candidatures')
+            ->join('candidats', 'candidat_id', '=', 'candidats.id')
+            ->join('formations', 'formation_id', '=', 'formations.id')
+            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.name')
+            ->get();
+
+        return view('admin.candidature.liste', compact('candidatures'));
     }
 
     /**
@@ -55,7 +62,7 @@ class CandidatureController extends Controller
         //
     }
 
- /**
+    /**
      * Display the specified resource.
      *
      * @param  \App\Candidature  $candidature
@@ -63,13 +70,14 @@ class CandidatureController extends Controller
      */
     public function downloadPDF($id)
     {
-        $show = Candidature::find($id);
-        $pdf = PDF::loadView('pre-inscription.attestation', compact('show'));
-        
-        return $pdf->download('attestation.pdf');
-    } 
-    
-    
+        $candidat = Candidat::where('id', $id)->first();
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        set_time_limit(300);
+
+        return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat'))->stream();
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -80,9 +88,8 @@ class CandidatureController extends Controller
     {
 
 
-        $candidat = Candidat::where('id',$id )->first();
+        $candidat = Candidat::where('id', $id)->first();
         return view('pre-inscription.attestation')->with('candidat', $candidat);
-       
     }
 
     /**
@@ -91,9 +98,25 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function edit(Candidature $candidature)
+    public function edit( $id )
     {
-        //
+
+       
+        $candidat = Candidat::where('id',Candidature::where('id',$id)->first()->candidat_id)->first();
+
+        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
+    }
+
+    public function editValidation(Candidature $candidature, $id)
+    {
+
+        $candidature = Candidature::findOrFail($id);
+
+        ($candidature->valide == 1) ? ($candidature->valide = 0) : ($candidature->valide = 1);
+
+        $candidature->save();
+
+        return redirect()->route('candidatures.index');
     }
 
     /**
@@ -105,17 +128,30 @@ class CandidatureController extends Controller
      */
     public function update(Request $request, Candidature $candidature)
     {
-        //
+        dd(\App\Candidature::all());
     }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Candidature $candidature)
+    public function destroy($id)
     {
-        //
+        $candidature = Candidature::findOrFail($id);
+
+        $candidature->delete();
+
+        return redirect()->route('candidatures.index');
     }
+
+    /* public function setValidate(Request $request){
+
+        dd($request->get('id'));
+        if($id=="1"){
+            Candidature::where('id', $id)->update(array('valide' => '0'));
+        }else{
+            Candidature::where('id', $id)->update(array('valide' => '1'));
+        }
+    } */
 }

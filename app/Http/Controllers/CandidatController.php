@@ -27,7 +27,9 @@ class CandidatController extends Controller
      */
     public function index()
     {
-        //
+        //i change it from candidature to candidat
+        $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
+        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }
 
     /**
@@ -328,7 +330,7 @@ class CandidatController extends Controller
 
             if (is_object($candidat)) {
                 $candidature = null;
-                // $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
+                $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
 
                 $candidat->update([
                     'universite_dip_name' => $fields['pre_insc_universite'] . " _-_ " . $fields['universite_dip_name'],
@@ -338,6 +340,7 @@ class CandidatController extends Controller
                 if (!is_object($candidature)) {
 
                     $candidature = Candidature::create([
+                        'labelle' => $candidat->nom_fr,
                         'candidat_id' => $candidat->id,
                         'formation_id' => $fields['formation'],
                     ]);
@@ -351,6 +354,7 @@ class CandidatController extends Controller
                 $response = array(
                     'candidat' => $candidat,
                     'candidature' => $candidature,
+                    'url'     => route('showPDF', $candidat->id),
                 );
                 return  response()->json($response, 200);
             }

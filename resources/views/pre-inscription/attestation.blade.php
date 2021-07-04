@@ -13,8 +13,12 @@
                         <!-- Start .row -->
                         <div class="col-lg-6" style="padding: 5px">
                             <!-- col-lg-6 start here -->
-                            @php $path =($candidat==null)?'':$candidat->candidatures->first()->docFile()->first()->path @endphp
-                            <div class="invoice-logo"><img width="200" src="{{ url("storage/$path") }}" alt="Invoice logo"></div>
+                            @php $path =($candidat==null)?'':App\docFile::where('candidature_id',$candidat->candidatures->first()->id)->first();
+                         
+                            @endphp
+                            <!--<div class="invoice-logo text-center"><img width="200" src="{{ url("storage/$path") }}" alt="Invoice logo"></div>-->
+                            <div class="invoice-logo text-center"><img width="200" src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png" alt="Invoice logo"></div>
+                              
                         </div>
                         <!-- col-lg-6 end here -->
   
@@ -32,39 +36,39 @@
                                
                             </div>
                             <div class="row">
-                            <div class="invoice-to mt25 col-lg-6 text-center">
-                                <ul class="list-unstyled">
-                                    <li><strong>Détails sur le candidat</strong></li>
-                                    <ul class="list-unstyled row  text-left">
-                                        <li class="col-lg-6"> Nom : {{($candidat==null)?'':$candidat->nom_fr}}</li>
-                                        <li class="col-lg-6">  النسب : {{($candidat==null)?'':$candidat->nom_ar}} </li>
-                                        <li class="col-lg-6"> Prenom : {{($candidat==null)?'':$candidat->prenom_fr}}</li>
-                                        <li class="col-lg-6">  الإسم : {{($candidat==null)?'':$candidat->prenom_ar}} </li>
+                                <div class="invoice-to mt25 col-lg-6 text-center">
+                                    <ul class="list-unstyled">
+                                        <li><strong>Détails sur le candidat</strong></li>
+                                        <ul class="list-unstyled  row text-left">
+                                            <li class="col-lg-6"> Nom : {{($candidat==null)?'':$candidat->nom_fr}}</li>
+                                            <li class="col-lg-6">  النسب : {{($candidat==null)?'':$candidat->nom_ar}} </li>
+                                            <li class="col-lg-6"> Prenom : {{($candidat==null)?'':$candidat->prenom_fr}}</li>
+                                            <li class="col-lg-6">  الإسم : {{($candidat==null)?'':$candidat->prenom_ar}} </li>
+                                        </ul>
+                                        <ul class="list-unstyled text-left">
+                                           
+                                          
+                                            <li > Date de naissance : {{($candidat==null)?'':$candidat->date_naiss}}</li>
+                                            <li > Lieu  : {{($candidat==null)?'':$candidat->lieu_naiss_fr}}</li>
+                                            <li >  Adresse : {{($candidat==null)?'':$candidat->adresse_etd}} </li>
+                                            <li >  GSM : {{($candidat==null)?'':$candidat->tel}} </li>
+                                        </ul>
                                     </ul>
-                                    <ul class="list-unstyled text-left">
-                                       
-                                      
-                                        <li > Date de naissance : {{($candidat==null)?'':$candidat->date_naiss}}</li>
-                                        <li > Lieu  : {{($candidat==null)?'':$candidat->lieu_naiss_fr}}</li>
-                                        <li >  Adresse : {{($candidat==null)?'':$candidat->adresse_etd}} </li>
-                                        <li >  GSM : {{($candidat==null)?'':$candidat->tel}} </li>
+                                </div>
+                                <div class="invoice-to mt25 col-lg-6 text-center">
+                                    <ul class="list-unstyled">
+                                        <li><strong>Détails sur les parents</strong></li>
+                                        <ul class="list-unstyled text-left ">
+                                            <li > CIN père : {{($candidat==null)?'':$candidat->CIN_pere}}</li>
+                                            <li > Profession  : {{($candidat==null)?'':$candidat->lieu_naiss_fr}}</li>
+                                            <li >  CIN mère : {{($candidat==null)?'':$candidat->profession_pere}} </li>
+                                            <li > Profession  : {{($candidat==null)?'':$candidat->profession_mere}} </li>
+                                            <li > Adresse  : {{($candidat==null)?'':$candidat->adresse_parent}} </li>
+                                            <li > Téléphone  : {{($candidat==null)?'':$candidat->tel_parent}} </li>
+                                        </ul>
                                     </ul>
-                                </ul>
+                                </div>
                             </div>
-                            <div class="invoice-to mt25 col-lg-6 text-center">
-                                <ul class="list-unstyled">
-                                    <li><strong>Détails sur les parents</strong></li>
-                                    <ul class="list-unstyled text-left ">
-                                        <li > CIN père : {{($candidat==null)?'':$candidat->CIN_pere}}</li>
-                                        <li > Profession  : {{($candidat==null)?'':$candidat->lieu_naiss_fr}}</li>
-                                        <li >  CIN mère : {{($candidat==null)?'':$candidat->profession_pere}} </li>
-                                        <li > Profession  : {{($candidat==null)?'':$candidat->profession_mere}} </li>
-                                        <li > Adresse  : {{($candidat==null)?'':$candidat->adresse_parent}} </li>
-                                        <li > Téléphone  : {{($candidat==null)?'':$candidat->tel_parent}} </li>
-                                    </ul>
-                                </ul>
-                            </div>
-                        </div>
                         <div class="invoice-details mt25">
             
                             <div class="card">
@@ -114,7 +118,7 @@
                             <div class="invoice-footer mt25">
                                 <p class="text-center">Generated on <script>document.write(new Date().toLocaleDateString() + ' at '+ new Date().toLocaleTimeString())
     
-                                </script>    <a href="#" class="btn btn-default ml15"><i class="fa fa-print mr5"></i> Print</a></p>
+                                </script>    <a href="{{route('downloadPDF',$candidat->id)}}" class="btn btn-default ml15"><i class="fa fa-print mr5"></i> Print</a></p>
                             </div>
                         </div>
                         <!-- col-lg-12 end here -->

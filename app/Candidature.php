@@ -12,6 +12,7 @@ class Candidature extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'labelle',
         'valide',
         'candidat_id',
@@ -24,7 +25,7 @@ class Candidature extends Model
     public function formation(){
         return $this->belongsTo(Candidat::class);
     }
-    public function docFile(){
+    public function docFiles(){
         return $this->hasMany(docFile::class);
     }
 }

@@ -24,7 +24,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('pre-ins', 'CandidatureController@index')->name('getPreInscr');
+    Route::get('pre-ins', 'CandidatController@index')->name('getPreInscr');
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
     Route::get('renderUsers', 'UserController@renderUsers')->name('getUsers');
@@ -54,31 +54,33 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
 
 
-Route::get('pages-404', 'NazoxController@index');
-Route::get('/', 'HomeController@root');
-Route::get('{any}', 'HomeController@index');
-Route::get('{any}', 'HomeController@index');
-
-
-//other routes
-Route::resource('/administrateurs', 'AdministrateurController');
-Route::resource('/professeurs', 'ProfesseurController');
-Route::resource('/etudiants', 'EtudiantController');
-Route::resource('/candidats', 'CandidatController');
-Route::resource('/candidatures', 'CandidatureController');
-Route::resource('/sessions', 'SessionController');
-Route::resource('/formations', 'FormationController');
-Route::resource('/seances', 'SeanceController');
-Route::resource('/salles', 'SalleController');
+    //other routes
+    Route::resource('/administrateurs', 'AdministrateurController');
+    Route::resource('/professeurs', 'ProfesseurController');
+    Route::resource('/etudiants', 'EtudiantController');
+    Route::resource('/candidats', 'CandidatController');
+    Route::resource('/candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit']);
+    Route::get('candidatures/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
+    Route::resource('/sessions', 'SessionController');
+    Route::resource('/formations', 'FormationController');
+    Route::resource('/seances', 'SeanceController');
+    Route::resource('/salles', 'SalleController');
 
 
 
 
 
-//////////// PDF ////////////
-Route::get('candidature/showPDF/{id}','CandidatureController@showPDF');
-Route::get('candidature/downloadPDF/{id}','CandidatureController@downloadPDF');
+    //////////// PDF ////////////
+    Route::get('candidature/showPDF/{id}', 'CandidatureController@showPDF')->name('showPDF');
+    Route::get('candidature/downloadPDF/{id}', 'CandidatureController@downloadPDF')->name('downloadPDF');
+
+
+    //Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
+
+
+
+    Route::get('pages-404', 'NazoxController@index');
+    Route::get('/', 'HomeController@root');
+    Route::get('{any}', 'HomeController@index');
+    Route::get('{any}', 'HomeController@index');
 });
-
-
-

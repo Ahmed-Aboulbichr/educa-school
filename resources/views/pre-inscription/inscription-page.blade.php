@@ -1,5 +1,7 @@
 @extends('layouts.master-without-side-bar-candidat')
-
+@php  
+//loading candidatures
+($candidat==null)?'':$candidat->candidatures @endphp
 @section('css')
     <!-- twitter-bootstrap-wizard css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
@@ -540,7 +542,7 @@
                     </div>
                     <ul class="pager wizard twitter-bs-wizard-pager-link">
                         <li class="previous"><a href="#">Previous</a></li>
-                        <li class="" style="float:right;" id="NextStepBtn" onclick="$('#infoCandidat').submit()" ><a href="#">Next</a></li>
+                        <li class="" style="float:right;" id="NextStepBtn" onclick="$('#infoCandidat').submit()" ><a id="NextStepBtnA" href="#">Next</a></li>
                        <!-- <li class="next"><a href="#">Submit</a></li>-->
                     </ul>
                 </div>
@@ -592,7 +594,8 @@
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
-                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}"
+                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
+                showPDF:"",
             }
         };
 
