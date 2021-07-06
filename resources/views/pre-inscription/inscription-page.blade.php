@@ -572,13 +572,23 @@
     <script src="{{ URL::asset('/assets/js/formation.js')}}"></script>
     {{-- Arabic keyboard --}}
     <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>
+    @php 
+    foreach (($candidat==null)?null:$candidat->docFiles as $docFile) {
+       
+        $docFile->path = route('getFiles',[explode('/' ,$docFile->path)[0], explode('/' ,$docFile->path)[1]]);
+
+        echo $docFile->path;
+    }
+
+    @endphp 
     <script>
 
         var candidat = null;
         candidat = @json($candidat ?? '');
         var docFiles = null;
+        
         docFiles = @json(($candidat==null)?null:$candidat->docFiles ?? '');
-      
+     
           Dropzone.autoDiscover = false;
         var config = {
             routes: {

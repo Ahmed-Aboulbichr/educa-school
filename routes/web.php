@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /////////////////////////
 
-    Route::get('storage/{path}', 'docFilesController@getFiles')->name('getFiles');
+    Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
 
 
     //other routes

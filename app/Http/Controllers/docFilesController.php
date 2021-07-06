@@ -12,7 +12,7 @@ class docFilesController extends Controller
     public function getFiles(Request $request)
     {
 
-        return Storage::get($request->path);
+        return Storage::get($request->directory.'/'.$request->filename);
        
     }
 }
