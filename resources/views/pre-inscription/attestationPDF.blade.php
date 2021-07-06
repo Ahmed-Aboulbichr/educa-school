@@ -254,7 +254,7 @@ th {
 @-ms-viewport {
   width: device-width;
 }
-  
+
      </style>
 </head>
 <body>
@@ -270,26 +270,25 @@ th {
                             <div class="col-lg-6 text-center" style="padding: 5px">
                                 <!-- col-lg-6 start here -->
 
-                                @php $path =($candidat==null)?'':App\docFile::where('candidature_id',$candidat->candidatures->first()->id)->first();
-                         
-                                @endphp
-                                <!--<div class="invoice-logo text-center"><img width="200" src="{{ url("storage/$path") }}" alt="Invoice logo"></div>-->
-                                <div class="invoice-logo text-center"><img width="200" src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png" alt="Invoice logo"></div>
-                                   </div>
+                               
+                                @php $path =($candidat==null)?'':$candidat->candidatures->first()->docFiles()->first()->path @endphp
+                               <div class="invoice-logo"><img width="200" src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png" alt="Invoice logo"></div>
+                               <!-- <div class="invoice-logo"><img width="200" src="{{url("storage/$path") }}" alt="Invoice logo"></div>-->
+                            </div>
                             <!-- col-lg-6 end here -->
-      
+
                             <!-- col-lg-6 end here -->
                             <div class="col-lg-12">
                                 <!-- col-lg-12 start here -->
                                 <div class="invoice-details mt25">
-                
+
                                     <div class="card">
                                         <div class="card-body text-center" style="padding-bottom: 20px;">
                                             <strong>Informations personnelles</strong>
-                                       
+
                                         </div>
                                       </div>
-                                   
+
                                 </div>
                                 <div class="row">
                                 <div class="invoice-to mt25 col-lg-6 text-center">
@@ -302,8 +301,8 @@ th {
                                             <li class="col-lg-6">  الإسم : {{($candidat==null)?'':$candidat->prenom_ar}} </li>
                                         </ul>
                                         <ul class="list-unstyled text-left">
-                                           
-                                          
+
+
                                             <li > Date de naissance : {{($candidat==null)?'':$candidat->date_naiss}}</li>
                                             <li > Lieu  : {{($candidat==null)?'':$candidat->lieu_naiss_fr}}</li>
                                             <li >  Adresse : {{($candidat==null)?'':$candidat->adresse_etd}} </li>
@@ -326,48 +325,48 @@ th {
                                 </div>
                             </div>
                             <div class="invoice-details mt25">
-                
+
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <strong>   Cursus scolaire / universitaire</strong>
-                                   
+
                                     </div>
                                   </div>
-                           
+
                              </div>
-    
+
                              <div class="row">
                                     <ul class="list-unstyled col-lg-12">
-                                
+
                                         <ul class="list-unstyled row  " style="">
                                             <li class=" col-lg-4"> Type de diplome : {{($candidat==null)?'':$candidat->docFiles->first()->type}}</li>
-                                            <li class=" col-lg-4"> Mention : {{($candidat==null)?'':($candidat->mention_bac=='P')?'Passable':($candidat->mention_bac=='AB')?'Assez-Bien':($candidat->mention_bac=='B')?'Bien':($candidat->mention_bac=='TB')?'Très Bien':($candidat->mention_bac=='E')?'Excellent':''}} </li>
+                                            <li class="col-lg-4"> Mention : {{($candidat==null)?'':(($candidat->mention_bac=='P')?'Passable':(($candidat->mention_bac=='AB')?'Assez-Bien':(($candidat->mention_bac=='B')?'Bien':(($candidat->mention_bac=='TB')?'Très Bien':(($candidat->mention_bac=='E')?'Excellent':'')))))}} </li>
                                             <li class="col-lg-4"> Année : {{($candidat==null)?'':$candidat->annee_bac}}</li>
                                         </ul>
                                         <ul class="list-unstyled row  ">
                                             <li class=" col-lg-4"> Lycée d'origine : {{($candidat==null)?'':$candidat->lycee_bac}} </li>
-                                            <li class=" col-lg-4"> Délégation : {{($candidat==null)?'':$candidat->delegation->first()->name}} </li>
-                                            <li class=" col-lg-4"> Académie : {{($candidat==null)?'':$candidat->academie->first()->name}} </li>
+                                            <li class=" col-lg-4"> Délégation : {{($candidat==null)?'':$candidat->delegation->name}} </li>
+                                            <li class=" col-lg-4"> Académie : {{($candidat==null)?'':$candidat->academie->name}} </li>
                                         </ul>
-                                        
+
                                     </ul>
                              </div>
                                 <div class="invoice-items">
                                     <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
                                         <table class="table table-bordered">
-                                         
-                                          
-                                               
+
+
+
                                                 <tr>
-                                                    
+
                                                     <th class="text-right">Je soussigné, certifie sur I'honneur l'exactitude de ces renseignements</th>
-                                                    
+
                                                 </tr>
                                                 <tr>
                                                     <th   style="height: 100px;" class="text-right">Signature de l'étudiant</th>
-                                            
+
                                                 </tr>
-                                          
+
                                         </table>
                                     </div>
                                 </div>
@@ -387,5 +386,5 @@ th {
         </div>
 </body>
 </html>
-    
+
 

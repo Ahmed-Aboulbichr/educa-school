@@ -20,13 +20,12 @@ Recover Password
                                 <div>
                                     <div class="text-center">
                                         <div>
-                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo-dark.png')}}" height="20" alt="logo"></a>
+                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
                                         </div>
 
                                         <h4 class="font-size-18 mt-4">Reset Password</h4>
                                         <p class="text-muted">Reset your password to Nazox.</p>
                                     </div>
-
                                     <div class="p-2 mt-5">
                                         <div class="alert alert-success mb-4" role="alert">
                                             Enter your Email and instructions will be sent to you!
@@ -55,14 +54,13 @@ Recover Password
                                             <p>© <script>document.write(new Date().getFullYear())</script> Nazox. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="background-repeat: no-repeat;background-image:url('/assets/images/ENCG-Fes.jpg');background-size: cover;">
                 <div class="authentication-bg">
                     <div class="bg-overlay"></div>
                 </div>

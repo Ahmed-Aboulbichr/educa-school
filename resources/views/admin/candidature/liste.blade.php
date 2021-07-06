@@ -9,16 +9,15 @@
 @section('content')
 @component('components.breadcrumb')
     @slot('title') candidatures @endslot
-    @slot('li_1') Tables @endslot
-    @slot('li_2') Editable Tables @endslot
+    @slot('li_1') Liste @endslot
+    @slot('li_2') Candidatures @endslot
 @endcomponent
 
-<div class="row">
+<div class="row" style="margin-top: 2em;">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Liste des candidatures</h4>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap">
@@ -40,7 +39,7 @@
                             <td>{{ $candidature->id }}</td>
                             <td data-original-value="11">{{ $candidature->labelle }}</td>
                             <td data-original-value="11">
-                                
+
                                 @if ($candidature->valide=="0")
                                     <a href="{{ route('candidatures.editValidation', $candidature->id) }}" class="btn btn-warning waves-effect waves-light btn-sm">
                                         <i class="ri-error-warning-line align-middle mr-2"></i> non validé
@@ -77,9 +76,12 @@
 @section('script')
 
 <!-- Required datatable js -->
+            <!-- {{--
+
 <script src="{{ URL::asset('/assets/libs/datatables/dataTables.min.js')}}"></script>
 
 <script src="{{ URL::asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.js')}}"></script>
+--}} -->
 
 
 @endsection

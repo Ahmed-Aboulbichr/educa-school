@@ -22,6 +22,8 @@
 
     @section('script')
             <!-- plugin js -->
+            <!-- {{--
+
             <script src="{{ URL::asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
 
             <!-- jquery.vectormap map -->
@@ -31,6 +33,8 @@
             <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
 
             <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js')}}"></script>
+
+            --}} -->
 
     @endsection
 

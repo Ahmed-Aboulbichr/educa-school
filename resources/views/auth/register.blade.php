@@ -20,7 +20,7 @@ Register
                                 <div>
                                     <div class="text-center">
                                         <div>
-                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo-dark.png')}}" height="20" alt="logo"></a>
+                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="20" alt="logo"></a>
                                         </div>
 
                                         <h4 class="font-size-18 mt-4">Register account</h4>
@@ -31,6 +31,10 @@ Register
                                         <form method="POST" action="{{ route('register') }}">
                                             @csrf
 
+                                            <div class="input-daterange input-group" data-provide="datepicker" data-date-format="dd M, yyyy" data-date-autoclose="true">
+                                                <input type="text" class="form-control" name="start" />
+                                                <input type="text" class="form-control" name="end" />
+                                            </div>
                                             <div class="form-group auth-form-group-custom mb-4">
                                                 <i class="ri-user-2-line auti-custom-input-icon"></i>
                                                 <label for="firstName">{{ __('firstName') }}</label>
@@ -95,13 +99,12 @@ Register
                                         <p><script>document.write(new Date().getFullYear())</script>© Nazox.  Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8" style="background-repeat: no-repeat;background-image:url('/assets/images/ENCG-Fes.jpg');background-size: cover;">
                 <div class="authentication-bg">
                     <div class="bg-overlay"></div>
                 </div>
