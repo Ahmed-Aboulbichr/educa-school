@@ -86,8 +86,6 @@ class CandidatureController extends Controller
      */
     public function showPDF($id)
     {
-
-
         $candidat = Candidat::where('id', $id)->first();
         return view('pre-inscription.attestation')->with('candidat', $candidat);
     }
@@ -101,7 +99,7 @@ class CandidatureController extends Controller
     public function edit( $id )
     {
 
-       
+
         $candidat = Candidat::where('id',Candidature::where('id',$id)->first()->candidat_id)->first();
 
         return view('pre-inscription.inscription-page')->with('candidat', $candidat);
@@ -112,13 +110,20 @@ class CandidatureController extends Controller
 
         $candidature = Candidature::findOrFail($id);
 
-        ($candidature->valide == 1) ? ($candidature->valide = 0) : ($candidature->valide = 1);
-
-        $candidature->save();
-
-        return redirect()->route('candidatures.index');
+        if($candidature->valide == 0){
+            $candidature->valide = 1;
+            $candidature->save();
+            return redirect()->route('candidature.valide',$candidature->id);
+        }
+        if($candidature->valide == 1){
+            return redirect()->route('candidatures.index');
+        }
     }
 
+    public function valide($id){
+        //to do : traitement d'envoyéer l'email à le candidat
+        return redirect()->route('candidatures.index');
+    }
     /**
      * Update the specified resource in storage.
      *

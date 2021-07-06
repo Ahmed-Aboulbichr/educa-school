@@ -20,7 +20,7 @@ Reset Password
                                 <div>
                                     <div class="text-center">
                                         <div>
-                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo-dark.png')}}" height="20" alt="logo"></a>
+                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
                                         </div>
 
                                         <h4 class="font-size-18 mt-4">Reset Password</h4>

@@ -11,7 +11,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-store-2-line"></i>
+                        <i class="ri-menu-fill"></i>
                         <span>Candidature</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -24,7 +24,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-store-2-line"></i>
+                        <i class="fas fa-user-graduate"></i>
                         <span>Etudiant</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -34,7 +34,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-store-2-line"></i>
+                        <i class=" ri-file-copy-line"></i>
                         <span>E-Document</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -47,7 +47,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-store-2-line"></i>
+                        <i class="ri-bar-chart-line"></i>
                         <span>E-Note</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -56,36 +56,36 @@
                 </li>
 
                 <li>
-                    <a  class=" waves-effect">
-                        <i class="ri-chat-1-line"></i>
+                    <a  class="waves-effect">
+                        <i class="ri-contacts-book-line"></i>
                         <span>E-biblio</span>
                     </a>
                 </li>
 
                 <li>
-                    <a  class=" waves-effect">
-                        <i class="ri-chat-1-line"></i>
+                    <a  class="waves-effect">
+                        <i class="fas fa-user-tie"></i>
                         <span>Proffeseurs</span>
                     </a>
                 </li>
 
                 <li>
                     <a  class=" waves-effect">
-                        <i class="ri-chat-1-line"></i>
+                        <i class="ri-clipboard-line"></i>
                         <span>Planification</span>
                     </a>
                 </li>
 
                 <li>
                     <a  class=" waves-effect">
-                        <i class="ri-chat-1-line"></i>
+                        <i class="ri-settings-2-line"></i>
                         <span>Paramettrage</span>
                     </a>
                 </li>
 
                 <li>
                     <a  class=" waves-effect">
-                        <i class="ri-chat-1-line"></i>
+                        <i class="ri-exchange-funds-line"></i>
                         <span>E-DAQIQ</span>
                     </a>
                 </li>

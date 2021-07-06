@@ -5,7 +5,7 @@
             <div class="navbar-brand-box">
                 <a href="{{url('index')}}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('/assets/images/logo-sm-dark.png')}}" alt="" height="22">
+                        <img src="{{ URL::asset('/assets/images/favicon-USMBA.png')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
                         <img src="{{ URL::asset('/assets/images/logo-dark.png')}} " alt="" height="20">
@@ -13,8 +13,8 @@
                 </a>
 
                 <a href="{{url('index')}}" class="logo logo-light">
-                    <span class="logo-sm">
-                        <img src="{{ URL::asset('/assets/images/logo-sm-light.png')}}" alt="" height="22">
+                    <span class="logo-sm"  style="margin-left:-8px;">
+                        <img src="{{ URL::asset('/assets/images/favicon-USMBA.png')}}" alt="" height="35">
                     </span>
                     <span class="logo-lg">
                         <img src="{{ URL::asset('/assets/images/logo.png')}}" alt="" height="50">
@@ -68,11 +68,10 @@
             </div>
 
             <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="ri-settings-2-line"></i>
-                </button>
+                <a type="button" href="{{route('logout')}}" style="padding-top: 1.47em;" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
+                    <i class="ri-shut-down-line align-middle mr-1 text-danger"></i>
+                </a>
             </div>
-
 
         </div>
     </div>

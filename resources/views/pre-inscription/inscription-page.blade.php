@@ -1,7 +1,11 @@
 @extends('layouts.master-without-side-bar-candidat')
-@php  
+@php
 //loading candidatures
 ($candidat==null)?'':$candidat->candidatures @endphp
+
+@section('title')
+    Pré-inscription
+@endsection
 @section('css')
     <!-- twitter-bootstrap-wizard css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
@@ -578,7 +582,7 @@
         candidat = @json($candidat ?? '');
         var docFiles = null;
         docFiles = @json(($candidat==null)?null:$candidat->docFiles ?? '');
-    
+
           Dropzone.autoDiscover = false;
         var config = {
             routes: {
