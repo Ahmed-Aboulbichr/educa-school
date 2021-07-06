@@ -110,20 +110,30 @@ class CandidatureController extends Controller
 
         $candidature = Candidature::findOrFail($id);
 
-        if($candidature->valide == 0){
-            $candidature->valide = 1;
-            $candidature->save();
-            return redirect()->route('candidature.valide',$candidature->id);
-        }
-        if($candidature->valide == 1){
-            return redirect()->route('candidatures.index');
-        }
-    }
+        ($candidature->valide == 1) ? ($candidature->valide = 0) : ($candidature->valide = 1);
 
-    public function valide($id){
-        //to do : traitement d'envoyéer l'email à le candidat
+        $candidature->save();
+        /*
+            if($candidature->valide == 0){
+                $candidature->valide = 1;
+                $candidature->save();
+                return redirect()->route('candidature.valide',$candidature->id);
+            }
+            if($candidature->valide == 1){
+                return redirect()->route('candidatures.index');
+            }
+            */
+
         return redirect()->route('candidatures.index');
     }
+
+
+    public function valide($id)
+    {
+        //to do : traitement d'envoyéer l'email
+        return redirect()->route('candidatures.index');
+    }
+
     /**
      * Update the specified resource in storage.
      *
