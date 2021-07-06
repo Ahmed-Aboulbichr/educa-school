@@ -98,49 +98,6 @@ class CandidatController extends Controller
         //
     }
 
-    public function saveStepTwo(Request $request)
-    {
-        if ($request->ajax()) {
-            $fields = $request->validate([
-                'cin_pere' => ['bail', 'required', 'string', 'max:10'],
-                'cin_mere' => ['bail', 'required', 'string', 'max:10'],
-                'tel_parent' => ['bail', 'required', 'string', 'max:20'],
-                'cat_pere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
-                'cat_mere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
-                'secteur_pere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
-                'secteur_mere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_mere'))],
-                'ville_parent' => ['bail', 'required', 'integer', Rule::exists('villes', 'id')->where('id', $request->input('ville_parent'))],
-                'prof_pere' => ['bail', 'required', 'string', 'max:50'],
-                'prof_mere' => ['bail', 'required', 'string', 'max:50'],
-                'adresse_parent' => ['bail', 'nullable', 'string', 'max:100'],
-            ]);
-            $candidat = null;
-            $candidat = Candidat::where('user_id', Auth::id())->first();
-            if (is_object($candidat)) {
-                $candidat->update([
-                    'CIN_pere' => $fields['cin_pere'],
-                    'CIN_mere' => $fields['cin_mere'],
-                    'tel_parent' => $fields['tel_parent'],
-                    'cat_pere' => $fields['cat_pere'],
-                    'cat_mere' => $fields['cat_mere'],
-                    'sec_profession_mere_id' => $fields['secteur_mere'],
-                    'sec_profession_pere_id' => $fields['secteur_pere'],
-                    'ville_id_parent' => $fields['ville_parent'],
-                    'profession_pere' => $fields['prof_pere'],
-                    'profession_mere' => $fields['prof_mere'],
-                    'adresse_parent' => $fields['adresse_parent'],
-                ]);
-                $response = array(
-                    "candidat" => $candidat
-                );
-                return response()->json($response, 200);
-            } else {
-                $response = "nothing to update" . Auth::id();
-                return response()->json($response, 200);
-            }
-        }
-    }
-
     public function saveStepOne(Request $req)
     {
         if ($req->ajax()) {
@@ -211,6 +168,50 @@ class CandidatController extends Controller
                 'candidat' => $candidat,
             );
             return  response()->json($response, 200);
+        }
+    }
+
+    
+    public function saveStepTwo(Request $request)
+    {
+        if ($request->ajax()) {
+            $fields = $request->validate([
+                'cin_pere' => ['bail', 'required', 'string', 'max:10'],
+                'cin_mere' => ['bail', 'required', 'string', 'max:10'],
+                'tel_parent' => ['bail', 'required', 'string', 'max:20'],
+                'cat_pere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'cat_mere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'secteur_pere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
+                'secteur_mere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_mere'))],
+                'ville_parent' => ['bail', 'required', 'integer', Rule::exists('villes', 'id')->where('id', $request->input('ville_parent'))],
+                'prof_pere' => ['bail', 'required', 'string', 'max:50'],
+                'prof_mere' => ['bail', 'required', 'string', 'max:50'],
+                'adresse_parent' => ['bail', 'nullable', 'string', 'max:100'],
+            ]);
+            $candidat = null;
+            $candidat = Candidat::where('user_id', Auth::id())->first();
+            if (is_object($candidat)) {
+                $candidat->update([
+                    'CIN_pere' => $fields['cin_pere'],
+                    'CIN_mere' => $fields['cin_mere'],
+                    'tel_parent' => $fields['tel_parent'],
+                    'cat_pere' => $fields['cat_pere'],
+                    'cat_mere' => $fields['cat_mere'],
+                    'sec_profession_mere_id' => $fields['secteur_mere'],
+                    'sec_profession_pere_id' => $fields['secteur_pere'],
+                    'ville_id_parent' => $fields['ville_parent'],
+                    'profession_pere' => $fields['prof_pere'],
+                    'profession_mere' => $fields['prof_mere'],
+                    'adresse_parent' => $fields['adresse_parent'],
+                ]);
+                $response = array(
+                    "candidat" => $candidat
+                );
+                return response()->json($response, 200);
+            } else {
+                $response = "nothing to update" . Auth::id();
+                return response()->json($response, 200);
+            }
         }
     }
 

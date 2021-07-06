@@ -578,7 +578,7 @@
         candidat = @json($candidat ?? '');
         var docFiles = null;
         docFiles = @json(($candidat==null)?null:$candidat->docFiles ?? '');
-    
+      
           Dropzone.autoDiscover = false;
         var config = {
             routes: {
