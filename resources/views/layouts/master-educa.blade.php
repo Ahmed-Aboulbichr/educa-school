@@ -28,7 +28,6 @@
         </div>
         <!-- End Page-content -->
         </div>
-        <!-- end main content-->
 </div>
 <!-- END layout-wrapper -->
 
