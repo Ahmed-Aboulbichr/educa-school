@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\academie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class AcademieController extends Controller
 {
@@ -86,6 +87,7 @@ class AcademieController extends Controller
 
     public function renderAcademies(Request $request)
     {
+        
         if ($request->ajax()) {
 
             $academies = DB::table('academies')->select('name', 'id')->get();

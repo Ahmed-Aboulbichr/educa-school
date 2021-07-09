@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
@@ -22,9 +23,9 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'password' => Hash::make($fields['password']),
         ]);
-
+        
         $token = $user->createToken('myapptoken')->plainTextToken;
-
+        $user->assignRole('User');
         $response = [
             'user' => $user,
             'token' => $token
@@ -60,7 +61,7 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request) {
-        auth()->user()->tokens()->delete();
+        Auth::user()->tokens()->delete();
 
         return [
             'message' => 'Logged out'

@@ -580,8 +580,6 @@
     foreach (($candidat==null)?null:$candidat->docFiles as $docFile) {
        
         $docFile->path = route('getFiles',[explode('/' ,$docFile->path)[0], explode('/' ,$docFile->path)[1]]);
-
-        echo $docFile->path;
     }
 
     @endphp 
