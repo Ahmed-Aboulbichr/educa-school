@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormationsTable extends Migration
+class CreateNiveauEtudesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateFormationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('formations', function (Blueprint $table) {
+        Schema::create('niveau_etudes', function (Blueprint $table) {
             $table->id();
-            $table->string('type');        // LP
-            $table->string('niveau_etude');    //  Acces aux BAC + 3
-            $table->string('specialite');       //  LDW
-            $table->string('niveau_preRequise'); // BAC + 2
+            $table->enum('intitule', ['BAC+1','BAC+2','BAC+3','BAC+4','BAC+5'])->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateFormationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formations');
+        Schema::dropIfExists('niveau_etudes');
     }
 }
