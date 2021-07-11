@@ -13,6 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserSeeder::class);
 
-        $this->call([SecteurProfessionSeeder::class,academieSeeder::class,delegationSeeder::class,NationaliteSeeder::class,PaySeeder::class,provinceSeeder::class,villesSeeder::class,TypeFormationSeeder::class,NiveauEtudeSeeder::class]);
+        $this->call([SecteurProfessionSeeder::class,academieSeeder::class,delegationSeeder::class,NationaliteSeeder::class,PaySeeder::class,provinceSeeder::class,villesSeeder::class,TypeFormationSeeder::class,NiveauEtudeSeeder::class,PermissionSeeder::class]);
     }
 }

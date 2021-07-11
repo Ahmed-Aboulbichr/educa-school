@@ -42,8 +42,8 @@ class CreateCandidatsTable extends Migration
             $table->string("CIN_mere",10)->nullable();
             $table->string("profession_pere",50)->nullable();
             $table->string("profession_mere",50)->nullable();
-            $table->string('ville_id_etud')->nullable();
-            $table->string('ville_id_parent')->nullable();
+            $table->unsignedBigInteger('ville_id_etud');
+            $table->unsignedBigInteger('ville_id_parent');
 
             $table->unsignedBigInteger('sec_profession_pere_id')->nullable();
             $table->unsignedBigInteger('sec_profession_mere_id')->nullable();
