@@ -140,7 +140,7 @@ $(function() {
           const element = docFiles[key];
           let mockFile = { name: element.path, size: 1024 };
           uploadFile = false ;
-          myDropzone.displayExistingFile(mockFile,  'storage/'+element.path  );
+          myDropzone.displayExistingFile(mockFile,  element.path  );
            }
           } 
            this.on("success", function (response,file, serverFileName) {

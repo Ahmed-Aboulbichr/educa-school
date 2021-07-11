@@ -270,7 +270,7 @@ th {
                             <div class="col-lg-6 text-center" style="padding: 5px">
                                 <!-- col-lg-6 start here -->
 
-
+                               
                                 @php $path =($candidat==null)?'':$candidat->candidatures->first()->docFiles()->first()->path @endphp
                                <div class="invoice-logo"><img width="200" src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png" alt="Invoice logo"></div>
                                <!-- <div class="invoice-logo"><img width="200" src="{{url("storage/$path") }}" alt="Invoice logo"></div>-->

@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App;
+use Illuminate\Support\Facades\App as FacadesApp;
 
 class LocaleController extends Controller
 {
     public function lang($locale)
     {
-        App::setLocale($locale);
+        FacadesApp::setLocale($locale);
         session()->put('locale', $locale);
         return redirect()->back();
     }
