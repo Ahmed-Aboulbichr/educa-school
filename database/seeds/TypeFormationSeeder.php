@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class TypeForamtionSeeder extends Seeder
+class TypeFormationSeeder extends Seeder
 {
     /**
      * Run the database seeds.

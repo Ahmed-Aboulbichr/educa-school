@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeForamtionsTable extends Migration
+class CreateTypeFormationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -27,6 +27,6 @@ class CreateTypeForamtionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_foramtions');
+        Schema::dropIfExists('type_formations');
     }
 }
