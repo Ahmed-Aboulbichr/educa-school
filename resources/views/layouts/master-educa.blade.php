@@ -22,7 +22,7 @@
         @else @if ((Auth::user()==null)?false:(Auth::user()->hasRole('User')))
         @include('layouts.sidebar-educa-etud');
         @endif @endif
-        @include('layouts.sidebar')
+        {{--@include('layouts.sidebar')--}}
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
