@@ -55,11 +55,11 @@ class CreateCandidatsTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('pay_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('nationalite_id')->nullable()->constrained()->onDelete('cascade')->default(null);
-            //$table->foreign('ville_id_parent')->references('id')->on('villes')->onDelete('cascade')->nullable();
+            $table->foreign('ville_id_parent')->references('id')->on('villes')->onDelete('cascade')->nullable();
 
             $table->foreign('sec_profession_pere_id')->references('id')->on('secteur_professions')->onDelete('cascade')->nullable();
             $table->foreign('sec_profession_mere_id')->references('id')->on('secteur_professions')->onDelete('cascade')->nullable();
-            //$table->foreign('ville_id_etud')->references('id')->on('villes')->onDelete('cascade')->nullable();
+            $table->foreign('ville_id_etud')->references('id')->on('villes')->onDelete('cascade')->nullable();
 
             $table->timestamps();
         });
