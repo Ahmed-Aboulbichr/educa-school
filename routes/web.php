@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {

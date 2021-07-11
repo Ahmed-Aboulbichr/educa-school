@@ -15,7 +15,14 @@
      <!-- Begin page -->
      <div id="layout-wrapper">
         @include('layouts.topbar-educa')
-        @include('layouts.sidebar')
+        @if ((Auth::user()==null)?false:(Auth::user()->hasRole('Super Admin')))
+
+        @include('layouts.sidebar-educa-admin');
+
+        @else @if ((Auth::user()==null)?false:(Auth::user()->hasRole('User')))
+        @include('layouts.sidebar-educa-etud');
+        @endif @endif
+        {{--@include('layouts.sidebar')--}}
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->

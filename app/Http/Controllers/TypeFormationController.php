@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Type_foramtion;
 use Illuminate\Http\Request;
-use App\academie;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 
-class AcademieController extends Controller
+class TypeFormationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,10 +41,10 @@ class AcademieController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Type_foramtion  $type_foramtion
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Type_foramtion $type_foramtion)
     {
         //
     }
@@ -54,10 +52,10 @@ class AcademieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Type_foramtion  $type_foramtion
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Type_foramtion $type_foramtion)
     {
         //
     }
@@ -66,10 +64,10 @@ class AcademieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Type_foramtion  $type_foramtion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Type_foramtion $type_foramtion)
     {
         //
     }
@@ -77,22 +75,11 @@ class AcademieController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Type_foramtion  $type_foramtion
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type_foramtion $type_foramtion)
     {
         //
-    }
-
-    public function renderAcademies(Request $request)
-    {
-        
-        if ($request->ajax()) {
-
-            $academies = DB::table('academies')->select('name', 'id')->get();
-
-            return  response()->json($academies, 200);
-        }
     }
 }

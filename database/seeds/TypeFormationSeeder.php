@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class NiveauEtudeSeeder extends Seeder
+class TypeFormationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,8 +12,8 @@ class NiveauEtudeSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert("INSERT INTO `niveau_etudes` (`intitule`)
-        VALUES
-        ('BAC+1'),('BAC+2'),('BAC+3'),('BAC+4'),('BAC+5')");
+        DB::insert("INSERT INTO `type_formations` (`intitule`)
+         VALUES
+         ('Mastre'),('LP'),('LF'),('Master spécialisé')");
     }
 }
