@@ -22,6 +22,7 @@
         @else @if ((Auth::user()==null)?false:(Auth::user()->hasRole('User')))
         @include('layouts.sidebar-educa-etud');
         @endif @endif
+        @include('layouts.sidebar')
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
@@ -34,16 +35,9 @@
         </div>
         <!-- End Page-content -->
         </div>
-        <!-- end main content-->
 </div>
 <!-- END layout-wrapper -->
 
-<!-- Right Sidebar -->
-@include('layouts.right-sidebar')
-<!-- /Right-bar -->
-
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
 
 <!-- JAVASCRIPT -->
 @include('layouts.vendor-scripts')
