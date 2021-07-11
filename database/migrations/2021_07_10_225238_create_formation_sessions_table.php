@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormationsTable extends Migration
+class CreateFormationSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateFormationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('formations', function (Blueprint $table) {
+        Schema::create('formation_sessions', function (Blueprint $table) {
             $table->id();
-            $table->string('type');        // LP
-            $table->string('niveau_etude');    //  Acces aux BAC + 3
-            $table->string('specialite');       //  LDW
-            $table->string('niveau_preRequise'); // BAC + 2
+            $table->foreignId('session_id')->constrained()->onDelete('cascade');
+            $table->foreignId('formation_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateFormationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formations');
+        Schema::dropIfExists('formation_sessions');
     }
 }

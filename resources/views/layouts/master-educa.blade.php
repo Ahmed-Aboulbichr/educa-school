@@ -15,7 +15,7 @@
      <!-- Begin page -->
      <div id="layout-wrapper">
         @include('layouts.topbar-educa')
-        @include('layouts.sidebar-educa')
+        @include('layouts.sidebar')
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
@@ -28,14 +28,9 @@
         </div>
         <!-- End Page-content -->
         </div>
-        <!-- end main content-->
 </div>
 <!-- END layout-wrapper -->
 
-
-
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
 
 <!-- JAVASCRIPT -->
 @include('layouts.vendor-scripts')
