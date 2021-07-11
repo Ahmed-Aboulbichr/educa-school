@@ -25,7 +25,7 @@ class CandidatureController extends Controller
         $candidatures = DB::table('candidatures')
             ->join('candidats', 'candidat_id', '=', 'candidats.id')
             ->join('formations', 'formation_id', '=', 'formations.id')
-            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.name')
+            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.specialite')
             ->get();
 
         return view('admin.candidature.liste', compact('candidatures'));
@@ -88,7 +88,7 @@ class CandidatureController extends Controller
      */
     public function showPDF($id)
     {
-        
+
         abort_if(Gate::denies('Candidature_PDF_view'), 403);
         $candidat = Candidat::where('id', $id)->first();
         return view('pre-inscription.attestation')->with('candidat', $candidat);

@@ -1,4 +1,4 @@
-@extends('layouts.master-candidats')
+@extends('layouts.master-educa')
 @section('title') Candidats @endsection
 @section('css')
     <!-- DataTables -->
@@ -19,6 +19,7 @@
                 <div class="card-body">
                     <div>
                         <div class="row no-gutters">
+                            @foreach ($formations as $formation)
                             <div class="col-xl-4 col-sm-6">
                                 <div class="product-box">
                                     <div class="product-img">
@@ -30,59 +31,18 @@
                                                 <i class="mdi mdi-heart-outline"></i>
                                             </a>
                                         </div> --}}
-                                        <img src="http://127.0.0.1:8000/assets/images/LP.png" alt="" class="img-fluid mx-auto d-block">
+                                        <img src="https://place-hold.it/300x200/#C6D9E/black/#19759.png&text={{$formation->intitule}}}&bold&fontsize=20" alt="" class="img-fluid mx-auto d-block">
                                     </div>
                                     
                                     <div class="text-center">
                                         {{-- <p class="font-size-12 mb-1">Blue color, T-shirt</p> --}}
-                                        <h5 class="font-size-15 mt-3"><a href="#" class="text-dark">Licence Professionelle</a></h5>
+                                        <h5 class="font-size-15 mt-3"><a href="{{ route('type_formations.show', $formation->id) }}" class="text-dark">{{$formation->intitule}}</a></h5>
 
                                         {{-- <h5 class="mt-3 mb-0">$240</h5> --}}
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="product-box">
-                                    <div class="product-img">
-                                        {{-- <div class="product-ribbon badge badge-primary">
-                                            - 25 %
-                                        </div>
-                                        <div class="product-like">
-                                            <a href="#">
-                                                <i class="mdi mdi-heart-outline"></i>
-                                            </a>
-                                        </div> --}}
-                                        <img src="http://127.0.0.1:8000/assets/images/masterPRO.jpg" alt="" class="img-fluid mx-auto d-block">
-                                    </div>
-                                    
-                                    <div class="text-center">
-                                        {{-- <p class="font-size-12 mb-1">Half sleeve, T-shirt</p> --}}
-                                        <h5 class="font-size-15 mt-3"><a href="#" class="text-dark">Master professionnelle </a></h5>
-
-                                        {{-- <h5 class="mt-3 mb-0"><span class="text-muted mr-2"><del>$240</del></span>$225</h5> --}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="product-box">
-                                    <div class="product-img">
-                                        {{-- <div class="product-like">
-                                            <a href="#">
-                                                <i class="mdi mdi-heart text-danger"></i>
-                                            </a>
-                                        </div> --}}
-                                        <img src="http://127.0.0.1:8000/assets/images/master.jpg" alt="" class="img-fluid mx-auto d-block">
-                                    </div>
-                                    
-                                    <div class="text-center">
-                                        {{-- <p class="font-size-12 mb-1">Green color, Hoodie</p> --}}
-                                        <h5 class="font-size-15 mt-3 "><a href="#" class="text-dark">Master</a></h5>
-
-                                        {{-- <h5 class="mt-3 mb-0"><span class="text-muted mr-2"><del>$290</del></span>$275</h5> --}}
-                                    </div>
-                                </div>
-                            </div>
-                           
+                            @endforeach
                         </div>
                     </div>
                 </div>

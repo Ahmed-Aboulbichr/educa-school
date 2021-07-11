@@ -14,7 +14,6 @@ use App\User;
 use App\Pay;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use phpDocumentor\Reflection\Types\Nullable;
@@ -28,12 +27,9 @@ class CandidatController extends Controller
      */
     public function index()
     {
-
-        
-        abort_if(Gate::denies('Candidat_access'), 403);
         //i change it from candidature to candidat
         $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
-        return view('pre-inscription.accueil')->with('candidat', $candidat);
+        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }
 
     /**
@@ -65,7 +61,7 @@ class CandidatController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -102,10 +98,51 @@ class CandidatController extends Controller
         //
     }
 
+    public function saveStepTwo(Request $request)
+    {
+        if ($request->ajax()) {
+            $fields = $request->validate([
+                'cin_pere' => ['bail', 'required', 'string', 'max:10'],
+                'cin_mere' => ['bail', 'required', 'string', 'max:10'],
+                'tel_parent' => ['bail', 'required', 'string', 'max:20'],
+                'cat_pere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'cat_mere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'secteur_pere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
+                'secteur_mere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_mere'))],
+                'ville_parent' => ['bail', 'required', 'integer', Rule::exists('villes', 'id')->where('id', $request->input('ville_parent'))],
+                'prof_pere' => ['bail', 'required', 'string', 'max:50'],
+                'prof_mere' => ['bail', 'required', 'string', 'max:50'],
+                'adresse_parent' => ['bail', 'nullable', 'string', 'max:100'],
+            ]);
+            $candidat = null;
+            $candidat = Candidat::where('user_id', Auth::id())->first();
+            if (is_object($candidat)) {
+                $candidat->update([
+                    'CIN_pere' => $fields['cin_pere'],
+                    'CIN_mere' => $fields['cin_mere'],
+                    'tel_parent' => $fields['tel_parent'],
+                    'cat_pere' => $fields['cat_pere'],
+                    'cat_mere' => $fields['cat_mere'],
+                    'sec_profession_mere_id' => $fields['secteur_mere'],
+                    'sec_profession_pere_id' => $fields['secteur_pere'],
+                    'ville_id_parent' => $fields['ville_parent'],
+                    'profession_pere' => $fields['prof_pere'],
+                    'profession_mere' => $fields['prof_mere'],
+                    'adresse_parent' => $fields['adresse_parent'],
+                ]);
+                $response = array(
+                    "candidat" => $candidat
+                );
+                return response()->json($response, 200);
+            } else {
+                $response = "nothing to update" . Auth::id();
+                return response()->json($response, 200);
+            }
+        }
+    }
+
     public function saveStepOne(Request $req)
     {
-        abort_if(Gate::denies('Candidat_create'), 403);
-        
         if ($req->ajax()) {
             $fields = $req->validate([
                 'nom_fr' => ['bail', 'required', 'string', 'max:20'],
@@ -177,57 +214,8 @@ class CandidatController extends Controller
         }
     }
 
-    
-    public function saveStepTwo(Request $request)
-    {
-
-        abort_if(Gate::denies('Candidat_create'), 403);
-        if ($request->ajax()) {
-            $fields = $request->validate([
-                'cin_pere' => ['bail', 'required', 'string', 'max:10'],
-                'cin_mere' => ['bail', 'required', 'string', 'max:10'],
-                'tel_parent' => ['bail', 'required', 'string', 'max:20'],
-                'cat_pere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
-                'cat_mere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
-                'secteur_pere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
-                'secteur_mere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_mere'))],
-                'ville_parent' => ['bail', 'required', 'integer', Rule::exists('villes', 'id')->where('id', $request->input('ville_parent'))],
-                'prof_pere' => ['bail', 'required', 'string', 'max:50'],
-                'prof_mere' => ['bail', 'required', 'string', 'max:50'],
-                'adresse_parent' => ['bail', 'nullable', 'string', 'max:100'],
-            ]);
-            $candidat = null;
-            $candidat = Candidat::where('user_id', Auth::id())->first();
-            if (is_object($candidat)) {
-                $candidat->update([
-                    'CIN_pere' => $fields['cin_pere'],
-                    'CIN_mere' => $fields['cin_mere'],
-                    'tel_parent' => $fields['tel_parent'],
-                    'cat_pere' => $fields['cat_pere'],
-                    'cat_mere' => $fields['cat_mere'],
-                    'sec_profession_mere_id' => $fields['secteur_mere'],
-                    'sec_profession_pere_id' => $fields['secteur_pere'],
-                    'ville_id_parent' => $fields['ville_parent'],
-                    'profession_pere' => $fields['prof_pere'],
-                    'profession_mere' => $fields['prof_mere'],
-                    'adresse_parent' => $fields['adresse_parent'],
-                ]);
-                $response = array(
-                    "candidat" => $candidat
-                );
-                return response()->json($response, 200);
-            } else {
-                $response = "nothing to update" . Auth::id();
-                return response()->json($response, 200);
-            }
-        }
-    }
-
     public function saveStepThree(Request $request)
     {
-        abort_if(Gate::denies('Candidat_create'), 403);
-
-
         if ($request->ajax()) {
             $fields = $request->validate([
                 'annee_bac' => ['', 'string', 'max:4'],
@@ -266,7 +254,6 @@ class CandidatController extends Controller
     public function saveStepFour(Request $request)
     {
 
-        abort_if(Gate::denies('Candidat_create'), 403);
 
         if ($request->hasFile('file')) {
 
@@ -276,12 +263,7 @@ class CandidatController extends Controller
 
             if (is_object($candidat)) {
 
-
-                abort_if(Gate::denies('docFile_create'), 403);
-
-
                 $path = $this->handleUploadedImage($request->file('file'));
-
                 $doc_file = docFile::create([
                     'type' => 'bac',
                     'path' => $path,
@@ -312,7 +294,6 @@ class CandidatController extends Controller
     {
 
 
-        abort_if(Gate::denies('Candidat_create'), 403);
         if ($request->ajax()) {
             $fields = $request->validate([
                 'pre_insc_annee_universitaire' => [
@@ -358,19 +339,11 @@ class CandidatController extends Controller
 
                 if (!is_object($candidature)) {
 
-
-                     abort_if(Gate::denies('candidature_create'), 403);
-
-
                     $candidature = Candidature::create([
                         'labelle' => $candidat->nom_fr,
                         'candidat_id' => $candidat->id,
                         'formation_id' => $fields['formation'],
                     ]);
-
-
-                    
-                    abort_if(Gate::denies('docFile_create'), 403);
 
                     docFile::where('id', $candidat->bac_id)->first()->update([
                         'candidature_id' => $candidature->id,
