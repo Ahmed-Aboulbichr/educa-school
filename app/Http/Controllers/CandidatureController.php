@@ -96,13 +96,13 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id )
+    public function edit($id)
     {
 
 
-        $candidat = Candidat::where('id',Candidature::where('id',$id)->first()->candidat_id)->first();
+        $candidat = Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->first();
 
-        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
+        return view('candidats.profil')->with('candidat', $candidat);
     }
 
     public function editValidation(Candidature $candidature, $id)

@@ -15,7 +15,7 @@
      <!-- Begin page -->
      <div id="layout-wrapper">
         @include('layouts.topbar-educa')
-        @include('layouts.sidebar-educa')
+        @include('layouts.sidebar-candidats')
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
