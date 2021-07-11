@@ -29,7 +29,7 @@ class CandidatController extends Controller
     {
         //i change it from candidature to candidat
         $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
-        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
+        return view('pre-inscription.accueil')->with('candidat', $candidat);
     }
 
     /**

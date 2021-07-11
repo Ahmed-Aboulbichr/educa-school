@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css">
     <!-- Plugins css -->
     <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
+    
     <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
 
     <style>
@@ -36,7 +37,6 @@
             </style>
 @endsection
 @section('content')
-
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
