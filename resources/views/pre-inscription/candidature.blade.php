@@ -38,78 +38,197 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Suivi les étaps d'inscription</h4>
-                <div id="progrss-wizard" class="twitter-bs-wizard">
-                    <ul class="twitter-bs-wizard-nav nav-justified">
-                        <li class="nav-item">
-                            <a href="#progress-candidature-last-step" class="nav-link" data-toggle="tab">
-                                <span class="step-number">01</span>
-                                <span class="step-title">Vos Informations</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#progress-parent-details" class="nav-link" data-toggle="tab">
-                                <span class="step-number">02</span>
-                                <span class="step-title">Informations sur les parents
-                                </span>
-                            </a>
-                        </li>
-                        
-                    </ul>
+                <h4 class="card-title mb-4">Remplir votre cursus universitaire</h4>
+                    <div>
+                        <form id="cursusUniversitaire">
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Niveau</label>
+                                        <select class="custom-select" name="niveau_etude_id" id="niveauEtude">
+                                            <option selected  >Select Niveau d'étude</option>
+                                            <option value="1">BAC + 1</option>
+                                            <option value="2">BAC + 2</option>
+                                            <option value="3">BAC + 3</option>
+                                            <option value="4">BAC + 4</option>
+                                            <option value="5">BAC + 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Spécialité de vos études</label>
+                                        <input value="" type="text" name="specialite" id="specialite" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Année Universitaire</label>
+                                        <select name="Annee_univ" id="AnneUniv" class="custom-select">
+                                            <option selected  >Select Année universitaire</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2020-2021')?'selected':''--}}    value="2020-2021">2020/2021</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2021-2022')?'selected':''--}}    value="2021-2022">2021/2022</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2019-2020')?'selected':''--}}    value="2019-2020">2019/2020</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2018-2019')?'selected':''--}}    value="2018-2019">2018/2019</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2017-2018')?'selected':''--}}    value="2017-2018">2017/2018</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2016-2017')?'selected':''--}}    value="2016-2017">2016/2017</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2015-2016')?'selected':''--}}    value="2015-2016">2015/2016</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2014-2015')?'selected':''--}}    value="2014-2015">2014/2015</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2013-2014')?'selected':''--}}    value="2013-2014">2013/2014</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2012-2013')?'selected':''--}}    value="2012-2013">2012/2013</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2011-2012')?'selected':''--}}    value="2011-2012">2011/2012</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2010-2011')?'selected':''--}}    value="2010-2011">2010/2011</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2009-2010')?'selected':''--}}    value="2009-2010">2009/2010</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2008-2009')?'selected':''--}}    value="2008-2009">2008/2009</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2007-2008')?'selected':''--}}    value="2007-2008">2007/2008</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2006-2007')?'selected':''--}}    value="2006-2007">2006/2007</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2005-2006')?'selected':''--}}    value="2005-2006">2005/2006</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2004-2005')?'selected':''--}}    value="2004-2005">2004/2005</option>
+                                            <option   {{--$candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2003-2004')?'selected':''--}}    value="2003-2004">2003/2004</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                    <div id="bar" class="progress mt-4">
-                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"></div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Université</label>
+                                        <select class="custom-select" id="univNom" name="univ_nom">
+                                            <option selected  >Choisir une université   </option>
+                                            <option value="1">Univ ibn zohr - Agadir</option>
+                                            <option value="2">Univ Hassan 2 - Casablanca</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Note S1</label>
+                                        <input  value="" id="noteS1" type="number" name="note_S1" min="0" max="20"class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Note S2</label>
+                                        <input  value="" id="noteS2" type="number" name="note_S2" min="0" max="20" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="card-title">Photo de votre relevé de notes de cette année ( PDF , Max-size : 10Mb )  </h4>
+                                        <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                            Quidem autem libero aut laboriosam quibusdam qui repellat. Nulla a ea aspernatur perspiciatis!
+                                        </p>
+
+                                        <div>
+                                            <form id="releveAnnee"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                @csrf
+                                                <div class="fallback">
+                                                    <input  value="" name="releve_annee" type="file" multiple="multiple">
+                                                </div>
+                                                <div class="dz-message needsclick">
+                                                    <div class="mb-3">
+                                                        <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                    </div>
+
+                                                    <h4>Drop files here or click to upload.</h4>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-4">
+                                <button type="submit" style="" class="btn btn-primary btn-block  waves-effect btn-sm">Submit</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-content twitter-bs-wizard-tab-content">
+                <!--   <div id="progrss-wizard" class="twitter-bs-wizard">
+                        <ul class="twitter-bs-wizard-nav nav-justified">
+                            <li class="nav-item">
+                                <a href="#progress-candidature-last-step" class="nav-link" data-toggle="tab">
+                                    <span class="step-number">01</span>
+                                    <span class="step-title">Vos Informations</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#progress-parent-details" class="nav-link" data-toggle="tab">
+                                    <span class="step-number">02</span>
+                                    <span class="step-title">Informations sur les parents
+                                    </span>
+                                </a>
+                            </li>
 
-<div class="tab-pane" id="progress-candidature-last-step">
-    <div>
-        <form id="choixFormation">
-            @csrf
-                <div class="row">
+                        </ul>
+                        <div id="bar" class="progress mt-4">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"></div>
+                        </div>
+                        <div class="tab-content twitter-bs-wizard-tab-content">
 
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="progress-basicpill-namecard-input">premiere inscription ( département )</label>
+                            <div class="tab-pane" id="progress-candidature-last-step">
+                                <div>
+                                    <form id="choixFormation">
+                                        @csrf
+                                            <div class="row">
 
-                        <input   value="{{($candidature==null)?(($formation==null)?'':$formation->id):$candidature->formation_id}}" type="hidden" name="formation" class="form-control"  >
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="progress-basicpill-namecard-input">premiere inscription ( département )</label>
 
+                                                {{--   <input   value="{{($candidature==null)?(($formation==null)?'':$formation->id):$candidature->formation_id}}" type="hidden" name="formation" class="form-control"  > --}}
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane" id="progress-confirm-detail">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-6">
+                                        <div class="text-center">
+                                            <div class="mb-4">
+                                                <i class="mdi mdi-check-circle-outline text-success display-4"></i>
+                                            </div>
+                                            <div>
+                                                <h5>Confirmation de candidature</h5>
+                                                <p class="text-muted">If several languages coalesce, the grammar of the resulting</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="pager wizard twitter-bs-wizard-pager-link">
+                            <li class="previous"><a href="#">Previous</a></li>
+                            <li class="" style="float:right;" id="NextStepBtn" onclick="$('#choixFormation').submit()" ><a id="NextStepBtnA" href="#">Next</a></li>
+                            <li class="next"><a href="#">Submit</a></li>
+                        </ul>
                     </div>
-                </div>
-
-
-            </div>
-
-        </form>
-    </div>
-</div>
-
-
-<div class="tab-pane" id="progress-confirm-detail">
-    <div class="row justify-content-center">
-        <div class="col-lg-6">
-            <div class="text-center">
-                <div class="mb-4">
-                    <i class="mdi mdi-check-circle-outline text-success display-4"></i>
-                </div>
-                <div>
-                    <h5>Confirmation de candidature</h5>
-                    <p class="text-muted">If several languages coalesce, the grammar of the resulting</p>
-                </div>
+                    -->
             </div>
         </div>
     </div>
-</div>
-</div>
-<ul class="pager wizard twitter-bs-wizard-pager-link">
-<li class="previous"><a href="#">Previous</a></li>
-<li class="" style="float:right;" id="NextStepBtn" onclick="$('#choixFormation').submit()" ><a id="NextStepBtnA" href="#">Next</a></li>
-<!-- <li class="next"><a href="#">Submit</a></li>-->
-</ul>
-</div>
-</div>
-</div>
-</div>
+
 @endsection
 
 
@@ -128,10 +247,10 @@
     <script src="{{ URL::asset('/assets/js/formation.js')}}"></script>
     {{-- Arabic keyboard --}}
     <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>
-   
+
     <script>
 
-     
+
 
           Dropzone.autoDiscover = false;
         var config = {
