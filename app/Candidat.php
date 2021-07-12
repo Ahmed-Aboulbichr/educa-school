@@ -28,7 +28,6 @@ class Candidat extends Model
         'pay_id',
         'nationalite_id',
         'ville_id_parent',
-        'bac_id',
         'date_naiss',
         'sec_profession_pere_id',
         'sec_profession_mere_id',
@@ -37,8 +36,6 @@ class Candidat extends Model
         'mg_bac',
         'annee_bac',
         'lycee_bac',
-        'universite_dip_name',
-        'pre_insc_annee_universitaire',
         'adresse_parent',
         'tel_parent',
         'cat_mere',
@@ -50,7 +47,7 @@ class Candidat extends Model
     ];
     public function docFiles()
     {
-        return $this->hasMany(docFile::class, 'id', 'bac_id');
+        return $this->hasMany(docFile::class);
     }
 
     public function candidatures(){

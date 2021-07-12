@@ -285,13 +285,12 @@ class CandidatController extends Controller
                 $doc_file = docFile::create([
                     'type' => 'bac',
                     'path' => $path,
+                    'candidat_id' => $candidat->id,
                 ]);
-                $candidat->update([
-                    'bac_id' => $doc_file->id,
-                ]);
-
+                
                 $response = array(
                     'candidat' => $candidat,
+                    'doc_file' => $doc_file,
                 );
 
 
@@ -308,87 +307,7 @@ class CandidatController extends Controller
         return  response()->json("nothing to update" . $request, 200);
     }
 
-    public function saveStepFive(Request $request)
-    {
-
-
-        abort_if(Gate::denies('Candidat_create'), 403);
-        if ($request->ajax()) {
-            $fields = $request->validate([
-                'pre_insc_annee_universitaire' => [
-                    '', 'string',
-                    Rule::in([
-                        "2021-2022",
-                        "2020-2021",
-                        "2019-2020",
-                        "2018-2019",
-                        "2017-2018",
-                        "2016-2017",
-                        "2015-2016",
-                        "2014-2015",
-                        "2013-2014",
-                        "2012-2013",
-                        "2011-2012",
-                        "2010-2011",
-                        "2009-2010",
-                        "2008-2009",
-                        "2007-2008",
-                        "2006-2007",
-                        "2005-2006",
-                        "2004-2005",
-                        "2003-2004"
-                    ])
-                ],
-
-                'pre_insc_universite' => ['', 'string', 'max:255'],
-                'universite_dip_name' => ['', 'string', 'max:255'],
-                'formation' => ['', 'string', 'max:255'],
-            ]);
-            $candidat = null;
-            $candidat = Candidat::where('user_id', Auth::id())->first();
-
-            if (is_object($candidat)) {
-                $candidature = null;
-                $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
-
-                $candidat->update([
-                    'universite_dip_name' => $fields['pre_insc_universite'] . " _-_ " . $fields['universite_dip_name'],
-                    'pre_insc_annee_universitaire' => $fields['pre_insc_annee_universitaire'],
-                ]);
-
-                if (!is_object($candidature)) {
-
-
-                     abort_if(Gate::denies('candidature_create'), 403);
-
-
-                    $candidature = Candidature::create([
-                        'labelle' => $candidat->nom_fr,
-                        'candidat_id' => $candidat->id,
-                        'formation_id' => $fields['formation'],
-                    ]);
-
-
-                    
-                    abort_if(Gate::denies('docFile_create'), 403);
-
-                    docFile::where('id', $candidat->bac_id)->first()->update([
-                        'candidature_id' => $candidature->id,
-                    ]);
-                }
-
-
-                $response = array(
-                    'candidat' => $candidat,
-                    'candidature' => $candidature,
-                    'url'     => route('showPDF', $candidat->id),
-                );
-                return  response()->json($response, 200);
-            }
-
-            return  response()->json("nothing to update", 200);
-        }
-    }
+    
 
     public function handleUploadedImage($file)
     {

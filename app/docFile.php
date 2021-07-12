@@ -18,6 +18,7 @@ class docFile extends Model
         'formation_id',
         'etudiant_id',
         'candidature_id',
+        'candidat_id',
     ];
 
 
