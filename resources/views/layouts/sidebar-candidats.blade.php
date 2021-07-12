@@ -10,18 +10,27 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="javascript: void(0);" class=" waves-effect">
                         <i class="ri-menu-fill"></i>
-                        <span>Candidature</span>
+                        <span>Informations Personnel</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
+                   {{--  <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{url('admin.candidature.inscription')}}>Inscription</a></li>
                         <li><a href={{url('admin.candidature.re-inscription')}}>Réinscription</a></li>
                         <li><a href={{url('admin.candidature.reclamation')}}>Reclamation</a></li>
-                        <li><a href={{ route('type_formations.index') }}>Liste Candidatures</a></li>
-                    </ul>
+                        <li><a href={{ route('candidatures.index') }}>Liste Candidatures</a></li>
+                    </ul> --}}
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Etudiant</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a>Liste Etudiants</a></li>
+                    </ul>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -53,7 +62,12 @@
                     </a>
                 </li>
 
-               
+                <li>
+                    <a  class="waves-effect">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Proffeseurs</span>
+                    </a>
+                </li>
 
                 <li>
                     <a  class=" waves-effect">
@@ -66,6 +80,13 @@
                     <a  class=" waves-effect">
                         <i class="ri-settings-2-line"></i>
                         <span>Paramettrage</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a  class=" waves-effect">
+                        <i class="ri-exchange-funds-line"></i>
+                        <span>E-DAQIQ</span>
                     </a>
                 </li>
 

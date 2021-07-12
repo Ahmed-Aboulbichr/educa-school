@@ -15,16 +15,7 @@
      <!-- Begin page -->
      <div id="layout-wrapper">
         @include('layouts.topbar-educa')
-        @if ((Auth::user()==null)?false:(Auth::user()->hasRole('Super Admin')))
-
-        @include('layouts.sidebar-educa-admin');
-
-        @else 
-            @if ((Auth::user()==null)?false:(Auth::user()->hasRole('User')))
-                @include('layouts.sidebar-educa-etud');
-            @endif 
-        @endif
-        {{--@include('layouts.sidebar')--}}
+        @include('layouts.sidebar-candidats')
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
@@ -37,9 +28,14 @@
         </div>
         <!-- End Page-content -->
         </div>
+        <!-- end main content-->
 </div>
 <!-- END layout-wrapper -->
 
+
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>
 
 <!-- JAVASCRIPT -->
 @include('layouts.vendor-scripts')

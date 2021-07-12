@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class CandidatureController extends Controller
 {
@@ -25,7 +26,7 @@ class CandidatureController extends Controller
         $candidatures = DB::table('candidatures')
             ->join('candidats', 'candidat_id', '=', 'candidats.id')
             ->join('formations', 'formation_id', '=', 'formations.id')
-            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.name')
+            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.specialite')
             ->get();
 
         return view('admin.candidature.liste', compact('candidatures'));
@@ -49,7 +50,48 @@ class CandidatureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+    
+            abort_if(Gate::denies('Candidature_create'), 403);
+            if ($request->ajax()) {
+                $fields = $request->validate([
+                    'formation'  => ['bail', 'required', 'integer', Rule::exists('formations', 'id')->where('id', $request->input('formation'))],
+                ]);
+                $candidat = null;
+                $candidat = Candidat::where('user_id', Auth::id())->first();
+    
+                if (is_object($candidat)) {
+                    $candidature = null;
+                    $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
+    
+    
+                    if (!is_object($candidature)) {
+    
+    
+                         abort_if(Gate::denies('candidature_create'), 403);
+    
+    
+                        $candidature = Candidature::create([
+                            'labelle' => $candidat->nom_fr.' '. $candidat->prenom_fr,
+                            'candidat_id' => $candidat->id,
+                            'formation_id' => $fields['formation'],
+                        ]);
+    
+    
+                    }
+    
+    
+                    $response = array(
+                        'candidat' => $candidat,
+                        'candidature' => $candidature,
+                        'url'     => route('showPDF', $candidat->id),
+                    );
+                    return  response()->json($response, 200);
+                }
+    
+                return  response()->json("nothing to update", 200);
+            }
+        
     }
 
     /**
@@ -88,7 +130,7 @@ class CandidatureController extends Controller
      */
     public function showPDF($id)
     {
-        
+
         abort_if(Gate::denies('Candidature_PDF_view'), 403);
         $candidat = Candidat::where('id', $id)->first();
         return view('pre-inscription.attestation')->with('candidat', $candidat);
@@ -100,14 +142,14 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id )
+    public function edit($id)
     {
 
         abort_if(Gate::denies('Candidature_edit'), 403);
 
-        $candidat = Candidat::where('id',Candidature::where('id',$id)->first()->candidat_id)->first();
+        $candidat = Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->first();
 
-        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
+        return view('candidats.profil')->with('candidat', $candidat);
     }
 
     public function editValidation(Candidature $candidature, $id)

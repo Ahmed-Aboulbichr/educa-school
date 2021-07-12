@@ -1,4 +1,7 @@
 @extends('layouts.master-without-side-bar-candidat')
+@php
+//loading candidatures
+($candidat==null)?'':$candidat->candidatures @endphp
 
 @section('title')
     Pré-inscription
@@ -13,26 +16,7 @@
     <!-- Plugins css -->
     <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
     
-    <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
-
-    <style>
-        .card {
-          /* Add shadows to create the "card" effect */
-          box-shadow: 5px 6px 15px 5px rgba(0.2,0.2,0.2,0.2);
-          transition: 0.3s;
-        }
-
-        /* On mouse-over, add a deeper shadow */
-        .card:hover {
-          box-shadow: 10px 18px 28px 10px rgba(0.2,0.2,0.2,0.2);
-        }
-
-        /* Add some padding inside the card container */
-        .container {
-          padding: 2px 16px;
-        }
-            </style>
-@endsection
+    <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />endsection
 @section('content')
     <div class="col-lg-12">
         <div class="card">
@@ -54,9 +38,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#progress-bac-detail" class="nav-link" data-toggle="tab">
+                            <a href="#progress-bank-detail" class="nav-link" data-toggle="tab">
                                 <span class="step-number">03</span>
                                 <span class="step-title">Details du Baccalauréat</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#progress-bac-detail" class="nav-link" data-toggle="tab">
+                                <span class="step-number">04</span>
+                                <span class="step-title">Choix de formation</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -332,7 +322,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane" id="progress-bac-detail">
+                        <div class="tab-pane" id="progress-bank-detail">
                             <div>
                                 <form id="infoBaccalaureat">
                                     @csrf
@@ -435,7 +425,89 @@
                             </div>
                         </div>
 
-                
+                        <div class="tab-pane" id="progress-bac-detail">
+                            <div>
+                                <form id="choixFormation">
+                                    @csrf
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="progress-basicpill-namecard-input">premiere inscription (année universitaire) </label>
+
+                                                <select name="pre_insc_annee_universitaire" class="custom-select">
+                                                    <option selected  >Select Année universitaire</option>
+
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2020-2021')?'selected':''}}    value="2020-2021">2020/2021</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2021-2022')?'selected':''}}    value="2021-2022">2021/2022</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2019-2020')?'selected':''}}    value="2019-2020">2019/2020</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2018-2019')?'selected':''}}    value="2018-2019">2018/2019</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2017-2018')?'selected':''}}    value="2017-2018">2017/2018</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2016-2017')?'selected':''}}    value="2016-2017">2016/2017</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2015-2016')?'selected':''}}    value="2015-2016">2015/2016</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2014-2015')?'selected':''}}    value="2014-2015">2014/2015</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2013-2014')?'selected':''}}    value="2013-2014">2013/2014</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2012-2013')?'selected':''}}    value="2012-2013">2012/2013</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2011-2012')?'selected':''}}    value="2011-2012">2011/2012</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2010-2011')?'selected':''}}    value="2010-2011">2010/2011</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2009-2010')?'selected':''}}    value="2009-2010">2009/2010</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2008-2009')?'selected':''}}    value="2008-2009">2008/2009</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2007-2008')?'selected':''}}    value="2007-2008">2007/2008</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2006-2007')?'selected':''}}    value="2006-2007">2006/2007</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2005-2006')?'selected':''}}    value="2005-2006">2005/2006</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2004-2005')?'selected':''}}    value="2004-2005">2004/2005</option>
+                                                    <option   {{(($candidat==null)?'':$candidat->pre_insc_annee_universitaire=='2003-2004')?'selected':''}}    value="2003-2004">2003/2004</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="progress-basicpill-namecard-input">premiere inscription (nom d'université)</label>
+                                                @php
+                                                  if($candidat!=null){
+                                                      try {
+
+                                                        $pre_insc_universite = trim(explode('_-_',$candidat->universite_dip_name)[0]);
+                                                        $universite_dip_name = trim(explode('_-_',$candidat->universite_dip_name)[1]);
+                                                      } catch (\Throwable $th) {
+                                                        $pre_insc_universite = "";
+                                                        $universite_dip_name = "";
+                                                      }
+                                                  }
+
+
+                                                @endphp
+                                                <input   value="{{($candidat==null)?'':$pre_insc_universite}}" name="pre_insc_universite" type="text" class="form-control"  >
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="progress-basicpill-namecard-input">premiere inscription ( département )</label>
+
+                                                <input   value="{{($candidat==null)?'':$universite_dip_name}}" type="text" name="universite_dip_name" class="form-control"  >
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="progress-basicpill-namecard-input">Choix de formation</label>
+
+                                                <select name="formation"  id="formationOptions" class="custom-select">
+                                                    <option selected  >Selectionner un Choix de formation</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
 
                         <div class="tab-pane" id="progress-confirm-detail">
                             <div class="row justify-content-center">
@@ -445,7 +517,7 @@
                                             <i class="mdi mdi-check-circle-outline text-success display-4"></i>
                                         </div>
                                         <div>
-                                            <h5>Confirmation de pre-inscription</h5>
+                                            <h5>Confirmation de candidature</h5>
                                             <p class="text-muted">If several languages coalesce, the grammar of the resulting</p>
                                         </div>
                                     </div>
@@ -481,28 +553,16 @@
     <script src="{{ URL::asset('/assets/js/delegations.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/provinces.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/secteursProfession.js')}}"></script>
-    <script src="{{ URL::asset('/assets/js/candidat.js')}}"></script>
-    
+    <script src="{{ URL::asset('/assets/js/condidature.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/formation.js')}}"></script>
     {{-- Arabic keyboard --}}
     <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>
-    @php 
-    if($candidat!=null){
-        foreach ($candidat->docFiles as $docFile) {
-       
-       $docFile->path = route('getFiles',[explode('/' ,$docFile->path)[0], explode('/' ,$docFile->path)[1]]);
-   }
-
-    }
-    
-
-    @endphp 
     <script>
 
         var candidat = null;
         candidat = @json($candidat ?? '');
         var docFiles = null;
         docFiles = @json(($candidat==null)?null:$candidat->docFiles ?? '');
-     
 
           Dropzone.autoDiscover = false;
         var config = {
@@ -513,12 +573,14 @@
                 getDelegations: "{{route('getDelegations')}}",
                 getAcademies: "{{route('getAcademies')}}",
                 getProvinces: "{{route('getProvinces')}}",
+                getFormations: "{{route('getFormations')}}",
                 getSecteurProfessions:"{{route('getSecteurProfessions')}}",
                 saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
-                Finish:"",
+                saveCandidatStepFive:"{{route('saveCandidatStepFive')}}",
+                showPDF:"",
             }
         };
 

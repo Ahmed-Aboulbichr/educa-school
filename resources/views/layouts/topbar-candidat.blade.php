@@ -23,10 +23,20 @@
         </div>
 
         <div class="d-flex">
-            <div class="dropdown d-none d-lg-inline-block ml-1">
+            {{-- <div class="dropdown d-none d-lg-inline-block ml-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                     <i class="ri-fullscreen-line"></i>
                 </button>
+            </div> --}}
+            <div class="dropdown d-inline-block">
+                <a type="button" href="{{ url('candidats.profil')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
+                    <strong>Mes Candidatures</strong>
+                </a>
+            </div>
+            <div class="dropdown d-inline-block">
+                <a type="button" href="{{route('getPreInscr')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
+                    Modifier mes Informations
+                </a>
             </div>
             <div class="dropdown d-inline-block">
                 <a type="button" href="{{route('logout')}}" style="padding-top: 1.47em;" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
