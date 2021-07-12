@@ -73,8 +73,9 @@ class RegisterController extends Controller
         ]);
         $token = $user->createToken("publictoken")->plainTextToken;
       ($data['email']=="admin@gmail.com")?$user->assignRole('Super Admin'):$user->assignRole('User');
-        
+
 
         return $user;
+
     }
 }
