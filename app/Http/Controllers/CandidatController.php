@@ -14,7 +14,6 @@ use App\User;
 use App\Pay;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use phpDocumentor\Reflection\Types\Nullable;
@@ -28,9 +27,6 @@ class CandidatController extends Controller
      */
     public function index()
     {
-
-        
-        abort_if(Gate::denies('Candidat_access'), 403);
         //i change it from candidature to candidat
         $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
         return view('pre-inscription.inscription-page')->with('candidat', $candidat);
@@ -65,7 +61,7 @@ class CandidatController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -102,10 +98,10 @@ class CandidatController extends Controller
         //
     }
 
+
+    
     public function saveStepOne(Request $req)
     {
-        abort_if(Gate::denies('Candidat_create'), 403);
-        
         if ($req->ajax()) {
             $fields = $req->validate([
                 'nom_fr' => ['bail', 'required', 'string', 'max:20'],
@@ -177,11 +173,10 @@ class CandidatController extends Controller
         }
     }
 
-    
+
+
     public function saveStepTwo(Request $request)
     {
-
-        abort_if(Gate::denies('Candidat_create'), 403);
         if ($request->ajax()) {
             $fields = $request->validate([
                 'cin_pere' => ['bail', 'required', 'string', 'max:10'],
@@ -223,11 +218,9 @@ class CandidatController extends Controller
         }
     }
 
+   
     public function saveStepThree(Request $request)
     {
-        abort_if(Gate::denies('Candidat_create'), 403);
-
-
         if ($request->ajax()) {
             $fields = $request->validate([
                 'annee_bac' => ['', 'string', 'max:4'],
@@ -266,7 +259,6 @@ class CandidatController extends Controller
     public function saveStepFour(Request $request)
     {
 
-        abort_if(Gate::denies('Candidat_create'), 403);
 
         if ($request->hasFile('file')) {
 
@@ -276,12 +268,7 @@ class CandidatController extends Controller
 
             if (is_object($candidat)) {
 
-
-                abort_if(Gate::denies('docFile_create'), 403);
-
-
                 $path = $this->handleUploadedImage($request->file('file'));
-
                 $doc_file = docFile::create([
                     'type' => 'bac',
                     'path' => $path,
@@ -308,6 +295,7 @@ class CandidatController extends Controller
     }
 
     
+   
 
     public function handleUploadedImage($file)
     {

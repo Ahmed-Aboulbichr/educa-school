@@ -51,7 +51,7 @@
                                 @endif
                             </td>
                             <td data-original-value="1"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->nom_fr }} {{ $candidature->prenom_fr }}</a></td>
-                            <td data-original-value="1.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->name }}</a></td>
+                            <td data-original-value="1.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->specialite }}</a></td>
                             <td>
                                 <form method="POST" action="{{ route('candidatures.destroy', $candidature->id) }}">
                                 <a href="{{ route('candidatures.edit', $candidature->id) }}">

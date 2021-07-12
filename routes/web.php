@@ -53,16 +53,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
 
-
     //other routes
+    Route::resource('/type_formations', 'TypeFormationController')->only(['index', 'show']);
     Route::resource('/administrateurs', 'AdministrateurController');
     Route::resource('/professeurs', 'ProfesseurController');
     Route::resource('/etudiants', 'EtudiantController');
     Route::resource('/candidats', 'CandidatController');
-    Route::resource('/candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit']);
-    Route::get('candidatures/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
     Route::post('saveCandidature', 'CandidatureController@store')->name('saveCandidature');
-   // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
+    Route::resource('candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit', 'show']);
+    Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
+    // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
     Route::resource('/sessions', 'SessionController');
     Route::resource('/formations', 'FormationController');
     Route::resource('/seances', 'SeanceController');

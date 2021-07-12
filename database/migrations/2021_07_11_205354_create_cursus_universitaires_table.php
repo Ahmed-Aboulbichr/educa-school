@@ -19,7 +19,7 @@ class CreateCursusUniversitairesTable extends Migration
             $table->string('univ_nom', 100);     //Univ ibn zohr
             $table->double('note_S1');
             $table->double('note_S2');
-            $table->string('Annee_univ',20);   //2018-2019
+            $table->string('Annee_univ', 20);   //2018-2019
             $table->foreignId('niveau_etude_id')->nullable()->constrained()->onDelete('cascade'); // BAC + 2
             $table->foreignId('candidat_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();

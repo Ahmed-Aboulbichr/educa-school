@@ -26,7 +26,7 @@ class CandidatureController extends Controller
         $candidatures = DB::table('candidatures')
             ->join('candidats', 'candidat_id', '=', 'candidats.id')
             ->join('formations', 'formation_id', '=', 'formations.id')
-            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.name')
+            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.specialite')
             ->get();
 
         return view('admin.candidature.liste', compact('candidatures'));
@@ -130,7 +130,7 @@ class CandidatureController extends Controller
      */
     public function showPDF($id)
     {
-        
+
         abort_if(Gate::denies('Candidature_PDF_view'), 403);
         $candidat = Candidat::where('id', $id)->first();
         return view('pre-inscription.attestation')->with('candidat', $candidat);
@@ -142,14 +142,14 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id )
+    public function edit($id)
     {
 
         abort_if(Gate::denies('Candidature_edit'), 403);
 
-        $candidat = Candidat::where('id',Candidature::where('id',$id)->first()->candidat_id)->first();
+        $candidat = Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->first();
 
-        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
+        return view('candidats.profil')->with('candidat', $candidat);
     }
 
     public function editValidation(Candidature $candidature, $id)
