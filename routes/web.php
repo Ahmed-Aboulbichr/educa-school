@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //other routes
     Route::resource('/type_formations', 'TypeFormationController')->only(['index', 'show']);
+
+
     Route::resource('/administrateurs', 'AdministrateurController');
     Route::resource('/professeurs', 'ProfesseurController');
     Route::resource('/etudiants', 'EtudiantController');

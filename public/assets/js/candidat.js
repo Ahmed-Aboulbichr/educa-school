@@ -82,10 +82,16 @@ $("#infoBaccalaureat").on('submit',function(e){
             alert('please upload required files first ');
             $('#NextStepBtn').attr('onclick',action);
            }else{
-            $('#progrss-wizard').bootstrapWizard('next');
-             $('#NextStepBtn').off();
-             $('#NextStepBtn').attr('class',"");
-            $('#NextStepBtn').attr('onclick',"$('#choixFormation').submit()");
+
+                  
+          $('#NextStepBtnA').html('Finish');
+          $('#NextStepBtn').removeClass('disabled');
+           $('#progrss-wizard').bootstrapWizard('next');
+           $('#NextStepBtn').off();
+           config.routes.Finish = response.url;
+           $('#NextStepBtnA').attr('href',config.routes.Finish);
+
+           
            }
         },
         error: function(response) {
@@ -162,5 +168,3 @@ $(function() {
        }
    });
 });
-
-

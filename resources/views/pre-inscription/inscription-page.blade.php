@@ -54,15 +54,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#progress-bank-detail" class="nav-link" data-toggle="tab">
+                            <a href="#progress-bac-detail" class="nav-link" data-toggle="tab">
                                 <span class="step-number">03</span>
                                 <span class="step-title">Details du Baccalauréat</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#progress-bac-detail" class="nav-link" data-toggle="tab">
-                                <span class="step-number">04</span>
-                                <span class="step-title">Choix de formation</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -338,7 +332,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane" id="progress-bank-detail">
+                        <div class="tab-pane" id="progress-bac-detail">
                             <div>
                                 <form id="infoBaccalaureat">
                                     @csrf
@@ -487,15 +481,19 @@
     <script src="{{ URL::asset('/assets/js/delegations.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/provinces.js')}}"></script>
     <script src="{{ URL::asset('/assets/js/secteursProfession.js')}}"></script>
-    <script src="{{ URL::asset('/assets/js/candidature.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/candidat.js')}}"></script>
     
     {{-- Arabic keyboard --}}
     <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>
     @php 
-    foreach (($candidat==null)?null:$candidat->docFiles as $docFile) {
+    if($candidat!=null){
+        foreach ($candidat->docFiles as $docFile) {
        
-        $docFile->path = route('getFiles',[explode('/' ,$docFile->path)[0], explode('/' ,$docFile->path)[1]]);
+       $docFile->path = route('getFiles',[explode('/' ,$docFile->path)[0], explode('/' ,$docFile->path)[1]]);
+   }
+
     }
+    
 
     @endphp 
     <script>
@@ -520,7 +518,7 @@
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
                 saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
-                
+                Finish:"",
             }
         };
 

@@ -34,7 +34,7 @@
                 </a>
             </div>
             <div class="dropdown d-inline-block">
-                <a type="button" href="{{route('logout')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
+                <a type="button" href="{{route('getPreInscr')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
                     Modifier mes Informations
                 </a>
             </div>

@@ -42,7 +42,7 @@ class docFile extends Model
 
     public function candidat()
     {
-        return $this->belongsTo(candidat::class, 'bac_id', 'id');
+        return $this->belongsTo(candidat::class);
     }
 
     public function documents()

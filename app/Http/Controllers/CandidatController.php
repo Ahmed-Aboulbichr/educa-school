@@ -248,6 +248,7 @@ class CandidatController extends Controller
 
                 $response = array(
                     'candidat' => $candidat,
+                    'url'     => url('type_formations'),
                 );
                 return  response()->json($response, 200);
             }
@@ -278,6 +279,7 @@ class CandidatController extends Controller
                 $response = array(
                     'candidat' => $candidat,
                     'doc_file' => $doc_file,
+                    
                 );
 
 
