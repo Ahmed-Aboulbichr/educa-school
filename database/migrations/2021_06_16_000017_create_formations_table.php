@@ -17,7 +17,6 @@ class CreateFormationsTable extends Migration
             $table->id();
             $table->string('specialite', 100);       //  LDW
             $table->foreignId('type_formation_id')->nullable()->constrained()->onDelete('cascade'); // LP MASTER
-            $table->foreignId('niveau_etude_id')->nullable()->constrained()->onDelete('cascade'); //  BAC + 3 BAC +2
             $table->unsignedBigInteger('niveau_preRequise')->nullable(); //You must to have a BAC + 2
             $table->string("niveau_acces");
             $table->date('dateLimite');
