@@ -12,4 +12,6 @@ class Reponse extends Model
     {
         return $this->belongsToMany(docFile::class);
     }
+
+
 }

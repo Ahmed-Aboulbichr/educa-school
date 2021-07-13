@@ -19,10 +19,10 @@
 
         @include('layouts.sidebar-educa-admin');
 
-        @else 
+        @else
             @if ((Auth::user()==null)?false:(Auth::user()->hasRole('User')))
                 @include('layouts.sidebar-educa-etud');
-            @endif 
+            @endif
         @endif
         {{--@include('layouts.sidebar')--}}
         <!-- ============================================================== -->

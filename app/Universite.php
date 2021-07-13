@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Niveau_etude extends Model
+class Universite extends Model
 {
     protected $fillable = [
-        
+        'id',
         'intitule',
     ];
 
@@ -16,8 +16,4 @@ class Niveau_etude extends Model
         return $this->hasMany(Cursus_universitaire::class);
     }
 
-    public function formations()
-    {
-        return $this->hasMany(Formation::class);
-    }
 }

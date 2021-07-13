@@ -6,7 +6,7 @@
     @slot('li_1') UI Elements @endslot
     @slot('li_2') Buttons @endslot
 @endcomponent
- 
+
 <div class="row">
     <div class="col-xl-6">
         <div class="card">
@@ -23,7 +23,7 @@
                     <button type="button" class="btn btn-dark waves-effect waves-light">Dark</button>
                     <button type="button" class="btn btn-link waves-effect">Link</button>
                     <button type="button" class="btn btn-secondary waves-effect waves-light">Secondary</button>
-                    
+
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <button type="button" class="btn btn-outline-danger waves-effect waves-light">Danger</button>
                     <button type="button" class="btn btn-outline-dark waves-effect waves-light">Dark</button>
                     <button type="button" class="btn btn-outline-secondary waves-effect">Secondary</button>
-                    
+
                 </div>
             </div>
         </div>
@@ -57,8 +57,8 @@
                 <h4 class="card-title">Rounded buttons</h4>
                 <p class="card-title-desc">Use class <code>.btn-rounded</code> for button round border.</p>
                 <div class="button-items">
-                    <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Primary</button>
-                    <button type="button" class="btn btn-light btn-rounded waves-effect">Light</button>
+                    <a type="button" href="https://www.google.com" style="color:#fff;"class="btn btn-primary btn-rounded waves-effect waves-light">+ Ajouter</a>
+                    <button type="button" href="https://www.google.com" class="btn btn-light btn-rounded waves-effect">Light</button>
                     <button type="button" class="btn btn-success btn-rounded waves-effect waves-light">Success</button>
                     <button type="button" class="btn btn-info btn-rounded waves-effect waves-light">Info</button>
                     <button type="button" class="btn btn-warning btn-rounded waves-effect waves-light">Warning</button>
@@ -66,7 +66,7 @@
                     <button type="button" class="btn btn-dark btn-rounded waves-effect waves-light">Dark</button>
                     <button type="button" class="btn btn-link btn-rounded waves-effect">Link</button>
                     <button type="button" class="btn btn-secondary btn-rounded waves-effect waves-light">Secondary</button>
-                    
+
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
 
                 <div class="button-items">
                     <button type="button" class="btn btn-primary waves-effect waves-light">
-                        Primary <i class="ri-arrow-right-line align-middle ml-2"></i> 
+                        Primary <i class="ri-arrow-right-line align-middle ml-2"></i>
                     </button>
                     <button type="button" class="btn btn-success waves-effect waves-light">
                         <i class="ri-check-line align-middle mr-2"></i> Success
@@ -383,7 +383,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 <!-- end row -->
-  
+
 @endsection
