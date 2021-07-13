@@ -13,19 +13,14 @@ class docFile extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'path',
         'type',
-        'formation_id',
+        'document_id',
         'etudiant_id',
-        'candidature_id',
+        'cursus_universitaire_id',
         'candidat_id',
     ];
-
-
-
-
-
-
 
 
     //many to many relation ship
@@ -38,6 +33,11 @@ class docFile extends Model
     public function candidature()
     {
         return $this->belongsTo(Candidature::class);
+    }
+
+    public function cursusUniversitaire()
+    {
+        return $this->belongsTo(Cursus_universitaire::class);
     }
 
     public function candidat()

@@ -4,16 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Type_formation extends Model
+class Universite extends Model
 {
     protected $fillable = [
         'id',
         'intitule',
     ];
 
-    public function formations()
+    public function cursusUniversitaires()
     {
-        return $this->hasMany(Formation::class);
+        return $this->hasMany(Cursus_universitaire::class);
     }
 
 }

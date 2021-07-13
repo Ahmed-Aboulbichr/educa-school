@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Candidat extends Model
 {
     protected $fillable = [
+        'id',
         'nom_fr',
         'nom_ar',
         'prenom_fr',
@@ -45,6 +46,7 @@ class Candidat extends Model
         'profession_pere',
         'profession_mere',
     ];
+
     public function docFiles()
     {
         return $this->hasMany(docFile::class);
@@ -54,6 +56,12 @@ class Candidat extends Model
     {
         return $this->hasMany(Candidature::class);
     }
+
+    public function cursusUniversitaires()
+    {
+        return $this->hasMany(Cursus_universitaire::class);
+    }
+
     public function academie()
     {
         return $this->belongsTo(Academie::class);

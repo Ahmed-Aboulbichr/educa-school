@@ -16,7 +16,7 @@ class CreateCursusUniversitairesTable extends Migration
         Schema::create('cursus_universitaires', function (Blueprint $table) {
             $table->id();
             $table->string('specialite', 100);  //DUT:INFORMATIQUE
-            $table->string('univ_nom', 100);     //Univ ibn zohr
+            $table->foreignId('universite_id')->nullable()->constrained()->onDelete('cascade');
             $table->double('note_S1');
             $table->double('note_S2');
             $table->string('Annee_univ', 20);   //2018-2019

@@ -11,7 +11,7 @@
     @slot('li_1') Tables @endslot
     @slot('li_2') Data Tables @endslot
 @endcomponent
-                        
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -39,7 +39,7 @@
                     <tbody>
                     <tr>
                         <td>Tiger Nixon</td>
-                        <td>System Architect</td>
+                        <td>méthodes informatiques appliquées à la gestion des entreprises</td>
                         <td>Edinburgh</td>
                         <td>61</td>
                         <td>2011/04/25</td>
@@ -1012,8 +1012,8 @@
                             <th>Salary</th>
                         </tr>
                     </thead>
-                
-                
+
+
                     <tbody>
                         <tr>
                             <td>Tiger Nixon</td>
@@ -1473,7 +1473,7 @@
                         </tr>
                     </tbody>
                 </table>
-            
+
             </div> <!-- end card body-->
         </div> <!-- end card -->
     </div><!-- end col-->
@@ -1500,7 +1500,7 @@
                             <th>Salary</th>
                         </tr>
                     </thead>
-                
+
                     <tbody>
                         <tr>
                             <td>Tiger Nixon</td>
@@ -1988,8 +1988,8 @@
                             <th>Salary</th>
                         </tr>
                     </thead>
-                
-                
+
+
                     <tbody>
                         <tr>
                             <td>Tiger Nixon</td>
@@ -2478,8 +2478,8 @@
                             <th>Salary</th>
                         </tr>
                     </thead>
-                
-                
+
+
                     <tbody>
                         <tr>
                             <td>Tiger Nixon</td>
@@ -3466,7 +3466,7 @@
                             <th>Salary</th>
                         </tr>
                     </thead>
-                
+
                     <tbody>
                         <tr>
                             <td>Tiger Nixon</td>
