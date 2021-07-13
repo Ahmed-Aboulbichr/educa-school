@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidat;
 use App\Cursus_universitaire;
+use App\docFile;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CursusUniversitaireController extends Controller
 {
@@ -14,7 +19,17 @@ class CursusUniversitaireController extends Controller
      */
     public function index()
     {
-        //
+        $candidat = Candidat::where('user_id', Auth::user()->id)->get('id')->first();
+        /* dd($candidat->id); */
+        $cursus = Cursus_universitaire::where('candidat_id', $candidat->id)
+            ->join('niveau_etudes', 'niveau_etude_id', '=', 'niveau_etudes.id')
+            ->join('candidats', 'candidats.id', '=', 'candidat_id')
+            ->select('niveau_etudes.*', 'cursus_universitaires.*', 'candidats.*')
+            ->get();
+
+        return view('candidats.parcours.parcours', compact('cursus', $cursus));
+
+        /* $cursus = DB::table('cursus_universitaires') */
     }
 
     /**

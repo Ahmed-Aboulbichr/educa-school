@@ -50,18 +50,22 @@ class Candidat extends Model
         return $this->hasMany(docFile::class);
     }
 
-    public function candidatures(){
+    public function candidatures()
+    {
         return $this->hasMany(Candidature::class);
     }
-    public function academie(){
+    public function academie()
+    {
         return $this->belongsTo(Academie::class);
     }
-    
-    public function delegation(){
+
+    public function delegation()
+    {
         return $this->belongsTo(Delegation::class);
     }
 
-    public function province(){
+    public function province()
+    {
         return $this->belongsTo(Province::class);
     }
 }
