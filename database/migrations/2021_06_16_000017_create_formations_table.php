@@ -20,7 +20,6 @@ class CreateFormationsTable extends Migration
             $table->dateTime('date_fermeture_pre_ins', 2);
             $table->foreignId('type_formation_id')->nullable()->constrained()->onDelete('cascade'); // LP MASTER
             $table->foreignId('niveau_etude_id')->nullable()->constrained()->onDelete('cascade'); //  BAC + 3 BAC +2
-
             $table->unsignedBigInteger('niveau_preRequise')->nullable();
             $table->foreign('niveau_preRequise')->references('id')->on('niveau_etudes')->onDelete('cascade')->nullable();  // BAC + 2
             $table->timestamps();

@@ -62,6 +62,11 @@
                     </div>
                     <div class="tab-content twitter-bs-wizard-tab-content">
 
+
+
+
+
+                        
 <div class="tab-pane" id="progress-candidature-last-step">
     <div>
         <form id="choixFormation">

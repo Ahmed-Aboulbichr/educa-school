@@ -37,9 +37,10 @@ class CandidatureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+       $formation = Formation::where('id', $id)->latest()->first();
+       return view('pre-inscription.candidature')->with('formation', $formation);
     }
 
     /**
