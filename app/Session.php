@@ -14,6 +14,6 @@ class Session extends Model
 
     public function formations()
     {
-        return $this->belongsToMany(Formation::class);
+        return $this->hasMany(Formation::class);
     }
 }

@@ -33,7 +33,7 @@
                         <tr>
                             <td>2021-08-01</td>
                             <td>2021-07-15</td>
-                            <td>Intelligence Économique </br>et prospective des territoires</td>
+                            <td>Comptabilité, Contrôle de Gestion et Audit</td>
                             <td>Master</td>
                             <td>1ére année </br> (2 ans d'études)</td>
                             <td colspan="2">
