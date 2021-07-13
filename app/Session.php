@@ -6,5 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Session extends Model
 {
-    //
+    protected $fillable = [
+        'id',
+        'anne_univ',
+        'intitule',
+    ];
+
+    public function formations()
+    {
+        return $this->belongsToMany(Formation::class);
+    }
 }

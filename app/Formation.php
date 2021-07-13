@@ -12,14 +12,31 @@ class Formation extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'specialite',
         'type_formation_id',
-        'niveau_etude_id',
+        'dateLimite',
+        'duree',
+        'niveau_acces',
         'niveau_preRequise',
     ];
 
 
-     public function candidatures(){
+    public function candidatures(){
         return $this->hasMany(Candidature::class);
-    }  
+    }
+
+    public function niveauEtude(){
+        return $this->belongsTo(Niveau_etude::class);
+    }
+
+    public function typeFormation(){
+        return $this->belongsTo(Type_formation::class);
+    }
+
+    public function sessions()
+    {
+        return $this->belongsToMany(Session::class);
+    }
+
 }
