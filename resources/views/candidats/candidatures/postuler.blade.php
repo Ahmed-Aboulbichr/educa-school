@@ -35,7 +35,7 @@
                             <td>2021-07-15</td>
                             <td>Intelligence Économique </br>et prospective des territoires</td>
                             <td>Master</td>
-                            <td>BAC + 4 </br> (2 ans d'études)</td>
+                            <td>1ére année </br> (2 ans d'études)</td>
                             <td colspan="2">
                                 <a type="button" href="https://www.google.com" style="color:#fff;"class="btn btn-primary btn-rounded btn-sm waves-effect waves-light">+ Ajouter</a>
                             </td>
