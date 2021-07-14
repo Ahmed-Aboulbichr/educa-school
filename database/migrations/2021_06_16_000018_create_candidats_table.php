@@ -32,6 +32,7 @@ class CreateCandidatsTable extends Migration
             $table->double("mg_bac")->nullable();
             $table->string("annee_bac",20)->nullable();
             $table->string("lycee_bac",50)->nullable();
+            $table->string("type_bac",50)->nullable();
             $table->string("adresse_parent",100)->nullable();
             $table->string("tel_parent",20)->nullable();
             $table->enum('cat_pere', ['PUBLIC','PRIVE','LIBRE'])->nullable();

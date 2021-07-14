@@ -41,26 +41,26 @@
                 <div id="progrss-wizard" class="twitter-bs-wizard">
                     <ul class="twitter-bs-wizard-nav nav-justified">
                         <li class="nav-item">
-                            <a href="#progress-seller-details" class="nav-link" data-toggle="tab">
+                            <a href="#progress-seller-details " class="nav-link remove-events" data-toggle="tab">
                                 <span class="step-number">01</span>
                                 <span class="step-title">Vos Informations</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#progress-parent-details" class="nav-link" data-toggle="tab">
+                            <a href="#progress-parent-details" class="nav-link remove-events" data-toggle="tab">
                                 <span class="step-number">02</span>
                                 <span class="step-title">Informations sur les parents
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#progress-bac-detail" class="nav-link" data-toggle="tab">
+                            <a href="#progress-bac-detail" class="nav-link remove-events" data-toggle="tab">
                                 <span class="step-number">03</span>
                                 <span class="step-title">Details du Baccalauréat</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#progress-confirm-detail" class="nav-link" data-toggle="tab">
+                            <a href="#progress-confirm-detail" class="nav-link remove-events" data-toggle="tab">
                                 <span class="step-number">05</span>
                                 <span class="step-title">Confirmation</span>
                             </a>
@@ -284,7 +284,6 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">CAT mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select value="{{($candidat==null)?'':$candidat->cat_mere}}" name="cat_mere" class="custom-select">
-                                            <!-- {{--    <option {{($candidat==null)?'selected':''}}>Selectionner un Choix de formation</option> --}} !-->
                                                 <option {{(($candidat==null)?'':$candidat->cat_mere=="PUBLIC")?'selected':''}}>PUBLIC</option>
                                                 <option {{(($candidat==null)?'':$candidat->cat_mere=="PRIVE")?'selected':''}}>PRIVE</option>
                                                 <option {{(($candidat==null)?'':$candidat->cat_mere=="LIBRE")?'selected':''}}>LIBRE</option>
@@ -337,15 +336,15 @@
                                 <form id="infoBaccalaureat">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                     
+                                        <div class="col-lg-3">
                                             <div class="form-group">
-                                                <label for="progress-basicpill-namecard-input">Année baccalauréat</label>
+                                                <label for="progress-basicpill-namecard-input">Type de bac</label>
 
-                                                <input   value="{{($candidat==null)?'':$candidat->annee_bac}}" name="annee_bac"  type="text" class="form-control" id="datepicker" >
+                                                <input   value="{{($candidat==null)?'':$candidat->type_bac}}" name="type_bac"  type="text" class="form-control"  >
                                             </div>
                                         </div>
-
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label>Mention baccalauréat</label>
                                                 <select name="mention_bac" class="custom-select">
@@ -358,11 +357,19 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">Moyen general de baccalauréat</label>
 
                                                 <input   value="{{($candidat==null)?'':$candidat->mg_bac}}" type="number" name="mg_bac" min='0' max='20' class="form-control"  >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label for="progress-basicpill-namecard-input">Année baccalauréat</label>
+
+                                                <input   value="{{($candidat==null)?'':$candidat->annee_bac}}" name="annee_bac"  type="text" class="form-control" id="datepicker" >
                                             </div>
                                         </div>
                                     </div>
@@ -497,7 +504,14 @@
 
     @endphp 
     <script>
-
+    
+       
+         z = document.querySelectorAll('a.nav-link.remove-events'); 
+        for (let index = 0; index < z.length; index++) {
+   
+          // z[index].removeEventListener('click','showtab');
+            
+        }
         var candidat = null;
         candidat = @json($candidat ?? '');
         var docFiles = null;

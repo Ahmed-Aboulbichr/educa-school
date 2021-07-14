@@ -13,9 +13,9 @@ class docFile extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
         'path',
         'type',
+        'formation_id',
         'document_id',
         'etudiant_id',
         'cursus_universitaire_id',
@@ -29,11 +29,7 @@ class docFile extends Model
         return $this->belongsToMany(Reponse::class);
     }
 
-    //one to many relation ships
-    public function candidature()
-    {
-        return $this->belongsTo(Candidature::class);
-    }
+  
 
     public function cursusUniversitaire()
     {
