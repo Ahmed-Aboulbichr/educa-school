@@ -19,9 +19,9 @@ class CreateFormationsTable extends Migration
             $table->foreignId('type_formation_id')->constrained()->onDelete('cascade'); // LP MASTER
             $table->foreignId('session_id')->constrained()->onDelete('cascade'); // formation se trouve dans une session
             $table->unsignedBigInteger('niveau_preRequise'); //You must to have a BAC + 2
-            $table->string("niveau_acces",20);
+            $table->string("niveau_acces");
             $table->date('dateLimite');
-            $table->string('duree',10);
+            $table->string('duree',15);
             $table->foreign('niveau_preRequise')->references('id')->on('niveau_etudes')->onDelete('cascade');  // BAC + 2
             $table->timestamps();
         });

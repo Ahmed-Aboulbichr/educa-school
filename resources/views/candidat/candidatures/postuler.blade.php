@@ -30,6 +30,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($formations as $formation)
+                        <tr>
+                            <td>{{$formation->date_session}}</td>
+                            <td>{{$formation->dateLimite}}</td>
+                            <td>{{$formation->specialite}}</td>
+                            <td>{{$formation->designation}}</td>
+                            <td>{{$formation->niveau_acces}}</br>({{$formation->duree}})</td>
+                            <td colspan="2">
+                                <a type="button" href="https://www.google.com" style="color:#fff;"class="btn btn-primary btn-rounded btn-sm waves-effect waves-light">+ Ajouter</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        <!--
                         <tr>
                             <td>2021-08-01</td>
                             <td>2021-07-15</td>
@@ -40,6 +53,7 @@
                                 <a type="button" href="https://www.google.com" style="color:#fff;"class="btn btn-primary btn-rounded btn-sm waves-effect waves-light">+ Ajouter</a>
                             </td>
                         </tr>
+                        -->
                     </tbody>
                 </table>
 
@@ -51,12 +65,13 @@
 
 @endsection
 @section('script')
+
     <!-- Required datatable js -->
     <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
-    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js')}}"></script>
-    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js')}}"></script>
+
 
     <!-- Datatable init js -->
     <script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
+
 @endsection
 

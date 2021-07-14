@@ -8,7 +8,7 @@ class Type_formation extends Model
 {
     protected $fillable = [
         'id',
-        'intitule',
+        'designation',
     ];
 
     public function formations()

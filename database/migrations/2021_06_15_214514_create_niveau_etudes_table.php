@@ -15,7 +15,7 @@ class CreateNiveauEtudesTable extends Migration
     {
         Schema::create('niveau_etudes', function (Blueprint $table) {
             $table->id();
-            $table->enum('intitule', ['BAC+1','BAC+2','BAC+3','BAC+4','BAC+5'])->nullable();
+            $table->enum('intitule', ['BAC','BAC+1','BAC+2','BAC+3','BAC+4','BAC+5'])->nullable();
             $table->timestamps();
         });
     }
