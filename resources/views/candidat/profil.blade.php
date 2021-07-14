@@ -36,7 +36,7 @@
                                     
                                     <div class="text-center">
                                         {{-- <p class="font-size-12 mb-1">Blue color, T-shirt</p> --}}
-                                        <h5 class="font-size-15 mt-3"><a href="{{ route('type_formations.show', $formation->id) }}" class="text-dark">{{$formation->intitule}}</a></h5>
+                                        <h5 class="font-size-15 mt-3"><a href="{{route('type_formations.show', $formation->id)}}" class="text-dark">{{$formation->intitule}}</a></h5>
 
                                         {{-- <h5 class="mt-3 mb-0">$240</h5> --}}
                                     </div>

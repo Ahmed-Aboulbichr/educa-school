@@ -37,9 +37,15 @@
                             <td>{{$formation->specialite}}</td>
                             <td>{{$formation->designation}}</td>
                             <td>{{$formation->niveau_acces}}</br>({{$formation->duree}})</td>
-                            <td colspan="2">
-                                <a type="button" href="https://www.google.com" style="color:#fff;"class="btn btn-primary btn-rounded btn-sm waves-effect waves-light">+ Ajouter</a>
-                            </td>
+
+                            @php $currentDate = date("Y-m-d"); @endphp
+                            @if ($formation->dateLimite < $currentDate)
+                                <td>Fermé</td>
+                            @elseif($formation->dateLimite > $currentDate)
+                                <td colspan="2">
+                                    <a type="button" href="{{route('postule', $formation->id)}}" style="color:#fff;"class="btn btn-primary btn-rounded btn-sm waves-effect waves-light">+ Ajouter</a>
+                                </td>
+                            @endif
                         </tr>
                         @endforeach
                         <!--

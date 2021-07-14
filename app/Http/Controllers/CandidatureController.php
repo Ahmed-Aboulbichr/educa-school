@@ -50,8 +50,8 @@ class CandidatureController extends Controller
      */
     public function store(Request $request)
     {
-        
-    
+
+
             abort_if(Gate::denies('Candidature_create'), 403);
             if ($request->ajax()) {
                 $fields = $request->validate([
@@ -59,28 +59,28 @@ class CandidatureController extends Controller
                 ]);
                 $candidat = null;
                 $candidat = Candidat::where('user_id', Auth::id())->first();
-    
+
                 if (is_object($candidat)) {
                     $candidature = null;
                     $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
-    
-    
+
+
                     if (!is_object($candidature)) {
-    
-    
+
+
                          abort_if(Gate::denies('candidature_create'), 403);
-    
-    
+
+
                         $candidature = Candidature::create([
                             'labelle' => $candidat->nom_fr.' '. $candidat->prenom_fr,
                             'candidat_id' => $candidat->id,
                             'formation_id' => $fields['formation'],
                         ]);
-    
-    
+
+
                     }
-    
-    
+
+
                     $response = array(
                         'candidat' => $candidat,
                         'candidature' => $candidature,
@@ -88,10 +88,10 @@ class CandidatureController extends Controller
                     );
                     return  response()->json($response, 200);
                 }
-    
+
                 return  response()->json("nothing to update", 200);
             }
-        
+
     }
 
     /**
@@ -218,4 +218,15 @@ class CandidatureController extends Controller
             Candidature::where('id', $id)->update(array('valide' => '1'));
         }
     } */
+
+    public function postule($id){
+        $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
+        if(is_object($candidat)){
+            $candidature = Candidature::create([
+                'labelle' => $candidat->nom_fr.' '. $candidat->prenom_fr,
+                'candidat_id' => $candidat->id,
+                'formation_id' => $id,
+            ]);
+        }
+    }
 }

@@ -105,7 +105,7 @@ class FormationController extends Controller
             ->orderBy('formations.dateLimite','ASC')
             ->get();
 
-            return view('candidat.candidatures.postuler', compact('formations'));
+            return view('candidat.candidatures.formations', compact('formations'));
 
 
     }
