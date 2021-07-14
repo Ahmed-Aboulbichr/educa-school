@@ -12,7 +12,7 @@ class Formation extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
+        
         'specialite',
         'type_formation_id',
         'dateLimite',
@@ -36,7 +36,7 @@ class Formation extends Model
 
     public function sessions()
     {
-        return $this->belongsToMany(Session::class);
+        return $this->belongsTo(Session::class);
     }
 
 }

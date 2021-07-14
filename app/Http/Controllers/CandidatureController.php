@@ -37,9 +37,10 @@ class CandidatureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+       $formation = Formation::where('id', $id)->latest()->first();
+       return view('pre-inscription.candidature')->with('formation', $formation);
     }
 
     /**
@@ -149,7 +150,7 @@ class CandidatureController extends Controller
 
         $candidat = Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->first();
 
-        return view('candidats.profil')->with('candidat', $candidat);
+        return view('candidat.profil')->with('candidat', $candidat);
     }
 
     public function editValidation(Candidature $candidature, $id)

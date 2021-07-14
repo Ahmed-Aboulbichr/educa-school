@@ -64,6 +64,21 @@ class CandidatController extends Controller
         dd($id);
     }
 
+
+
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        return view('candidat.profile')->with('candidat',Candidat::where('user_id',Auth::id())->first());
+    
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -223,13 +238,14 @@ class CandidatController extends Controller
     {
         if ($request->ajax()) {
             $fields = $request->validate([
-                'annee_bac' => ['', 'string', 'max:4'],
-                'mention_bac' => ['', 'string', Rule::in(['P', 'AB', 'B', 'TB', 'E'])],
-                'mg_bac' => ['', 'numeric', 'between:0,20'],
-                'lycee_bac' => ['', 'string', 'max:255'],
-                'province' => ['', 'string', 'max:255'],
-                'delegation' => ['', 'string', 'max:255'],
-                'academie' => ['', 'string', 'max:255'],
+                'annee_bac' => ['bail', 'required', 'string', 'max:4'],
+                'mention_bac' => ['bail', 'required', 'string', Rule::in(['P', 'AB', 'B', 'TB', 'E'])],
+                'mg_bac' => ['bail', 'required', 'numeric', 'between:0,20'],
+                'lycee_bac' => ['bail', 'required', 'string', 'max:255'],
+                'type_bac' => ['bail', 'required', 'string', 'max:255'],
+                'province' => ['bail', 'required', 'string', 'max:255'],
+                'delegation' => ['bail', 'required', 'string', 'max:255'],
+                'academie' => ['bail', 'required', 'string', 'max:255'],
             ]);
             $candidat = null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
@@ -239,6 +255,7 @@ class CandidatController extends Controller
                     'annee_bac' => $fields['annee_bac'],
                     'mention_bac' => $fields['mention_bac'],
                     'mg_bac' => $fields['mg_bac'],
+                    'type_bac' => $fields['type_bac'],
                     'lycee_bac' => $fields['lycee_bac'],
                     'province_id' => $fields['province'],
                     'delegation_id' => $fields['delegation'],
@@ -248,7 +265,7 @@ class CandidatController extends Controller
 
                 $response = array(
                     'candidat' => $candidat,
-                    'url'     => url('type_formations'),
+                    'url'     => route('profile'),
                 );
                 return  response()->json($response, 200);
             }
