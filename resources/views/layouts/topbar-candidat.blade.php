@@ -29,7 +29,7 @@
                 </button>
             </div> --}}
             <div class="dropdown d-inline-block">
-                <a type="button" href="{{ url('candidats.profil')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
+                <a type="button" href="{{ url('candidat.profil')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
                     <strong>Mes Candidatures</strong>
                 </a>
             </div>

@@ -25,7 +25,5 @@ class Candidature extends Model
     public function formation(){
         return $this->belongsTo(Candidat::class);
     }
-    public function docFiles(){
-        return $this->hasMany(docFile::class);
-    }
+  
 }

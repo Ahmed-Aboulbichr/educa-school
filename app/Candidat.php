@@ -26,14 +26,13 @@ class Candidat extends Model
         'province_id',
         'delegation_id',
         'user_id',
-        'pay_id',
         'nationalite_id',
         'ville_id_parent',
-        'date_naiss',
         'sec_profession_pere_id',
         'sec_profession_mere_id',
         'ville_id_etud',
         'mention_bac',
+        'type_bac',
         'mg_bac',
         'annee_bac',
         'lycee_bac',
@@ -65,12 +64,20 @@ class Candidat extends Model
         return $this->belongsTo(Academie::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function delegation(){
         return $this->belongsTo(Delegation::class);
     }
 
     public function province(){
         return $this->belongsTo(Province::class);
+    }
+    
+    public function nationalite(){
+        return $this->belongsTo(Nationalite::class);
     }
 
 }

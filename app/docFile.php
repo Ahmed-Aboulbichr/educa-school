@@ -29,11 +29,7 @@ class docFile extends Model
         return $this->belongsToMany(Reponse::class);
     }
 
-    //one to many relation ships
-    public function candidature()
-    {
-        return $this->belongsTo(Candidature::class);
-    }
+  
 
     public function cursusUniversitaire()
     {

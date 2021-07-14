@@ -12,7 +12,7 @@ class Formation extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
+        
         'specialite',
         'type_formation_id',
         'dateLimite',

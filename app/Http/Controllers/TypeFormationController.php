@@ -17,7 +17,7 @@ class TypeFormationController extends Controller
     public function index()
     {
         $formations = DB::table('type_formations')->select('*')->get();
-        return view('candidats.profil', compact('formations'));
+        return view('candidat.profil', compact('formations'));
     }
 
     /**

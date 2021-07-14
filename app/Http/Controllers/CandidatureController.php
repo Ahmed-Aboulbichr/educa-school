@@ -150,7 +150,7 @@ class CandidatureController extends Controller
 
         $candidat = Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->first();
 
-        return view('candidats.profil')->with('candidat', $candidat);
+        return view('candidat.profil')->with('candidat', $candidat);
     }
 
     public function editValidation(Candidature $candidature, $id)

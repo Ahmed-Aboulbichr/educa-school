@@ -1,5 +1,6 @@
 <?php
 
+use App\Candidat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/professeurs', 'ProfesseurController');
     Route::resource('/etudiants', 'EtudiantController');
     Route::resource('/candidats', 'CandidatController');
+    Route::get('/profile','CandidatController@profile' )->name('profile');
     Route::post('saveCandidature', 'CandidatureController@store')->name('saveCandidature');
     Route::resource('candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit', 'show']);
     Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
@@ -80,7 +82,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
-
 
 
     Route::get('pages-404', 'NazoxController@index');
