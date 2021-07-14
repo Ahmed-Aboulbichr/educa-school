@@ -7,25 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 class Cursus_universitaire extends Model
 {
     protected $fillable = [
-        'id',
         'specialite',
         'universite_id',
         'note_S1',
         'note_S2',
-        'Anne_univ',
+        'Annee_univ',
         'niveau_etude_id',
         'candidat_id',
     ];
 
-    public function candidat(){
+    public function candidat()
+    {
         return $this->belongsTo(Candidat::class);
     }
 
-    public function niveauEtude(){
+    public function niveauEtude()
+    {
         return $this->belongsTo(Niveau_etude::class);
     }
 
-    public function universite(){
+    public function universite()
+    {
         return $this->belongsTo(Universite::class);
     }
 
@@ -33,5 +35,4 @@ class Cursus_universitaire extends Model
     {
         return $this->hasMany(docFile::class);
     }
-
 }

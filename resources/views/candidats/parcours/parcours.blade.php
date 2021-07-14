@@ -5,16 +5,6 @@
     Candidature
 @endsection
 @section('css')
-    <!-- twitter-bootstrap-wizard css -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
-    <link href="{{ URL::asset('/assets/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.css')}}" rel="stylesheet" type="text/css" />
-
-    <!--Arabic Keyboard -->
-    <link rel="stylesheet" type="text/css" href="http://www.arabic-keyboard.org/keyboard/keyboard.css">
-    <!-- Plugins css -->
-    <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{ URL::asset('/assets/css/arabic.css')}}" rel="stylesheet" type="text/css" />
-    
     <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
     <style>
         .card {
@@ -39,11 +29,15 @@
         <div class="col-12">
         <div class="card">
             <div class="card-body">
-
+                @if( session()->has('success') )
+                    <div class="alert alert-success" role="alert" >{{ session()->get('success') }}</div>
+                @elseif( session()->has('exists') )
+                    <div class="alert alert-warning" role="alert" >{{ session()->get('exists') }}</div>
+                @endif
                 <h4 class="card-title"><span class="badge badge-pill badge-info" >---</span> Mon Parcours</h4>
                 <p class="card-title-desc">Veuillez Ajouter vos diplôme à partir du bouton "ajouter diplôme".</p>
                 <div class="bg-light d-flex float-right mb-4">
-                    <button class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center">ajouter diplôme</button>
+                    <button class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center" id="ajout">ajouter diplôme</button>
                 </div>
                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
@@ -52,26 +46,26 @@
                         <th>Specialite</th>
                         <th>Note S1</th>
                         <th>Note S2</th>
-                        <th>Année</th>
-                        <th>Document</th>
+                        <th>Année</th>      
                         <th>Action</th>
                     </tr>
                     </thead>
 
 
                     <tbody>
-                    @foreach ($cursus as $cur)
+                    @foreach ($data['cursus'] as $cur)
                     <tr>
                         <td>{{$cur->intitule}}</td>
                         <td>{{$cur->specialite}}</td>
                         <td>{{ $cur->note_S1 }}</td>
                         <td>{{ $cur->note_S2 }}</td>
                         <td>{{ $cur->Annee_univ }}</td>
-                        <td>icon for doc</td>
                         <td>
                             {{-- <button class="btn btn-warning p-1" id="submitForm"><i class="mdi mdi-24px mdi-delete"></i></button> --}}
-                            <form action="{{ route('cursus_universitaire.index') }}" method="POST">
-                                <button class="btn btn-info p-1" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                            <form action="{{ route('cursus_universitaire.destroy', $cur->id) }}" method="POST">
+                                <a class="btn btn-info p-1" type="button" href="{{ route('cursus_universitaire.show', $cur->id) }}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
+                                @csrf
+                                @method('DELETE')
                                 <button class="btn btn-warning p-1" name="archive" type="submit" id="submitForm" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
                             </form>
                         </td>
@@ -89,44 +83,42 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0">Center modal</h5>
+                    <h5 class="modal-title mt-0">Ajout d'un diplôme</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form action="{{ route('cursus_universitaire.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                 <div class="modal-body">
+                        @if($errors->any())
+                            @foreach($errors->all() as $error)
+                                <div class="col-6-auto">
+                                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                </div>
+                            @endforeach
+                        @endif
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Niveau Etude</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="nvEtude" id="nvEtude">
-                                        <option value="">BAC + 1</option>
-                                        <option value="">BAC + 2</option>
-                                        <option value="">BAC + 3</option>
-                                        <option value="">BAC + 4</option>
-                                        <option value="">BAC + 5</option>
+                                    <select class="form-control" name="niveau_etude_id" id="nvEtude">
+                                        <option value="-1"></option>
+                                        <option value="1">BAC + 1</option>
+                                        <option value="2">BAC + 2</option>
+                                        <option value="3">BAC + 3</option>
+                                        <option value="4">BAC + 4</option>
+                                        <option value="5">BAC + 5</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-lg-6">
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Select</label>
-                                <div class="col-md-10">
-                                    <select class="form-control">
-                                        <option>Select</option>
-                                        <option>Large select</option>
-                                        <option>Small select</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="col-lg-6">
                             <div class="form-group row align-items-center">
-                                <label for="example-text-input" class="col-md-3 col-form-label">Anne universitaire</label>
+                                <label for="annee" class="col-md-3 col-form-label">Anne universitaire</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                    <input class="form-control" type="text" id="annee" name="Annee_univ">
                                 </div>
                             </div>
                         </div>
@@ -134,62 +126,70 @@
                             <div class="form-group row align-items-center">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Nom université</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                    <select class="form-control" name="universite_id">
+                                        <option value="-1"></option>
+                                        @foreach ($data['universities'] as $universite)
+                                            <option value="{{ $universite->id }}">{{ $universite->intitule }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group row align-items-center">
-                                <label for="example-text-input" class="col-md-3 col-form-label">Spécialité</label>
+                                <label for="specialite" class="col-md-3 col-form-label">Spécialité</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                    <input class="form-control" type="text" name="specialite"  id="specialite">
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group row align-items-center">
-                                <label for="example-text-input" class="col-md-3 col-form-label">Note S1</label>
+                                <label for="noteS1" class="col-md-3 col-form-label">Note S1</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                    <input class="form-control" type="number" name="note_S1"  id="noteS1" step="0.01">
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group row align-items-center">
-                                <label for="example-text-input" class="col-md-3 col-form-label">Note S2</label>
+                                <label for="noteS2" class="col-md-3 col-form-label">Note S2</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                                    <input class="form-control" type="number" name="note_S2" id="noteS2" step="0.01">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <h4 class="card-title">Document</h4>
-                                    <div>
-                                        <form action="#" class="dropzone">
-                                            <div class="fallback">
-                                                <input name="file" type="file" multiple="multiple">
-                                            </div>
-                                            <div class="dz-message needsclick">
-                                                <div class="mb-3">
-                                                    <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
-                                                </div>
-                                                
-                                                <h4>Drop files here or click to upload.</h4>
-                                            </div>
-                                        </form>
+                        <div class="col-lg-6">
+                            <div class="form-group row align-items-center">
+                                <label for="fileS1" class="col-md-3 col-form-label">Relevé de notes S1</label>
+                                <div class="col-md-9">
+                                    <input type="file" class="custom-file-input" name="files[]" id="fileS1" accept="image/*" value="Releve_Note_S1" onchange="getName(event,this)">
+                                    <label class="custom-file-label" for="fileS2">Choose file</label>
+                                    <span class="text-muted" >only images</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group row align-items-center">
+                                <label for="fileS2" class="col-md-3 col-form-label">Relevé de notes S2</label>
+                                <div class="col-md-9">
+                                    <div class="custom-file">
+                                        <input type="hidden" name="files[]" value="Releve_Note_S2">
+                                        <input type="file" class="custom-file-input" name="files[]" id="fileS2" accept="image/*" value='Releve_Note_S2' onchange="getName(event,this)">
+                                        <label class="custom-file-label" for="fileS2">Choose file</label>
                                     </div>
-
-                                    <div class="text-center mt-4">
-                                        <button type="button" class="btn btn-primary waves-effect waves-light">Send Files</button>
-                                    </div>
+                                    {{-- <input class="form-control" type="file" name="files[]" id="fileS2" accept="image/*"  onchange="getName(event, 1)"> --}}
+                                    <span class="text-muted" >only images</span>
                                 </div>
                             </div>
-                        </div> <!-- end col -->
+                        </div>
                     </div> <!-- end row -->
                 </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
+                </div>
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -200,61 +200,25 @@
 @section('script')
 
 
-    <!-- twitter-bootstrap-wizard js -->
-    <script src="{{ URL::asset('/assets/libs/twitter-bootstrap-wizard/twitter-bootstrap-wizard.min.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-     <!-- Plugins js -->
-     <script src="{{ URL::asset('/assets/libs/dropzone/dropzone.min.js')}}"></script>
-    <!-- form wizard init -->
-    <script src="{{ URL::asset('/assets/js/pages/form-wizard.init.js')}}"></script>
-    <script src="{{ URL::asset('/assets/js/candidature.js')}}"></script>
-    <script src="{{ URL::asset('/assets/js/formation.js')}}"></script>
-    
     <!-- Sweet Alerts js -->
     <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js') }}"></script>
-    {{-- Arabic keyboard --}}
-    <script type="text/javascript" src="http://www.arabic-keyboard.org/keyboard/keyboard.js" charset="UTF-8"></script>
+
+    
+
+    @if (count($errors) > 0)
+        <script>$('#ajout').click();</script> 
+    @endif
+
+    <script src="{{ URL::asset('/assets/js/dilpome.js') }}" ></script>
 
     <script>
-
-
-
-          Dropzone.autoDiscover = false;
-        var config = {
-            routes: {
-
-                getFormations: "{{route('getFormations')}}",
-                saveCandidature:"{{route('saveCandidature')}}",
-                showPDF:"",
-            }
-        };
-
-      $("#datepicker").datepicker({
-            format: "yyyy",
-            viewMode: "years",
-            minViewMode: "years"
-      });
-
-      $('#submitForm').on('click',function(e){
-        e.preventDefault();
-        var form = $(this).parents('form');
-        Swal.fire({
-            title: 'êtes vous sûr de supprimer ce diplôme?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.value) {
-                form.submit();
-            }  
-        });
-    });
-
-   </script>
+        function getName(e, elementCourant){
+            alert($(elementCourant).attr('value'));
+            var name=e.target.files[0].name;
+            $(elementCourant).siblings('label').html($(elementCourant).attr('value'));
+        }
+    </script>
 @endsection
