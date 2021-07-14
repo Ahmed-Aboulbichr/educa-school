@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-educa')
 @section('title') Dashboard @endsection
 @section('css')
     <!-- DataTables -->

@@ -461,7 +461,7 @@
                         </div>
                     </div>
                     <ul class="pager wizard twitter-bs-wizard-pager-link">
-                        <li class="previous"><a href="#">Previous</a></li>
+                        <li class="previous" onclick="correctNextBtn();"><a href="#">Previous</a></li>
                         <li class="" style="float:right;" id="NextStepBtn" onclick="$('#infoCandidat').submit()" ><a id="NextStepBtnA" href="#">Next</a></li>
                        <!-- <li class="next"><a href="#">Submit</a></li>-->
                     </ul>
@@ -504,14 +504,21 @@
 
     @endphp 
     <script>
+         
+
+         function correctNextBtn(){
+             fn = $('#NextStepBtn').attr('onclick').toString();
+             function changeFinishBtn(){
+                $('#NextStepBtn').attr('onclick',"$('#infoBaccalaureat').submit()");
+                $('#NextStepBtnA').attr('href',"#");
+                $('#NextStepBtnA').html("Next");
+             }
+             (fn=="$('#infoParent').submit()")?$('#NextStepBtn').attr('onclick',"$('#infoCandidat').submit()"):((fn=="$('#infoBaccalaureat').submit()")?$('#NextStepBtn').attr('onclick',"$('#infoParent').submit()"):((fn==""&&$('#NextStepBtnA').attr('href')!='#')?changeFinishBtn():null))
+         }
+
     
        
-         z = document.querySelectorAll('a.nav-link.remove-events'); 
-        for (let index = 0; index < z.length; index++) {
-   
-          // z[index].removeEventListener('click','showtab');
-            
-        }
+         
         var candidat = null;
         candidat = @json($candidat ?? '');
         var docFiles = null;
