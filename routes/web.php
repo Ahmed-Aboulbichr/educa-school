@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('saveCandidatStepTwo', 'CandidatController@saveStepTwo')->name('saveCandidatStepTwo');
     Route::post('saveCandidatStepThree', 'CandidatController@saveStepThree')->name('saveCandidatStepThree');
     Route::post('saveCandidatStepFour', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
-    
+
 
     /////////////////////////
 
@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
     //other routes
     Route::resource('/type_formations', 'TypeFormationController')->only(['index', 'show']);
 
-
+    Route::resource('/cursus_universitaire', 'CursusUniversitaireController');
     Route::resource('/administrateurs', 'AdministrateurController');
     Route::resource('/professeurs', 'ProfesseurController');
     Route::resource('/etudiants', 'EtudiantController');

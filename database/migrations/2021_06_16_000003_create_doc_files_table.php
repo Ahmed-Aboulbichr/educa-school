@@ -16,7 +16,7 @@ class CreateDocFilesTable extends Migration
         Schema::create('doc_files', function (Blueprint $table) {
             $table->id();
             //columns
-            $table->string('type', 30);
+            $table->string('type', 255);
             $table->longText('path');
             //foreign key
             $table->foreignId('candidat_id')->nullable()->constrained()->onDelete('cascade');

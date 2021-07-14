@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Candidat extends Model
 {
     protected $fillable = [
-    
+
         'nom_fr',
         'nom_ar',
         'prenom_fr',
@@ -51,7 +51,8 @@ class Candidat extends Model
         return $this->hasMany(docFile::class);
     }
 
-    public function candidatures(){
+    public function candidatures()
+    {
         return $this->hasMany(Candidature::class);
     }
 
@@ -60,24 +61,28 @@ class Candidat extends Model
         return $this->hasMany(Cursus_universitaire::class);
     }
 
-    public function academie(){
+    public function academie()
+    {
         return $this->belongsTo(Academie::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function delegation(){
+    public function delegation()
+    {
         return $this->belongsTo(Delegation::class);
     }
 
-    public function province(){
+    public function province()
+    {
         return $this->belongsTo(Province::class);
     }
-    
-    public function nationalite(){
+
+    public function nationalite()
+    {
         return $this->belongsTo(Nationalite::class);
     }
-
 }
