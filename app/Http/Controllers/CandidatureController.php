@@ -99,13 +99,22 @@ class CandidatureController extends Controller
         }
 
 
-    function load(){
-        
+    function renderMyCandidatures(){
+
      //   abort_if(Gate::denies('Candidature_load'), 403);
-     $candidatures = DB::table('candidatures')
-            ->join('candidats', 'candidat_id', '=', 'candidats.id')
-            ->join('formations', 'formation_id', '=', 'formations.id')
-            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.specialite')
+        $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
+        if($candidat == null ) return redirect(route('getPreInscr'),302);
+        else
+            $candidatures = DB::table('formations')
+            ->join('sessions', 'session_id', '=', 'sessions.id')
+            ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+            ->join('candidatures', 'formations.id', '=', 'candidatures.formation_id')
+            ->select(['formations.*','candidatures.id','candidatures.candidat_id','candidatures.valide','sessions.date_session','sessions.annee_univ','type_formations.designation'])
+            ->whereIn('candidatures.candidat_id',function($query) {
+                $query->select('id')->from('candidats')->where('user_id',Auth::id());
+            })
+            ->orderBy('sessions.date_session','DESC')
+            ->orderBy('formations.dateLimite','ASC')
             ->get();
 
         return view('candidat.candidatures.mesCandidatures', compact('candidatures'));
@@ -205,12 +214,12 @@ class CandidatureController extends Controller
      */
      function destroy($id)
     {
-        abort_if(Gate::denies('Candidature_delete'), 403);
+        //abort_if(Gate::denies('Candidature_delete'), 403);
         $candidature = Candidature::findOrFail($id);
 
         $candidature->delete();
 
-        return redirect()->route('candidatures.index');
+        return redirect()->route('mesCandidatures')->with('success', 'Votre candidatures a été bien supprimer');;
     }
 
     /* public function setValidate(Request $request){
