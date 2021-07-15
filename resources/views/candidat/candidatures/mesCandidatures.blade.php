@@ -1,14 +1,15 @@
 @extends('layouts.master-educa')
-@section('title') Dashboard @endsection
+@section('title') Mes Candidatures @endsection
 @section('css')
     <!-- DataTables -->
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
+
 @endsection
 @section('content')
 @component('components.breadcrumb')
-    @slot('title') Dashboard @endslot
-    @slot('li_1')  @endslot
-    @slot('li_2')  @endslot
+    @slot('title') Educa School @endslot
+    @slot('li_1') Candidat @endslot
+    @slot('li_2') Mes Candidatures @endslot
 @endcomponent
 
 <div class="row">
@@ -26,20 +27,20 @@
                             <th>Spécialité</th>
                             <th>Type</th>
                             <th>Niveau d'accès</th>
-                            <th>Postuler</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($formations as $formation)
                         <tr>
-                            <td>2021-08-01</td>
-                            <td>2021-07-15</td>
-                            <td>Comptabilité, Contrôle de Gestion et Audit</td>
-                            <td>Master</td>
-                            <td>1ére année </br> (2 ans d'études)</td>
-                            <td colspan="2">
-                                <a type="button" href="https://www.google.com" style="color:#fff;"class="btn btn-primary btn-rounded btn-sm waves-effect waves-light">+ Ajouter</a>
-                            </td>
+                            <td>{{$formation->date_session}}</td>
+                            <td>{{$formation->dateLimite}}</td>
+                            <td>{{$formation->specialite}}</td>
+                            <td>{{$formation->designation}}</td>
+                            <td>{{$formation->niveau_acces}}</br>({{$formation->duree}})</td>
+                            <td>C'est validé </br> un recu ici</td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
 
@@ -51,12 +52,12 @@
 
 @endsection
 @section('script')
+
     <!-- Required datatable js -->
     <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
-    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js')}}"></script>
-    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js')}}"></script>
 
     <!-- Datatable init js -->
     <script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
+
 @endsection
 

@@ -9,7 +9,7 @@ class Session extends Model
     protected $fillable = [
    
         'anne_univ',
-        'intitule',
+        'date_session',
     ];
 
     public function formations()

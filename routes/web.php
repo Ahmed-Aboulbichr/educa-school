@@ -25,6 +25,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('mesCandidatures', 'CandidatureController@load')->name('mesCandidatures');
     Route::get('pre-ins', 'CandidatController@index')->name('getPreInscr');
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
@@ -64,28 +65,26 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/candidats', 'CandidatController');
     Route::get('/profile','CandidatController@profile' )->name('profile');
     Route::post('saveCandidature', 'CandidatureController@store')->name('saveCandidature');
-    Route::resource('candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit', 'show']);
+    Route::resource('candidatures', 'CandidatureController');
     Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
+
     // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
     Route::resource('/sessions', 'SessionController');
     Route::resource('/formations', 'FormationController');
     Route::resource('/seances', 'SeanceController');
     Route::resource('/salles', 'SalleController');
 
-
-
-
+    //Route::post('postuleCandidature/{id}','CandidatureController@postule')->name('postuleCandidature');
 
     //////////// PDF ////////////
     Route::get('candidature/showPDF/{id}', 'CandidatureController@showPDF')->name('showPDF');
     Route::get('candidature/downloadPDF/{id}', 'CandidatureController@downloadPDF')->name('downloadPDF');
 
-
     //Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
-
 
     Route::get('pages-404', 'NazoxController@index');
     Route::get('/', 'HomeController@root');
     Route::get('{any}', 'HomeController@index');
     Route::get('{any}', 'HomeController@index');
+
 });

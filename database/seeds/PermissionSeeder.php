@@ -80,6 +80,7 @@ class PermissionSeeder extends Seeder
             'Candidature_access',
             'Candidature_PDF_download',
             'Candidature_PDF_view',
+            'mesCandidatures',
             'DocFile_access',
             'DocFile_create',
             'DocFile_show',

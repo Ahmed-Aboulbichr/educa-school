@@ -34,7 +34,7 @@ class Formation extends Model
         return $this->belongsTo(Type_formation::class);
     }
 
-    public function sessions()
+    public function session()
     {
         return $this->belongsTo(Session::class);
     }

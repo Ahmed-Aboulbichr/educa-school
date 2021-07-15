@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Candidat;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FormationController extends Controller
@@ -84,13 +85,31 @@ class FormationController extends Controller
         //
     }
 
-    public function renderFormations(Request $request)
+    public function renderFormations()
     {
-        if ($request->ajax()) {
+            /*if ($request->ajax()) {
 
-            $formations = DB::table('formations')->select('name', 'id')->get();
-
+            $formations = Formation::with(['session','typeFormation', 'niveauEtude'])
+            ->orderBy('niveau_etude_intitule')
+            ->get();
             return  response()->json($formations, 200);
-        }
+            }
+            */
+
+            $formations = DB::table('formations')
+            ->join('sessions', 'session_id', '=', 'sessions.id')
+            ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+            ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
+            ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
+            ->whereNotIn('formations.id',function($query) {
+                $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
+                $query->select('formation_id')->from('candidatures')->where('candidat_id',$candidat->id);
+             })
+            ->orderBy('sessions.date_session','DESC')
+            ->orderBy('formations.dateLimite','ASC')
+            ->get();
+
+            return view('candidat.candidatures.formations', compact('formations'));
+
     }
 }

@@ -16,7 +16,7 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
             $table->string('annee_univ');
-            $table->date('intitule');
+            $table->date('date_session');
             $table->timestamps();
         });
     }

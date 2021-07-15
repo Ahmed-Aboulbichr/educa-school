@@ -14,6 +14,6 @@ class NiveauEtudeSeeder extends Seeder
     {
         DB::insert("INSERT INTO `niveau_etudes` (`intitule`)
         VALUES
-        ('BAC+1'),('BAC+2'),('BAC+3'),('BAC+4'),('BAC+5')");
+        ('BAC'),('BAC+1'),('BAC+2'),('BAC+3'),('BAC+4'),('BAC+5')");
     }
 }
