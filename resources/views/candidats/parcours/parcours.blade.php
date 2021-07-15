@@ -46,7 +46,7 @@
                         <th>Specialite</th>
                         <th>Note S1</th>
                         <th>Note S2</th>
-                        <th>Année</th>      
+                        <th>Année</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -105,11 +105,11 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
                                         <option value="-1"></option>
-                                        <option value="1">BAC + 1</option>
-                                        <option value="2">BAC + 2</option>
-                                        <option value="3">BAC + 3</option>
-                                        <option value="4">BAC + 4</option>
-                                        <option value="5">BAC + 5</option>
+                                        <option value="2">BAC + 1</option>
+                                        <option value="3">BAC + 2</option>
+                                        <option value="4">BAC + 3</option>
+                                        <option value="5">BAC + 4</option>
+                                        <option value="6">BAC + 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                         </div>
                     </div> <!-- end row -->
                 </div>
-                
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
                 </div>
@@ -206,10 +206,10 @@
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js') }}"></script>
 
-    
+
 
     @if (count($errors) > 0)
-        <script>$('#ajout').click();</script> 
+        <script>$('#ajout').click();</script>
     @endif
 
     <script src="{{ URL::asset('/assets/js/dilpome.js') }}" ></script>

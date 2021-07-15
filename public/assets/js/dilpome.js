@@ -21,7 +21,7 @@ $('#submitForm').on('click', function (e) {
 $('#nvEtude').on('change', function (event) {
     var value = $(this).val();
     var divs = $('.col-lg-6');
-    if (value == 2 || value == 3 || value == 5) {
+    if (value == 3 || value == 4 || value == 6) {
         if (divs.length == 8) {
             var val = divs.last().clone();
             var label = val.find('label');
