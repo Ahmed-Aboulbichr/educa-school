@@ -97,24 +97,18 @@ class CandidatureController extends Controller
                 return redirect('/getFormations')->with('notice', 'Vous avez pas completez vos informations scolaires pour postuler à cette offre');
             }
         }
-    }
+
 
     function load(){
+        
+     //   abort_if(Gate::denies('Candidature_load'), 403);
+     $candidatures = DB::table('candidatures')
+            ->join('candidats', 'candidat_id', '=', 'candidats.id')
+            ->join('formations', 'formation_id', '=', 'formations.id')
+            ->select('candidatures.*', 'candidats.prenom_fr', 'candidats.nom_fr', 'formations.specialite')
+            ->get();
 
-        $candidatures = DB::table('formations')
-        ->join('sessions', 'session_id', '=', 'sessions.id')
-        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
-        ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
-        ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
-        ->whereIn('formations.id',function($query) {
-            $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
-            $query->select('formation_id')->from('candidatures')->where('candidat_id',$candidat->id);
-         })
-        ->orderBy('sessions.date_session','DESC')
-        ->orderBy('formations.dateLimite','ASC')
-        ->get();
-
-        return view('candidat.candidatures.mesCandidatures', compact('formations'));
+        return view('candidat.candidatures.mesCandidatures', compact('candidatures'));
     }
     /**
      * Display the specified resource.
@@ -230,3 +224,4 @@ class CandidatureController extends Controller
     } */
 
 
+}

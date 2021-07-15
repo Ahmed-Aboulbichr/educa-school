@@ -95,14 +95,17 @@ class FormationController extends Controller
             return  response()->json($formations, 200);
             }
             */
-
+        
+            $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
+            if($candidat == null ) return redirect(route('getPreInscr'),302);
+            else
             $formations = DB::table('formations')
             ->join('sessions', 'session_id', '=', 'sessions.id')
             ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
             ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
             ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
             ->whereNotIn('formations.id',function($query) {
-                $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
+                $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
                 $query->select('formation_id')->from('candidatures')->where('candidat_id',$candidat->id);
              })
             ->orderBy('sessions.date_session','DESC')
