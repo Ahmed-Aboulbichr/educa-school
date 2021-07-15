@@ -301,7 +301,7 @@ class CandidatController extends Controller
 
     public function saveStepFour(Request $request)
     {
-
+       
 
         if ($request->hasFile('file')) {
 
