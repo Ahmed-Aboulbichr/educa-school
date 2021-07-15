@@ -6,6 +6,8 @@ use App\Candidat;
 use App\docFile;
 use App\Formation;
 use App\Candidature;
+use App\Cursus_universitaire;
+use App\Niveau_etude;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -43,6 +45,15 @@ class CandidatureController extends Controller
        return view('pre-inscription.candidature')->with('formation', $formation);
     }
 
+    public function conditionAcces($niveauPreRequise,$niveauEtude){
+        //$val = strcmp($niveauPreRequise,$niveauEtude);
+        if($niveauEtude >= $niveauPreRequise){
+            return true;
+        }
+        if($niveauEtude < $niveauPreRequise){
+            return false;
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -51,48 +62,41 @@ class CandidatureController extends Controller
      */
     public function store(Request $request)
     {
+        // abort_if(Gate::denies('Candidature_create'), 403);
+        $candidat = Candidat::where('user_id', Auth::id())->first();
+        $formation = Formation::where('id',$request->get('id'))->first();
 
+        if (is_object($candidat) && is_object($formation)) {
 
-            abort_if(Gate::denies('Candidature_create'), 403);
-            if ($request->ajax()) {
-                $fields = $request->validate([
-                    'formation'  => ['bail', 'required', 'integer', Rule::exists('formations', 'id')->where('id', $request->input('formation'))],
-                ]);
-                $candidat = null;
-                $candidat = Candidat::where('user_id', Auth::id())->first();
+            //récupérer le niveau pre requise
+            $niveauPreRequise = Niveau_etude::where('id',$formation->niveau_preRequise)->first()->intitule;
+            //récupérer le derniére cursus de candidat
+            $cursusUniv = Cursus_universitaire::where('candidat_id',$candidat->id)->latest()->first();
 
-                if (is_object($candidat)) {
-                    $candidature = null;
-                    $candidature = Candidature::where('candidat_id', $candidat->id)->where('formation_id', $fields['formation'])->first();
-
-
-                    if (!is_object($candidature)) {
-
-
-                         abort_if(Gate::denies('candidature_create'), 403);
-
-
-                        $candidature = Candidature::create([
-                            'labelle' => $candidat->nom_fr.' '. $candidat->prenom_fr,
-                            'candidat_id' => $candidat->id,
-                            'formation_id' => $fields['formation'],
-                        ]);
-
-
-                    }
-
-
-                    $response = array(
-                        'candidat' => $candidat,
-                        'candidature' => $candidature,
-                        'url'     => route('showPDF', $candidat->id),
-                    );
-                    return  response()->json($response, 200);
-                }
-
-                return  response()->json("nothing to update", 200);
+            if($cursusUniv === null){
+                $niveauEtude = "BAC";
+                $check = $this->conditionAcces(strval($niveauPreRequise),$niveauEtude);
+            }
+            if($cursusUniv !== null){
+                //récupére le niveau etude de cette cursus
+                $niveauEtudeUniv = Niveau_etude::where('id',$cursusUniv->niveau_etude_id)->first()->intitule;
+                $check = $this->conditionAcces($niveauPreRequise,strval($niveauEtudeUniv));
             }
 
+            if($check === true){
+                $candidature = Candidature::create([
+                    'labelle' => $candidat->nom_fr.' '. $candidat->prenom_fr,
+                    'candidat_id' => $candidat->id,
+                    'formation_id' => $formation->id,
+                ]);
+
+                return redirect('/getFormations')->with('success', 'Votre candidature a été bien enregistré');
+            }
+
+            if($check === false)
+                return redirect('/getFormations')->with('notice', 'Vous avez pas completez vos informations scolaires pour postuler à cette offre');
+            }
+        }
     }
 
     /**
@@ -101,18 +105,7 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function show(Candidature $candidature)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Candidature  $candidature
-     * @return \Illuminate\Http\Response
-     */
-    public function downloadPDF($id)
+     function downloadPDF($id)
     {
         abort_if(Gate::denies('Candidature_PDF_download'), 403);
         $candidat = Candidat::where('id', $id)->first();
@@ -122,14 +115,13 @@ class CandidatureController extends Controller
         return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat'))->stream();
     }
 
-
     /**
      * Display the specified resource.
      *
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function showPDF($id)
+     function showPDF($id)
     {
 
         abort_if(Gate::denies('Candidature_PDF_view'), 403);
@@ -143,7 +135,7 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+     function edit($id)
     {
 
         abort_if(Gate::denies('Candidature_edit'), 403);
@@ -153,7 +145,7 @@ class CandidatureController extends Controller
         return view('candidat.profil')->with('candidat', $candidat);
     }
 
-    public function editValidation(Candidature $candidature, $id)
+     function editValidation(Candidature $candidature, $id)
     {
 
         abort_if(Gate::denies('Candidature_edit'), 403);
@@ -177,7 +169,7 @@ class CandidatureController extends Controller
     }
 
 
-    public function valide($id)
+     function valide($id)
     {
         //to do : traitement d'envoyéer l'email
         return redirect()->route('candidatures.index');
@@ -190,7 +182,7 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Candidature $candidature)
+     function update(Request $request, Candidature $candidature)
     {
         abort_if(Gate::denies('Candidature_update'), 403);
     }
@@ -200,7 +192,7 @@ class CandidatureController extends Controller
      * @param  \App\Candidature  $candidature
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+     function destroy($id)
     {
         abort_if(Gate::denies('Candidature_delete'), 403);
         $candidature = Candidature::findOrFail($id);
@@ -220,15 +212,3 @@ class CandidatureController extends Controller
         }
     } */
 
-    public function postule($id){
-        $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
-        if(is_object($candidat)){
-
-            $candidature = Candidature::create([
-                'labelle' => $candidat->nom_fr.' '. $candidat->prenom_fr,
-                'candidat_id' => $candidat->id,
-                'formation_id' => $id,
-            ]);
-        }
-    }
-}

@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/candidats', 'CandidatController');
     Route::get('/profile','CandidatController@profile' )->name('profile');
     Route::post('saveCandidature', 'CandidatureController@store')->name('saveCandidature');
-    Route::resource('candidatures', 'CandidatureController')->only(['index', 'destroy', 'edit', 'show']);
+    Route::resource('candidatures', 'CandidatureController')->only(['index', 'store', 'destroy']);
     Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
     // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
     Route::resource('/sessions', 'SessionController');
@@ -72,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/seances', 'SeanceController');
     Route::resource('/salles', 'SalleController');
 
-    Route::post('postuleCandidature/{id}','CandidatureController@postule')->name('postuleCandidature');
+    //Route::post('postuleCandidature/{id}','CandidatureController@postule')->name('postuleCandidature');
 
 
 

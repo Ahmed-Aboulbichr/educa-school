@@ -76,7 +76,7 @@ class CandidatController extends Controller
     public function profile()
     {
         return view('candidat.profile')->with('candidat',Candidat::where('user_id',Auth::id())->first());
-    
+
     }
 
     /**
@@ -114,7 +114,7 @@ class CandidatController extends Controller
     }
 
 
-    
+
     public function saveStepOne(Request $req)
     {
         if ($req->ajax()) {
@@ -233,7 +233,7 @@ class CandidatController extends Controller
         }
     }
 
-   
+
     public function saveStepThree(Request $request)
     {
         if ($request->ajax()) {
@@ -292,11 +292,11 @@ class CandidatController extends Controller
                     'path' => $path,
                     'candidat_id' => $candidat->id,
                 ]);
-                
+
                 $response = array(
                     'candidat' => $candidat,
                     'doc_file' => $doc_file,
-                    
+
                 );
 
 
@@ -313,8 +313,8 @@ class CandidatController extends Controller
         return  response()->json("nothing to update" . $request, 200);
     }
 
-    
-   
+
+
 
     public function handleUploadedImage($file)
     {
