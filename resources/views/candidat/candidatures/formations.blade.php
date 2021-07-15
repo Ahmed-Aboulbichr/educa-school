@@ -1,5 +1,5 @@
 @extends('layouts.master-educa')
-@section('title') Dashboard @endsection
+@section('title') EDUCA SCHOOL @endsection
 @section('css')
     <!-- DataTables -->
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
@@ -8,9 +8,9 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-    @slot('title') Dashboard @endslot
-    @slot('li_1')  @endslot
-    @slot('li_2')  @endslot
+    @slot('title') EDUCA SCHOOL @endslot
+    @slot('li_1') Candidat @endslot
+    @slot('li_2') Postule @endslot
 @endcomponent
 
 <div class="row">

@@ -26,8 +26,8 @@ Auth::routes(['verify' => true]);
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {
 
-    
-    Route::get('mesCandidatures', 'CandidatureController@load')->name('mesCandidatures');
+
+    Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
     Route::get('pre-ins', 'CandidatController@index')->name('getPreInscr');
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
