@@ -448,20 +448,125 @@
 
                                 </form>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
 
-                                                <h4 class="card-title">Upload fichier Bac scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <h4 class="card-title">Upload fichier Bac Recto scanné ( PDF , Max-size : 10Mb )  </h4>
                                                 <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                                    Quidem autem libero aut laboriosam quibusdam qui repellat. Nulla a ea aspernatur perspiciatis!
                                                 </p>
 
                                                 <div>
-                                                    <form id="fichierBac"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                    <form id="fichierBacRect"  action="#"  enctype="multipart/form-data" class="dropzone">
                                                         @csrf
                                                         <div class="fallback">
-                                                            <input  value="" name="bacFile" type="file" multiple="multiple">
+                                                            <input  value="" name="bacFileRect" type="file" >
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            </div>
+
+                                                            <h4>Drop files here or click to upload.</h4>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="card-title">Upload fichier Bac Verso  scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                </p>
+
+                                                <div>
+                                                    <form id="fichierBacVers"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input  value="" name="bacFileVers" type="file" >
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            </div>
+
+                                                            <h4>Drop files here or click to upload.</h4>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="card-title">Upload fichier CIN Recto scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                </p>
+
+                                                <div>
+                                                    <form id="fichierCINRect"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input  value="" name="CINFileRect" type="file" >
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            </div>
+
+                                                            <h4>Drop files here or click to upload.</h4>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="card-title">Upload fichier CIN Verso scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                </p>
+
+                                                <div>
+                                                    <form id="fichierCINVers"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input  value="" name="CINFileVers" type="file" >
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            </div>
+
+                                                            <h4>Drop files here or click to upload.</h4>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="card-title">Upload photo de profile  ( Image , Max-size : 5Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.   
+                                                </p>
+
+                                                <div>
+                                                    <form id="fichierProfileImg"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input  value="" name="profileImgFile" type="file" >
                                                         </div>
                                                         <div class="dz-message needsclick">
                                                             <div class="mb-3">
@@ -576,7 +681,11 @@
                 saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
-                saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
+                saveCandidatBacRect:"{{route('saveCandidatStepFour','BacRect')}}",
+                saveCandidatBacVers:"{{route('saveCandidatStepFour','BacVers')}}",
+                saveCandidatCINRect:"{{route('saveCandidatStepFour','CINRect')}}",
+                saveCandidatCINVers:"{{route('saveCandidatStepFour','CINVers')}}",
+                saveCandidatProfileImg:"{{route('saveCandidatStepFour','ProfileImg')}}",
                 Finish:"",
             }
         };

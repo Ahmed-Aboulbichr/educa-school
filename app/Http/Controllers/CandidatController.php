@@ -299,7 +299,7 @@ class CandidatController extends Controller
     }
     }
 
-    public function saveStepFour(Request $request)
+    public function saveStepFour(Request $request,$type)
     {
        
 
@@ -308,15 +308,40 @@ class CandidatController extends Controller
             $candidat = null;
             $doc_file = null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
-
+           
             if (is_object($candidat)) {
 
                 $path = $this->handleUploadedImage($request->file('file'));
-                $doc_file = docFile::create([
-                    'type' => 'bac',
-                    'path' => $path,
-                    'candidat_id' => $candidat->id,
-                ]);
+
+
+                $doc = docFile::where('type',$type)->where('candidat_id',$candidat->id)->first();
+                if($doc){
+                    try {
+              
+                        unlink(base_path(). '/storage/app/'.  $doc->path);
+                       } catch (\Throwable $th) {
+                           //throw $th;
+                       }
+
+
+                       $doc->update([
+                        'path' => $path,
+                    ]);
+
+                } else{
+
+                    $doc_file = docFile::create([
+                        'type' => $type,
+                        'path' => $path,
+                        'candidat_id' => $candidat->id,
+                    ]);
+
+                }
+
+               
+
+
+              
 
                 $response = array(
                     'candidat' => $candidat,

@@ -107,7 +107,7 @@ $("#infoBaccalaureat").on('submit',function(e){
            }
         },
         error: function(response) {
-          console.log(response.responseJSON.errors)
+          
           $.each(response.responseJSON.errors,(prefix,error) => {
             
             $('span.'+prefix+'_error').text(error);
@@ -140,7 +140,50 @@ $(function() {
   var fileList = new Array;
   var i = 0;
 
-   $("#fichierBac").dropzone({
+   $("#fichierBacRect").dropzone({
+      
+       resizeWidth: 1500,
+       resizeHeight: 944,
+       dictDefaultMessage: 'Default Message',
+       dictFileTooBig: 'File Too Big >5MB ',
+       dictRemoveFile: 'Remove File',
+       dictCancelUpload: 'Cancel Upload',
+       dictMaxFilesExceeded: 'Max Files Exceeded !',
+       url: config.routes.saveCandidatBacRect,
+       addRemoveLinks: true,
+       maxFiles: 1,
+       acceptedFiles: 'image/*',
+       maxFilesize: 1,
+       init: function () {
+        let myDropzone = this;
+       
+        for (const key in docFiles) {
+         if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='BacRect') {
+          const element = docFiles[key];
+          let mockFile = { name: element.path, size: 1024 };
+          uploadFile = false ;
+          myDropzone.displayExistingFile(mockFile,  element.path  );
+           }
+          } 
+           this.on("success", function (response,file, serverFileName) {
+            alert('uploaded successfully');
+               file.serverFn = serverFileName;
+               fileList[i] = {
+                   "serverFileName": serverFileName,
+                   "fileName": file.name,
+                   "fileId": i
+               };
+               i++;
+               $('#NextStepBtn').attr('class',"");
+           });
+           this.on("error", function (file, error) {
+            console.log(error);
+            $('#NextStepBtn').attr('class',"upload-file");
+            alert('error accrured');
+           });
+       }
+   });
+   $("#fichierBacVers").dropzone({
       
        resizeWidth: 1000,
        resizeHeight: 644,
@@ -149,16 +192,145 @@ $(function() {
        dictRemoveFile: 'Remove File',
        dictCancelUpload: 'Cancel Upload',
        dictMaxFilesExceeded: 'Max Files Exceeded !',
-       url: config.routes.saveCandidatStepFour,
+       url: config.routes.saveCandidatBacVers,
        addRemoveLinks: true,
        maxFiles: 1,
        acceptedFiles: 'image/*',
-       maxFilesize: 5,
+       maxFilesize: 1,
        init: function () {
         let myDropzone = this;
        
         for (const key in docFiles) {
-         if (Object.hasOwnProperty.call(docFiles, key)) {
+         if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='BacVers') {
+          const element = docFiles[key];
+          let mockFile = { name: element.path, size: 1024 };
+          uploadFile = false ;
+          myDropzone.displayExistingFile(mockFile,  element.path  );
+           }
+          } 
+           this.on("success", function (response,file, serverFileName) {
+            alert('uploaded successfully');
+               file.serverFn = serverFileName;
+               fileList[i] = {
+                   "serverFileName": serverFileName,
+                   "fileName": file.name,
+                   "fileId": i
+               };
+               i++;
+               $('#NextStepBtn').attr('class',"");
+           });
+           this.on("error", function (file, error) {
+            console.log(error);
+            $('#NextStepBtn').attr('class',"upload-file");
+            alert('error accrured');
+           });
+       }
+   });
+   $("#fichierCINRect").dropzone({
+      
+       resizeWidth: 1000,
+       resizeHeight: 644,
+       dictDefaultMessage: 'Default Message',
+       dictFileTooBig: 'File Too Big >5MB ',
+       dictRemoveFile: 'Remove File',
+       dictCancelUpload: 'Cancel Upload',
+       dictMaxFilesExceeded: 'Max Files Exceeded !',
+       url: config.routes.saveCandidatCINRect,
+       addRemoveLinks: true,
+       maxFiles: 1,
+       acceptedFiles: 'image/*',
+       maxFilesize: 1,
+       init: function () {
+        let myDropzone = this;
+       
+        for (const key in docFiles) {
+         if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='CINRect') {
+          const element = docFiles[key];
+          let mockFile = { name: element.path, size: 1024 };
+          uploadFile = false ;
+          myDropzone.displayExistingFile(mockFile,  element.path  );
+           }
+          } 
+           this.on("success", function (response,file, serverFileName) {
+            alert('uploaded successfully');
+               file.serverFn = serverFileName;
+               fileList[i] = {
+                   "serverFileName": serverFileName,
+                   "fileName": file.name,
+                   "fileId": i
+               };
+               i++;
+               $('#NextStepBtn').attr('class',"");
+           });
+           this.on("error", function (file, error) {
+            console.log(error);
+            $('#NextStepBtn').attr('class',"upload-file");
+            alert('error accrured');
+           });
+       }
+   });
+   $("#fichierCINVers").dropzone({
+      
+       resizeWidth: 1000,
+       resizeHeight: 644,
+       dictDefaultMessage: 'Default Message',
+       dictFileTooBig: 'File Too Big >5MB ',
+       dictRemoveFile: 'Remove File',
+       dictCancelUpload: 'Cancel Upload',
+       dictMaxFilesExceeded: 'Max Files Exceeded !',
+       url: config.routes.saveCandidatCINVers,
+       addRemoveLinks: true,
+       maxFiles: 1,
+       acceptedFiles: 'image/*',
+       maxFilesize: 1,
+       init: function () {
+        let myDropzone = this;
+       
+        for (const key in docFiles) {
+         if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='CINVers') {
+          const element = docFiles[key];
+          let mockFile = { name: element.path, size: 1024 };
+          uploadFile = false ;
+          myDropzone.displayExistingFile(mockFile,  element.path  );
+           }
+          } 
+           this.on("success", function (response,file, serverFileName) {
+            alert('uploaded successfully');
+               file.serverFn = serverFileName;
+               fileList[i] = {
+                   "serverFileName": serverFileName,
+                   "fileName": file.name,
+                   "fileId": i
+               };
+               i++;
+               $('#NextStepBtn').attr('class',"");
+           });
+           this.on("error", function (file, error) {
+            console.log(error);
+            $('#NextStepBtn').attr('class',"upload-file");
+            alert('error accrured');
+           });
+       }
+   });
+   $("#fichierProfileImg").dropzone({
+      
+       resizeWidth: 1000,
+       resizeHeight: 644,
+       dictDefaultMessage: 'Default Message',
+       dictFileTooBig: 'File Too Big >5MB ',
+       dictRemoveFile: 'Remove File',
+       dictCancelUpload: 'Cancel Upload',
+       dictMaxFilesExceeded: 'Max Files Exceeded !',
+       url: config.routes.saveCandidatProfileImg,
+       addRemoveLinks: true,
+       maxFiles: 1,
+       acceptedFiles: 'image/*',
+       maxFilesize: 1,
+       init: function () {
+        let myDropzone = this;
+       
+        for (const key in docFiles) {
+         if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='ProfileImg' ) {
           const element = docFiles[key];
           let mockFile = { name: element.path, size: 1024 };
           uploadFile = false ;

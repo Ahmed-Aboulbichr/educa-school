@@ -26,7 +26,7 @@
                                 </div>
                             @endforeach
                         @endif
-                        
+
                         @if( session()->has('success') )
                             <div class="alert alert-success" role="alert" >{{ session()->get('success') }}</div>
                         @elseif( session()->has('exists') )
@@ -39,11 +39,12 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
                                         <option value="-1"></option>
-                                        <option value="1" {{ $cursus->niveau_etude_id==1 ? 'selected' : '' }}>BAC + 1</option>
-                                        <option value="2" {{ $cursus->niveau_etude_id==2 ? 'selected' : '' }}>BAC + 2</option>
-                                        <option value="3" {{ $cursus->niveau_etude_id==3 ? 'selected' : '' }}>BAC + 3</option>
-                                        <option value="4" {{ $cursus->niveau_etude_id==4 ? 'selected' : '' }}>BAC + 4</option>
-                                        <option value="5" {{ $cursus->niveau_etude_id==5 ? 'selected' : '' }}>BAC + 5</option>
+                                        <option value="1" {{ $cursus->niveau_etude_id==1 ? 'selected' : '' }}>BAC</option>
+                                        <option value="2" {{ $cursus->niveau_etude_id==2 ? 'selected' : '' }}>BAC + 1</option>
+                                        <option value="3" {{ $cursus->niveau_etude_id==3 ? 'selected' : '' }}>BAC + 2</option>
+                                        <option value="4" {{ $cursus->niveau_etude_id==4 ? 'selected' : '' }}>BAC + 3</option>
+                                        <option value="5" {{ $cursus->niveau_etude_id==5 ? 'selected' : '' }}>BAC + 4</option>
+                                        <option value="6" {{ $cursus->niveau_etude_id==6 ? 'selected' : '' }}>BAC + 5</option>
                                     </select>
                                 </div>
                             </div>
@@ -115,7 +116,9 @@
                                 <img src="{{ asset("storage/". $docs[1]->path)  }}" onclick="location.href=this.src">
                             </div>
                         </div>
-                        @if( $cursus->niveau_etude_id==2 or $cursus->niveau_etude_id==3 or $cursus->niveau_etude_id==5 )
+
+                        {{$docs->get('id') }}
+                        @if($docs->where('type','Attestation_de_Reussite')->first())
                             <div class="col-lg-6">
                                 <div class="form-group row align-items-center">
                                     <label for="attest" class="col-md-3 col-form-label">Attestation de réussite</label>
@@ -124,13 +127,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <img src="{{ asset("storage/". $docs[1]->path)  }}" onclick="location.href=this.src">
+
+                                    <img src="{{ asset("storage/". $docs->where('type','Attestation_de_Reussite')->first()->path)  }}" onclick="location.href=this.src">
                                 </div>
                             </div>
                         @endif
                     </div> <!-- end row -->
                 </div>
-                
+
                 <div class="modal-footer">
                     <input type="hidden" name="candidat" value="{{$cursus->candidat_id}}">
                     <button type="submit" class="btn btn-primary waves-effect waves-light">Modifier</button>
@@ -154,5 +158,5 @@
             $(elementCourant).siblings('label').html($(elementCourant).attr('value'));
         }
     </script>
-    
+
 @endsection

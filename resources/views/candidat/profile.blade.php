@@ -21,7 +21,13 @@
                                             <div class="product-img">
 
                                                 @php 
-                                              $path= ($candidat==null)?"NaN":$candidat->docFiles->first()->path;
+                                                try {
+                                                   //code...  
+                                                   $path= ($candidat==null)?"NaN":$candidat->docFiles->where('type','ProfileImg')->first()->path;
+                                               } catch (\Throwable $th) {
+                                               
+                                             $path= "NaN";
+                                               }
                                                  
                                                 
                                                 @endphp 
@@ -88,6 +94,102 @@
                 </div>
                 <!-- end row -->
 
+                <div class="mt-4">
+                    <h5 class="font-size-14 mb-3">Fichiers : </h5>
+                    <div class="product-desc">
+                        <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="BAC-tab" data-toggle="tab" href="#BACTab" role="tab">Fichiers BAC :</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="CIN-tab" data-toggle="tab" href="#CINTab" role="tab">Fichiers CIN :</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content border border-top-0 p-4">
+                            <div class="tab-pane fade" id="BACTab" role="tabpanel">
+                                <div class="row">
+                                    <div class="product-img col-6">
+
+                                        @php 
+                                        try {
+                                            //code...
+                                      $path= ($candidat==null)?"NaN":$candidat->docFiles->where('type','BacRect')->first()->path;
+                                        } catch (\Throwable $th) {
+                                        
+                                      $path= "NaN";
+                                        }
+                                         
+                                        
+                                        @endphp 
+                                        
+                                        <img src="{{ url("storage/$path")}}" alt="" class="img-fluid mx-auto d-block" data-zoom="assets/images/product/img-1.png">
+                                    </div>
+                                    <div class="product-img col-6">
+
+                                        @php 
+                                         try {
+                                            //code...
+                                            $path= ($candidat==null)?"NaN":$candidat->docFiles->where('type','BacVers')->first()->path;
+                                        } catch (\Throwable $th) {
+                                        
+                                      $path= "NaN";
+                                        }
+                                    
+                                         
+                                        
+                                        @endphp 
+                                        
+                                        <img src="{{ url("storage/$path")}}" alt="" class="img-fluid mx-auto d-block" data-zoom="assets/images/product/img-1.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="CINTab" role="tabpanel">
+                                <div class="row">
+                                    <div class="product-img col-6">
+
+                                       
+                                        @php 
+                                         try {
+                                            //code...
+                                            $path= ($candidat==null)?"NaN":$candidat->docFiles->where('type','CINRect')->first()->path;
+                                        } catch (\Throwable $th) {
+                                        
+                                      $path= "NaN";
+                                        }
+                                    
+                                      
+                                         
+                                        
+                                        @endphp 
+                                        
+                                        <img src="{{ url("storage/$path")}}" alt="" class="img-fluid mx-auto d-block" data-zoom="assets/images/product/img-1.png">
+                                    </div>
+
+                                    <div class="product-img col-6">
+                                        @php 
+                                        try {
+                                           //code...  
+                                           $path= ($candidat==null)?"NaN":$candidat->docFiles->where('type','CINVers')->first()->path;
+                                       } catch (\Throwable $th) {
+                                       
+                                     $path= "NaN";
+                                       }
+                                   
+                                    
+                                         
+                                        
+                                        @endphp 
+                                        
+                                        <img src="{{ url("storage/$path")}}" alt="" class="img-fluid mx-auto d-block" data-zoom="assets/images/product/img-1.png">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    
             </div>
         </div>
         <!-- end card -->

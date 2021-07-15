@@ -29,7 +29,9 @@ File: Main Css File
 18. Extra Pages
 
 */
-
+.remove-events{
+  pointer-events: none !important;
+}
 @font-face {
   font-family: "Inter";
   font-style: normal;

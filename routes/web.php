@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/stepOne', 'CandidatController@saveStepOne')->name('saveCandidatStepOne');
     Route::post('saveCandidatStepTwo', 'CandidatController@saveStepTwo')->name('saveCandidatStepTwo');
     Route::post('saveCandidatStepThree', 'CandidatController@saveStepThree')->name('saveCandidatStepThree');
-    Route::post('saveCandidatStepFour', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
+    Route::post('saveCandidatStepFour/{type}', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
 
 
     /////////////////////////

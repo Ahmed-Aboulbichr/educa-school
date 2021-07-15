@@ -39,7 +39,7 @@ class CursusUniversitaireController extends Controller
             'universities' => $universities
         ];
 
-        return view('candidats.parcours.parcours', compact('data', $data));
+        return view('candidat.parcours.parcours', compact('data', $data));
 
         /* $cursus = DB::table('cursus_universitaires') */
     }
@@ -94,10 +94,10 @@ class CursusUniversitaireController extends Controller
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $key => $file) {
-                $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation de Réussite'));
+                $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation_de_Reussite'));
                 /* $filesize = $file->getClientSize(); */
-                $filepath = $file->storeAs('uploads', $file->getClientOriginalName());
-
+              
+                $filepath = $this->handleUploadedImage($file);
                 $doc_files = new docFile([
                     'type' => $filename,
                     'path' => $filepath,
@@ -142,9 +142,15 @@ class CursusUniversitaireController extends Controller
             ->get();
 
         foreach ($doc_files as $doc) {
+           try {
+              
             unlink(base_path(). '/storage/app/'.  $doc->path);
+           } catch (\Throwable $th) {
+               //throw $th;
+           }
+            docFile::where('id',$doc->id)->delete();
         }
-
+    
         $cursus_universitaire->delete();
 
         return redirect()->route('cursus_universitaire.index')
@@ -171,7 +177,7 @@ class CursusUniversitaireController extends Controller
             ->where('cursus_universitaire_id', '=', $cursus->id)
             ->get();
 
-        return view('candidats.parcours.modify')->with('cursus', $cursus)->with('docs', $doc_files)->with('univer', $universite)->with('universities', $universities);
+        return view('candidat.parcours.modify')->with('cursus', $cursus)->with('docs', $doc_files)->with('univer', $universite)->with('universities', $universities);
     }
 
     /**
@@ -223,9 +229,16 @@ class CursusUniversitaireController extends Controller
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $key => $file) {
-                $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation de Réussite'));
+                $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation_de_Reussite'));
                 /* $filesize = $file->getClientSize(); */
-                $filepath = $file->storeAs('uploads', $file->getClientOriginalName());
+               
+                $filepath = $this->handleUploadedImage($file);
+                try {
+              
+                    unlink(base_path(). '/storage/app/'.  $docs[$key]->path);
+                   } catch (\Throwable $th) {
+                       //throw $th;
+                   }
 
                 DB::table('doc_files')->where('id', $docs[$key]->id)->update([
                     'type' => $filename,
@@ -237,5 +250,17 @@ class CursusUniversitaireController extends Controller
         }
         DB::commit();
         return redirect()->route('cursus_universitaire.index');
+    }
+
+
+
+    public function handleUploadedImage($file)
+    {
+
+
+        if (!is_null($file)) {
+            $path =  Storage::putFile('uploads', $file);
+            return $path;
+        }
     }
 }
