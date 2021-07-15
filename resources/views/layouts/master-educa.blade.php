@@ -14,7 +14,7 @@
 <body data-sidebar="dark">
      <!-- Begin page -->
      <div id="layout-wrapper">
-        @include('layouts.topbar-educa')
+        @include('layouts.topbar-candidat')
         @if ((Auth::user()==null)?false:(Auth::user()->hasRole('Super Admin')))
 
         @include('layouts.sidebar-educa-admin');

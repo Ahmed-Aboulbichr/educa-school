@@ -216,7 +216,6 @@
 
     <script>
         function getName(e, elementCourant){
-            alert($(elementCourant).attr('value'));
             var name=e.target.files[0].name;
             $(elementCourant).siblings('label').html($(elementCourant).attr('value'));
         }

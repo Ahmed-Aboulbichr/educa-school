@@ -29,6 +29,11 @@
                 </button>
             </div> --}}
             <div class="dropdown d-inline-block">
+                <a type="button" href="{{ route('profile')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
+                    <img src="http://127.0.0.1:8000/assets/images/users/avatar-3.jpg" class="rounded-circle avatar-sm" alt="">
+                </a>
+            </div>
+            <div class="dropdown d-inline-block">
                 <a type="button" href="{{ url('candidat.profil')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
                     <strong>Mes Candidatures</strong>
                 </a>
