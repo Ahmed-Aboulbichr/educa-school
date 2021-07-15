@@ -7,7 +7,9 @@ $("#infoCandidat ").on('submit',function(e){
         url: config.routes.saveCandidatStepOne,
         type: 'post',
         data: $(this).serialize(),
-
+        beforeSend: function(){
+          $('span.error-text').text('');
+        },
         success: function(response) {
           $('#NextStepBtn').attr( 'class',"next");
            $('#progrss-wizard').bootstrapWizard('next');
@@ -19,7 +21,11 @@ $("#infoCandidat ").on('submit',function(e){
           
         },
         error: function(response) {
-          console.log(response);
+
+         $.each(response.responseJSON.errors,(prefix,error) => {
+            $('span.'+prefix+'_error').text(error);
+           });
+
          $('#NextStepBtn').attr('class',"");
         $('#NextStepBtn').attr('onclick',action);
         }
@@ -37,7 +43,9 @@ $("#infoParent").on('submit',function(e){
         url: config.routes.saveCandidatStepTwo,
         type: 'post',
         data: $(this).serializeArray(),
-
+        beforeSend: function(){
+          $('span.error-text').text('');
+        },
         success: function(response) {
           console.log(response);
           $('#NextStepBtn').attr( 'class',"next");
@@ -50,7 +58,9 @@ $("#infoParent").on('submit',function(e){
           
         },
         error: function(response) {
-          console.log(response);
+         $.each(response.responseJSON.errors,(prefix,error) => {
+            $('span.'+prefix+'_error').text(error);
+           });
           $('#NextStepBtn').off();
          $('#NextStepBtn').attr('class',"");
         $('#NextStepBtn').attr('onclick',action);
@@ -75,7 +85,9 @@ $("#infoBaccalaureat").on('submit',function(e){
         url: config.routes.saveCandidatStepThree,
         type: 'post',
         data: $(this).serialize(),
-
+        beforeSend: function(){
+          $('span.error-text').text('');
+        },
         success: function(response) {
 
            if($('#NextStepBtn').hasClass('upload-file')){
@@ -95,7 +107,11 @@ $("#infoBaccalaureat").on('submit',function(e){
            }
         },
         error: function(response) {
-          console.log(response);
+          console.log(response.responseJSON.errors)
+          $.each(response.responseJSON.errors,(prefix,error) => {
+            
+            $('span.'+prefix+'_error').text(error);
+           });
           if($('#NextStepBtn').hasClass('upload-file')){
             $('#NextStepBtn').attr('class',"upload-file");
 

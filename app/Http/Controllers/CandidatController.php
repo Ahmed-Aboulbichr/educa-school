@@ -116,26 +116,32 @@ class CandidatController extends Controller
 
 
     public function saveStepOne(Request $req)
-    {
+    {    
         if ($req->ajax()) {
-            $fields = $req->validate([
-                'nom_fr' => ['bail', 'required', 'string', 'max:20'],
-                'nom_ar' => ['bail', 'required', 'string', 'max:20'],
-                'prenom_fr' => ['bail', 'required', 'string', 'max:20'],
-                'prenom_ar' => ['bail', 'required', 'string', 'max:20'],
-                'lieu_naiss_fr' => ['bail', 'nullable', 'string', 'max:50'],
-                'lieu_naiss_ar' => ['bail', 'nullable', 'string', 'max:50'],
-                'CIN' => ['bail', 'required', 'string', 'max:10'],
-                'CNE' => ['bail', 'required', 'string', 'max:20'],
-                'date_naiss' => ['bail', 'required', 'date_format:Y-m-d'],
-                'tel' => ['bail', 'required', 'numeric'],
+            $validator = Validator::make($req->all(),[
+                'nom_fr' => ['required', 'string', 'max:20'],
+                'nom_ar' => ['required', 'string', 'max:20'],
+                'prenom_fr' => ['required', 'string', 'max:20'],
+                'prenom_ar' => ['required', 'string', 'max:20'],
+                'lieu_naiss_fr' => ['nullable', 'string', 'max:50'],
+                'lieu_naiss_ar' => ['nullable', 'string', 'max:50'],
+                'CIN' => ['required', 'string', 'max:10'],
+                'CNE' => ['required', 'string', 'max:20'],
+                'date_naiss' => ['required', 'date_format:Y-m-d'],
+                'tel' => ['required', 'numeric'],
                 'situation_familiale' => ['nullable', 'string', 'max:20'],
                 'sexe' => ['string', 'max:20'],
-                'pay_id' => ['bail', 'nullable', 'integer', Rule::exists('pays', 'id')->where('id', $req->input('pay_id'))],
-                'nationalite_id' => ['bail', 'nullable', 'integer', Rule::exists('nationalites', 'id')->where('id', $req->input('nationalite_id'))],
-                'ville_id_etud' => ['bail', 'nullable', 'integer', Rule::exists('villes', 'id')->where('id', $req->input('ville_id_etud'))],
+                'pay_id' => ['nullable', 'integer', Rule::exists('pays', 'id')->where('id', $req->input('pay_id'))],
+                'nationalite_id' => ['nullable', 'integer', Rule::exists('nationalites', 'id')->where('id', $req->input('nationalite_id'))],
+                'ville_id_etud' => ['nullable', 'integer', Rule::exists('villes', 'id')->where('id', $req->input('ville_id_etud'))],
                 'adresse_etd' => ['nullable', 'string', 'max:100'],
             ]);
+            if($validator->fails()){
+
+                return  response()->json(['errors' => $validator->errors()->toArray()], 500);
+          
+            }else {
+            $fields = $req->all();
 
             $candidat = Candidat::where('CIN', '=', $fields['CIN'])->first();
             if ($candidat === null) {
@@ -186,6 +192,7 @@ class CandidatController extends Controller
             );
             return  response()->json($response, 200);
         }
+       }
     }
 
 
@@ -193,19 +200,26 @@ class CandidatController extends Controller
     public function saveStepTwo(Request $request)
     {
         if ($request->ajax()) {
-            $fields = $request->validate([
-                'cin_pere' => ['bail', 'required', 'string', 'max:10'],
-                'cin_mere' => ['bail', 'required', 'string', 'max:10'],
-                'tel_parent' => ['bail', 'required', 'string', 'max:20'],
-                'cat_pere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
-                'cat_mere' => ['bail', 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
-                'secteur_pere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
-                'secteur_mere' => ['bail', 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_mere'))],
-                'ville_parent' => ['bail', 'required', 'integer', Rule::exists('villes', 'id')->where('id', $request->input('ville_parent'))],
-                'prof_pere' => ['bail', 'required', 'string', 'max:50'],
-                'prof_mere' => ['bail', 'required', 'string', 'max:50'],
-                'adresse_parent' => ['bail', 'nullable', 'string', 'max:100'],
+
+            $validator = Validator::make($request->all(),[
+                'cin_pere' => [ 'required', 'string', 'max:10'],
+                'cin_mere' => [ 'required', 'string', 'max:10'],
+                'tel_parent' => [ 'required', 'string', 'max:20'],
+                'cat_pere' => [ 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'cat_mere' => [ 'required', 'string', Rule::in(['PUBLIC', 'PRIVE', 'LIBRE'])],
+                'secteur_pere' => [ 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_pere'))],
+                'secteur_mere' => [ 'required', 'integer', Rule::exists('secteur_professions', 'id')->where('id', $request->input('secteur_mere'))],
+                'ville_parent' => [ 'required', 'integer', Rule::exists('villes', 'id')->where('id', $request->input('ville_parent'))],
+                'prof_pere' => [ 'required', 'string', 'max:50'],
+                'prof_mere' => [ 'required', 'string', 'max:50'],
+                'adresse_parent' => [ 'nullable', 'string', 'max:100'],
             ]);
+            if($validator->fails()){
+
+                return  response()->json(['errors' => $validator->errors()->toArray()], 500);
+          
+            }else {
+            $fields = $request->all();
             $candidat = null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
             if (is_object($candidat)) {
@@ -231,22 +245,32 @@ class CandidatController extends Controller
                 return response()->json($response, 200);
             }
         }
+        }
     }
 
 
     public function saveStepThree(Request $request)
     {
         if ($request->ajax()) {
-            $fields = $request->validate([
-                'annee_bac' => ['bail', 'required', 'string', 'max:4'],
-                'mention_bac' => ['bail', 'required', 'string', Rule::in(['P', 'AB', 'B', 'TB', 'E'])],
-                'mg_bac' => ['bail', 'required', 'numeric', 'between:0,20'],
-                'lycee_bac' => ['bail', 'required', 'string', 'max:255'],
-                'type_bac' => ['bail', 'required', 'string', 'max:255'],
-                'province' => ['bail', 'required', 'string', 'max:255'],
-                'delegation' => ['bail', 'required', 'string', 'max:255'],
-                'academie' => ['bail', 'required', 'string', 'max:255'],
-            ]);
+
+           
+
+                $validator = Validator::make($request->all(),[
+                    'annee_bac' => [ 'required', 'string', 'max:4'],
+                    'mention_bac' => [ 'required', 'string', Rule::in(['P', 'AB', 'B', 'TB', 'E'])],
+                    'mg_bac' => [ 'required', 'numeric', 'between:0,20'],
+                    'lycee_bac' => [ 'required', 'string', 'max:255'],
+                    'type_bac' => [ 'required', 'string', 'max:255'],
+                    'province' => [ 'required', 'integer', 'max:255',Rule::exists('provinces', 'id')->where('id', $request->input('province'))],
+                    'delegation' => [ 'required', 'integer', 'max:255',Rule::exists('delegations', 'id')->where('id', $request->input('delegation'))],
+                    'academie' => [ 'required', 'integer', 'max:255',Rule::exists('academies', 'id')->where('id', $request->input('academie'))],
+                ]);
+                if($validator->fails()){
+    
+                    return  response()->json(['errors' => $validator->errors()->toArray()], 500);
+              
+                }else {
+            $fields = $request->all();
             $candidat = null;
             $candidat = Candidat::where('user_id', Auth::id())->first();
 
@@ -268,10 +292,11 @@ class CandidatController extends Controller
                     'url'     => route('profile'),
                 );
                 return  response()->json($response, 200);
-            }
-
-            return  response()->json("nothing to update", 200);
+            } return  response()->json("nothing to update", 200);
         }
+            
+        
+    }
     }
 
     public function saveStepFour(Request $request)
