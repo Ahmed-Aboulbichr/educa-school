@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\File; 
 use App\Candidat;
 use App\Cursus_universitaire;
 use App\docFile;
@@ -96,7 +96,7 @@ class CursusUniversitaireController extends Controller
             foreach ($request->file('files') as $key => $file) {
                 $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation de Réussite'));
                 /* $filesize = $file->getClientSize(); */
-                $filepath = $file->storeAs('uploads', $file->getClientOriginalName(), 'public');
+                $filepath = $file->storeAs('uploads', $file->getClientOriginalName());
 
                 $doc_files = new docFile([
                     'type' => $filename,
@@ -142,7 +142,7 @@ class CursusUniversitaireController extends Controller
             ->get();
 
         foreach ($doc_files as $doc) {
-            unlink(public_path('storage/' . $doc->path));
+            unlink(base_path(). '/storage/app/'.  $doc->path);
         }
 
         $cursus_universitaire->delete();
@@ -225,7 +225,7 @@ class CursusUniversitaireController extends Controller
             foreach ($request->file('files') as $key => $file) {
                 $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation de Réussite'));
                 /* $filesize = $file->getClientSize(); */
-                $filepath = $file->storeAs('uploads', $file->getClientOriginalName(), 'public');
+                $filepath = $file->storeAs('uploads', $file->getClientOriginalName());
 
                 DB::table('doc_files')->where('id', $docs[$key]->id)->update([
                     'type' => $filename,
