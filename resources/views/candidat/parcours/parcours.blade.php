@@ -105,11 +105,12 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
                                         <option value="-1"></option>
-                                        <option value="1">BAC + 1</option>
-                                        <option value="2">BAC + 2</option>
-                                        <option value="3">BAC + 3</option>
-                                        <option value="4">BAC + 4</option>
-                                        <option value="5">BAC + 5</option>
+                                        <option value="1">BAC</option>
+                                        <option value="2">BAC + 1</option>
+                                        <option value="3">BAC + 2</option>
+                                        <option value="4">BAC + 3</option>
+                                        <option value="5">BAC + 4</option>
+                                        <option value="6">BAC + 5</option>
                                     </select>
                                 </div>
                             </div>

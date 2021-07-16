@@ -10,4 +10,10 @@ class Etudiant extends User
     {
         return $this->hasMany(docFile::class);
     }
+
+    public function candidat()
+    {
+        return $this->belongsTo(Candidat::class);
+    }
+
 }

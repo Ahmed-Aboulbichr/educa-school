@@ -56,6 +56,12 @@ class Candidat extends Model
         return $this->hasMany(Candidature::class);
     }
 
+    public function etudiant()
+    {
+        return $this->hasOne(Etudiant::class);
+    }
+    
+    
     public function cursusUniversitaires()
     {
         return $this->hasMany(Cursus_universitaire::class);

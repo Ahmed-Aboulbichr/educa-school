@@ -80,6 +80,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-firstname-input">Nom <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->nom_fr}}" type="text" name="nom_fr"  class="form-control" id="progress-basicpill-firstname-input">
+                                            <span class="text-danger error-text nom_fr_error"></span>
                                             <span class="text-muted">ABOULBICHR</span>
                                         </div>
                                     </div>
@@ -87,6 +88,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic"><i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i> النسب</label>
                                             <input   value="{{($candidat==null)?'':$candidat->nom_ar}}" type="text" name="nom_ar" class="form-control rtl keyboardInput" id="progress-basicpill-lastname-ar-input">
+                                            <span class="text-danger error-text nom_ar_error"></span>
                                             <span class="text-muted" style="float: right">أبوالبشر</span>
                                         </div>
                                     </div>
@@ -97,6 +99,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Prénom <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->prenom_fr}}" type="text" name="prenom_fr" class="form-control" id="progress-basicpill-lastname-input">
+                                            <span class="text-danger error-text prenom_fr_error"></span>
                                             <span class="text-muted">Ahmed</span>
                                         </div>
                                     </div>
@@ -104,6 +107,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-lastname-input" class="arabic"><i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i> الإسم</label>
                                             <input   value="{{($candidat==null)?'':$candidat->prenom_ar}}" type="text" name="prenom_ar" class="form-control rtl keyboardInput" id="progress-basicpill-firstname-ar-input">
+                                            <span class="text-danger error-text prenom_ar_error"></span>
                                             <span class="text-muted"  style="float: right" >أحمد</span>
                                         </div>
                                     </div>
@@ -113,13 +117,17 @@
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Lieu de naissance</label>
+                                           
                                             <input   value="{{($candidat==null)?'':$candidat->lieu_naiss_fr}}" type="text" name="lieu_naiss_fr" class="form-control" id="progress-basicpill-birthplace-input">
+                                         <span class="text-danger error-text lieu_naiss_fr_error"></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input" class="arabic">مكان الإزدياد</label>
                                             <input   value="{{($candidat==null)?'':$candidat->lieu_naiss_ar}}" type="text" name="lieu_naiss_ar" class="form-control rtl keyboardInput" id="progress-basicpill-birthplace-ar-input">
+                    
+                                            <span class="text-danger error-text lieu_naiss_ar_error"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +137,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >CIN <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->CIN}}" type="text" name="CIN" class="form-control" id="progress-basicpill-CIN-input">
+                                            <span class="text-danger error-text CIN_error"></span>
                                             <span class="text-muted">BA7060</span>
                                         </div>
                                     </div>
@@ -136,6 +145,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">CNE <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->CNE}}" type="email" name="CNE" class="form-control" id="progress-basicpill-CNE-input">
+                                            <span class="text-danger error-text CNE_error"></span>
                                             <span class="text-muted">R109218391</span>
                                         </div>
                                     </div>
@@ -145,6 +155,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-phoneno-input" >Date de naissance <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->date_naiss}}" type="text" name="date_naiss" class="form-control" id="progress-basicpill-birthday-input">
+                                            <span class="text-danger error-text date_naiss_error"></span>
                                             <span class="text-muted">2000-05-18</span>
                                         </div>
                                     </div>
@@ -152,6 +163,7 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-email-input">Téléphone <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->tel}}" type="text" name="tel" class="form-control" id="progress-basicpill-phone-input">
+                                            <span class="text-danger error-text tel_error"></span>
                                             <span class="text-muted">0654682005</span>
                                         </div>
                                     </div>
@@ -171,7 +183,8 @@
                                                 <option {{(($candidat==null)?'':$candidat->situation_familiale=='célibataire (C)')?'selected':''}}>célibataire (C)</option>
                                                 <option {{(($candidat==null)?'':$candidat->situation_familiale=='veuf (V)')?'selected':''}}>veuf (V)</option>
                                             </select>
-                                        </div>
+                                        <span class="text-danger error-text situation_familiale_error"></span>
+                                    </div>
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                         <div  class="form-group">
@@ -180,11 +193,13 @@
                                                 <div class="custom-control custom-radio mb-3">
                                                     <input {{ (($candidat==null)?'': $candidat->sexe=='Homme')? 'checked':'' }}   type="radio" id="masculin" name="sexe" value="Homme" class="custom-control-input">
                                                     <label class="custom-control-label" for="masculin">Masculin</label>
-                                                </div>
+                                                <span class="text-danger error-text sexe_error"></span>
+                                            </div>
                                                 <div class="custom-control custom-radio mb-3">
                                                     <input  {{ (($candidat==null)?'': $candidat->sexe=='Femme' )? 'checked' : '' }}  type="radio" id="feminin" name="sexe" value="Femmme" class="custom-control-input">
                                                     <label class="custom-control-label" for="feminin">Féminin</label>
-                                                </div>
+                                                <span class="text-danger error-text sexe_error"></span>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -197,7 +212,8 @@
                                             <select name="pay_id" class="form-control" id="paysOptionsEtud">
                                                 <option value="">-----------</option>
                                             </select>
-                                        </div>
+                                        <span class="text-danger error-text pay_id_error"></span>
+                                    </div>
                                     </div>
 
                                     <div class="col-lg-6 mb-3">
@@ -207,8 +223,9 @@
                                             <select   id="nationalities"  class="form-control" name="nationalite_id">
                                                 <option value=""></option>
                                             </select>
+                                        <span class="text-danger error-text nationalite_id_error"></span>
 
-                                        </div>
+                                    </div>
                                     </div>
 
                                     <div class="col-lg-3">
@@ -217,7 +234,8 @@
                                             <select name="ville_id_etud" class="form-control" id="villeOptionsEtud">
                                                 <option value="">-----------</option>
                                             </select>
-                                        </div>
+                                        <span class="text-danger error-text ville_id_etud_error"></span>
+                                    </div>
                                     </div>
 
                                 </div>
@@ -227,7 +245,8 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-address-input">Adresse</label>
                                             <textarea  id="progress-basicpill-address-input" name="adresse_etd" class="form-control" rows="2">{{($candidat==null)?'':$candidat->adresse_etd}}</textarea>
-                                        </div>
+                                        <span class="text-danger error-text adresse_etd_error"></span>
+                                    </div>
                                     </div>
                                 </div>
                             </form>
@@ -241,13 +260,15 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-pancard-input">CIN père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input  value="{{($candidat==null)?'':$candidat->CIN_pere}}" type="text" name="cin_pere" class="form-control" id="progress-basicpill-pancard-input" >
-                                        </div>
+                                        <span class="text-danger error-text cin_pere_error"></span>
+                                    </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-inputCIN">CIN mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input  value="{{($candidat==null)?'':$candidat->CIN_mere}}" type="text" name="cin_mere" class="form-control" id="progress-basicpill-vatno-inputCIN" >
-                                        </div>
+                                        <span class="text-danger error-text cin_mere_error"></span>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -260,7 +281,8 @@
                                                 <option {{(($candidat==null)?'':$candidat->cat_pere=="PRIVE")?'selected':''}}>PRIVE</option>
                                                 <option {{(($candidat==null)?'':$candidat->cat_pere=="LIBRE")?'selected':''}}>LIBRE</option>
                                             </select>
-                                        </div>
+                                        <span class="text-danger error-text cat_pere_error"></span>
+                                    </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -269,13 +291,15 @@
                                                 <option value="">-----------</option>
 
                                             </select>
-                                        </div>
+                                       <span class="text-danger error-text secteur_pere_error"></span>
+                                     </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-inputProfPere">Profession père <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input   value="{{($candidat==null)?'':$candidat->profession_pere}}" type="text" name="prof_pere" class="form-control" id="progress-basicpill-vatno-inputProfPere">
-                                        </div>
+                                       <span class="text-danger error-text prof_pere_error"></span>
+                                     </div>
                                     </div>
 
                                 </div>
@@ -288,7 +312,8 @@
                                                 <option {{(($candidat==null)?'':$candidat->cat_mere=="PRIVE")?'selected':''}}>PRIVE</option>
                                                 <option {{(($candidat==null)?'':$candidat->cat_mere=="LIBRE")?'selected':''}}>LIBRE</option>
                                             </select>
-                                        </div>
+                                       <span class="text-danger error-text cat_mere_error"></span>
+                                     </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -297,13 +322,15 @@
                                                 <option value="">-----------</option>
 
                                             </select>
-                                        </div>
+                                        <span class="text-danger error-text secteur_mere_error"></span>
+                                    </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-inputProfMere">Profession mère <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input  value="{{($candidat==null)?'':$candidat->profession_mere}}" type="text" name="prof_mere" class="form-control" id="progress-basicpill-vatno-inputProfMere">
-                                        </div>
+                                        <span class="text-danger error-text prof_mere_error"></span>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-between">
@@ -311,14 +338,16 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Tel parent <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <input  value="{{($candidat==null)?'':$candidat->tel_parent}}" id="input-mask" inputmode="text" name="tel_parent" class="form-control input-mask" data-inputmask="'mask': '09-99999999'" >                                        </div>
-                                    </div>
+                                    <span class="text-danger error-text tel_parent_error"></span>
+                                </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="progress-basicpill-vatno-input">Ville parent <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
                                             <select name="ville_parent" class="form-control" id="villeOptionsParent">
                                                 <option value="">-----------</option>
                                             </select>
-                                        </div>
+                                       <span class="text-danger error-text ville_parent_error"></span>
+                                     </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -326,7 +355,8 @@
                                         <div class="form-group">
                                             <label for="progress-basicpill-address-input">Adresse parent</label>
                                             <textarea name="adresse_parent" id="progress-basicpill-addressParent-input" class="form-control" rows="2">{{($candidat==null)?'':$candidat->adresse_parent}}</textarea>
-                                        </div>
+                                        <span class="text-danger error-text adresse_parent_error"></span>
+                                    </div>
                                     </div>
                                 </div>
                             </form>
@@ -342,7 +372,8 @@
                                                 <label for="progress-basicpill-namecard-input">Type de bac</label>
 
                                                 <input   value="{{($candidat==null)?'':$candidat->type_bac}}" name="type_bac"  type="text" class="form-control"  >
-                                            </div>
+                                           <span class="text-danger error-text type_bac_error"></span>
+                                         </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
@@ -355,14 +386,16 @@
                                                     <option {{(($candidat==null)?'':$candidat->mention_bac=='TB')?'selected':''}} value="TB">Très Bien</option>
                                                     <option {{(($candidat==null)?'':$candidat->mention_bac=='E')?'selected':''}}  value="E">Excellent</option>
                                                 </select>
-                                            </div>
+                                            <span class="text-danger error-text mention_bac_error"></span>
+                                        </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label for="progress-basicpill-namecard-input">Moyen general de baccalauréat</label>
 
                                                 <input   value="{{($candidat==null)?'':$candidat->mg_bac}}" type="number" name="mg_bac" min='0' max='20' class="form-control"  >
-                                            </div>
+                                            <span class="text-danger error-text mg_bac_error"></span>
+                                        </div>
                                         </div>
 
                                         <div class="col-lg-3">
@@ -370,7 +403,8 @@
                                                 <label for="progress-basicpill-namecard-input">Année baccalauréat</label>
 
                                                 <input   value="{{($candidat==null)?'':$candidat->annee_bac}}" name="annee_bac"  type="text" class="form-control" id="datepicker" >
-                                            </div>
+                                            <span class="text-danger error-text annee_bac_error"></span>
+                                        </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -379,7 +413,8 @@
                                             <div class="form-group">
                                                 <label for="progress-basicpill-cardno-input">Lycée de baccalauréat</label>
                                                 <input   value="{{($candidat==null)?'':$candidat->lycee_bac}}" type="text" name="lycee_bac" class="form-control" id="progress-basicpill-cardno-input">
-                                            </div>
+                                            <span class="text-danger error-text lycee_bac_error"></span>
+                                        </div>
                                         </div>
 
                                         <div class="col-lg-3">
@@ -388,7 +423,8 @@
                                                 <select class="custom-select" name="province" id="provincesOptions">
                                                     <option selected  >Select ¨Province</option>
                                                 </select>
-                                            </div>
+                                           <span class="text-danger error-text province_error"></span>
+                                         </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
@@ -396,7 +432,8 @@
                                                 <select class="custom-select" name="delegation" id="delegationsOptions">
                                                     <option selected  >Select Delegation</option>
                                                 </select>
-                                            </div>
+                                            <span class="text-danger error-text delegation_error"></span>
+                                        </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
@@ -404,26 +441,132 @@
                                                 <select class="custom-select" name="academie" id="academiesOptions">
                                                     <option selected  >Select Academie</option>
                                                 </select>
-                                            </div>
+                                           <span class="text-danger error-text academie_error"></span>
+                                         </div>
                                         </div>
                                     </div>
 
                                 </form>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
 
-                                                <h4 class="card-title">Upload fichier Bac scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <h4 class="card-title">Upload fichier Bac Recto scanné ( PDF , Max-size : 10Mb )  </h4>
                                                 <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                                    Quidem autem libero aut laboriosam quibusdam qui repellat. Nulla a ea aspernatur perspiciatis!
                                                 </p>
 
                                                 <div>
-                                                    <form id="fichierBac"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                    <form id="fichierBacRect"  action="#"  enctype="multipart/form-data" class="dropzone">
                                                         @csrf
                                                         <div class="fallback">
-                                                            <input  value="" name="bacFile" type="file" multiple="multiple">
+                                                            <input  value="" name="bacFileRect" type="file" >
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            </div>
+
+                                                            <h4>Drop files here or click to upload.</h4>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="card-title">Upload fichier Bac Verso  scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                </p>
+
+                                                <div>
+                                                    <form id="fichierBacVers"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input  value="" name="bacFileVers" type="file" >
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            </div>
+
+                                                            <h4>Drop files here or click to upload.</h4>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="card-title">Upload fichier CIN Recto scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                </p>
+
+                                                <div>
+                                                    <form id="fichierCINRect"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input  value="" name="CINFileRect" type="file" >
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            </div>
+
+                                                            <h4>Drop files here or click to upload.</h4>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="card-title">Upload fichier CIN Verso scanné ( PDF , Max-size : 10Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                                </p>
+
+                                                <div>
+                                                    <form id="fichierCINVers"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input  value="" name="CINFileVers" type="file" >
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
+                                                            </div>
+
+                                                            <h4>Drop files here or click to upload.</h4>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body">
+
+                                                <h4 class="card-title">Upload photo de profile  ( Image , Max-size : 5Mb )  </h4>
+                                                <p class="card-title-desc"> Lorem ipsum dolor sit, amet consectetur adipisicing elit.   
+                                                </p>
+
+                                                <div>
+                                                    <form id="fichierProfileImg"  action="#"  enctype="multipart/form-data" class="dropzone">
+                                                        @csrf
+                                                        <div class="fallback">
+                                                            <input  value="" name="profileImgFile" type="file" >
                                                         </div>
                                                         <div class="dz-message needsclick">
                                                             <div class="mb-3">
@@ -538,7 +681,11 @@
                 saveCandidatStepOne:"{{route('saveCandidatStepOne')}}",
                 saveCandidatStepTwo:"{{route('saveCandidatStepTwo')}}",
                 saveCandidatStepThree:"{{route('saveCandidatStepThree')}}",
-                saveCandidatStepFour:"{{route('saveCandidatStepFour')}}",
+                saveCandidatBacRect:"{{route('saveCandidatStepFour','BacRect')}}",
+                saveCandidatBacVers:"{{route('saveCandidatStepFour','BacVers')}}",
+                saveCandidatCINRect:"{{route('saveCandidatStepFour','CINRect')}}",
+                saveCandidatCINVers:"{{route('saveCandidatStepFour','CINVers')}}",
+                saveCandidatProfileImg:"{{route('saveCandidatStepFour','ProfileImg')}}",
                 Finish:"",
             }
         };

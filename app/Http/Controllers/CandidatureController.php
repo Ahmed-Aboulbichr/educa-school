@@ -97,24 +97,27 @@ class CandidatureController extends Controller
                 return redirect('/getFormations')->with('notice', 'Vous avez pas completez vos informations scolaires pour postuler à cette offre');
             }
         }
-    }
 
-    function load(){
 
-        $candidatures = DB::table('formations')
-        ->join('sessions', 'session_id', '=', 'sessions.id')
-        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
-        ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
-        ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
-        ->whereIn('formations.id',function($query) {
-            $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
-            $query->select('formation_id')->from('candidatures')->where('candidat_id',$candidat->id);
-         })
-        ->orderBy('sessions.date_session','DESC')
-        ->orderBy('formations.dateLimite','ASC')
-        ->get();
+    function renderMyCandidatures(){
 
-        return view('candidat.candidatures.mesCandidatures', compact('formations'));
+     //   abort_if(Gate::denies('Candidature_load'), 403);
+        $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
+        if($candidat == null ) return redirect(route('getPreInscr'),302);
+        else
+            $candidatures = DB::table('formations')
+            ->join('sessions', 'session_id', '=', 'sessions.id')
+            ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+            ->join('candidatures', 'formations.id', '=', 'candidatures.formation_id')
+            ->select(['formations.*','candidatures.id','candidatures.candidat_id','candidatures.valide','sessions.date_session','sessions.annee_univ','type_formations.designation'])
+            ->whereIn('candidatures.candidat_id',function($query) {
+                $query->select('id')->from('candidats')->where('user_id',Auth::id());
+            })
+            ->orderBy('sessions.date_session','DESC')
+            ->orderBy('formations.dateLimite','ASC')
+            ->get();
+
+        return view('candidat.candidatures.mesCandidatures', compact('candidatures'));
     }
     /**
      * Display the specified resource.
@@ -211,12 +214,12 @@ class CandidatureController extends Controller
      */
      function destroy($id)
     {
-        abort_if(Gate::denies('Candidature_delete'), 403);
+        //abort_if(Gate::denies('Candidature_delete'), 403);
         $candidature = Candidature::findOrFail($id);
 
         $candidature->delete();
 
-        return redirect()->route('candidatures.index');
+        return redirect()->route('mesCandidatures')->with('success', 'Votre candidatures a été bien supprimer');;
     }
 
     /* public function setValidate(Request $request){
@@ -230,3 +233,4 @@ class CandidatureController extends Controller
     } */
 
 
+}

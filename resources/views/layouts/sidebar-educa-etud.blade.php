@@ -18,19 +18,19 @@
                         <li><a href={{route('cursus_universitaire.index')}}>mon parcours</a></li>
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                               
+
                                 <span>Candidature</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href={{url('admin.candidature.inscription')}}>Inscription</a></li>
-                                <li><a href={{url('admin.candidature.re-inscription')}}>Réinscription</a></li>
-                                <li><a href={{url('admin.candidature.reclamation')}}>Reclamation</a></li>
-                                <li><a href={{ route('type_formations.index') }}>Liste Candidatures</a></li>
+                                <li><a href={{route('getFormations')}}>Postule</a></li>
+                                <li><a href={{route('mesCandidatures')}}>Mes candidatures</a></li>
+                              <!-- {{--  <li><a href={{url('admin.candidature.reclamation')}}>Reclamation</a></li>
+                                <li><a href={{ route('type_formations.index') }}>Liste Candidatures</a></li> --}} -->
                             </ul>
                         </li>
                     </ul>
                 </li>
-                
+
 
 
                 <li>

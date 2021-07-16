@@ -25,7 +25,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('mesCandidatures', 'CandidatureController@load')->name('mesCandidatures');
+
+
+    Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
     Route::get('pre-ins', 'CandidatController@index')->name('getPreInscr');
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
@@ -48,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/stepOne', 'CandidatController@saveStepOne')->name('saveCandidatStepOne');
     Route::post('saveCandidatStepTwo', 'CandidatController@saveStepTwo')->name('saveCandidatStepTwo');
     Route::post('saveCandidatStepThree', 'CandidatController@saveStepThree')->name('saveCandidatStepThree');
-    Route::post('saveCandidatStepFour', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
+    Route::post('saveCandidatStepFour/{type}', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
 
 
     /////////////////////////

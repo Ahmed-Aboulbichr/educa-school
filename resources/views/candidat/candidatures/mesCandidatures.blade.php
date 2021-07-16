@@ -14,6 +14,15 @@
 
 <div class="row">
     <div class="col-12">
+        @if( session()->has('success') )
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="mdi mdi-check-all mr-2"></i>
+                {{ session()->get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"></h4>
@@ -27,18 +36,32 @@
                             <th>Spécialité</th>
                             <th>Type</th>
                             <th>Niveau d'accès</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($formations as $formation)
+                        @foreach ($candidatures as $candidature)
                         <tr>
-                            <td>{{$formation->date_session}}</td>
-                            <td>{{$formation->dateLimite}}</td>
-                            <td>{{$formation->specialite}}</td>
-                            <td>{{$formation->designation}}</td>
-                            <td>{{$formation->niveau_acces}}</br>({{$formation->duree}})</td>
-                            <td>C'est validé </br> un recu ici</td>
+                            <td>{{$candidature->date_session}}</td>
+                            <td>{{$candidature->dateLimite}}</td>
+                            <td>{{$candidature->specialite}}</td>
+                            <td>{{$candidature->designation}}</td>
+                            <td>{{$candidature->niveau_acces}}</br>({{$candidature->duree}})</td>
+                            @if($candidature->valide === 1)
+                                <td>C'est validé </br> un recu ici</td>
+                            @else
+                                <td>Pas encours</td>
+                            @endif
+                            <td>
+                                <form action="{{ route('candidatures.destroy', $candidature->id)}}" method="post">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light" type="submit">
+                                    <i class="ri-close-line align-middle mr-2"></i>Annuler
+                                  </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
