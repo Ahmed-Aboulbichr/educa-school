@@ -1,8 +1,7 @@
-
-@extends('layouts.master-without-side-bar-candidat')
+@extends('layouts.master-layouts-candidat')
 
 @section('title')
-    Candidature
+    Mon Parcours
 @endsection
 @section('css')
     <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -24,6 +23,9 @@
         }
             </style>
 @endsection
+@section('body')
+<body data-topbar="dark" data-layout="horizontal">
+@endsection
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -34,19 +36,18 @@
                 @elseif( session()->has('exists') )
                     <div class="alert alert-warning" role="alert" >{{ session()->get('exists') }}</div>
                 @endif
-                <h4 class="card-title"><span class="badge badge-pill badge-info" >---</span> Mon Parcours</h4>
-                <p class="card-title-desc">Veuillez Ajouter vos diplôme à partir du bouton "ajouter diplôme".</p>
+                <h4 class="card-title">Veuillez ajouter vos parcours universitaire (anneé par anneé) à partir du bouton "Ajouter"</h4>
                 <div class="bg-light d-flex float-right mb-4">
-                    <button class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center" id="ajout">ajouter diplôme</button>
+                    <button class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center" id="ajout"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
                 </div>
                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                     <tr>
                         <th>Niveau Etude</th>
-                        <th>Specialite</th>
+                        <th>Spécialité</th>
                         <th>Note S1</th>
                         <th>Note S2</th>
-                        <th>Année</th>      
+                        <th>Année</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -105,7 +106,6 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
                                         <option value="-1"></option>
-                                        <option value="1">BAC</option>
                                         <option value="2">BAC + 1</option>
                                         <option value="3">BAC + 2</option>
                                         <option value="4">BAC + 3</option>
@@ -117,7 +117,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group row align-items-center">
-                                <label for="annee" class="col-md-3 col-form-label">Anne universitaire</label>
+                                <label for="annee" class="col-md-3 col-form-label">Année universitaire</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="text" id="annee" name="Annee_univ">
                                 </div>
@@ -186,7 +186,7 @@
                         </div>
                     </div> <!-- end row -->
                 </div>
-                
+
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
                 </div>
@@ -195,9 +195,6 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 @endsection
-
-
-
 @section('script')
 
 
@@ -207,10 +204,10 @@
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js') }}"></script>
 
-    
+
 
     @if (count($errors) > 0)
-        <script>$('#ajout').click();</script> 
+        <script>$('#ajout').click();</script>
     @endif
 
     <script src="{{ URL::asset('/assets/js/dilpome.js') }}" ></script>

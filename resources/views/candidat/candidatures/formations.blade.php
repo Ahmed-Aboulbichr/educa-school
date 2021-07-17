@@ -1,18 +1,16 @@
-@extends('layouts.master-educa')
-@section('title') EDUCA SCHOOL @endsection
+@extends('layouts.master-layouts-candidat')
+@section('title')
+    Les Formations ouverts
+@endsection
 @section('css')
     <!-- DataTables -->
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-
+@endsection
+@section('body')
+<body data-topbar="dark" data-layout="horizontal">
 @endsection
 @section('content')
-@component('components.breadcrumb')
-    @slot('title') EDUCA SCHOOL @endslot
-    @slot('li_1') Candidat @endslot
-    @slot('li_2') Postule @endslot
-@endcomponent
-
 <div class="row">
     <div class="col-12">
         @if( session()->has('success') )
@@ -90,8 +88,6 @@
         </div> <!-- end card -->
     </div><!-- end col-->
 </div> <!-- end row-->
-
-
 @endsection
 @section('script')
 

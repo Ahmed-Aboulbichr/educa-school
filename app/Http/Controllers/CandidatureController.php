@@ -90,11 +90,11 @@ class CandidatureController extends Controller
                     'formation_id' => $formation->id,
                 ]);
 
-                return redirect('/getFormations')->with('success', 'Votre candidature a été bien enregistré');
+                return redirect('/getFormations')->with('success', 'Votre candidature a été enregistrée');
             }
 
             if($check === false)
-                return redirect('/getFormations')->with('notice', 'Vous avez pas completez vos informations scolaires pour postuler à cette offre');
+                return redirect('/getFormations')->with('notice', 'Vous avez pas completez vos informations scolaires pour postuler à cette formation');
             }
         }
 
@@ -219,7 +219,7 @@ class CandidatureController extends Controller
 
         $candidature->delete();
 
-        return redirect()->route('mesCandidatures')->with('success', 'Votre candidatures a été bien supprimer');;
+        return redirect()->route('mesCandidatures')->with('success', 'Votre candidatures a été supprimée');;
     }
 
     /* public function setValidate(Request $request){

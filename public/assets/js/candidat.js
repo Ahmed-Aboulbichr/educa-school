@@ -16,9 +16,9 @@ $("#infoCandidat ").on('submit',function(e){
           $('#NextStepBtn').attr('class',"");
           $('#NextStepBtn').off();
           $('#NextStepBtn').attr('onclick',"$('#infoParent').submit()");
-         
-         
-          
+
+
+
         },
         error: function(response) {
 
@@ -53,9 +53,9 @@ $("#infoParent").on('submit',function(e){
            (uploadFile)? $('#NextStepBtn').attr( 'class',"upload-file"):$('#NextStepBtn').attr( 'class',"");
            $('#NextStepBtn').off();
           $('#NextStepBtn').attr('onclick',"$('#infoBaccalaureat').submit()");
-         
-         
-          
+
+
+
         },
         error: function(response) {
          $.each(response.responseJSON.errors,(prefix,error) => {
@@ -95,7 +95,7 @@ $("#infoBaccalaureat").on('submit',function(e){
             $('#NextStepBtn').attr('onclick',action);
            }else{
 
-                  
+
           $('#NextStepBtnA').html('Finish');
           $('#NextStepBtn').removeClass('disabled');
            $('#progrss-wizard').bootstrapWizard('next');
@@ -103,13 +103,13 @@ $("#infoBaccalaureat").on('submit',function(e){
            config.routes.Finish = response.url;
            $('#NextStepBtnA').attr('href',config.routes.Finish);
 
-           
+
            }
         },
         error: function(response) {
-          
+
           $.each(response.responseJSON.errors,(prefix,error) => {
-            
+
             $('span.'+prefix+'_error').text(error);
            });
           if($('#NextStepBtn').hasClass('upload-file')){
@@ -133,15 +133,11 @@ $(function() {
 
  });
 
-
-  
- 
-
   var fileList = new Array;
   var i = 0;
 
    $("#fichierBacRect").dropzone({
-      
+
        resizeWidth: 1500,
        resizeHeight: 944,
        dictDefaultMessage: 'Default Message',
@@ -156,7 +152,7 @@ $(function() {
        maxFilesize: 1,
        init: function () {
         let myDropzone = this;
-       
+
         for (const key in docFiles) {
          if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='BacRect') {
           const element = docFiles[key];
@@ -164,7 +160,7 @@ $(function() {
           uploadFile = false ;
           myDropzone.displayExistingFile(mockFile,  element.path  );
            }
-          } 
+          }
            this.on("success", function (response,file, serverFileName) {
             alert('uploaded successfully');
                file.serverFn = serverFileName;
@@ -184,7 +180,7 @@ $(function() {
        }
    });
    $("#fichierBacVers").dropzone({
-      
+
        resizeWidth: 1000,
        resizeHeight: 644,
        dictDefaultMessage: 'Default Message',
@@ -199,7 +195,7 @@ $(function() {
        maxFilesize: 1,
        init: function () {
         let myDropzone = this;
-       
+
         for (const key in docFiles) {
          if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='BacVers') {
           const element = docFiles[key];
@@ -207,7 +203,7 @@ $(function() {
           uploadFile = false ;
           myDropzone.displayExistingFile(mockFile,  element.path  );
            }
-          } 
+          }
            this.on("success", function (response,file, serverFileName) {
             alert('uploaded successfully');
                file.serverFn = serverFileName;
@@ -227,7 +223,7 @@ $(function() {
        }
    });
    $("#fichierCINRect").dropzone({
-      
+
        resizeWidth: 1000,
        resizeHeight: 644,
        dictDefaultMessage: 'Default Message',
@@ -242,7 +238,7 @@ $(function() {
        maxFilesize: 1,
        init: function () {
         let myDropzone = this;
-       
+
         for (const key in docFiles) {
          if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='CINRect') {
           const element = docFiles[key];
@@ -250,7 +246,7 @@ $(function() {
           uploadFile = false ;
           myDropzone.displayExistingFile(mockFile,  element.path  );
            }
-          } 
+          }
            this.on("success", function (response,file, serverFileName) {
             alert('uploaded successfully');
                file.serverFn = serverFileName;
@@ -270,7 +266,7 @@ $(function() {
        }
    });
    $("#fichierCINVers").dropzone({
-      
+
        resizeWidth: 1000,
        resizeHeight: 644,
        dictDefaultMessage: 'Default Message',
@@ -285,7 +281,7 @@ $(function() {
        maxFilesize: 1,
        init: function () {
         let myDropzone = this;
-       
+
         for (const key in docFiles) {
          if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='CINVers') {
           const element = docFiles[key];
@@ -293,7 +289,7 @@ $(function() {
           uploadFile = false ;
           myDropzone.displayExistingFile(mockFile,  element.path  );
            }
-          } 
+          }
            this.on("success", function (response,file, serverFileName) {
             alert('uploaded successfully');
                file.serverFn = serverFileName;
@@ -313,7 +309,7 @@ $(function() {
        }
    });
    $("#fichierProfileImg").dropzone({
-      
+
        resizeWidth: 1000,
        resizeHeight: 644,
        dictDefaultMessage: 'Default Message',
@@ -328,7 +324,7 @@ $(function() {
        maxFilesize: 1,
        init: function () {
         let myDropzone = this;
-       
+
         for (const key in docFiles) {
          if (Object.hasOwnProperty.call(docFiles, key)&&docFiles[key].type =='ProfileImg' ) {
           const element = docFiles[key];
@@ -336,7 +332,7 @@ $(function() {
           uploadFile = false ;
           myDropzone.displayExistingFile(mockFile,  element.path  );
            }
-          } 
+          }
            this.on("success", function (response,file, serverFileName) {
             alert('uploaded successfully');
                file.serverFn = serverFileName;
