@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Candidat;
-use App\docFile;
 use App\Formation;
 use App\Candidature;
 use App\Cursus_universitaire;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class CandidatureController extends Controller
 {
@@ -128,11 +127,19 @@ class CandidatureController extends Controller
      function downloadPDF($id)
     {
         abort_if(Gate::denies('Candidature_PDF_download'), 403);
-        $candidat = Candidat::where('id', $id)->first();
+        
+        $candidature = Candidature::where('id',$id)->first();
+        abort_if(($candidature==null), 404);
+        $candidat = Candidat::where('id', $candidature->candidat_id)->first();
+        
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         set_time_limit(300);
-
-        return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat'))->stream();
+  
+      
+            
+        $profileImg =base64_encode(Storage::get($candidat->docFiles()->where('type','=','profileImg')->first()->path ));
+        return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat','profileImg','candidature'))->stream();
+       
     }
 
     /**
@@ -144,9 +151,13 @@ class CandidatureController extends Controller
      function showPDF($id)
     {
 
-        //abort_if(Gate::denies('Candidature_PDF_view'), 403);
-        $candidat = Candidat::where('id', $id)->first();
-        return view('pre-inscription.attestation')->with('candidat', $candidat);
+        abort_if(Gate::denies('Candidature_PDF_view'), 403);
+        $candidature = Candidature::where('id',$id)->first();
+        abort_if(($candidature==null), 404);
+        $candidat = Candidat::where('id', $candidature->candidat_id)->first();
+        
+        $profileImg =base64_encode(Storage::get($candidat->docFiles()->where('type','=','profileImg')->first()->path ));
+        return view('pre-inscription.attestation')->with('candidat', $candidat)->with('profileImg',$profileImg)->with('candidature',$candidature);
     }
 
     /**

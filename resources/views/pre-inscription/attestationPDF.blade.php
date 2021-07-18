@@ -251,9 +251,7 @@ th {
 .panel-body:after {
   clear: both;
 }
-@-ms-viewport {
-  width: device-width;
-}
+
 
      </style>
 </head>
@@ -271,10 +269,9 @@ th {
                                 <!-- col-lg-6 start here -->
 
                                
-                                @php $path =($candidat==null)?'':$candidat->candidatures->first()->docFiles()->first()->path @endphp
-                               <div class="invoice-logo"><img width="200" src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png" alt="Invoice logo"></div>
-                               <!-- <div class="invoice-logo"><img width="200" src="{{url("storage/$path") }}" alt="Invoice logo"></div>-->
-                            </div>
+                                <div class="invoice-logo text-center"><img width="200" src="data:image;base64,{{ $profileImg }}" alt="Invoice logo"></div>
+                          
+                             </div>
                             <!-- col-lg-6 end here -->
 
                             <!-- col-lg-6 end here -->
