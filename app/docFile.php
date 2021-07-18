@@ -51,5 +51,9 @@ class docFile extends Model
         return $this->belongsTo(Etudiant::class);
     }
 
+    public function candidatures(){
+
+        return $this->belongsToMany(Candidature::class);
+    }
 
 }

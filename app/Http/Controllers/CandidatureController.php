@@ -89,6 +89,11 @@ class CandidatureController extends Controller
                     'formation_id' => $formation->id,
                 ]);
 
+
+                //  TODO add info to candidature_doc_file  
+
+
+
                 return redirect('/getFormations')->with('success', 'Votre candidature a été bien enregistré');
             }
 

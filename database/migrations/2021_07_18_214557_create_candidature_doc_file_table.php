@@ -15,6 +15,10 @@ class CreateCandidatureDocFileTable extends Migration
     {
         Schema::create('candidature_doc_file', function (Blueprint $table) {
             $table->id();
+
+            //columns foreign key
+            $table->foreignId('candidature_id')->constrained()->onDelete('cascade');
+            $table->foreignId('doc_file_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
