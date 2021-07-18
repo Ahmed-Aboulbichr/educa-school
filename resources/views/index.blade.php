@@ -25,5 +25,5 @@
                 <!-- Responsive examples -->
                 <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
         @endsection
-    @endif
+
 @endif

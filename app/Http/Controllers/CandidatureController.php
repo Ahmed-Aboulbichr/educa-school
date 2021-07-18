@@ -219,7 +219,7 @@ class CandidatureController extends Controller
 
         $candidature->delete();
 
-        return redirect()->route('mesCandidatures')->with('success', 'Votre candidatures a été supprimée');;
+        return redirect()->route('mesCandidatures')->with('success', 'Votre candidature a été supprimé');;
     }
 
     /* public function setValidate(Request $request){

@@ -61,7 +61,7 @@
             </div>
 
             @php
-                $candidat = \app\Candidat::where('user_id', Auth::id())->latest()->first();
+                $candidat = App\Candidat::where('user_id', Auth::id())->latest()->first();
                     try {
                     //code...
                     $path= ($candidat==null)?"NaN":$candidat->docFiles->where('type','ProfileImg')->first()->path;

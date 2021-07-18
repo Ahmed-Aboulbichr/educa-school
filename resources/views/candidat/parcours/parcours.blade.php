@@ -29,53 +29,59 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                @if( session()->has('success') )
-                    <div class="alert alert-success" role="alert" >{{ session()->get('success') }}</div>
-                @elseif( session()->has('exists') )
-                    <div class="alert alert-warning" role="alert" >{{ session()->get('exists') }}</div>
-                @endif
-                <h4 class="card-title">Veuillez ajouter vos parcours universitaire (anneé par anneé) à partir du bouton "Ajouter"</h4>
-                <div class="bg-light d-flex float-right mb-4">
-                    <button class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center" id="ajout"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
-                </div>
-                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    <thead>
-                    <tr>
-                        <th>Niveau Etude</th>
-                        <th>Spécialité</th>
-                        <th>Note S1</th>
-                        <th>Note S2</th>
-                        <th>Année</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-
-
-                    <tbody>
-                    @foreach ($data['cursus'] as $cur)
-                    <tr>
-                        <td>{{$cur->intitule}}</td>
-                        <td>{{$cur->specialite}}</td>
-                        <td>{{ $cur->note_S1 }}</td>
-                        <td>{{ $cur->note_S2 }}</td>
-                        <td>{{ $cur->Annee_univ }}</td>
-                        <td>
-                            {{-- <button class="btn btn-warning p-1" id="submitForm"><i class="mdi mdi-24px mdi-delete"></i></button> --}}
-                            <form action="{{ route('cursus_universitaire.destroy', $cur->id) }}" method="POST">
-                                <a class="btn btn-info p-1" type="button" href="{{ route('cursus_universitaire.show', $cur->id) }}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-warning p-1" name="archive" type="submit" id="submitForm" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+            @if( session()->has('success') )
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="mdi mdi-check-all mr-2"></i>
+                {{ session()->get('success') }}
             </div>
-        </div>
+            @elseif( session()->has('exists') )
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="mdi mdi-block-helper mr-2"></i>
+                 {{ session()->get('exists') }}
+                </div>
+            @endif
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Veuillez ajouter vos parcours universitaire (anneé par anneé) à partir du bouton "Ajouter"</h4>
+                    <div class="bg-light d-flex float-right mb-4">
+                        <button class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center" id="ajout"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
+                    </div>
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                        <tr>
+                            <th>Niveau Etude</th>
+                            <th>Spécialité</th>
+                            <th>Note S1</th>
+                            <th>Note S2</th>
+                            <th>Année</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+
+
+                        <tbody>
+                        @foreach ($data['cursus'] as $cur)
+                        <tr>
+                            <td>{{$cur->intitule}}</td>
+                            <td>{{$cur->specialite}}</td>
+                            <td>{{ $cur->note_S1 }}</td>
+                            <td>{{ $cur->note_S2 }}</td>
+                            <td>{{ $cur->Annee_univ }}</td>
+                            <td>
+                                {{-- <button class="btn btn-warning p-1" id="submitForm"><i class="mdi mdi-24px mdi-delete"></i></button> --}}
+                                <form action="{{ route('cursus_universitaire.destroy', $cur->id) }}" method="POST">
+                                    <a class="btn btn-info p-1" type="button" href="{{ route('cursus_universitaire.show', $cur->id) }}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-warning p-1" name="archive" type="submit" id="submitForm" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 

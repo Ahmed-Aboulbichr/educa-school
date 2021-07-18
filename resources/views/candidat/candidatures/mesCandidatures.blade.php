@@ -53,7 +53,7 @@
                                 <td>Pas encours</td>
                             @endif
                             <td>
-                                  <button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light" data-toggle="modal" data-id="{{$candidature->id}}" data-target="#annule">
+                                  <button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light btn-delete"  data-toggle="modal" data-action="{{ route('candidatures.destroy', $candidature->id) }}" data-target="#annule">
                                     <i class="ri-close-line align-middle mr-2"></i>Annuler
                                   </button>
                             </td>
@@ -67,24 +67,24 @@
     </div><!-- end col-->
 </div> <!-- end row-->
 <!-- Modal -->
-<div class="modal fade" id="annule" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="annule"  tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Annuler mon candidature</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Annuler la candidature</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Vous étes sur tu veux supprimée votre candidature</p>
+                <p>êtes-vous sûr de vouloir annuler votre candidature ?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">close</button>
-                <form action="" method="post">
+                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Oui</button>
+                <form action="" id="form-delete-candidature" method="post">
                     @csrf
                     @method('DELETE')
-                        <button type="button" class="btn btn-danger waves-effect waves-light">Supprimer</button>
+                        <button class="btn btn-danger waves-effect waves-light" type="submit">Non</button>
                 </form>
             </div>
         </div>
@@ -94,10 +94,8 @@
 @endsection
 @section('script')
     <script>
-        $(document).on("click", "annule", function () {
-         {{ $annule }} = $(this).data('id');
-        var action ={{route('candidatures.destroy', $annule)}}
-        $('.modal-footer').find('form').attr('action', action);
+        $('.btn-delete').on('click', function () {
+            $('#form-delete-candidature').attr('action', $(this).data('action'));
         });
     </script>
     <!-- Required datatable js -->
