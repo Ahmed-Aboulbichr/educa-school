@@ -22,19 +22,17 @@ Register
                                         <div>
                                             <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="20" alt="logo"></a>
                                         </div>
-
                                         <h4 class="font-size-18 mt-4">Register account</h4>
-                                        <p class="text-muted">Get your free Nazox account now.</p>
                                     </div>
 
                                     <div class="p-2 mt-5">
                                         <form method="POST" action="{{ route('register') }}">
                                             @csrf
-
+                                            <!--
                                             <div class="input-daterange input-group" data-provide="datepicker" data-date-format="dd M, yyyy" data-date-autoclose="true">
                                                 <input type="text" class="form-control" name="start" />
                                                 <input type="text" class="form-control" name="end" />
-                                            </div>
+                                            </div> !-->
                                             <div class="form-group auth-form-group-custom mb-4">
                                                 <i class="ri-user-2-line auti-custom-input-icon"></i>
                                                 <label for="firstName">{{ __('firstName') }}</label>
@@ -86,10 +84,10 @@ Register
                                             <div class="text-center">
                                                 <button class="btn btn-primary w-md waves-effect waves-light" type="submit">{{ __('Register') }}</button>
                                             </div>
-
+                                            <!--
                                             <div class="mt-4 text-center">
                                                 <p class="mb-0">By registering you agree to the Nazox <a href="#" class="text-primary">Terms of Use</a></p>
-                                            </div>
+                                            </div> !-->
 
                                         </form>
                                     </div>

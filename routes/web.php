@@ -26,8 +26,6 @@ Auth::routes(['verify' => true]);
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {
 
-
-    Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
     Route::get('pre-ins', 'CandidatController@index')->name('getPreInscr');
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
@@ -66,6 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/etudiants', 'EtudiantController');
     Route::resource('/candidats', 'CandidatController');
     Route::get('/profile','CandidatController@profile' )->name('profile');
+    Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
+
     Route::post('saveCandidature', 'CandidatureController@store')->name('saveCandidature');
     Route::resource('candidatures', 'CandidatureController');
     Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');

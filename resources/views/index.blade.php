@@ -1,29 +1,29 @@
-@extends('layouts.master-educa')
-@section('title') Dashboard @endsection
-@section('css')
-    <!-- DataTables -->
-    <link href="{{ URL::asset('/assets/libs/jquery-vectormap/jquery-vectormap.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- Responsive datatable examples -->
-    <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
-@endsection
-@section('content')
-@component('components.breadcrumb')
-    @slot('title') Dashboard @endslot
-    @slot('li_1')  @endslot
-    @slot('li_2')  @endslot
-@endcomponent
-    <div class="row">
+@if ((Auth::user()==null)?false:(Auth::user()->hasRole('User')))
+    {{-- si le cas d'un candidature --}}
 
-    </div>
+    <script type="text/javascript">
+        window.location.href = "/pre-ins";
+    </script>
+@else
+    {{-- si le cas d'un admin ou bien etudiant --}}
 
-    <!-- end row -->
-    @endsection
+        @extends('layouts.master-educa')
+        @section('title') Dashboard  @endsection
+        @section('css')
+            <!-- DataTables -->
+            <link href="{{ URL::asset('/assets/libs/jquery-vectormap/jquery-vectormap.min.css')}}" rel="stylesheet" type="text/css" />
+            <!-- Responsive datatable examples -->
+            <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
+        @endsection
+        @section('content')
+            <div class="row">
 
-    @section('script')
+            </div>
+            <!-- end row -->
+        @endsection
+        @section('script')
+                <!-- Responsive examples -->
+                <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
+        @endsection
 
-            <!-- Responsive examples -->
-            <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
-
-
-    @endsection
-
+@endif

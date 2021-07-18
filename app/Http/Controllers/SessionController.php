@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Session;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -13,7 +14,8 @@ class SessionController extends Controller
      */
     public function index()
     {
-        //
+        $sessions = Session::all();
+        return view('admin.session.index', compact('sessions'));
     }
 
     /**
@@ -23,7 +25,7 @@ class SessionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.session.create');
     }
 
     /**
@@ -34,19 +36,16 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'anne_univ'=>'required',
+            'date_session'=>'required'
+        ]);
+
+        Session::create($request->all());
+         return redirect()->route('session.index')
+         ->with('success','La session a été enregistrée') ;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -56,7 +55,8 @@ class SessionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $session = Session::findOrFail($id);
+        return view('admin.session.edit', compact('sessions'));
     }
 
     /**
@@ -68,7 +68,16 @@ class SessionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'anne_univ' => 'required',
+            'date_session' => 'required'
+        ]);
+
+        Session::where('id',$id)->update($request->all());
+
+        return redirect()->route('session.index')
+        ->with('success','La session a été modifié');
+
     }
 
     /**
@@ -79,6 +88,9 @@ class SessionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $session = Session::findOrFail($id);
+        $session->delete();
+        return redirect()->route('session.index')
+        ->with('success','La session a été modifié');
     }
 }
