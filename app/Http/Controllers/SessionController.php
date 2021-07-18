@@ -14,7 +14,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions = Session::latest();
+        $sessions = Session::all();
         return view('admin.session.index', compact('sessions'));
     }
 
@@ -72,6 +72,7 @@ class SessionController extends Controller
             'anne_univ' => 'required',
             'date_session' => 'required'
         ]);
+
         Session::where('id',$id)->update($request->all());
 
         return redirect()->route('session.index')

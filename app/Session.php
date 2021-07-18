@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Session extends Model
 {
     protected $fillable = [
-        'anne_univ',
+        'annee_univ',
         'date_session',
     ];
 
