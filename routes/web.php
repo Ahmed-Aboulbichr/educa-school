@@ -73,6 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
     Route::resource('/sessions', 'SessionController');
     Route::resource('/formations', 'FormationController');
+    Route::resource('/type_formations', 'TypeFormationController');
     Route::resource('/seances', 'SeanceController');
     Route::resource('/salles', 'SalleController');
 

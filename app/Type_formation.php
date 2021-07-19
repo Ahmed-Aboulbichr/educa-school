@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Type_formation extends Model
 {
     protected $fillable = [
-        'id',
         'designation',
+        'annees_post_bac'
     ];
 
     public function formations()
