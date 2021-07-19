@@ -14,7 +14,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions = Session::all();
+        $sessions = Session::all()->sortByDesc('annee_univ');
         return view('admin.session.index', compact('sessions'));
     }
 
@@ -37,12 +37,16 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'anne_univ'=>'required',
-            'date_session'=>'required'
+            'annee_univ'=>'required',
+            'date_session'=>['required', 'date_format:Y-m-d']
         ]);
 
-        Session::create($request->all());
-         return redirect()->route('session.index')
+        Session::create([
+            'annee_univ' => $request->get('annee_univ'),
+            'date_session' => $request->get('date_session')
+        ]);
+
+        return redirect()->route('session.index')
          ->with('success','La session a été enregistrée') ;
     }
 
@@ -56,7 +60,7 @@ class SessionController extends Controller
     public function edit($id)
     {
         $session = Session::findOrFail($id);
-        return view('admin.session.edit', compact('sessions'));
+        return response()->json($session, 200);
     }
 
     /**
@@ -73,7 +77,10 @@ class SessionController extends Controller
             'date_session' => 'required'
         ]);
 
-        Session::where('id',$id)->update($request->all());
+        Session::where('id',$id)->update([
+            'annee_univ' => $request->get('annee_univ'),
+            'date_session' => $request->get('date_session')
+        ]);
 
         return redirect()->route('session.index')
         ->with('success','La session a été modifié');
