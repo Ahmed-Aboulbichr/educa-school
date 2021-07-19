@@ -32,12 +32,13 @@
                 </button>
             </div>
         @endif
-        <div class="row mb-2 mt-4">
-            <div class="col-xl-2 offset-xl-10 offset-lg-9" style="padding-left: 4em;">
-                <button class="btn btn-primary waves-effect waves-light" data-target="#ajoutModal"  data-toggle="modal"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
-            </div>
-        </div>
+       
         <div class="card">
+            <div class="row mb-2 mt-4">
+                <div class="col-xl-2 offset-xl-10 offset-lg-9" style="padding-left: 4em;">
+                    <button class="btn btn-primary waves-effect waves-light" data-target="#ajoutModal"  data-toggle="modal"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
+                </div>
+            </div>
             <div class="card-body">
                 <h4 class="card-title"></h4>
                 <table id="datatable" class="table dt-responsive nowrap mt-4">
@@ -49,25 +50,27 @@
                             <th>Action</th>
                         </tr>
                     </thead>
+                    @php
+                        $i = 0;
+                        @endphp
                     <tbody>
+                        @foreach ($Type_formations as $Type_formation)
                         <tr>
-                            @php
-                                $i = 0;
-                            @endphp
-                            @foreach ($Type_formations as $Type_formation)
+                          
                                 <td>{{++$i}}</td>
                                 <td>{{$Type_formation->designation}}</td>
                                 <td>{{$Type_formation->annees_post_bac}}</td>
                                 <td>
-                                    <form action="{{ route('Type_formations.destroy', $Type_formation->id) }}" method="POST">
-                                        <a class="btn btn-info p-1" type="button" href="{{ route('Type_formations.edit', $Type_formation->id) }}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
+                                    <form action="{{ route('type_formations.destroy', $Type_formation->id) }}" method="POST">
+                                        <a class="btn btn-edit btn-info p-1" type="button" data-route="{{route('type_formations.edit', $Type_formation->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-warning p-1" name="archive" type="submit" id="submitForm" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
+                                        <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
                                     </form>
                                 </td>
-                            @endforeach
+                            
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div> <!-- end card body-->
@@ -82,24 +85,65 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <form action="{{ route('type_formations.store') }}" method="POST">
+                        @csrf
                     <div class="modal-body">
                         <div class="form-group row align-items-center">
-                            <label class="col-md-3 col-form-label">Année Universitaire</label>
+                            <label class="col-md-3 col-form-label">intitulé</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="designation" id="designation">
+                                <input type="text" class="form-control" name="designation">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
-                            <label class="col-md-3 col-form-label">Date type de formation</label>
+                            <label class="col-md-3 col-form-label">Nombre d'années après bac</label>
                             <div class="col-md-9">
-                                <input class="form-control" type="number" name="annees_post_bac" value="2020-03-19" id="annees_post_bac">
+                                <input class="form-control" type="number" name="annees_post_bac" >
                             </div>
                         </div>
                     </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
                     </div>
+                    </form>
+    
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>  
+        
+        <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title mt-0" id="myModalLabel">Ajout d'un type de formation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="" id="editForm" method="POST">
+                        @csrf
+                    <div class="modal-body">
+                        <div class="form-group row align-items-center">
+                            <label class="col-md-3 col-form-label">intitulé</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="designation" value="" id="designation">
+                            </div>
+                        </div>
+                        <div class="form-group row align-items-center">
+                            <label class="col-md-3 col-form-label">Nombre d'années après bac</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="number" name="annees_post_bac" value="" id="annees_post_bac">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                    </div>
+                    </form>
+    
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div>
@@ -121,6 +165,23 @@
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
 
     <script>
+        $('.btn-edit').on('click', function () {
+            var route = $(this).data('route');
+            $.ajax({
+                url: route,
+                type: 'get',
+                dataType: 'json',
+                success: function(response){
+                    $("#editModal").modal('show');
+                    $("#editForm").attr("action",response.route);
+                    $("#designation").val(response.Type_formation.designation);
+                    $("#annees_post_bac").val(response.Type_formation.annees_post_bac);
+                },
+                error: function(response){
+                    console.log(response.responseText);
+                }
+            })
+        });
        /* $(document).ready(function() {
             var table = $('#datatable').dataTable({
                 "language": {

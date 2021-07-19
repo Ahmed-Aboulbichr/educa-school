@@ -11,6 +11,15 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class=" fas fa-graduation-cap"></i>
+                        <span>Formation</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{url('type_formations')}}>Types formations</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-menu-fill"></i>
                         <span>Candidature</span>
                     </a>

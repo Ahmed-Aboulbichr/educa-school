@@ -55,8 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
 
-    //other routes
-    Route::resource('/type_formations', 'TypeFormationController')->only(['index', 'show']);
 
     Route::resource('/cursus_universitaire', 'CursusUniversitaireController');
     Route::resource('/administrateurs', 'AdministrateurController');
@@ -73,7 +71,11 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
     Route::resource('/session', 'SessionController');
     Route::resource('/formations', 'FormationController');
-    Route::resource('/type_formations', 'TypeFormationController');
+    Route::resource('/type_formations', 'TypeFormationController', [
+        'except' => ['update']
+      ]);
+    
+    Route::post('/type_formations/update/{id}', 'TypeFormationController@update')->name('type_formations.update');
     Route::resource('/seances', 'SeanceController');
     Route::resource('/salles', 'SalleController');
 

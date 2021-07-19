@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Type_formation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TypeFormationController extends Controller
 {
@@ -43,7 +42,7 @@ class TypeFormationController extends Controller
         ]);
 
         Type_formation::create($request->all());
-         return redirect()->route('Type_formation.index')
+         return redirect()->route('type_formations.index')
          ->with('success','La Type_formation a été enregistrée') ;
     }
 
@@ -52,11 +51,11 @@ class TypeFormationController extends Controller
      *
      * @param  \App\Type_formation  $Type_formation
      * @return \Illuminate\Http\Response
-     */
-    public function show(Type_formation $Type_formation, $id)
+     */ 
+    public function show($id)
     {
         $type_formation = Type_formation::findOrFail($id);
-        /*$candidatures = DB::table('type_formations')
+       /* $candidatures = DB::table('type_formations')
             ->join('formations', 'formations.type_formation_id', '=', 'type_formations.id')
             ->join('candidatures', 'formations.id', '=', 'candidatures.formation_id')
             ->join('candidats', 'candidatures.candidat_id', '=', 'candidats.id')
@@ -76,7 +75,11 @@ class TypeFormationController extends Controller
     public function edit($id)
     {
         $Type_formation = Type_formation::findOrFail($id);
-        return view('admin.Type_formation.edit', compact('Type_formations'));
+        $response = [
+            'Type_formation' => $Type_formation,
+             'route' =>  route('type_formations.update',[$id])
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -93,9 +96,15 @@ class TypeFormationController extends Controller
             'annees_post_bac' => 'required'
         ]);
 
-        Type_formation::where('id',$id)->update($request->all());
+        Type_formation::where('id',$id)->update(
+            [
+                'designation' => $request->designation,
+                'annees_post_bac' => $request->annees_post_bac
 
-        return redirect()->route('Type_formation.index')
+            ]
+            );
+
+        return redirect()->route('type_formations.index')
         ->with('success','La Type_formation a été modifié');
 
     }
@@ -110,7 +119,7 @@ class TypeFormationController extends Controller
     {
         $Type_formation = Type_formation::findOrFail($id);
         $Type_formation->delete();
-        return redirect()->route('Type_formation.index')
+        return redirect()->route('type_formations.index')
         ->with('success','La Type_formation a été modifié');
     }
 
