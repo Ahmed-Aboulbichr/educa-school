@@ -49,29 +49,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @php
-                                $i = 0;
-                            @endphp
-                            @foreach ($sessions as $session)
+                        @php
+                            $i = 0;
+                        @endphp
+                        @foreach ($sessions as $session)
+                            <tr>
                                 <td>{{++$i}}</td>
                                 <td>{{$session->annee_univ}}</td>
                                 <td>{{$session->date_session}}</td>
                                 <td>
-                                    <form action="{{ route('sessions.destroy', $session->id) }}" method="POST">
-                                        <a class="btn btn-info p-1" type="button" href="{{ route('sessions.edit', $session->id) }}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
+                                    <form action="{{ route('session.destroy', $session->id) }}" method="POST">
+                                        <a class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('session.edit', $session->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-warning p-1" name="archive" type="submit" id="submitForm" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
+                                        <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
                                     </form>
                                 </td>
-                            @endforeach
-                        </tr>
+                                </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div> <!-- end card body-->
         </div>
-
+        <!--Modal Ajout -->
         <div id="ajoutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -81,34 +81,74 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group row align-items-center">
-                            <label class="col-md-3 col-form-label">Année Universitaire</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="niveau_etude_id" id="nvEtude">
-                                    <option value="{{date('Y')}}-{{date('Y')+1}}">{{date('Y')}}/{{date('Y')+1}}</option>
-                                    @for ($i = 0; $i <20; $i++)
-                                        @php
-                                            $currentYear = date('Y');
-                                            $year = $currentYear - $i;
-                                            $lastYear = $currentYear-($i+1);
-                                        @endphp
-                                        <option value="{{$lastYear}}-{{$year}}">{{$lastYear}}/{{$year}}</option>
-                                    @endfor
-                                </select>
+                    <form action="{{ route('session.store') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Année Universitaire</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" name="annee_univ">
+                                        <option>--- Année universitaire ---</option>
+                                        <option value="{{date('Y')}}-{{date('Y')+1}}">{{date('Y')}}/{{date('Y')+1}}</option>
+                                        @for ($i = 0; $i <20; $i++)
+                                            @php
+                                                $currentYear = date('Y');
+                                                $year = $currentYear - $i;
+                                                $lastYear = $currentYear-($i+1);
+                                            @endphp
+                                            <option name="annee_univ" value="{{$lastYear}}-{{$year}}">{{$lastYear}}/{{$year}}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Date session</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="date" name="date_session" id="example-date-input">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group row align-items-center">
-                            <label class="col-md-3 col-form-label">Date session</label>
-                            <div class="col-md-9">
-                                <input class="form-control" type="date" value="2020-03-19" id="example-date-input">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter la session</button>
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+        <!--Modal modifier -->
+        <div id="modifierModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title mt-0" id="myModalLabel">Modifier la session</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('session.edit', $session->id) }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Année Universitaire</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" name="annee_univ" id="anneUniv">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Date session</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="date" id="date_session" name="date_session">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter la session</button>
+                        </div>
+                    </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div>
@@ -130,6 +170,24 @@
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
 
     <script>
+        $('.btn-edit').on('click', function () {
+            var route = $(this).data('route');
+            $.ajax({
+                url: route,
+                type: 'get',
+                dataType: 'json',
+                success: function(response){
+                    $("#modifierModal").modal('show');
+                    console.log(response);
+                    var optionSelected = "<option selected value="+response.annee_univ+">"+response.annee_univ+"</option>";
+                    $("#anneUniv").append(optionSelected);
+                    $("#date_session").val(response.date_session);
+                },
+                error: function(response){
+                    console.log(response.responseText);
+                }
+            })
+        });
        /* $(document).ready(function() {
             var table = $('#datatable').dataTable({
                 "language": {

@@ -253,50 +253,46 @@ class CandidatController extends Controller
     {
         if ($request->ajax()) {
 
+            $validator = Validator::make($request->all(),[
+                'annee_bac' => [ 'required', 'string', 'max:4'],
+                'mention_bac' => [ 'required', 'string', Rule::in(['P', 'AB', 'B', 'TB', 'E'])],
+                'mg_bac' => [ 'required', 'numeric', 'between:0,20'],
+                'lycee_bac' => [ 'required', 'string', 'max:255'],
+                'type_bac' => [ 'required', 'string', 'max:255'],
+                'province' => [ 'required', 'integer', 'max:255',Rule::exists('provinces', 'id')->where('id', $request->input('province'))],
+                'delegation' => [ 'required', 'integer', 'max:255',Rule::exists('delegations', 'id')->where('id', $request->input('delegation'))],
+                'academie' => [ 'required', 'integer', 'max:255',Rule::exists('academies', 'id')->where('id', $request->input('academie'))],
+            ]);
+            if($validator->fails()){
+
+                return  response()->json(['errors' => $validator->errors()->toArray()], 500);
+
+            }else {
+                $fields = $request->all();
+                $candidat = null;
+                $candidat = Candidat::where('user_id', Auth::id())->first();
+
+                if (is_object($candidat)) {
+                    $candidat->update([
+                        'annee_bac' => $fields['annee_bac'],
+                        'mention_bac' => $fields['mention_bac'],
+                        'mg_bac' => $fields['mg_bac'],
+                        'type_bac' => $fields['type_bac'],
+                        'lycee_bac' => $fields['lycee_bac'],
+                        'province_id' => $fields['province'],
+                        'delegation_id' => $fields['delegation'],
+                        'academie_id' =>  $fields['academie'],
+                    ]);
 
 
-                $validator = Validator::make($request->all(),[
-                    'annee_bac' => [ 'required', 'string', 'max:4'],
-                    'mention_bac' => [ 'required', 'string', Rule::in(['P', 'AB', 'B', 'TB', 'E'])],
-                    'mg_bac' => [ 'required', 'numeric', 'between:0,20'],
-                    'lycee_bac' => [ 'required', 'string', 'max:255'],
-                    'type_bac' => [ 'required', 'string', 'max:255'],
-                    'province' => [ 'required', 'integer', 'max:255',Rule::exists('provinces', 'id')->where('id', $request->input('province'))],
-                    'delegation' => [ 'required', 'integer', 'max:255',Rule::exists('delegations', 'id')->where('id', $request->input('delegation'))],
-                    'academie' => [ 'required', 'integer', 'max:255',Rule::exists('academies', 'id')->where('id', $request->input('academie'))],
-                ]);
-                if($validator->fails()){
-
-                    return  response()->json(['errors' => $validator->errors()->toArray()], 500);
-
-                }else {
-            $fields = $request->all();
-            $candidat = null;
-            $candidat = Candidat::where('user_id', Auth::id())->first();
-
-            if (is_object($candidat)) {
-                $candidat->update([
-                    'annee_bac' => $fields['annee_bac'],
-                    'mention_bac' => $fields['mention_bac'],
-                    'mg_bac' => $fields['mg_bac'],
-                    'type_bac' => $fields['type_bac'],
-                    'lycee_bac' => $fields['lycee_bac'],
-                    'province_id' => $fields['province'],
-                    'delegation_id' => $fields['delegation'],
-                    'academie_id' =>  $fields['academie'],
-                ]);
-
-
-                $response = array(
-                    'candidat' => $candidat,
-                    'url'     => route('cursus_universitaire.index'),
-                );
-                return  response()->json($response, 200);
-            } return  response()->json("nothing to update", 200);
+                    $response = array(
+                        'candidat' => $candidat,
+                        'url'     => route('cursus_universitaire.index'),
+                    );
+                    return  response()->json($response, 200);
+                } return  response()->json("nothing to update", 200);
+            }
         }
-
-
-    }
     }
 
     public function saveStepFour(Request $request,$type)
