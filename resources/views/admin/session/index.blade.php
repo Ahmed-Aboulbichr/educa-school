@@ -59,7 +59,7 @@
                                 <td>{{$session->date_session}}</td>
                                 <td>
                                     <form action="{{ route('session.destroy', $session->id) }}" method="POST">
-                                        <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('session.edit', $session->id)}}" data-action="{{route('session.update', $session->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                        <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('session.edit', $session->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
@@ -104,7 +104,7 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Date session</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="date" name="date_session" id="example-date-input">
+                                    <input class="form-control" type="date" name="date_session" >
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
         </div>
 
         <!--Modal modifier -->
-        <div id="modifierModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -127,7 +127,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="" id="form-update-session" method="POST">
+                    <form action="" id="editForm" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group row align-items-center">
@@ -186,16 +186,16 @@
                 type: 'get',
                 dataType: 'json',
                 success: function(response){
-                    $("#modifierModal").modal('show');
-                    var optionSelected = "<option selected value="+response.annee_univ+">"+response.annee_univ+"</option>";
+                    $("#editModal").modal('show');
+                    var optionSelected = "<option selected value="+response.session.annee_univ+">"+response.session.annee_univ+"</option>";
+                    $("#editForm").attr("action",response.route);
                     $("#anneUniv").append(optionSelected);
-                    $("#date_session").val(response.date_session);
+                    $("#date_session").val(response.session.date_session);
                 },
                 error: function(response){
                     console.log(response.responseText);
                 }
             })
-            $('#form-update-session').attr('action', $(this).data('action'));
         });
        /* $(document).ready(function() {
             var table = $('#datatable').dataTable({

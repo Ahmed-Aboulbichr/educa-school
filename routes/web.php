@@ -69,13 +69,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
 
     // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
-    Route::resource('/session', 'SessionController');
+    Route::resource('/session', 'SessionController',  [
+        'except' => ['update']
+    ]);
     Route::resource('/formations', 'FormationController');
     Route::resource('/type_formations', 'TypeFormationController', [
         'except' => ['update']
-      ]);
-    
+    ]);
+
     Route::post('/type_formations/update/{id}', 'TypeFormationController@update')->name('type_formations.update');
+    Route::post('/session/update/{id}', 'SessionController@update')->name('session.update');
     Route::resource('/seances', 'SeanceController');
     Route::resource('/salles', 'SalleController');
 

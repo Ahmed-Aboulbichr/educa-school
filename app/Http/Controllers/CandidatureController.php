@@ -90,7 +90,8 @@ class CandidatureController extends Controller
                 ]);
 
 
-                //  TODO add info to candidature_doc_file  
+
+                //  TODO add info to candidature_doc_file
 
 
 
@@ -132,19 +133,19 @@ class CandidatureController extends Controller
      function downloadPDF($id)
     {
         abort_if(Gate::denies('Candidature_PDF_download'), 403);
-        
+
         $candidature = Candidature::where('id',$id)->first();
         abort_if(($candidature==null), 404);
         $candidat = Candidat::where('id', $candidature->candidat_id)->first();
-        
+
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         set_time_limit(300);
-  
-      
-            
+
+
+
         $profileImg =base64_encode(Storage::get($candidat->docFiles()->where('type','=','profileImg')->first()->path ));
         return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat','profileImg','candidature'))->stream();
-       
+
     }
 
     /**
@@ -160,7 +161,7 @@ class CandidatureController extends Controller
         $candidature = Candidature::where('id',$id)->first();
         abort_if(($candidature==null), 404);
         $candidat = Candidat::where('id', $candidature->candidat_id)->first();
-        
+
         $profileImg =base64_encode(Storage::get($candidat->docFiles()->where('type','=','profileImg')->first()->path ));
         return view('pre-inscription.attestation')->with('candidat', $candidat)->with('profileImg',$profileImg)->with('candidature',$candidature);
     }
