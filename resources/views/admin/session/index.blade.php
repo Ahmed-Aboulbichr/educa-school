@@ -59,13 +59,13 @@
                                 <td>{{$session->date_session}}</td>
                                 <td>
                                     <form action="{{ route('session.destroy', $session->id) }}" method="POST">
-                                        <a class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('session.edit', $session->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
+                                        <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('session.edit', $session->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
                                     </form>
                                 </td>
-                                </tr>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -85,18 +85,18 @@
                         @csrf
                         <div class="modal-body">
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Année Universitaire</label>
+                                <label class="col-md-3 col-form-label">Année universitaire</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="annee_univ">
                                         <option>--- Année universitaire ---</option>
-                                        <option value="{{date('Y')}}-{{date('Y')+1}}">{{date('Y')}}/{{date('Y')+1}}</option>
+                                        <option value="{{date('Y')}}-{{date('Y')+1}}">{{date('Y')}}-{{date('Y')+1}}</option>
                                         @for ($i = 0; $i <20; $i++)
                                             @php
                                                 $currentYear = date('Y');
                                                 $year = $currentYear - $i;
                                                 $lastYear = $currentYear-($i+1);
                                             @endphp
-                                            <option name="annee_univ" value="{{$lastYear}}-{{$year}}">{{$lastYear}}/{{$year}}</option>
+                                            <option name="annee_univ" value="{{$lastYear}}-{{$year}}">{{$lastYear}}-{{$year}}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -104,13 +104,13 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Date session</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="date" name="date_session" id="example-date-input">
+                                    <input class="form-control" type="date" name="date_session" >
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter la session</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
                         </div>
                     </form>
                 </div><!-- /.modal-content -->
@@ -118,7 +118,7 @@
         </div>
 
         <!--Modal modifier -->
-        <div id="modifierModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -127,13 +127,22 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('session.edit', $session->id) }}" method="POST">
+                    <form action="" id="editForm" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Année Universitaire</label>
+                                <label class="col-md-3 col-form-label">Année universitaire</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="annee_univ" id="anneUniv">
+                                        <option value="{{date('Y')}}-{{date('Y')+1}}">{{date('Y')}}-{{date('Y')+1}}</option>
+                                        @for ($i = 0; $i <20; $i++)
+                                            @php
+                                                $currentYear = date('Y');
+                                                $year = $currentYear - $i;
+                                                $lastYear = $currentYear-($i+1);
+                                            @endphp
+                                            <option name="annee_univ" value="{{$lastYear}}-{{$year}}">{{$lastYear}}-{{$year}}</option>
+                                        @endfor
                                     </select>
                                 </div>
                             </div>
@@ -146,7 +155,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter la session</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Modifier</button>
                         </div>
                     </form>
                 </div><!-- /.modal-content -->
@@ -177,11 +186,11 @@
                 type: 'get',
                 dataType: 'json',
                 success: function(response){
-                    $("#modifierModal").modal('show');
-                    console.log(response);
-                    var optionSelected = "<option selected value="+response.annee_univ+">"+response.annee_univ+"</option>";
+                    $("#editModal").modal('show');
+                    var optionSelected = "<option selected value="+response.session.annee_univ+">"+response.session.annee_univ+"</option>";
+                    $("#editForm").attr("action",response.route);
                     $("#anneUniv").append(optionSelected);
-                    $("#date_session").val(response.date_session);
+                    $("#date_session").val(response.session.date_session);
                 },
                 error: function(response){
                     console.log(response.responseText);

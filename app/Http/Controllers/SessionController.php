@@ -60,7 +60,11 @@ class SessionController extends Controller
     public function edit($id)
     {
         $session = Session::findOrFail($id);
-        return response()->json($session, 200);
+        $response = [
+            'session' => $session,
+            'route' =>  route('session.update',[$id])
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -74,7 +78,7 @@ class SessionController extends Controller
     {
         $request->validate([
             'anne_univ' => 'required',
-            'date_session' => 'required'
+            'date_session' => ['required', 'date_format:Y-m-d']
         ]);
 
         Session::where('id',$id)->update([

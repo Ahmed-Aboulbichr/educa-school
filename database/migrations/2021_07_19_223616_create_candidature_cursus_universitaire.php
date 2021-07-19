@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCandidatureDocFileTable extends Migration
+class CreateCandidatureCursusUniversitaire extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCandidatureDocFileTable extends Migration
      */
     public function up()
     {
-        Schema::create('candidature_doc_file', function (Blueprint $table) {
+        Schema::create('candidature_cursus_universitaire', function (Blueprint $table) {
             $table->id();
 
             //columns foreign key
@@ -30,6 +30,6 @@ class CreateCandidatureDocFileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('candidature_doc_file');
+        Schema::dropIfExists('candidature_cursus_universitaire');
     }
 }
