@@ -35,9 +35,10 @@ class TypeFormationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request->session()->flash('operation','store');
         $request->validate([
-            'annees_post_bac'=>'required',
+            'designation'=>'required',
             'annees_post_bac'=>'required'
         ]);
 
@@ -79,6 +80,7 @@ class TypeFormationController extends Controller
             'Type_formation' => $Type_formation,
              'route' =>  route('type_formations.update',[$id])
         ];
+
         return response()->json($response, 200);
     }
 
@@ -90,7 +92,8 @@ class TypeFormationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $request->session()->flash('operation','update');
         $request->validate([
             'designation' => 'required',
             'annees_post_bac' => 'required'
@@ -103,7 +106,6 @@ class TypeFormationController extends Controller
 
             ]
             );
-
         return redirect()->route('type_formations.index')
         ->with('success','La Type_formation a été modifié');
 
