@@ -29,7 +29,7 @@ class docFile extends Model
         return $this->belongsToMany(Reponse::class);
     }
 
-  
+
 
     public function cursusUniversitaire()
     {
@@ -49,11 +49,6 @@ class docFile extends Model
     public function etudiants()
     {
         return $this->belongsTo(Etudiant::class);
-    }
-
-    public function candidatures(){
-
-        return $this->belongsToMany(Candidature::class);
     }
 
 }

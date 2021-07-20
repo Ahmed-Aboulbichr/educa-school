@@ -36,4 +36,8 @@ class Cursus_universitaire extends Model
     {
         return $this->hasMany(docFile::class);
     }
+
+    public function candidatures(){
+        return $this->belongsToMany(Candidature::class);
+    }
 }
