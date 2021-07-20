@@ -7,6 +7,7 @@ use App\Formation;
 use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
+use App\CandidatureCursusUniv;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -71,6 +72,7 @@ class CandidatureController extends Controller
             $niveauPreRequise = Niveau_etude::where('id',$formation->niveau_preRequise)->first()->intitule;
             //récupérer le derniére cursus de candidat
             $cursusUniv = Cursus_universitaire::where('candidat_id',$candidat->id)->latest()->first();
+            $check = false;
 
             if($cursusUniv === null){
                 $niveauEtude = "BAC";
@@ -89,12 +91,17 @@ class CandidatureController extends Controller
                     'formation_id' => $formation->id,
                 ]);
 
+                $cursusUniversitaires = Cursus_universitaire::where('candidat_id',$candidat->id)->get();
+                $checkTwo = false;
 
-
-                //  TODO add info to candidature_doc_file
-
-
-
+                foreach ($cursusUniversitaires as $cursusUniv) {
+                    //récupére le niveau etude de chaque cursus
+                    $niveauIterative = Niveau_etude::where('id',$cursusUniv->niveau_etude_id)->first()->intitule;
+                    if($niveauIterative <= $niveauPreRequise){
+                        CandidatureCursusUniv::create(['candidature_id' => $candidature->id,
+                        'cursus_universitaire_id' => $cursusUniv->id]);
+                    }
+                }
                 return redirect('/getFormations')->with('success', 'Votre candidature a été enregistrée');
             }
 

@@ -80,11 +80,11 @@
                 <p>êtes-vous sûr de vouloir annuler votre candidature ?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Oui</button>
+                <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Non</button>
                 <form action="" id="form-delete-candidature" method="post">
                     @csrf
                     @method('DELETE')
-                        <button class="btn btn-danger waves-effect waves-light" type="submit">Non</button>
+                        <button class="btn btn-danger waves-effect waves-light" type="submit">Oui</button>
                 </form>
             </div>
         </div>
