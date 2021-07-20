@@ -92,7 +92,6 @@ class CandidatureController extends Controller
                 ]);
 
                 $cursusUniversitaires = Cursus_universitaire::where('candidat_id',$candidat->id)->get();
-                $checkTwo = false;
 
                 foreach ($cursusUniversitaires as $cursusUniv) {
                     //récupére le niveau etude de chaque cursus

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCandidatureCursusUniversitaire extends Migration
+class CreateCandidatureCursusUniversitairesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCandidatureCursusUniversitaire extends Migration
      */
     public function up()
     {
-        Schema::create('candidature_cursus_univs', function (Blueprint $table) {
+        Schema::create('candidature_cursus_universitaires', function (Blueprint $table) {
             $table->id();
 
             //columns foreign key

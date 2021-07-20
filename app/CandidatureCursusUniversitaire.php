@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CandidatureCursusUniv extends Model
+class CandidatureCursusUniversitaire extends Model
 {
     protected $fillable = [
         'candidature_id',
