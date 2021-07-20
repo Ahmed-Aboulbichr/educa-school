@@ -30,7 +30,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        @endif
+        @elseif( session()->has('exists') )
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="mdi mdi-block-helper mr-2"></i>
+                 {{ session()->get('exists') }}
+                </div>
+            @endif
         <div class="row mb-2 mt-4">
             <div class="col-xl-2 offset-xl-10 offset-lg-9" style="padding-left: 4em;">
                 <button class="btn btn-primary waves-effect waves-light" data-target="#ajoutModal"  data-toggle="modal"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
@@ -84,6 +89,13 @@
                     <form action="{{ route('session.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
+                            @if($errors->any() && session()->has('operation') && session()->get('operation') =="store")
+                            @foreach($errors->all() as $error)
+                                <div class="col-6-auto">
+                                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                </div>
+                            @endforeach
+                        @endif
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Année universitaire</label>
                                 <div class="col-md-9">
@@ -130,6 +142,13 @@
                     <form action="" id="editForm" method="POST">
                         @csrf
                         <div class="modal-body">
+                            @if($errors->any() && session()->has('operation') && session()->get('operation') =="update")
+                            @foreach($errors->all() as $error)
+                                <div class="col-6-auto">
+                                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                </div>
+                            @endforeach
+                        @endif
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Année universitaire</label>
                                 <div class="col-md-9">
@@ -141,7 +160,7 @@
                                                 $year = $currentYear - $i;
                                                 $lastYear = $currentYear-($i+1);
                                             @endphp
-                                            <option name="annee_univ" value="{{$lastYear}}-{{$year}}">{{$lastYear}}-{{$year}}</option>
+                                            <option  value="{{$lastYear}}-{{$year}}">{{$lastYear}}-{{$year}}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -177,7 +196,12 @@
 
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
-
+    @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
+    <script>$('#ajoutModal').show();</script>
+    @endif
+    @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="update")
+    <script>$('#editModal').show();</script>
+    @endif
     <script>
         $('.btn-edit').on('click', function () {
             var route = $(this).data('route');
