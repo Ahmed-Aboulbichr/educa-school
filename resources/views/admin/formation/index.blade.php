@@ -225,11 +225,11 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_acces" id="niveauAcces_selected">
                                         <option>--- Niveau d'accès ---</option>
-                                        <option value="1ére année">1ére année</option>
-                                        <option value="2ème année">2ème année</option>
-                                        <option value="3ème année">3ème année</option>
-                                        <option value="4ème année">4ème année</option>
-                                        <option value="5ème année">5ème année</option>
+                                        <option value="1">1ére année</option>
+                                        <option value="2">2ème année</option>
+                                        <option value="3">3ème année</option>
+                                        <option value="4">4ème année</option>
+                                        <option value="5">5ème année</option>
                                     </select>
                                 </div>
                             </div>
@@ -238,11 +238,11 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="duree" id="duree_selected">
                                         <option>--- Durée ---</option>
-                                        <option value="1 ans d'études">1 ans d'études</option>
-                                        <option value="2 ans d'études">2 ans d'études</option>
-                                        <option value="3 ans d'études">3 ans d'études</option>
-                                        <option value="4 ans d'études">4 ans d'études</option>
-                                        <option value="5 ans d'études">5 ans d'études</option>
+                                        <option value="1">1 ans d'études</option>
+                                        <option value="2">2 ans d'études</option>
+                                        <option value="3">3 ans d'études</option>
+                                        <option value="4">4 ans d'études</option>
+                                        <option value="5">5 ans d'études</option>
                                     </select>
                                 </div>
                             </div>
@@ -280,10 +280,10 @@
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
 
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
-    <script>$('#ajoutModal').show();</script>
+    <script>$('#ajoutModal').modal('toggle');</script>
     @endif
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="update")
-    <script>$('#editModal').show();</script>
+    <script>$('#editModal').modal('toggle');</script>
     @endif
     <script>
         
@@ -376,12 +376,13 @@
                     getSessions(formation);
                     $("#specialite").val(formation.specialite);
                     $("#dateLimite_selected").val(formation.dateLimite);
-                    // operation with data put in html !!
-                        /*var optionDuree = "<option selected value="+formation.duree+">"+formation.duree+"</option>";
-                        var optionNiveauAcces = "<option selected value="+formation.niveau_acces+">"+formation.niveau_acces+"</option>";
-                        $("#duree_selected").append(optionDuree);
-                        $("#niveauAcces_selected").append(optionNiveauAcces); */
-                    //
+
+
+                    
+                    $('select').find('option[value='+formation.niveau_acces+']').attr('selected','selected');
+                    $('select').find('option[value="'+formation.duree+'"]').attr('selected','selected');
+                   
+
                     $("#editForm").attr("action",response.route);
                     $("#editModal").modal('show');
                 },

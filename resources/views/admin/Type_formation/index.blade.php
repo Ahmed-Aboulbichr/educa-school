@@ -90,6 +90,13 @@
                     <form action="{{ route('type_formations.store') }}" method="POST">
                         @csrf
                     <div class="modal-body">
+                        @if($errors->any() && session()->has('operation') && session()->get('operation') =="store")
+                        @foreach($errors->all() as $error)
+                            <div class="col-6-auto">
+                                <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                            </div>
+                        @endforeach
+                    @endif
                         <div class="form-group row align-items-center">
                             <label class="col-md-3 col-form-label">intitulé</label>
                             <div class="col-md-9">
@@ -126,6 +133,13 @@
                     <form action="" id="editForm" method="POST">
                         @csrf
                     <div class="modal-body">
+                        @if($errors->any() && session()->has('operation') && session()->get('operation') =="update")
+                        @foreach($errors->all() as $error)
+                            <div class="col-6-auto">
+                                <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                            </div>
+                        @endforeach
+                    @endif
                         <div class="form-group row align-items-center">
                             <label class="col-md-3 col-form-label">intitulé</label>
                             <div class="col-md-9">
@@ -165,7 +179,12 @@
 
         <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
-
+    @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
+    <script>$('#ajoutModal').modal('toggle');</script>
+    @endif
+    @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="update")
+    <script>$('#editModal').modal('toggle');</script>
+    @endif
     <script>
         $('.btn-edit').on('click', function () {
             var route = $(this).data('route');

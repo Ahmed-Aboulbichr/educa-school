@@ -53,8 +53,8 @@ class FormationController extends Controller
             'dateLimite'=> ['required',  'date_format:Y-m-d'],
             'type_formation_id' => ['required', 'integer', Rule::exists('type_formations', 'id')->where('id', $request->input('type_formation_id'))],
             'niveau_preRequise' => ['required', 'integer', Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_preRequise'))],
-            'niveau_acces' => ['required', 'string', Rule::in(['1ére année', '2ème année', '3ème année', '4ème année', '5ème année'])],
-            'duree' => ['required', 'string', Rule::in(['1 ans d\'études', '2 ans d\'études', '3 ans d\'études', '4 ans d\'études', '5 ans d\'études'])],
+            'niveau_acces' => ['required', 'integer', Rule::in(['1', '2', '3', '4', '5'])],
+            'duree' => ['required', 'integer', Rule::in(['1', '2', '3', '4', '5'])],
             'specialite' => ['required', 'string', 'max:255']
         ]);
 
@@ -106,7 +106,20 @@ class FormationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->session()->flash('operation','update');
+        $request->validate([
+            'session_id'=> ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
+            'dateLimite'=> ['required',  'date_format:Y-m-d'],
+            'type_formation_id' => ['required', 'integer', Rule::exists('type_formations', 'id')->where('id', $request->input('type_formation_id'))],
+            'niveau_preRequise' => ['required', 'integer', Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_preRequise'))],
+            'niveau_acces' => ['required', 'integer', Rule::in(['1', '2', '3', '4', '5'])],
+            'duree' => ['required', 'integer', Rule::in(['1', '2', '3', '4', '5'])],
+            'specialite' => ['required', 'string', 'max:255']
+        ]);
+
+        Formation::where('id',$id)->first()->update($request->all());
+         return redirect()->route('formation.index')
+         ->with('success','La formation a été modifié') ;
     }
 
     /**

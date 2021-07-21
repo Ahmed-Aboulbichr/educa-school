@@ -203,10 +203,10 @@
 
 
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
-    <script>$('#ajoutModal').show();</script>
+    <script>$('#ajoutModal').modal('toggle');</script>
     @endif
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="update")
-    <script>$('#editModal').show();</script>
+    <script>$('#editModal').modal('toggle');</script>
     @endif
     <script>
         $('.btn-edit').on('click', function () {
