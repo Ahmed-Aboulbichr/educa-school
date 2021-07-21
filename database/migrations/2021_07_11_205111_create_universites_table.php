@@ -15,7 +15,7 @@ class CreateUniversitesTable extends Migration
     {
         Schema::create('universites', function (Blueprint $table) {
             $table->id();
-            $table->string('intitule', 100);     //Univ ibn zohr
+            $table->string('intitule', 100);  //TODO change to name    //Univ ibn zohr
             $table->timestamps();
         });
     }

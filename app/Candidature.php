@@ -26,7 +26,7 @@ class Candidature extends Model
         return $this->belongsTo(Candidat::class);
     }
 
-    public function Cursus_universitaire(){
-        $this->hasMany(Cursus_universitaire::class);
+    public function Cursus_universitaires(){
+        return $this->belongsToMany(Cursus_universitaire::class);
     }
 }
