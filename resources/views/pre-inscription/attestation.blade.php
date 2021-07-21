@@ -92,21 +92,24 @@
                                     </ul>
 
                                 </ul>
-
+                               @foreach ($candidature->cursus_universitaires as $cursus_univ)
+                                   
+                              
                                 <ul class="list-unstyled col-lg-12">
 
                                     <ul class="list-unstyled row  " style="padding: 10px">
-                                        <li class="text-center col-lg-4"> Type de diplome : Bac</li>
-                                        <li class="text-center col-lg-4"> Mention : {{($candidat==null)?'':(($candidat->mention_bac=='P')?'Passable':(($candidat->mention_bac=='AB')?'Assez-Bien':(($candidat->mention_bac=='B')?'Bien':(($candidat->mention_bac=='TB')?'Très Bien':(($candidat->mention_bac=='E')?'Excellent':'')))))}} </li>
-                                        <li class="text-center col-lg-4"> Année : {{($candidat==null)?'':$candidat->annee_bac}}</li>
+                                        <li class="text-center col-lg-4"> Niveau d'étude : {{$cursus_univ->niveau_etude->intitule}}</li>
+                                        <li class="text-center col-lg-4"> Moyenne génerale : {{($cursus_univ->note_S1+$cursus_univ->note_S2)/2}}</li>
+                                        <li class="text-center col-lg-4"> Année universitaires  : {{$cursus_univ->Annee_univ}}</li>
                                     </ul>
                                     <ul class="list-unstyled row  ">
-                                        <li class="text-center col-lg-4"> Lycée d'origine : {{($candidat==null)?'':$candidat->lycee_bac}} </li>
-                                        <li class="text-center col-lg-4"> Délégation : {{($candidat==null)?'':$candidat->delegation->name}} </li>
-                                        <li class="text-center col-lg-4"> Académie : {{($candidat==null)?'':$candidat->academie->name}} </li>
+                                        <li class="text-center col-lg-6"> Université : {{$cursus_univ->universite->intitule}} </li>
+                                        <li class="text-center col-lg-6"> Spécialité : {{$cursus_univ->specialite}} </li>
                                     </ul>
 
                                 </ul>
+
+                                @endforeach
                          </div>
                             <div class="invoice-items">
                                 <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
@@ -127,7 +130,7 @@
                             <div class="invoice-footer mt25">
                                 <p class="text-center">Generated on <script>document.write(new Date().toLocaleDateString() + ' at '+ new Date().toLocaleTimeString())
 
-                                </script>    <a href="{{route('downloadPDF',$candidat->id)}}" class="btn btn-default ml15"><i class="fa fa-print mr5"></i> Print</a></p>
+                                </script>    <a href="{{route('downloadPDF',$candidature->id)}}" class="btn btn-default ml15"><i class="fa fa-print mr5"></i> Print</a></p>
                             </div>
                         </div>
                         <!-- col-lg-12 end here -->

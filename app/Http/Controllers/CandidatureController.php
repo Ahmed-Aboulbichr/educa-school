@@ -7,7 +7,7 @@ use App\Formation;
 use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
-use App\CandidatureCursusUniv;
+use App\CandidaturesCursusUniversitaire;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -97,8 +97,7 @@ class CandidatureController extends Controller
                     //récupére le niveau etude de chaque cursus
                     $niveauIterative = Niveau_etude::where('id',$cursusUniv->niveau_etude_id)->first()->intitule;
                     if($niveauIterative <= $niveauPreRequise){
-                        CandidatureCursusUniv::create(['candidature_id' => $candidature->id,
-                        'cursus_universitaire_id' => $cursusUniv->id]);
+                        $candidature->Cursus_universitaires()->attach($cursusUniv);
                     }
                 }
                 return redirect('/getFormations')->with('success', 'Votre candidature a été enregistrée');
@@ -145,6 +144,7 @@ class CandidatureController extends Controller
         $candidat = Candidat::where('id', $candidature->candidat_id)->first();
 
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        $pdf->setPaper('A4', 'portait');
         set_time_limit(300);
 
 
@@ -169,7 +169,7 @@ class CandidatureController extends Controller
         $candidat = Candidat::where('id', $candidature->candidat_id)->first();
 
         $profileImg =base64_encode(Storage::get($candidat->docFiles()->where('type','=','profileImg')->first()->path ));
-        return view('pre-inscription.attestation')->with('candidat', $candidat)->with('profileImg',$profileImg)->with('candidature',$candidature);
+        return view('pre-inscription.attestationPDF')->with('candidat', $candidat)->with('profileImg',$profileImg)->with('candidature',$candidature);
     }
 
     /**
@@ -241,7 +241,7 @@ class CandidatureController extends Controller
         $candidature = Candidature::findOrFail($id);
 
         $candidature->delete();
-
+        $candidature->Cursus_universitaires()->detach();
         return redirect()->route('mesCandidatures')->with('success', 'Votre candidature a été supprimé');;
     }
 
