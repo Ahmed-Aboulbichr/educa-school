@@ -125,10 +125,8 @@ class TypeFormationController extends Controller
         ->with('success','La Type_formation a été modifié');
     }
 
-   
-   
-  
-
-    
+    public function renderTypeFormations(){
+        $Type_formations = Type_formation::all();
+        return  response()->json($Type_formations, 200);
+    }    
 }
-

@@ -82,4 +82,9 @@ class NiveauEtudeController extends Controller
     {
         //
     }
+
+    public function renderNiveau(){
+        $Niveau = Niveau_etude::all();
+        return  response()->json($Niveau, 200);
+    }
 }

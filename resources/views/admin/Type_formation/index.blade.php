@@ -9,7 +9,7 @@
 @component('components.breadcrumb')
     @slot('title') Types des formations @endslot
     @slot('li_1') Liste @endslot
-    @slot('li_2') formations @endslot
+    @slot('li_2') Formations @endslot
     @slot('li_3') Types @endslot
 @endcomponent
 
@@ -41,38 +41,40 @@
             </div>
             <div class="card-body">
                 <h4 class="card-title"></h4>
-                <table id="datatable" class="table dt-responsive nowrap mt-4">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>#</th>
-                            <th>intitulé</th>
-                            <th>Nombre d'années après bac</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    @php
-                        $i = 0;
-                        @endphp
-                    <tbody>
-                        @foreach ($Type_formations as $Type_formation)
-                        <tr>
-                          
-                                <td>{{++$i}}</td>
-                                <td>{{$Type_formation->designation}}</td>
-                                <td>{{$Type_formation->annees_post_bac}}</td>
-                                <td>
-                                    <form action="{{ route('type_formations.destroy', $Type_formation->id) }}" method="POST">
-                                        <a class="btn btn-edit btn-info p-1" type="button" data-route="{{route('type_formations.edit', $Type_formation->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
-                                    </form>
-                                </td>
+                <div class="table-responsive">
+                    <table id="datatable" class="table mt-4">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>intitulé</th>
+                                <th>Nombre d'années après bac</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        @php
+                            $i = 0;
+                            @endphp
+                        <tbody>
+                            @foreach ($Type_formations as $Type_formation)
+                            <tr>
                             
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                    <td>{{++$i}}</td>
+                                    <td>{{$Type_formation->designation}}</td>
+                                    <td>{{$Type_formation->annees_post_bac}}</td>
+                                    <td>
+                                        <form action="{{ route('type_formations.destroy', $Type_formation->id) }}" method="POST">
+                                            <button class="btn btn-edit btn-info p-1" type="button" data-route="{{route('type_formations.edit', $Type_formation->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
+                                        </form>
+                                    </td>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div> <!-- end card body-->
         </div>
 
@@ -152,16 +154,16 @@
 @endsection
 @section('script')
 
-    <!-- Required datatable js -->
+        <!-- Required datatable js -->
     <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
 
-    <!-- Datatable init js -->
+        <!-- Datatable init js -->
     <script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
 
         <!-- Sweet Alerts js -->
     <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
 
-    <!-- Sweet alert init js-->
+        <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
 
     <script>
@@ -182,15 +184,6 @@
                 }
             })
         });
-       /* $(document).ready(function() {
-            var table = $('#datatable').dataTable({
-                "language": {
-                    "emptyTable": "The table is really empty now!"
-                },
-                searching: false
-            });
-            //oPaginate:{sFirst:"First",sLast:"Last",sNext:"Next",sPrevious:"Previous"},sEmptyTable:"No data available in table",sInfo:"Affichage de l'élement _START_ à _END_ sur _TOTAL_ éléments",sInfoEmpty:"Affichage de l'élement 0 à 0 sur 0 éléments",
-        } ); */
     </script>
 
 @endsection

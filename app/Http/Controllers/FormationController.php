@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Candidat;
+use App\Formation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,15 @@ class FormationController extends Controller
      */
     public function index()
     {
-        //
+        $formations = DB::table('formations')
+        ->join('sessions', 'session_id', '=', 'sessions.id')
+        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+        ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
+        ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
+        ->orderBy('sessions.date_session','DESC')
+        ->get();
+        //return  response()->json($formations, 200);
+        return view('admin.formation.index', compact('formations'));
     }
 
     /**
@@ -59,7 +68,19 @@ class FormationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $formation = Formation::where('formations.id', $id)
+        ->join('sessions', 'session_id', '=', 'sessions.id')
+        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+        ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
+        ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
+        ->get()
+        ->first();
+
+        $response = [
+            'formation' => $formation,
+            'route' =>  route('formation.update',[$id])
+        ];
+        return response()->json($response, 200);
     }
 
     /**

@@ -40,6 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getNationalite', 'NationaliteController@renderNationalite')->name('getNationality');
     Route::get('getDelegations', 'DelegationController@renderDelegations')->name('getDelegations');
     Route::get('getFormations', 'FormationController@renderFormations')->name('getFormations');
+    Route::get('getTypeFormations', 'TypeFormationController@renderTypeFormations')->name('getTypeFormations');
+    Route::get('getNiveau', 'NiveauEtudeController@renderNiveau')->name('getNiveau');
+    Route::get('getSessions', 'SessionController@renderSessions')->name('getSessions');
     Route::get('getAcademies', 'AcademieController@renderAcademies')->name('getAcademies');
     Route::get('getProvinces', 'ProvinceController@renderProvinces')->name('getProvinces');
     Route::get('getSecteurProfessions', 'SecteurProfessionController@renderSecteurs')->name('getSecteurProfessions');
@@ -72,7 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/session', 'SessionController',  [
         'except' => ['update']
     ]);
-    Route::resource('/formations', 'FormationController');
+    Route::resource('/formation', 'FormationController');
     Route::resource('/type_formations', 'TypeFormationController', [
         'except' => ['update']
     ]);

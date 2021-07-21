@@ -27,41 +27,42 @@
                 <h4 class="card-title"></h4>
                 <p class="card-title-desc">
                 </p>
-                <table id="datatable" class="table dt-responsive nowrap">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Session</th>
-                            <th>Date limite</th>
-                            <th>Spécialité</th>
-                            <th>Type</th>
-                            <th>Niveau d'accès</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($candidatures as $candidature)
-                        <tr>
-                            <td>{{$candidature->date_session}}</td>
-                            <td>{{$candidature->dateLimite}}</td>
-                            <td>{{$candidature->specialite}}</td>
-                            <td>{{$candidature->designation}}</td>
-                            <td>{{$candidature->niveau_acces}}</br>({{$candidature->duree}})</td>
-                            @if($candidature->valide === 1)
-                                <td>C'est validé </br> un recu ici</td>
-                            @else
-                                <td>Pas encours</td>
-                            @endif
-                            <td>
-                                  <button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light btn-delete"  data-toggle="modal" data-action="{{ route('candidatures.destroy', $candidature->id) }}" data-target="#annule">
-                                    <i class="ri-close-line align-middle mr-2"></i>Annuler
-                                  </button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
+                <div class="table-responsive">
+                    <table id="datatable" class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Session</th>
+                                <th>Date limite</th>
+                                <th>Spécialité</th>
+                                <th>Type</th>
+                                <th>Niveau d'accès</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($candidatures as $candidature)
+                            <tr>
+                                <td>{{$candidature->date_session}}</td>
+                                <td>{{$candidature->dateLimite}}</td>
+                                <td>{{$candidature->specialite}}</td>
+                                <td>{{$candidature->designation}}</td>
+                                <td>{{$candidature->niveau_acces}}</br>({{$candidature->duree}})</td>
+                                @if($candidature->valide === 1)
+                                    <td>C'est validé </br> un recu ici</td>
+                                @else
+                                    <td>Pas encours</td>
+                                @endif
+                                <td>
+                                    <button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light btn-delete"  data-toggle="modal" data-action="{{ route('candidatures.destroy', $candidature->id) }}" data-target="#annule">
+                                        <i class="ri-close-line align-middle mr-2"></i>Annuler
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div> <!-- end card body-->
         </div> <!-- end card -->
     </div><!-- end col-->

@@ -14,7 +14,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions = Session::all()->sortByDesc('annee_univ');
+        $sessions = Session::all()->sortByDesc('date_session')->sortByDesc('annee_univ');
         return view('admin.session.index', compact('sessions'));
     }
 
@@ -81,8 +81,6 @@ class SessionController extends Controller
             'date_session'=>['required', 'date_format:Y-m-d']
         ]);
 
-        
-
         Session::where('id',$id)->update([
             'annee_univ' => $request->get('annee_univ'),
             'date_session' => $request->get('date_session')
@@ -103,6 +101,11 @@ class SessionController extends Controller
         $session = Session::findOrFail($id);
         $session->delete();
         return redirect()->route('session.index')
-        ->with('success','La session a été modifié');
+        ->with('success','La session a été supprimée');
+    }
+
+    public function renderSessions(){
+        $sessions = Session::all();
+        return  response()->json($sessions, 200);
     }
 }

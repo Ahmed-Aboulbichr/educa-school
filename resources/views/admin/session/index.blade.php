@@ -36,44 +36,47 @@
                  {{ session()->get('exists') }}
                 </div>
             @endif
-        <div class="row mb-2 mt-4">
-            <div class="col-xl-2 offset-xl-10 offset-lg-9" style="padding-left: 4em;">
-                <button class="btn btn-primary waves-effect waves-light" data-target="#ajoutModal"  data-toggle="modal"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
-            </div>
-        </div>
+
         <div class="card">
+            <div class="row mb-2 mt-4">
+                <div class="col-xl-2 offset-xl-10 offset-lg-9" style="padding-left: 4em;">
+                    <button class="btn btn-primary waves-effect waves-light" data-target="#ajoutModal"  data-toggle="modal"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
+                </div>
+            </div>
             <div class="card-body">
                 <h4 class="card-title"></h4>
-                <table id="datatable" class="table dt-responsive nowrap mt-4">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>#</th>
-                            <th>Année universitaire</th>
-                            <th>Date session</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $i = 0;
-                        @endphp
-                        @foreach ($sessions as $session)
+                <div class="table-responsive">
+                    <table id="datatable" class="table mt-4">
+                        <thead class="thead-light">
                             <tr>
-                                <td>{{++$i}}</td>
-                                <td>{{$session->annee_univ}}</td>
-                                <td>{{$session->date_session}}</td>
-                                <td>
-                                    <form action="{{ route('session.destroy', $session->id) }}" method="POST">
-                                        <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('session.edit', $session->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
-                                    </form>
-                                </td>
+                                <th>#</th>
+                                <th>Année universitaire</th>
+                                <th>Date session</th>
+                                <th>Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @php
+                                $i = 0;
+                            @endphp
+                            @foreach ($sessions as $session)
+                                <tr>
+                                    <td>{{++$i}}</td>
+                                    <td>{{$session->annee_univ}}</td>
+                                    <td>{{$session->date_session}}</td>
+                                    <td>
+                                        <form action="{{ route('session.destroy', $session->id) }}" method="POST">
+                                            <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('session.edit', $session->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div> <!-- end card body-->
         </div>
         <!--Modal Ajout -->
@@ -196,6 +199,9 @@
 
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
+
+
+
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
     <script>$('#ajoutModal').show();</script>
     @endif
@@ -221,15 +227,5 @@
                 }
             })
         });
-       /* $(document).ready(function() {
-            var table = $('#datatable').dataTable({
-                "language": {
-                    "emptyTable": "The table is really empty now!"
-                },
-                searching: false
-            });
-            //oPaginate:{sFirst:"First",sLast:"Last",sNext:"Next",sPrevious:"Previous"},sEmptyTable:"No data available in table",sInfo:"Affichage de l'élement _START_ à _END_ sur _TOTAL_ éléments",sInfoEmpty:"Affichage de l'élement 0 à 0 sur 0 éléments",
-        } ); */
     </script>
-
 @endsection
