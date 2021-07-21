@@ -14,7 +14,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $sessions = Session::all()->sortByDesc('date_session')->sortByDesc('annee_univ');
+        $sessions = Session::all()->sortBy('date_session')->sortByDesc('annee_univ');
         return view('admin.session.index', compact('sessions'));
     }
 

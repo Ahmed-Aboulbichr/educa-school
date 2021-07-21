@@ -105,7 +105,7 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Session</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="date_session" id="date_session">
+                                    <select class="form-control" name="session_id" id="date_session">
                                         <option>--- Date session ---</option>
                                     </select>
                                 </div>
@@ -113,13 +113,13 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Date Limite</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="date" name="date_limite" id="date_limite">
+                                    <input class="form-control" type="date" name="dateLimite" id="date_limite">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Type</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="type_formations" id="type_formations">
+                                    <select class="form-control" name="type_formation_id" id="type_formations">
                                         <option>--- Type formation ---</option>
                                     </select>
                                 </div>
@@ -197,14 +197,20 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Session</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="date_session" id="dateSession_selected">
+                                    <select class="form-control" name="session_id" id="dateSession_selected">
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Date Limite</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="date" name="dateLimite" id="dateLimite_selected">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Type</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="type_formations" id="typeFormations_selected">
+                                    <select class="form-control" name="type_formation_id" id="typeFormations_selected">
                                     </select>
                                 </div>
                             </div>
@@ -369,10 +375,13 @@
                     getNiveau(formation);
                     getSessions(formation);
                     $("#specialite").val(formation.specialite);
-                    var optionDuree = "<option selected value="+formation.duree+">"+formation.duree+"</option>";
-                    var optionNiveauAcces = "<option selected value="+formation.niveau_acces+">"+formation.niveau_acces+"</option>";
-                    $("#duree_selected").append(optionDuree);
-                    $("#niveauAcces_selected").append(optionNiveauAcces);
+                    $("#dateLimite_selected").val(formation.dateLimite);
+                    // operation with data put in html !!
+                        /*var optionDuree = "<option selected value="+formation.duree+">"+formation.duree+"</option>";
+                        var optionNiveauAcces = "<option selected value="+formation.niveau_acces+">"+formation.niveau_acces+"</option>";
+                        $("#duree_selected").append(optionDuree);
+                        $("#niveauAcces_selected").append(optionNiveauAcces); */
+                    //
                     $("#editForm").attr("action",response.route);
                     $("#editModal").modal('show');
                 },

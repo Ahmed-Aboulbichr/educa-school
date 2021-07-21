@@ -6,6 +6,7 @@ use App\Candidat;
 use App\Formation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
 class FormationController extends Controller
@@ -22,7 +23,7 @@ class FormationController extends Controller
         ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
         ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
         ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
-        ->orderBy('sessions.date_session','DESC')
+        ->orderByRaw('sessions.date_session DESC')
         ->get();
         //return  response()->json($formations, 200);
         return view('admin.formation.index', compact('formations'));
@@ -46,7 +47,20 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->session()->flash('operation','store');
+        $request->validate([
+            'session_id'=> ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
+            'dateLimite'=> ['required',  'date_format:Y-m-d'],
+            'type_formation_id' => ['required', 'integer', Rule::exists('type_formations', 'id')->where('id', $request->input('type_formation_id'))],
+            'niveau_preRequise' => ['required', 'integer', Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_preRequise'))],
+            'niveau_acces' => ['required', 'string', Rule::in(['1ére année', '2ème année', '3ème année', '4ème année', '5ème année'])],
+            'duree' => ['required', 'string', Rule::in(['1 ans d\'études', '2 ans d\'études', '3 ans d\'études', '4 ans d\'études', '5 ans d\'études'])],
+            'specialite' => ['required', 'string', 'max:255']
+        ]);
+
+        Formation::create($request->all());
+         return redirect()->route('formation.index')
+         ->with('success','La formation a été enregistrée') ;
     }
 
     /**
