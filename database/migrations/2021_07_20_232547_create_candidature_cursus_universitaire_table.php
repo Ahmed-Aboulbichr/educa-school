@@ -14,6 +14,10 @@ class CreateCandidatureCursusUniversitaireTable extends Migration
     public function up()
     {
         Schema::create('candidature_cursus_universitaire', function (Blueprint $table) {
+            $table->id();
+            //columns foreign key
+            $table->foreignId('candidature_id')->constrained()->onDelete('cascade');
+            $table->foreignId('cursus_universitaire_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
