@@ -54,8 +54,13 @@
                                 <td>{{$formation->dateLimite}}</td>
                                 <td>{{$formation->specialite}}</td>
                                 <td>{{$formation->designation}}</td>
-                                <td>{{$formation->niveau_acces}}</br>({{$formation->duree}})</td>
-
+                                <td>
+                                    @if($formation->niveau_acces === 1)
+                                        {{$formation->niveau_acces}}ére année </br>({{$formation->duree}} ans d'études)
+                                    @else
+                                        {{$formation->niveau_acces}}ème année </br>({{$formation->duree}} ans d'études)
+                                    @endif    
+                                </td>
                                 @php $currentDate = date("Y-m-d"); @endphp
                                 @if ($formation->dateLimite < $currentDate)
                                     <td>Fermé</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Session;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -28,6 +29,18 @@ class SessionController extends Controller
         return view('admin.session.create');
     }
 
+     function listeAnneeUniv()
+    {
+        $t[0] = strval(date('Y')."-".(date('Y')+1));
+        for ($i = 0; $i <20; $i++){
+            $currentYear = date('Y');
+            $year = $currentYear - $i;
+            $lastYear = $currentYear-($i+1);
+            $t[$i+1] = strval($lastYear."-".$year);
+        }
+        return $t;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -36,8 +49,10 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
+        $t = $this->listeAnneeUniv();
+        $request->session()->flash('operation','store');
         $request->validate([
-            'annee_univ'=>'required',
+            'annee_univ' => 'required|in:'.implode(',',$t),
             'date_session'=>['required', 'date_format:Y-m-d']
         ]);
 
@@ -49,7 +64,6 @@ class SessionController extends Controller
         return redirect()->route('session.index')
          ->with('success','La session a été enregistrée') ;
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -75,9 +89,11 @@ class SessionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {    
+    {   
+        $t = $this->listeAnneeUniv();
+        $request->session()->flash('operation','update');
         $request->validate([
-            'annee_univ'=>'required',
+            'annee_univ' => 'required|in:'.implode(',',$t),
             'date_session'=>['required', 'date_format:Y-m-d']
         ]);
 

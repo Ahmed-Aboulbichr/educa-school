@@ -57,19 +57,17 @@
                         <tbody>
                             @foreach ($Type_formations as $Type_formation)
                             <tr>
-                            
-                                    <td>{{++$i}}</td>
-                                    <td>{{$Type_formation->designation}}</td>
-                                    <td>{{$Type_formation->annees_post_bac}}</td>
-                                    <td>
-                                        <form action="{{ route('type_formations.destroy', $Type_formation->id) }}" method="POST">
-                                            <button class="btn btn-edit btn-info p-1" type="button" data-route="{{route('type_formations.edit', $Type_formation->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
-                                        </form>
-                                    </td>
-                                
+                                <td>{{++$i}}</td>
+                                <td>{{$Type_formation->designation}}</td>
+                                <td>{{$Type_formation->annees_post_bac}}</td>
+                                <td>
+                                    <form action="{{ route('type_formations.destroy', $Type_formation->id) }}" method="POST">
+                                        <button class="btn btn-edit btn-info p-1" type="button" data-route="{{route('type_formations.edit', $Type_formation->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-warning p-1" name="archive" type="submit"  ><i class="mdi mdi-24px mdi-delete"></i>   </button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

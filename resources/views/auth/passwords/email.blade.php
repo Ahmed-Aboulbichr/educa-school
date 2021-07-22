@@ -23,12 +23,11 @@ Recover Password
                                             <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
                                         </div>
 
-                                        <h4 class="font-size-18 mt-4">Reset Password</h4>
-                                        <p class="text-muted">Reset your password to Nazox.</p>
+                                        <h4 class="font-size-18 mt-4">Réinitialisation du mot de passe</h4>
                                     </div>
                                     <div class="p-2 mt-5">
                                         <div class="alert alert-success mb-4" role="alert">
-                                            Enter your Email and instructions will be sent to you!
+                                            Entrez votre email pour réinitialiser le mot de passe de votre compte
                                         </div>
 
                                         <form method="POST" action="{{ route('login') }}">
@@ -37,7 +36,7 @@ Recover Password
                                             <div class="form-group auth-form-group-custom mb-4">
                                                 <i class="ri-mail-line auti-custom-input-icon"></i>
                                                 <label for="email">{{ __('E-Mail Address') }}</label>
-                                                <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter email">
+                                                <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="">
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -46,12 +45,12 @@ Recover Password
                                             </div>
 
                                             <div class="mt-4 text-center">
-                                                <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Reset</button>
+                                                <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Réinitialiser</button>
                                             </div>
                                         </form>
-                                        <div class="mt-5 text-center">
-                                            <p>Don't have an account ? <a href="{{url('login')}}" class="font-weight-medium text-primary"> Login</a> </p>
-                                            <p>© <script>document.write(new Date().getFullYear())</script> Nazox. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
+                                        <div class="mt-4 text-center">
+                                            <p><a href="{{url('register')}}" class="font-weight-medium text-primary"> Créer votre compte</a> </p>
+                                            <p><script>document.write(new Date().getFullYear())</script>© ENCGF</p>
                                         </div>
                                     </div>
                                 </div>

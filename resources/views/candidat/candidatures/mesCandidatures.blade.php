@@ -47,7 +47,13 @@
                                 <td>{{$candidature->dateLimite}}</td>
                                 <td>{{$candidature->specialite}}</td>
                                 <td>{{$candidature->designation}}</td>
-                                <td>{{$candidature->niveau_acces}}</br>({{$candidature->duree}})</td>
+                                <td>
+                                    @if($candidature->niveau_acces === 1)
+                                        {{$candidature->niveau_acces}}ére année </br>({{$candidature->duree}} ans d'études)
+                                    @else
+                                        {{$candidature->niveau_acces}}ème année </br>({{$candidature->duree}} ans d'études)
+                                    @endif    
+                                </td>
                                 @if($candidature->valide === 1)
                                     <td>C'est validé </br> un recu ici</td>
                                 @else
