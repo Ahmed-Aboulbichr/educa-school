@@ -3,7 +3,6 @@
 @section('css')
     <!-- DataTables -->
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 @component('components.breadcrumb')
@@ -46,13 +45,13 @@
             <div class="card-body">
                 <h4 class="card-title"></h4>
                 <div class="table-responsive">
-                    <table id="datatable" class="table mt-4">
+                    <table id="datatable-buttons" class="table mt-4">
                         <thead class="thead-light">
                             <tr>
-                                <th>Session</th>
+                                <th style="width: 85.0781px;">Session</th>
                                 <th>Date Limite</th>
                                 <th>Specialite</th>
-                                <th>Type</th>
+                                <th style="width: 91.375px;">Type</th>
                                 <th>Niveau </br> d'accès</th>
                                 <th>Niveau </br>pré-requis</th>
                                 <th>Action</th>
@@ -65,7 +64,13 @@
                                     <td>{{$formation->dateLimite}}</td>
                                     <td>{{$formation->specialite}}</td>
                                     <td>{{$formation->designation}}</td>
-                                    <td>{{$formation->niveau_acces}} </br>({{$formation->duree}})</td>
+                                    <td>
+                                        @if($formation->niveau_acces === 1)
+                                            {{$formation->niveau_acces}}ére année </br>({{$formation->duree}} ans d'études)
+                                        @else
+                                            {{$formation->niveau_acces}}ème année </br>({{$formation->duree}} ans d'études)
+                                        @endif    
+                                    </td>
                                     <td>{{$formation->intitule}}</td>
                                     <td>
                                         <form action="{{ route('formation.destroy', $formation->id) }}" method="POST">
@@ -135,11 +140,11 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_acces" id="niveau_acces">
                                         <option>--- Niveau d'accès ---</option>
-                                        <option value="1ére année">1ére année</option>
-                                        <option value="2ème année">2ème année</option>
-                                        <option value="3ème année">3ème année</option>
-                                        <option value="4ème année">4ème année</option>
-                                        <option value="5ème année">5ème année</option>
+                                        <option value="1">1ére année</option>
+                                        <option value="2">2ème année</option>
+                                        <option value="3">3ème année</option>
+                                        <option value="4">4ème année</option>
+                                        <option value="5">5ème année</option>
                                     </select>
                                 </div>
                             </div>
@@ -148,11 +153,11 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="duree" id="duree">
                                         <option>--- Durée ---</option>
-                                        <option value="1 ans d'études">1 ans d'études</option>
-                                        <option value="2 ans d'études">2 ans d'études</option>
-                                        <option value="3 ans d'études">3 ans d'études</option>
-                                        <option value="4 ans d'études">4 ans d'études</option>
-                                        <option value="5 ans d'études">5 ans d'études</option>
+                                        <option value="1">1 ans d'études</option>
+                                        <option value="2">2 ans d'études</option>
+                                        <option value="3">3 ans d'études</option>
+                                        <option value="4">4 ans d'études</option>
+                                        <option value="5">5 ans d'études</option>
                                     </select>
                                 </div>
                             </div>
@@ -273,17 +278,15 @@
     <!-- Datatable init js -->
     <script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
 
-        <!-- Sweet Alerts js -->
-    <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js')}}"></script>
 
-    <!-- Sweet alert init js-->
-    <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
+    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js')}}"></script>
 
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
-    <script>$('#ajoutModal').modal('toggle');</script>
+        <script>$('#ajoutModal').modal('toggle');</script>
     @endif
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="update")
-    <script>$('#editModal').modal('toggle');</script>
+        <script>$('#editModal').modal('toggle');</script>
     @endif
     <script>
         
@@ -360,6 +363,7 @@
                 getSessions: "{{route('getSessions')}}"
             }
         }
+
         $('.btn-edit').on('click', function () {
             var route = $(this).data('route');
             $.ajax({
@@ -376,13 +380,8 @@
                     getSessions(formation);
                     $("#specialite").val(formation.specialite);
                     $("#dateLimite_selected").val(formation.dateLimite);
-
-
-                    
-                    $('select').find('option[value='+formation.niveau_acces+']').attr('selected','selected');
-                    $('select').find('option[value="'+formation.duree+'"]').attr('selected','selected');
-                   
-
+                    $('#niveauAcces_selected').find('option[value='+formation.niveau_acces+']').attr('selected','selected');
+                    $('#duree_selected').find('option[value="'+formation.duree+'"]').attr('selected','selected');
                     $("#editForm").attr("action",response.route);
                     $("#editModal").modal('show');
                 },
@@ -391,6 +390,7 @@
                 }
             })
         });
+
         $('#document').ready(function(){
             formation = null;
             getTypeFormations(formation);
@@ -401,6 +401,5 @@
         $('#ajoutButton').on('click', function(){
             $("#ajoutModal").modal('show');
         });
-
     </script>
 @endsection

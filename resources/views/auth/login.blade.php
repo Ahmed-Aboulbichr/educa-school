@@ -70,7 +70,7 @@ Connexion
 
                                     <div class="mt-4 text-center">
                                         <p><a href="{{url('register')}}" class="font-weight-medium text-primary"> Créer votre compte</a> </p>
-                                        <p><script>document.write(new Date().getFullYear())</script>© DEVSTTER</p>
+                                        <p><script>document.write(new Date().getFullYear())</script>© ENCGF</p>
                                     </div>
                                 </div>
                             </div>

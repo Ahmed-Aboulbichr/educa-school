@@ -217,9 +217,8 @@
                 dataType: 'json',
                 success: function(response){
                     $("#editModal").modal('show');
-                    var optionSelected = "<option selected value="+response.session.annee_univ+">"+response.session.annee_univ+"</option>";
                     $("#editForm").attr("action",response.route);
-                    $("#anneUniv").append(optionSelected);
+                    $('select').find('option[value="'+response.session.annee_univ+'"]').attr('selected','selected');
                     $("#date_session").val(response.session.date_session);
                 },
                 error: function(response){

@@ -44,6 +44,7 @@ class Candidat extends Model
         'CIN_mere',
         'profession_pere',
         'profession_mere',
+        'completed'
     ];
 
     public function docFiles()

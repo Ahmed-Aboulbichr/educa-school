@@ -4,8 +4,8 @@
     Mon Parcours
 @endsection
 @section('css')
-    <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-    <style>
+    <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
+    <!--<style>
         .card {
           /* Add shadows to create the "card" effect */
           box-shadow: 5px 6px 15px 5px rgba(0.2,0.2,0.2,0.2);
@@ -21,7 +21,7 @@
         .container {
           padding: 2px 16px;
         }
-            </style>
+    </style> !-->
 @endsection
 @section('body')
 <body data-topbar="dark" data-layout="horizontal">
@@ -42,45 +42,46 @@
             @endif
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Veuillez ajouter vos parcours universitaire (anneé par anneé) à partir du bouton "Ajouter"</h4>
+                    <h4 class="card-title">Veuillez ajouter vos cursus universitaire (anneé par anneé) à partir du bouton "Ajouter"</h4>
                     <div class="bg-light d-flex float-right mb-4">
                         <button class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center" id="ajout"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
                     </div>
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                        <tr>
-                            <th>Niveau Etude</th>
-                            <th>Spécialité</th>
-                            <th>Note S1</th>
-                            <th>Note S2</th>
-                            <th>Année</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-
-
-                        <tbody>
-                        @foreach ($data['cursus'] as $cur)
-                        <tr>
-                            <td>{{$cur->intitule}}</td>
-                            <td>{{$cur->specialite}}</td>
-                            <td>{{ $cur->note_S1 }}</td>
-                            <td>{{ $cur->note_S2 }}</td>
-                            <td>{{ $cur->Annee_univ }}</td>
-                            <td>
-                                {{-- <button class="btn btn-warning p-1" id="submitForm"><i class="mdi mdi-24px mdi-delete"></i></button> --}}
-                                <form action="{{ route('cursus_universitaire.destroy', $cur->id) }}" method="POST">
-                                    <a class="btn btn-info p-1" type="button" href="{{ route('cursus_universitaire.show', $cur->id) }}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-warning p-1" name="archive" type="submit" id="submitForm" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                    
+                    <div class="table-responsive">
+                        <table id="datatable" class="table mt-4">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Niveau Etude</th>
+                                    <th>Spécialité</th>
+                                    <th>Note S1</th>
+                                    <th>Note S2</th>
+                                    <th>Année</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($data['cursus'] as $cur)
+                                <tr>
+                                    <td>{{$cur->intitule}}</td>
+                                    <td>{{$cur->specialite}}</td>
+                                    <td>{{ $cur->note_S1 }}</td>
+                                    <td>{{ $cur->note_S2 }}</td>
+                                    <td>{{ $cur->Annee_univ }}</td>
+                                    <td>
+                                        {{-- <button class="btn btn-warning p-1" id="submitForm"><i class="mdi mdi-24px mdi-delete"></i></button> --}}
+                                        <form action="{{ route('cursus_universitaire.destroy', $cur->id) }}" method="POST">
+                                            <a class="btn btn-info p-1" type="button" href="{{ route('cursus_universitaire.show', $cur->id) }}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-warning p-1" name="archive" type="submit" id="submitForm" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>    
             </div>
         </div>
     </div>
@@ -90,7 +91,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0">Ajout d'un diplôme</h5>
+                    <h5 class="modal-title mt-0">Ajout d'une année universitaire</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -203,13 +204,11 @@
 @endsection
 @section('script')
 
+    <!-- Required datatable js -->
+    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
 
-    <!-- Sweet Alerts js -->
-    <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-
-    <!-- Sweet alert init js-->
-    <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js') }}"></script>
-
+    <!-- Datatable init js -->
+    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
 
 
     @if (count($errors) > 0)

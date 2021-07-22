@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Type_formation;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class TypeFormationController extends Controller

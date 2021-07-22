@@ -75,11 +75,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/session', 'SessionController',  [
         'except' => ['update']
     ]);
-    Route::resource('/formation', 'FormationController');
+    Route::resource('/formation', 'FormationController', [
+        'except' => ['update']
+    ]);
     Route::resource('/type_formations', 'TypeFormationController', [
         'except' => ['update']
     ]);
 
+    Route::post('/formation/update/{id}', 'FormationController@update')->name('formation.update');
     Route::post('/type_formations/update/{id}', 'TypeFormationController@update')->name('type_formations.update');
     Route::post('/session/update/{id}', 'SessionController@update')->name('session.update');
     Route::resource('/seances', 'SeanceController');

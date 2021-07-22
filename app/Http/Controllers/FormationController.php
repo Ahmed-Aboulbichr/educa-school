@@ -119,7 +119,7 @@ class FormationController extends Controller
 
         Formation::where('id',$id)->first()->update($request->all());
          return redirect()->route('formation.index')
-         ->with('success','La formation a été modifié') ;
+         ->with('success','La formation a été modifié');
     }
 
     /**
@@ -130,36 +130,38 @@ class FormationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $formation = Formation::findOrFail($id);
+        $formation->delete();
+        return redirect()->route('formation.index')
+        ->with('success','La formation a été supprimée');
     }
 
     public function renderFormations()
     {
-            /*if ($request->ajax()) {
+        /*if ($request->ajax()) {
 
-            $formations = Formation::with(['session','typeFormation', 'niveauEtude'])
-            ->orderBy('niveau_etude_intitule')
-            ->get();
-            return  response()->json($formations, 200);
-            }
-            */
+        $formations = Formation::with(['session','typeFormation', 'niveauEtude'])
+        ->orderBy('niveau_etude_intitule')
+        ->get();
+        return  response()->json($formations, 200);
+        }
+        */
 
+        $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
+        if($candidat == null ) return redirect(route('getPreInscr'),302);
+        else
+        $formations = DB::table('formations')
+        ->join('sessions', 'session_id', '=', 'sessions.id')
+        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+        ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation'])
+        ->whereNotIn('formations.id',function($query) {
             $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
-            if($candidat == null ) return redirect(route('getPreInscr'),302);
-            else
-            $formations = DB::table('formations')
-            ->join('sessions', 'session_id', '=', 'sessions.id')
-            ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
-            ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation'])
-            ->whereNotIn('formations.id',function($query) {
-                $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
-                $query->select('formation_id')->from('candidatures')->where('candidat_id',$candidat->id);
-             })
-            ->orderBy('sessions.date_session','DESC')
-            ->orderBy('formations.dateLimite','ASC')
-            ->get();
+            $query->select('formation_id')->from('candidatures')->where('candidat_id',$candidat->id);
+            })
+        ->orderBy('sessions.date_session','DESC')
+        ->orderBy('formations.dateLimite','ASC')
+        ->get();
 
-            return view('candidat.candidatures.formations', compact('formations'));
-
+        return view('candidat.candidatures.formations', compact('formations'));
     }
 }

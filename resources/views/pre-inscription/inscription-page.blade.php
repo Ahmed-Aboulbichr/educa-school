@@ -61,7 +61,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#progress-confirm-detail" class="nav-link remove-events" data-toggle="tab">
-                                <span class="step-number">05</span>
+                                <span class="step-number">04</span>
                                 <span class="step-title">Confirmation</span>
                             </a>
                         </li>

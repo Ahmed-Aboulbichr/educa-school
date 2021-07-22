@@ -59,6 +59,7 @@ class CreateCandidatsTable extends Migration
             $table->foreign('sec_profession_pere_id')->references('id')->on('secteur_professions')->onDelete('cascade')->default(null);
             $table->foreign('sec_profession_mere_id')->references('id')->on('secteur_professions')->onDelete('cascade')->default(null);
             $table->foreign('ville_id_etud')->references('id')->on('villes')->onDelete('cascade')->default(null);
+            $table->boolean('completed')->default(false)->nullable();
 
             $table->timestamps();
         });

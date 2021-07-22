@@ -1,9 +1,23 @@
 @if ((Auth::user()==null)?false:(Auth::user()->hasRole('User')))
     {{-- si le cas d'un candidature --}}
-
-    <script type="text/javascript">
-        window.location.href = "/pre-ins";
-    </script>
+    @php
+        $candidat = App\Candidat::where('user_id', Auth::id())->latest()->first();
+    @endphp
+    @if ($candidat != null)
+        @if ($candidat->completed != 1)
+            <script type="text/javascript">
+                window.location.href = "{{route('getPreInscr')}}"; //"/pre-ins";
+            </script>
+        @else
+            <script type="text/javascript">
+                window.location.href = "{{route('cursus_universitaire.index')}}";
+            </script>
+        @endif
+    @else
+        <script type="text/javascript">
+            window.location.href = "{{route('getPreInscr')}}"; //"/pre-ins";
+        </script>
+    @endif        
 @else
     {{-- si le cas d'un admin ou bien etudiant --}}
 
