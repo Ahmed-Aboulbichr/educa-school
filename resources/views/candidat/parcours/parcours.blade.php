@@ -33,12 +33,18 @@
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="mdi mdi-check-all mr-2"></i>
                 {{ session()->get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             @elseif( session()->has('exists') )
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <i class="mdi mdi-block-helper mr-2"></i>
                  {{ session()->get('exists') }}
-                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             @endif
             <div class="card">
                 <div class="card-body">
@@ -46,7 +52,7 @@
                     <div class="bg-light d-flex float-right mb-4">
                         <button class="btn btn-primary waves-effect waves-light"  data-toggle="modal" data-target=".bs-example-modal-center" id="ajout"><i class="mdi mdi-plus mr-1"></i>Ajouter</button>
                     </div>
-                    
+
                     <div class="table-responsive">
                         <table id="datatable" class="table mt-4">
                             <thead class="thead-light">
@@ -81,7 +87,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>

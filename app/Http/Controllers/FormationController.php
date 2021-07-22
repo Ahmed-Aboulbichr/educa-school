@@ -58,7 +58,16 @@ class FormationController extends Controller
             'specialite' => ['required', 'string', 'max:255']
         ]);
 
-        Formation::create($request->all());
+        Formation::create([
+            'session_id' => $request->get('session_id'),
+            'dateLimite' => $request->get('dateLimite'),
+            'type_formation_id' => $request->get('type_formation_id'),
+            'niveau_preRequise' => $request->get('niveau_preRequise'),
+            'niveau_acces' => $request->get('niveau_acces'),
+            'duree' => $request->get('duree'),
+            'specialite' => $request->get('specialite')
+        ]);
+
          return redirect()->route('formation.index')
          ->with('success','La formation a été enregistrée') ;
     }
@@ -117,7 +126,15 @@ class FormationController extends Controller
             'specialite' => ['required', 'string', 'max:255']
         ]);
 
-        Formation::where('id',$id)->first()->update($request->all());
+        Formation::where('id',$id)->first()->update([
+            'session_id' => $request->get('session_id'),
+            'dateLimite' => $request->get('dateLimite'),
+            'type_formation_id' => $request->get('type_formation_id'),
+            'niveau_preRequise' => $request->get('niveau_preRequise'),
+            'niveau_acces' => $request->get('niveau_acces'),
+            'duree' => $request->get('duree'),
+            'specialite' => $request->get('specialite')
+        ]);
          return redirect()->route('formation.index')
          ->with('success','La formation a été modifié');
     }
