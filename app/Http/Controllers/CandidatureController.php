@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Candidat;
-use App\docFile;
 use App\Formation;
 use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
+use App\CandidaturesCursusUniversitaire;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class CandidatureController extends Controller
 {
@@ -72,6 +72,7 @@ class CandidatureController extends Controller
             $niveauPreRequise = Niveau_etude::where('id',$formation->niveau_preRequise)->first()->intitule;
             //récupérer le derniére cursus de candidat
             $cursusUniv = Cursus_universitaire::where('candidat_id',$candidat->id)->latest()->first();
+            $check = false;
 
             if($cursusUniv === null){
                 $niveauEtude = "BAC";
@@ -90,11 +91,20 @@ class CandidatureController extends Controller
                     'formation_id' => $formation->id,
                 ]);
 
-                return redirect('/getFormations')->with('success', 'Votre candidature a été bien enregistré');
+                $cursusUniversitaires = Cursus_universitaire::where('candidat_id',$candidat->id)->get();
+
+                foreach ($cursusUniversitaires as $cursusUniv) {
+                    //récupére le niveau etude de chaque cursus
+                    $niveauIterative = Niveau_etude::where('id',$cursusUniv->niveau_etude_id)->first()->intitule;
+                    if($niveauIterative <= $niveauPreRequise){
+                        $candidature->Cursus_universitaires()->attach($cursusUniv);
+                    }
+                }
+                return redirect('/getFormations')->with('success', 'Votre candidature a été enregistrée');
             }
 
             if($check === false)
-                return redirect('/getFormations')->with('notice', 'Vous avez pas completez vos informations scolaires pour postuler à cette offre');
+                return redirect('/getFormations')->with('notice', 'Vous avez pas completez vos informations scolaires pour postuler à cette formation');
             }
         }
 
@@ -128,11 +138,20 @@ class CandidatureController extends Controller
      function downloadPDF($id)
     {
         abort_if(Gate::denies('Candidature_PDF_download'), 403);
-        $candidat = Candidat::where('id', $id)->first();
+
+        $candidature = Candidature::where('id',$id)->first();
+        abort_if(($candidature==null), 404);
+        $candidat = Candidat::where('id', $candidature->candidat_id)->first();
+
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        $pdf->setPaper('A4', 'portait');
         set_time_limit(300);
 
-        return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat'))->stream();
+
+
+        $profileImg =base64_encode(Storage::get($candidat->docFiles()->where('type','=','profileImg')->first()->path ));
+        return $pdf->loadView('pre-inscription.attestationPDF', compact('candidat','profileImg','candidature'))->stream();
+
     }
 
     /**
@@ -144,9 +163,13 @@ class CandidatureController extends Controller
      function showPDF($id)
     {
 
-        //abort_if(Gate::denies('Candidature_PDF_view'), 403);
-        $candidat = Candidat::where('id', $id)->first();
-        return view('pre-inscription.attestation')->with('candidat', $candidat);
+        abort_if(Gate::denies('Candidature_PDF_view'), 403);
+        $candidature = Candidature::where('id',$id)->first();
+        abort_if(($candidature==null), 404);
+        $candidat = Candidat::where('id', $candidature->candidat_id)->first();
+
+        $profileImg =base64_encode(Storage::get($candidat->docFiles()->where('type','=','profileImg')->first()->path ));
+        return view('pre-inscription.attestationPDF')->with('candidat', $candidat)->with('profileImg',$profileImg)->with('candidature',$candidature);
     }
 
     /**
@@ -218,8 +241,8 @@ class CandidatureController extends Controller
         $candidature = Candidature::findOrFail($id);
 
         $candidature->delete();
-
-        return redirect()->route('mesCandidatures')->with('success', 'Votre candidatures a été bien supprimer');;
+        $candidature->Cursus_universitaires()->detach();
+        return redirect()->route('mesCandidatures')->with('success', 'Votre candidature a été supprimé');;
     }
 
     /* public function setValidate(Request $request){

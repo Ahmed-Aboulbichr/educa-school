@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-
-
     $.ajax({
         url: config.routes.getFormations,
         type: 'get',

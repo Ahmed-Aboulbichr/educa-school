@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Candidat;
+use App\Formation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
 class FormationController extends Controller
@@ -16,7 +18,15 @@ class FormationController extends Controller
      */
     public function index()
     {
-        //
+        $formations = DB::table('formations')
+        ->join('sessions', 'session_id', '=', 'sessions.id')
+        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+        ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
+        ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
+        ->orderByRaw('sessions.date_session DESC')
+        ->get();
+        //return  response()->json($formations, 200);
+        return view('admin.formation.index', compact('formations'));
     }
 
     /**
@@ -37,7 +47,29 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->session()->flash('operation','store');
+        $request->validate([
+            'session_id'=> ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
+            'dateLimite'=> ['required',  'date_format:Y-m-d'],
+            'type_formation_id' => ['required', 'integer', Rule::exists('type_formations', 'id')->where('id', $request->input('type_formation_id'))],
+            'niveau_preRequise' => ['required', 'integer', Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_preRequise'))],
+            'niveau_acces' => ['required', 'integer', Rule::in(['1', '2', '3', '4', '5'])],
+            'duree' => ['required', 'integer', Rule::in(['1', '2', '3', '4', '5'])],
+            'specialite' => ['required', 'string', 'max:255']
+        ]);
+
+        Formation::create([
+            'session_id' => $request->get('session_id'),
+            'dateLimite' => $request->get('dateLimite'),
+            'type_formation_id' => $request->get('type_formation_id'),
+            'niveau_preRequise' => $request->get('niveau_preRequise'),
+            'niveau_acces' => $request->get('niveau_acces'),
+            'duree' => $request->get('duree'),
+            'specialite' => $request->get('specialite')
+        ]);
+
+         return redirect()->route('formation.index')
+         ->with('success','La formation a été enregistrée') ;
     }
 
     /**
@@ -59,7 +91,19 @@ class FormationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $formation = Formation::where('formations.id', $id)
+        ->join('sessions', 'session_id', '=', 'sessions.id')
+        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+        ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
+        ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation','niveau_etudes.intitule'])
+        ->get()
+        ->first();
+
+        $response = [
+            'formation' => $formation,
+            'route' =>  route('formation.update',[$id])
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -71,7 +115,28 @@ class FormationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->session()->flash('operation','update');
+        $request->validate([
+            'session_id'=> ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
+            'dateLimite'=> ['required',  'date_format:Y-m-d'],
+            'type_formation_id' => ['required', 'integer', Rule::exists('type_formations', 'id')->where('id', $request->input('type_formation_id'))],
+            'niveau_preRequise' => ['required', 'integer', Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_preRequise'))],
+            'niveau_acces' => ['required', 'integer', Rule::in(['1', '2', '3', '4', '5'])],
+            'duree' => ['required', 'integer', Rule::in(['1', '2', '3', '4', '5'])],
+            'specialite' => ['required', 'string', 'max:255']
+        ]);
+
+        Formation::where('id',$id)->first()->update([
+            'session_id' => $request->get('session_id'),
+            'dateLimite' => $request->get('dateLimite'),
+            'type_formation_id' => $request->get('type_formation_id'),
+            'niveau_preRequise' => $request->get('niveau_preRequise'),
+            'niveau_acces' => $request->get('niveau_acces'),
+            'duree' => $request->get('duree'),
+            'specialite' => $request->get('specialite')
+        ]);
+         return redirect()->route('formation.index')
+         ->with('success','La formation a été modifié');
     }
 
     /**
@@ -82,36 +147,38 @@ class FormationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $formation = Formation::findOrFail($id);
+        $formation->delete();
+        return redirect()->route('formation.index')
+        ->with('success','La formation a été supprimée');
     }
 
     public function renderFormations()
     {
-            /*if ($request->ajax()) {
+        /*if ($request->ajax()) {
 
-            $formations = Formation::with(['session','typeFormation', 'niveauEtude'])
-            ->orderBy('niveau_etude_intitule')
-            ->get();
-            return  response()->json($formations, 200);
-            }
-            */
+        $formations = Formation::with(['session','typeFormation', 'niveauEtude'])
+        ->orderBy('niveau_etude_intitule')
+        ->get();
+        return  response()->json($formations, 200);
+        }
+        */
 
+        $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
+        if($candidat == null ) return redirect(route('getPreInscr'),302);
+        else
+        $formations = DB::table('formations')
+        ->join('sessions', 'session_id', '=', 'sessions.id')
+        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+        ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation'])
+        ->whereNotIn('formations.id',function($query) {
             $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
-            if($candidat == null ) return redirect(route('getPreInscr'),302);
-            else
-            $formations = DB::table('formations')
-            ->join('sessions', 'session_id', '=', 'sessions.id')
-            ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
-            ->select(['formations.*','sessions.date_session','sessions.annee_univ','type_formations.designation'])
-            ->whereNotIn('formations.id',function($query) {
-                $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
-                $query->select('formation_id')->from('candidatures')->where('candidat_id',$candidat->id);
-             })
-            ->orderBy('sessions.date_session','DESC')
-            ->orderBy('formations.dateLimite','ASC')
-            ->get();
+            $query->select('formation_id')->from('candidatures')->where('candidat_id',$candidat->id);
+            })
+        ->orderBy('sessions.date_session','DESC')
+        ->orderBy('formations.dateLimite','ASC')
+        ->get();
 
-            return view('candidat.candidatures.formations', compact('formations'));
-
+        return view('candidat.candidatures.formations', compact('formations'));
     }
 }

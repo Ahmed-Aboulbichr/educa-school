@@ -150,7 +150,11 @@ class CursusUniversitaireController extends Controller
            }
             docFile::where('id',$doc->id)->delete();
         }
-    
+        $candidatures =  $cursus_universitaire->candidatures;
+        $cursus_universitaire->candidatures()->detach();
+        foreach ($candidatures as $candidature) {
+            $candidature->delete();
+        }
         $cursus_universitaire->delete();
 
         return redirect()->route('cursus_universitaire.index')

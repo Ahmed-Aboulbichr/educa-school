@@ -1,7 +1,6 @@
 <header id="page-topbar">
     <div class="navbar-header">
         <div class="d-flex">
-            <!-- LOGO -->
             <div class="navbar-brand-box">
                 <a href="{{url('index')}}" class="logo logo-dark">
                     <span class="logo-sm">
@@ -21,48 +20,20 @@
                     </span>
                 </a>
             </div>
-
-            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
-                <i class="ri-menu-2-line align-middle"></i>
-            </button>
-
-            <!-- App Search-->
-            <form class="app-search d-none d-lg-block">
-                <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="@lang('translation.Search')...">
-                    <span class="ri-search-line"></span>
-                </div>
-            </form>
-
-
         </div>
 
         <div class="d-flex">
-
-
-            <div class="dropdown d-none d-lg-inline-block ml-1">
+           <div class="dropdown d-none d-lg-inline-block ml-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                     <i class="ri-fullscreen-line"></i>
                 </button>
             </div>
 
-            
-                <div class="dropdown d-inline-block">
-                    <a type="button" href="{{ url('candidat.profil')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
-                        <strong>Mes Candidatures</strong>
-                    </a>
-                </div>
-                <div class="dropdown d-inline-block">
-                    <a type="button" href="{{route('getPreInscr')}}" style="display:flex; align-items:center" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
-                        Modifier mes Informations
-                    </a>
-                </div>
-                <div class="dropdown d-inline-block">
-                    <a type="button" href="{{route('logout')}}" style="padding-top: 1.47em;" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
-                        <i class="ri-shut-down-line align-middle mr-1 text-danger"></i>
-                    </a>
-                </div>
-            
+            <div class="dropdown d-inline-block">
+                <a type="button" href="{{route('logout')}}" style="padding-top: 1.47em;" class="btn btn-sm btn-link  header-item noti-icon waves-effect">
+                    <i class="ri-shut-down-line align-middle mr-1 text-danger"></i>
+                </a>
+            </div>
         </div>
     </div>
 </header>

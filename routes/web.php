@@ -26,8 +26,6 @@ Auth::routes(['verify' => true]);
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => 'auth'], function () {
 
-
-    Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
     Route::get('pre-ins', 'CandidatController@index')->name('getPreInscr');
     //users
     Route::get('utilisateurs', 'UserController@renderView')->name('getView');
@@ -42,6 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('getNationalite', 'NationaliteController@renderNationalite')->name('getNationality');
     Route::get('getDelegations', 'DelegationController@renderDelegations')->name('getDelegations');
     Route::get('getFormations', 'FormationController@renderFormations')->name('getFormations');
+    Route::get('getTypeFormations', 'TypeFormationController@renderTypeFormations')->name('getTypeFormations');
+    Route::get('getNiveau', 'NiveauEtudeController@renderNiveau')->name('getNiveau');
+    Route::get('getSessions', 'SessionController@renderSessions')->name('getSessions');
     Route::get('getAcademies', 'AcademieController@renderAcademies')->name('getAcademies');
     Route::get('getProvinces', 'ProvinceController@renderProvinces')->name('getProvinces');
     Route::get('getSecteurProfessions', 'SecteurProfessionController@renderSecteurs')->name('getSecteurProfessions');
@@ -57,8 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
 
-    //other routes
-    Route::resource('/type_formations', 'TypeFormationController')->only(['index', 'show']);
 
     Route::resource('/cursus_universitaire', 'CursusUniversitaireController');
     Route::resource('/administrateurs', 'AdministrateurController');
@@ -66,13 +65,26 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/etudiants', 'EtudiantController');
     Route::resource('/candidats', 'CandidatController');
     Route::get('/profile','CandidatController@profile' )->name('profile');
+    Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
+
     Route::post('saveCandidature', 'CandidatureController@store')->name('saveCandidature');
     Route::resource('candidatures', 'CandidatureController');
     Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
 
     // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
-    Route::resource('/sessions', 'SessionController');
-    Route::resource('/formations', 'FormationController');
+    Route::resource('/session', 'SessionController',  [
+        'except' => ['update']
+    ]);
+    Route::resource('/formation', 'FormationController', [
+        'except' => ['update']
+    ]);
+    Route::resource('/type_formations', 'TypeFormationController', [
+        'except' => ['update']
+    ]);
+
+    Route::post('/formation/update/{id}', 'FormationController@update')->name('formation.update');
+    Route::post('/type_formations/update/{id}', 'TypeFormationController@update')->name('type_formations.update');
+    Route::post('/session/update/{id}', 'SessionController@update')->name('session.update');
     Route::resource('/seances', 'SeanceController');
     Route::resource('/salles', 'SalleController');
 

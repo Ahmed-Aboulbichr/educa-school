@@ -22,7 +22,7 @@ class Cursus_universitaire extends Model
         return $this->belongsTo(Candidat::class);
     }
 
-    public function niveauEtude()
+    public function niveau_etude()
     {
         return $this->belongsTo(Niveau_etude::class);
     }
@@ -35,5 +35,9 @@ class Cursus_universitaire extends Model
     public function docFiles()
     {
         return $this->hasMany(docFile::class);
+    }
+
+    public function candidatures(){
+        return $this->belongsToMany(Candidature::class);
     }
 }
