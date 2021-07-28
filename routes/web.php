@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
 
+    Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
 
     Route::resource('/cursus_universitaire', 'CursusUniversitaireController');
     Route::resource('/administrateurs', 'AdministrateurController');
@@ -75,7 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
     Route::get('candidature/{type}', 'CandidatureController@index')->name('candidatures.index');
-    Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
 
     // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');
     Route::resource('/session', 'SessionController',  [

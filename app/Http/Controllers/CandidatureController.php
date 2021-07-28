@@ -183,15 +183,12 @@ class CandidatureController extends Controller
             ->select('candidatures.id', 'candidatures.labelle', 'candidatures.valide', 'formations.specialite', 'candidats.nom_fr', 'candidats.prenom_fr')
             ->get();
 
-
-
         return view('admin.candidature.liste', compact('candidatures'));
     }
 
     function editValidation(Candidature $candidature, $id)
     {
 
-        abort_if(Gate::denies('Candidature_edit'), 403);
         $candidature = Candidature::findOrFail($id);
 
         ($candidature->valide == 1) ? ($candidature->valide = 0) : ($candidature->valide = 1);
