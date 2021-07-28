@@ -13,6 +13,12 @@
     </style>
 @endsection
 @section('content')
+<div>
+    <div class="col-lg-9" style="min-width: 100%">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <div class="row no-gutters">
     <div class="row">
         <div class="col-12">
             <form action="{{ route('cursus_universitaire.update', $cursus->id) }}" method="POST" enctype="multipart/form-data">
@@ -37,15 +43,11 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Niveau Etude</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="niveau_etude_id" id="nvEtude">
-                                        <option value="-1"></option>
-                                        <option value="1" {{ $cursus->niveau_etude_id==1 ? 'selected' : '' }}>BAC</option>
-                                        <option value="2" {{ $cursus->niveau_etude_id==2 ? 'selected' : '' }}>BAC + 1</option>
-                                        <option value="3" {{ $cursus->niveau_etude_id==3 ? 'selected' : '' }}>BAC + 2</option>
-                                        <option value="4" {{ $cursus->niveau_etude_id==4 ? 'selected' : '' }}>BAC + 3</option>
-                                        <option value="5" {{ $cursus->niveau_etude_id==5 ? 'selected' : '' }}>BAC + 4</option>
-                                        <option value="6" {{ $cursus->niveau_etude_id==6 ? 'selected' : '' }}>BAC + 5</option>
-                                    </select>
+                        
+                                       
+                                        <input type="text"class="form-control" disabled value="{{ $cursus->niveau_etude->intitule}}" >
+                                       
+                                
                                 </div>
                             </div>
                         </div>
@@ -143,6 +145,13 @@
                 </form>
         </div>
     </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 

@@ -18,10 +18,14 @@ Recover Password
                         <div class="row justify-content-center">
                             <div class="col-lg-9">
                                 <div>
-                                        
-                                      
                                 
+                                    <div class="text-center">
+                                        <div>
+                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
+                                        </div>
 
+                                        <h4 class="font-size-18 mt-4">Verfier votre email</h4>
+                                    </div>
                                        <div class="p-2 mt-5">
                                          
                                               <div class="card">
@@ -43,10 +47,10 @@ Recover Password
                                                 </div>
                                             </div>
                                     
-                                        <div class="mt-5 text-center">
-                                            <p>Not you  ? <a href="{{url('logout')}}" class="font-weight-medium text-primary"> Logout</a> </p>
-                                            <p><script>document.write(new Date().getFullYear())</script>© Nazox.  Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
-                                        </div>
+                                            <div class="mt-4 text-center">
+                                                <p><a href="{{url('register')}}" class="font-weight-medium text-primary"> Créer votre compte</a> </p>
+                                                <p><script>document.write(new Date().getFullYear())</script>© ENCGF</p>
+                                            </div>
                                     </div>
     
                                 </div>
@@ -60,6 +64,11 @@ Recover Password
                     </div>
                 </div>
             </div>
+            <div class="col-lg-8" style="background-repeat: no-repeat;background-image:url('/assets/images/ENCG-Fes.jpg');background-size: cover;">
+                <div class="authentication-bg">
+                <div class="bg-overlay"></div>
+            </div>
+        </div>
         </div>
     </div>
 </div>

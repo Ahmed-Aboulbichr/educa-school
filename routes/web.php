@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'verified'], function () {
 
     Route::get('pre-ins', 'CandidatController@index')->name('getPreInscr');
     //users
@@ -68,7 +68,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
 
     Route::post('saveCandidature', 'CandidatureController@store')->name('saveCandidature');
-    Route::resource('candidatures', 'CandidatureController');
+    Route::resource('candidatures', 'CandidatureController',[
+        'except' => ['index']
+    ]);
+    
+    Route::get('candidature/{type}', 'CandidatureController@index')->name('candidatures.index');
     Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
 
     // Route::get('candidatureValide/{id}', 'CandidatureController@Valide')->name('candidature.valide');

@@ -28,7 +28,7 @@ class CandidatController extends Controller
     public function index()
     {
         //i change it from candidature to candidat
-        $candidat = Candidat::where('user_id', Auth::id())->latest()->first();
+        $candidat = Candidat::where('user_id', Auth::id())->orWhere('editor_id',Auth::id())->latest()->first();
         return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }
 
@@ -75,7 +75,7 @@ class CandidatController extends Controller
      */
     public function profile()
     {
-        return view('candidat.profile')->with('candidat',Candidat::where('user_id',Auth::id())->first());
+        return view('candidat.profile')->with('candidat',Candidat::where('user_id',Auth::id())->orWhere('editor_id',Auth::id())->first());
 
     }
 
@@ -144,6 +144,7 @@ class CandidatController extends Controller
             $fields = $req->all();
 
             $candidat = Candidat::where('CIN', '=', $fields['CIN'])->first();
+            
             if ($candidat === null) {
                 // user doesn't exist
                 $candidat =  new Candidat;
@@ -167,7 +168,7 @@ class CandidatController extends Controller
 
                 $candidat->save();
             } else {
-                $candidat->user_id = Auth::id();
+                $candidat->editor_id = Auth::id();
                 $candidat->nom_fr = $fields['nom_fr'];
                 $candidat->nom_ar = $fields['nom_ar'];
                 $candidat->prenom_fr = $fields['prenom_fr'];
@@ -221,7 +222,7 @@ class CandidatController extends Controller
             }else {
             $fields = $request->all();
             $candidat = null;
-            $candidat = Candidat::where('user_id', Auth::id())->first();
+            $candidat = Candidat::where('user_id', Auth::id())->orWhere('editor_id',Auth::id())->first();
             if (is_object($candidat)) {
                 $candidat->update([
                     'CIN_pere' => $fields['cin_pere'],
@@ -270,7 +271,7 @@ class CandidatController extends Controller
             }else {
                 $fields = $request->all();
                 $candidat = null;
-                $candidat = Candidat::where('user_id', Auth::id())->first();
+                $candidat = Candidat::where('user_id', Auth::id())->orWhere('editor_id',Auth::id())->first();
 
                 if (is_object($candidat)) {
                     $candidat->update([
@@ -282,6 +283,7 @@ class CandidatController extends Controller
                         'province_id' => $fields['province'],
                         'delegation_id' => $fields['delegation'],
                         'academie_id' =>  $fields['academie'],
+                        'completed' => 1,
                     ]);
 
 
@@ -303,7 +305,7 @@ class CandidatController extends Controller
 
             $candidat = null;
             $doc_file = null;
-            $candidat = Candidat::where('user_id', Auth::id())->first();
+            $candidat = Candidat::where('user_id', Auth::id())->orWhere('editor_id',Auth::id())->first();
 
             if (is_object($candidat)) {
 

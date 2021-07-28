@@ -52,6 +52,7 @@ class CreateCandidatsTable extends Migration
             $table->foreignId('province_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('delegation_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('editor_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('pay_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('nationalite_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreign('ville_id_parent')->references('id')->on('villes')->onDelete('cascade')->default(null);

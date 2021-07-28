@@ -149,7 +149,7 @@ $(function() {
        addRemoveLinks: true,
        maxFiles: 1,
        acceptedFiles: 'image/*',
-       maxFilesize: 1,
+       maxFilesize: 5,
        init: function () {
         let myDropzone = this;
 
@@ -192,7 +192,7 @@ $(function() {
        addRemoveLinks: true,
        maxFiles: 1,
        acceptedFiles: 'image/*',
-       maxFilesize: 1,
+       maxFilesize: 5,
        init: function () {
         let myDropzone = this;
 
@@ -235,7 +235,7 @@ $(function() {
        addRemoveLinks: true,
        maxFiles: 1,
        acceptedFiles: 'image/*',
-       maxFilesize: 1,
+       maxFilesize: 5,
        init: function () {
         let myDropzone = this;
 
@@ -278,7 +278,7 @@ $(function() {
        addRemoveLinks: true,
        maxFiles: 1,
        acceptedFiles: 'image/*',
-       maxFilesize: 1,
+       maxFilesize: 5,
        init: function () {
         let myDropzone = this;
 
@@ -321,7 +321,7 @@ $(function() {
        addRemoveLinks: true,
        maxFiles: 1,
        acceptedFiles: 'image/*',
-       maxFilesize: 1,
+       maxFilesize: 5,
        init: function () {
         let myDropzone = this;
 

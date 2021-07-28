@@ -37,6 +37,7 @@
                                 <th>Type</th>
                                 <th>Niveau d'accès</th>
                                 <th>Status</th>
+                                <th>Attestation</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -55,9 +56,13 @@
                                     @endif    
                                 </td>
                                 @if($candidature->valide === 1)
-                                    <td>C'est validé </br> un recu ici</td>
+                                    <td> Validé </td>
+                                    <td style="padding:0px;text-align:center;" >    <a style="font-size: 32px; text-align:center;" href="{{ route('showPDF', $candidature->id) }}">
+                                        <i class="mdi mdi-22px mdi-file-pdf-outline"></i>
+                                    </a></td>
                                 @else
                                     <td>Pas encours</td>
+                                    <td> NaN</td>
                                 @endif
                                 <td>
                                     <button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light btn-delete"  data-toggle="modal" data-action="{{ route('candidatures.destroy', $candidature->id) }}" data-target="#annule">

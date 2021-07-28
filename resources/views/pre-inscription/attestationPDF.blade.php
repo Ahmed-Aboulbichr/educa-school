@@ -318,7 +318,7 @@
 </head>
 
 <body>
-  <div class="container bootdey" style="float: left;">
+  <div class="container bootdey" >
     <div class="row invoice row-printable">
       <div class="col-md-10" style="background-color: white;">
         <!-- col-lg-12 start here -->

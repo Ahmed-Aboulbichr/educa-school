@@ -1,5 +1,5 @@
 @extends('layouts.master-educa')
-@section('title') Editable Tables @endsection
+@section('title') Candidatures Non-Validé @endsection
 @section('css')
 
     <!-- DataTables -->
@@ -8,20 +8,22 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-    @slot('title') candidatures @endslot
+    @slot('title') Candidatures Non-Validé @endslot
     @slot('li_1') Liste @endslot
-    @slot('li_2') Candidatures @endslot
+    @slot('li_2') Candidatures Non-Validé @endslot
 @endcomponent
 
-<div class="row" style="margin-top: 2em;">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
 
+<div class="row">
+<div class="col-12">
 
-                <div class="table-responsive">
-                    <table class="table table-editable table-nowrap">
-                        <thead>
+    <div class="card">
+       
+        <div class="card-body">
+            <h4 class="card-title"></h4>
+            <div class="table-responsive">
+                <table id="datatable-buttons" class="table mt-4">
+                    <thead class="thead-light">
                             <tr>
                             <th>ID</th>
                             <th>Labelle</th>
@@ -30,16 +32,14 @@
                             <th>Formation</th>
                             <th>Action</th>
                             </tr>
-                        </thead>
-                        {{-- @if ($candidatures == null)
-                            {{ $candidatures = [] }}
-                        @endif --}}
+                    </thead>
+                    <tbody>
                         @foreach ($candidatures as $candidature)
                         <tr>
                             <td>{{ $candidature->id }}</td>
-                            <td data-original-value="11">{{ $candidature->labelle }}</td>
-                            <td data-original-value="11">
-
+                            <td >{{ $candidature->labelle }}</td>
+                            <td >
+    
                                 @if ($candidature->valide=="0")
                                     <a href="{{ route('candidatures.editValidation', $candidature->id) }}" class="btn btn-warning waves-effect waves-light btn-sm">
                                         <i class="ri-error-warning-line align-middle mr-2"></i> non validé
@@ -50,8 +50,8 @@
                                     </a>
                                 @endif
                             </td>
-                            <td data-original-value="1"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->nom_fr }} {{ $candidature->prenom_fr }}</a></td>
-                            <td data-original-value="1.99"><a href="#" data-type="text" data-pk="1" class="editable" data-url="" data-title="Edit Quantity">{{ $candidature->specialite }}</a></td>
+                            <td >{{ $candidature->nom_fr }} {{ $candidature->prenom_fr }}</td>
+                            <td >{{ $candidature->specialite }}</td>
                             <td>
                                 <form method="POST" action="{{ route('candidatures.destroy', $candidature->id) }}">
                                 <a href="{{ route('candidatures.edit', $candidature->id) }}">
@@ -64,24 +64,31 @@
                             </td>
                         </tr>
                         @endforeach
-                    </table>
-                </div>
-
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div> <!-- end col -->
-</div> <!-- end row -->
+        </div> <!-- end card body-->
+    </div>
+    
+    </div>
+</div>
 
 @endsection
 @section('script')
 
 <!-- Required datatable js -->
-            <!-- {{--
+          
+    <!-- Required datatable js -->
+    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
 
-<script src="{{ URL::asset('/assets/libs/datatables/dataTables.min.js')}}"></script>
+    <!-- Datatable init js -->
+    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
 
-<script src="{{ URL::asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.js')}}"></script>
---}} -->
+    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js')}}"></script>
+
+    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js')}}"></script>
+
+
 
 
 @endsection

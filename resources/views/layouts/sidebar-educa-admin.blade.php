@@ -16,8 +16,8 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{url('formation')}}>Liste formations</a></li>
-                        <li><a href={{url('session')}}>Les sessions</a></li>
-                        <li><a href={{url('type_formations')}}>Les types formation</a></li>
+                        <li><a href={{url('session')}}>Sessions</a></li>
+                        <li><a href={{url('type_formations')}}>Types formation</a></li>
                     </ul>
                 </li>
                 <li>
@@ -29,7 +29,8 @@
                         <li><a href={{url('admin.candidature.inscription')}}>Inscription</a></li>
                         <li><a href={{url('admin.candidature.re-inscription')}}>Réinscription</a></li>
                         <li><a href={{url('admin.candidature.reclamation')}}>Reclamation</a></li>
-                        <li><a href={{ route('candidatures.index') }}>Liste Candidatures</a></li>
+                        <li><a href={{ route('candidatures.index','valide') }}>Candidatures Validé</a></li>
+                        <li><a href={{ route('candidatures.index','non-valide') }}>Candidatures Non-Validé</a></li>
                     </ul>
                 </li>
 
