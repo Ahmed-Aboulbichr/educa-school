@@ -5,6 +5,9 @@
 @endsection
 @section('css')
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
+
+    
+    <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css"></link>
     <!--<style>
         .card {
           /* Add shadows to create the "card" effect */
@@ -79,7 +82,7 @@
                                             <a class="btn btn-info p-1" type="button" href="{{ route('cursus_universitaire.show', $cur->id) }}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></a>
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-warning p-1" name="archive" type="submit" id="submitForm" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
+                                            <button class="btn btn-warning p-1" name="archive" type="submit" onclick="alertFunction(event,this)" ><i class="mdi mdi-24px mdi-delete"></i>   </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -119,11 +122,9 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
                                         <option value="-1"></option>
-                                        <option value="2">BAC + 1</option>
-                                        <option value="3">BAC + 2</option>
-                                        <option value="4">BAC + 3</option>
-                                        <option value="5">BAC + 4</option>
-                                        <option value="6">BAC + 5</option>
+                                        @foreach ($data['niveaux'] as $niveau)
+                                            <option value="{{ $niveau->intitule }}">{{ $niveau->intitule }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -188,7 +189,6 @@
                                 <label for="fileS2" class="col-md-3 col-form-label">Relevé de notes S2</label>
                                 <div class="col-md-9">
                                     <div class="custom-file">
-                                        <input type="hidden" name="files[]" value="Releve_Note_S2">
                                         <input type="file" class="custom-file-input" name="files[]" id="fileS2" accept="image/*" value='Releve_Note_S2' onchange="getName(event,this)">
                                         <label class="custom-file-label" for="fileS2">Choose file</label>
                                     </div>
@@ -215,6 +215,8 @@
 
     <!-- Datatable init js -->
     <script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
+
+    <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
 
 
     @if (count($errors) > 0)

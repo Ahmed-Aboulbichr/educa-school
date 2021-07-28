@@ -15,8 +15,8 @@ class CreateTypeFormationsTable extends Migration
     {
         Schema::create('type_formations', function (Blueprint $table) {
             $table->id();
-            $table->string('designation',50); //LP OR MASTER
-            $table->integer('annees_post_bac'); //LP OR MASTER
+            $table->string('designation', 50); //LP OR MASTER
+            $table->integer('annees_post_bac')->nullable(); //LP OR MASTER
             $table->timestamps();
         });
     }

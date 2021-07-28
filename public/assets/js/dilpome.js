@@ -1,6 +1,7 @@
-$('#submitForm').on('click', function (e) {
+
+function alertFunction(e, btn) {
     e.preventDefault();
-    var form = $(this).parents('form');
+    var form = $(btn).parents('form');
     console.log(form.attr('action'));
     Swal.fire({
         title: 'êtes vous sûr de supprimer ce diplôme?',
@@ -16,12 +17,12 @@ $('#submitForm').on('click', function (e) {
             form.submit();
         }
     });
-});
+}
 
 $('#nvEtude').on('change', function (event) {
     var value = $(this).val();
     var divs = $('.col-lg-6');
-    if (value == 3 || value == 4 || value == 6) {
+    if (value == "BAC+2" || value == "BAC+4" || value == "BAC+5") {
         if (divs.length == 8) {
             var val = divs.last().clone();
             var label = val.find('label');
@@ -29,6 +30,7 @@ $('#nvEtude').on('change', function (event) {
             label.attr('for', 'attestation');
             var input = val.find('input[type=file]');
             input.attr('id', 'attestation')
+            input.attr('value', 'Attestation_Reussite');
             $(val).insertAfter($('.col-lg-6').last());
         }
     } else {

@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\File; 
+
+use Illuminate\Support\Facades\File;
 use App\Candidat;
 use App\Cursus_universitaire;
 use App\docFile;
+use App\Niveau_etude;
 use App\Universite;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,9 +36,12 @@ class CursusUniversitaireController extends Controller
 
         $universities = Universite::all();
 
+        $niveaux = Niveau_etude::all();
+
         $data = [
             'cursus' => $cursus,
-            'universities' => $universities
+            'universities' => $universities,
+            'niveaux' => $niveaux
         ];
 
         return view('candidat.parcours.parcours', compact('data', $data));
@@ -86,7 +91,7 @@ class CursusUniversitaireController extends Controller
             'note_S1' => $request->input('note_S1'),
             'note_S2' => $request->input('note_S2'),
             'Annee_univ' => $request->input('Annee_univ'),
-            'niveau_etude_id' => $request->input('niveau_etude_id'),
+            'niveau_etude_id' => DB::table('niveau_etudes')->where('intitule', '=', $request->input('niveau_etude_id'))->get('id')->first()->id,
             'candidat_id' => $candidat
         ]);
         $cursus->save();
@@ -96,7 +101,7 @@ class CursusUniversitaireController extends Controller
             foreach ($request->file('files') as $key => $file) {
                 $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation_de_Reussite'));
                 /* $filesize = $file->getClientSize(); */
-              
+
                 $filepath = $this->handleUploadedImage($file);
                 $doc_files = new docFile([
                     'type' => $filename,
@@ -142,13 +147,13 @@ class CursusUniversitaireController extends Controller
             ->get();
 
         foreach ($doc_files as $doc) {
-           try {
-              
-            unlink(base_path(). '/storage/app/'.  $doc->path);
-           } catch (\Throwable $th) {
-               //throw $th;
-           }
-            docFile::where('id',$doc->id)->delete();
+            try {
+
+                unlink(base_path() . '/storage/app/' .  $doc->path);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+            docFile::where('id', $doc->id)->delete();
         }
         $candidatures =  $cursus_universitaire->candidatures;
         $cursus_universitaire->candidatures()->detach();
@@ -235,14 +240,14 @@ class CursusUniversitaireController extends Controller
             foreach ($request->file('files') as $key => $file) {
                 $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation_de_Reussite'));
                 /* $filesize = $file->getClientSize(); */
-               
+
                 $filepath = $this->handleUploadedImage($file);
                 try {
-              
-                    unlink(base_path(). '/storage/app/'.  $docs[$key]->path);
-                   } catch (\Throwable $th) {
-                       //throw $th;
-                   }
+
+                    unlink(base_path() . '/storage/app/' .  $docs[$key]->path);
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
 
                 DB::table('doc_files')->where('id', $docs[$key]->id)->update([
                     'type' => $filename,

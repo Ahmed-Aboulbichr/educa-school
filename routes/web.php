@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('pre-ins', 'CandidatController@index')->name('getPreInscr');
@@ -54,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('saveCandidatStepFour/{type}', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
 
 
+    Route::get('/all_type_formations', 'TypeFormationController@all')->name('all_type_formations');
     /////////////////////////
 
     Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');
@@ -64,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/professeurs', 'ProfesseurController');
     Route::resource('/etudiants', 'EtudiantController');
     Route::resource('/candidats', 'CandidatController');
-    Route::get('/profile','CandidatController@profile' )->name('profile');
+    Route::get('/profile', 'CandidatController@profile')->name('profile');
     Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
 
     Route::post('saveCandidature', 'CandidatureController@store')->name('saveCandidature');
@@ -97,8 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
     //Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
 
     Route::get('pages-404', 'NazoxController@index');
-    Route::get('/', 'HomeController@root');
+    Route::any('/', 'HomeController@root');
     Route::get('{any}', 'HomeController@index');
     Route::get('{any}', 'HomeController@index');
-
 });

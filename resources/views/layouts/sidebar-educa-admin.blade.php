@@ -29,7 +29,7 @@
                         <li><a href={{url('admin.candidature.inscription')}}>Inscription</a></li>
                         <li><a href={{url('admin.candidature.re-inscription')}}>Réinscription</a></li>
                         <li><a href={{url('admin.candidature.reclamation')}}>Reclamation</a></li>
-                        <li><a href={{ route('candidatures.index') }}>Liste Candidatures</a></li>
+                        <li><a href={{ url('all_type_formations') }}>Liste Candidatures</a></li>
                     </ul>
                 </li>
 

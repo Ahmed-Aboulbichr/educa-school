@@ -36,28 +36,28 @@ class TypeFormationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        $request->session()->flash('operation','store');
+    {
+        $request->session()->flash('operation', 'store');
         $request->validate([
-            'session_id'=>'required',
-            'annees_post_bac'=>'required'
+            'session_id' => 'required',
+            'annees_post_bac' => 'required'
         ]);
 
         Type_formation::create($request->all());
-         return redirect()->route('type_formations.index')
-         ->with('success','La Type_formation a été enregistrée') ;
+        return redirect()->route('type_formations.index')
+            ->with('success', 'La Type_formation a été enregistrée');
     }
 
- /**
+    /**
      * Display the specified resource.
      *
      * @param  \App\Type_formation  $Type_formation
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function show($id)
     {
         $type_formation = Type_formation::findOrFail($id);
-       /* $candidatures = DB::table('type_formations')
+        /* $candidatures = DB::table('type_formations')
             ->join('formations', 'formations.type_formation_id', '=', 'type_formations.id')
             ->join('candidatures', 'formations.id', '=', 'candidatures.formation_id')
             ->join('candidats', 'candidatures.candidat_id', '=', 'candidats.id')
@@ -67,7 +67,7 @@ class TypeFormationController extends Controller
         return view('admin.candidature.liste')->with('type_formation', $type_formation);
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -79,7 +79,7 @@ class TypeFormationController extends Controller
         $Type_formation = Type_formation::findOrFail($id);
         $response = [
             'Type_formation' => $Type_formation,
-             'route' =>  route('type_formations.update',[$id])
+            'route' =>  route('type_formations.update', [$id])
         ];
 
         return response()->json($response, 200);
@@ -93,23 +93,22 @@ class TypeFormationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-        $request->session()->flash('operation','update');
+    {
+        $request->session()->flash('operation', 'update');
         $request->validate([
             'designation' => 'required',
             'annees_post_bac' => 'required'
         ]);
 
-        Type_formation::where('id',$id)->update(
+        Type_formation::where('id', $id)->update(
             [
                 'designation' => $request->designation,
                 'annees_post_bac' => $request->annees_post_bac
 
             ]
-            );
+        );
         return redirect()->route('type_formations.index')
-        ->with('success','La Type_formation a été modifié');
-
+            ->with('success', 'La Type_formation a été modifié');
     }
 
     /**
@@ -123,11 +122,19 @@ class TypeFormationController extends Controller
         $Type_formation = Type_formation::findOrFail($id);
         $Type_formation->delete();
         return redirect()->route('type_formations.index')
-        ->with('success','La Type_formation a été modifié');
+            ->with('success', 'La Type_formation a été modifié');
     }
 
-    public function renderTypeFormations(){
+    public function renderTypeFormations()
+    {
         $Type_formations = Type_formation::all();
         return  response()->json($Type_formations, 200);
-    }    
+    }
+
+    public function all(Request $req)
+    {
+        $Type_formations = Type_formation::all();
+
+        return view('admin.candidature.type_formation')->with('type_formation', $Type_formations);
+    }
 }
