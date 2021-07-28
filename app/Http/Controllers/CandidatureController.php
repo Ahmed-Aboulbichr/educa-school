@@ -8,6 +8,7 @@ use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
 use App\CandidaturesCursusUniversitaire;
+use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class CandidatureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type)
     {
         //   abort_if(Gate::denies('Candidature_access'), 403);
         $candidatures = DB::table('candidatures')
@@ -244,7 +245,7 @@ class CandidatureController extends Controller
      */
     function destroy($id)
     {
-        //abort_if(Gate::denies('Candidature_delete'), 403);
+        abort_if(Gate::denies('Candidature_delete'), 403);
         $candidature = Candidature::findOrFail($id);
 
         $candidature->delete();

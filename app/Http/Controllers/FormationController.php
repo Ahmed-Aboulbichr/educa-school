@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class FormationController extends Controller
 {
@@ -18,6 +19,7 @@ class FormationController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('formation_index'), 403);
         $formations = DB::table('formations')
             ->join('sessions', 'session_id', '=', 'sessions.id')
             ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
@@ -93,6 +95,7 @@ class FormationController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('formation_edit'), 403);
         $formation = Formation::where('formations.id', $id)
             ->join('sessions', 'session_id', '=', 'sessions.id')
             ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
@@ -149,6 +152,7 @@ class FormationController extends Controller
      */
     public function destroy($id)
     {
+        abort_if(Gate::denies('formation_delete'), 403);
         $formation = Formation::findOrFail($id);
         $formation->delete();
         return redirect()->route('formation.index')

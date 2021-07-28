@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class CursusUniversitaireController extends Controller
 {
@@ -24,7 +25,7 @@ class CursusUniversitaireController extends Controller
     public function index()
     {
 
-        $candidat = Candidat::where('user_id', Auth::user()->id)->get('id')->first();
+        $candidat = Candidat::where('user_id', Auth::user()->id)->orWhere('editor_id',Auth::id())->get('id')->first();
         if ($candidat == null) {
             return redirect()->route('getPreInscr');
         }
@@ -68,16 +69,16 @@ class CursusUniversitaireController extends Controller
 
         DB::beginTransaction();
 
-        $candidat = Candidat::where('user_id', Auth::user()->id)->first()->id;
+        $candidat = Candidat::where('user_id', Auth::user()->id)->orWhere('editor_id',Auth::id())->first()->id;
 
         $request->validate([
-            'niveau_etude_id' => 'bail|required',
-            'Annee_univ' => 'bail|required',
-            'universite_id' => 'bail|required',
-            'specialite' => 'bail|required|max:255',
-            'note_S1' => 'bail|required',
-            'note_S2' => 'bail|required',
-            'files' => 'required'
+            'niveau_etude_id' => [ 'required', 'integer', 'max:255',Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_etude_id'))],
+            'Annee_univ' => 'required',
+            'universite_id' =>  [ 'required', 'integer', 'max:255',Rule::exists('universites', 'id')->where('id', $request->input('universite_id'))],
+            'specialite' => 'required|max:255',
+            'note_S1' =>  [ 'required', 'numeric', 'between:0,20'],
+            'note_S2' => [ 'required', 'numeric', 'between:0,20'],
+            'files' =>  ['required','image'],
         ]);
 
 
@@ -213,16 +214,15 @@ class CursusUniversitaireController extends Controller
         DB::beginTransaction();
 
         $request->validate([
-            'niveau_etude_id' => 'bail|required',
-            'Annee_univ' => 'bail|required',
-            'universite_id' => 'bail|required',
-            'specialite' => 'bail|required|max:255',
-            'note_S1' => 'bail|required',
-            'note_S2' => 'bail|required',
+            'Annee_univ' => 'required',
+            'universite_id' =>  [ 'required', 'integer', 'max:255',Rule::exists('universites', 'id')->where('id', $request->input('universite_id'))],
+            'specialite' => 'required|max:255',
+            'note_S1' =>  [ 'required', 'numeric', 'between:0,20'],
+            'note_S2' => [ 'required', 'numeric', 'between:0,20'],
+            'files' => ['required','image'],
         ]);
         Cursus_universitaire::where('id', $cursus_universitaire->id)
             ->update([
-                'niveau_etude_id' => $request->input('niveau_etude_id'),
                 'Annee_univ' => $request->input('Annee_univ'),
                 'universite_id' => $request->input('universite_id'),
                 'specialite' => $request->input('specialite'),

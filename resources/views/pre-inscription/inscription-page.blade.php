@@ -599,7 +599,7 @@
                                         </div>
                                         <div>
                                             <h5>Confirmation de pre-inscription</h5>
-                                            <p class="text-muted">If several languages coalesce, the grammar of the resulting</p>
+                                            <p class="text-muted"></p>
                                         </div>
                                     </div>
                                 </div>

@@ -12,8 +12,6 @@ class TypeFormationSeeder extends Seeder
      */
     public function run()
     {
-        DB::insert("INSERT INTO `type_formations` (`designation`)
-         VALUES
-         ('Master'),('LP'),('LF'),('Master spécialisé'),('DENCG')");
+     
     }
 }

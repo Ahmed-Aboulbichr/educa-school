@@ -22,7 +22,7 @@ Register
                                         <div>
                                             <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
                                         </div>
-                                        <h4 class="font-size-18 mt-5">Register account</h4>
+                                        <h4 class="font-size-18 mt-5">S'inscrire</h4>
                                     </div>
 
                                     <div class="p-2 mt-5">

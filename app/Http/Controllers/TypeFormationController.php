@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Type_formation;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TypeFormationController extends Controller
 {
@@ -15,6 +16,7 @@ class TypeFormationController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('type_formation_access'), 403);
         $Type_formations = Type_formation::all();
         return view('admin.Type_formation.index', compact('Type_formations'));
     }
@@ -26,6 +28,7 @@ class TypeFormationController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('type_formation_create'), 403);
         return view('admin.Type_formation.create');
     }
 
@@ -56,6 +59,7 @@ class TypeFormationController extends Controller
      */
     public function show($id)
     {
+        abort_if(Gate::denies('type_formation_show'), 403);
         $type_formation = Type_formation::findOrFail($id);
         /* $candidatures = DB::table('type_formations')
             ->join('formations', 'formations.type_formation_id', '=', 'type_formations.id')
@@ -76,6 +80,7 @@ class TypeFormationController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('type_formation_edit'), 403);
         $Type_formation = Type_formation::findOrFail($id);
         $response = [
             'Type_formation' => $Type_formation,
@@ -119,6 +124,7 @@ class TypeFormationController extends Controller
      */
     public function destroy($id)
     {
+        abort_if(Gate::denies('type_formation_delete'), 403);
         $Type_formation = Type_formation::findOrFail($id);
         $Type_formation->delete();
         return redirect()->route('type_formations.index')

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class SessionController extends Controller
 {
@@ -14,7 +15,7 @@ class SessionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   abort_if(Gate::denies('session_index'), 403);
         $sessions = Session::all()->sortBy('date_session')->sortByDesc('annee_univ');
         return view('admin.session.index', compact('sessions'));
     }
@@ -25,12 +26,12 @@ class SessionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {    abort_if(Gate::denies('session_create'), 403);
         return view('admin.session.create');
     }
 
      function listeAnneeUniv()
-    {
+    {   
         $t[0] = strval(date('Y')."-".(date('Y')+1));
         for ($i = 0; $i <20; $i++){
             $currentYear = date('Y');
@@ -48,7 +49,7 @@ class SessionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   abort_if(Gate::denies('session_create'), 403);
         $t = $this->listeAnneeUniv();
         $request->session()->flash('operation','store');
         $request->validate([
@@ -72,7 +73,7 @@ class SessionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   abort_if(Gate::denies('session_edit'), 403);
         $session = Session::findOrFail($id);
         $response = [
             'session' => $session,
@@ -89,7 +90,7 @@ class SessionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {   abort_if(Gate::denies('session_edit'), 403);
         $t = $this->listeAnneeUniv();
         $request->session()->flash('operation','update');
         $request->validate([
@@ -113,7 +114,7 @@ class SessionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {    abort_if(Gate::denies('session_delete'), 403);
         $session = Session::findOrFail($id);
         $session->delete();
         return redirect()->route('session.index')

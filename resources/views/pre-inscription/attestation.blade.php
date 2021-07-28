@@ -11,9 +11,9 @@
                 <div class="panel-body p30">
                     <div class="row">
                         <!-- Start .row -->
-                        <div class="col-lg-6" style="padding: 5px">
+                        <div class="col-lg-12 " style="padding: 5px; text-align:center;">
                             <!-- col-lg-6 start here -->
-                            <div class="invoice-logo text-center"><img width="200" src="data:image;base64,{{ $profileImg }}" alt="Invoice logo"></div>
+                            <div class="invoice-logo text-center" style="margin: 10px; "><img width="200" src="data:image;base64,{{ $profileImg }}" alt="Invoice logo"></div>
                           <!--  <div class="invoice-logo text-center"><img width="200" src="https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png" alt="Invoice logo"></div>-->
 
                         </div>

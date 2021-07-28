@@ -16,8 +16,8 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{url('formation')}}>Liste formations</a></li>
-                        <li><a href={{url('session')}}>Les sessions</a></li>
-                        <li><a href={{url('type_formations')}}>Les types formation</a></li>
+                        <li><a href={{url('session')}}>Sessions</a></li>
+                        <li><a href={{url('type_formations')}}>Types formation</a></li>
                     </ul>
                 </li>
                 <li>
