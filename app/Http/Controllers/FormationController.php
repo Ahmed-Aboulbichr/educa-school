@@ -83,9 +83,9 @@ class FormationController extends Controller
      */
     public function show($id)
     {
-        $formation = Formation::where('type_formation_id', $id)->get();
+        /* $formation = Formation::where('type_formation_id', $id)->get();
 
-        return view('admin.candidature.formations', ['formations' => $formation]);
+        return view('admin.candidature.formations', ['formations' => $formation]); */
     }
 
     /**

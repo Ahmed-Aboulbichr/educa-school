@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/all_type_formations', 'TypeFormationController@all')->name('all_type_formations');
+    Route::get('/all_sessions', 'SessionController@all')->name('all_sessions');
     /////////////////////////
 
     Route::get('storage/{directory}/{filename}', 'docFilesController@getFiles')->name('getFiles');

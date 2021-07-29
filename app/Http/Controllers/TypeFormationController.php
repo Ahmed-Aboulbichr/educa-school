@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Formation;
+use App\Session;
 use App\Type_formation;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -137,9 +139,11 @@ class TypeFormationController extends Controller
         return  response()->json($Type_formations, 200);
     }
 
-    public function all(Request $req)
+    public function all(Request $request)
     {
-        $Type_formations = Type_formation::all();
+        $session = Session::where('annee_univ', $request->input('session'))->first();
+
+        $Type_formations = Formation::where('session_id', $session->id)->get();
 
         return view('admin.candidature.type_formation')->with('type_formation', $Type_formations);
     }

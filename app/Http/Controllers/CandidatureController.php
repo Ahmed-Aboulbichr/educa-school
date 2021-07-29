@@ -7,6 +7,7 @@ use App\Formation;
 use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
+use App\Session;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
