@@ -22,7 +22,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Candidatures non validé</h4>
+                <h4 class="card-title bg-warning p-2 text-light text-center">Candidatures non validé</h4>
                 {{-- Candidatures non validé --}}
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap" id="datatable-buttons" >
@@ -74,7 +74,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Candidatures Validé</h4>
+                <h4 class="card-title bg-success p-2 text-light text-center">Candidatures Validé</h4>
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap" id="datatable-buttons1">
                         <thead>

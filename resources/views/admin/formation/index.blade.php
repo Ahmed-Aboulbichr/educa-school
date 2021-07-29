@@ -60,7 +60,7 @@
                         <tbody>
                             @foreach ($formations as $formation)
                                 <tr>
-                                    <td>{{$formation->date_session}}</td>
+                                    <td>{{$formation->annee_univ}}</td>
                                     <td>{{$formation->dateLimite}}</td>
                                     <td>{{$formation->specialite}}</td>
                                     <td>{{$formation->designation}}</td>

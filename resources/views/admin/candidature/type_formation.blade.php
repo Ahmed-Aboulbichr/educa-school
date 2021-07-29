@@ -26,7 +26,7 @@
                     <p class="card-text">Cliquer pour voir toutes les candidatures du formation {{$type->specialite}}.</p>
                     
                 </div>
-                <a href="{{ route('candidatures.show', [$type->id]) }}" class="btn btn-primary waves-effect waves-light m-3">Button</a>
+                <a href="{{ route('candidatures.show', [$type->id]) }}" class="btn btn-primary waves-effect waves-light m-3">Les candidatures</a>
             </div>
         </div>
     @endforeach

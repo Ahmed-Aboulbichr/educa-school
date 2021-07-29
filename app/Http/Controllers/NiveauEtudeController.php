@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Niveau_etude;
+use App\Session;
 use Illuminate\Http\Request;
 
 class NiveauEtudeController extends Controller
@@ -14,7 +15,10 @@ class NiveauEtudeController extends Controller
      */
     public function index()
     {
-        //
+
+        $niveaux = Niveau_etude::all();
+
+        return view('admin.niveau_etude.index', ['niveaux' => $niveaux]);
     }
 
     /**
@@ -35,7 +39,16 @@ class NiveauEtudeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->session()->put('operation', 'store');
+        $request->validate([
+            'intitule' => 'required'
+        ]);
+
+        Niveau_etude::create([
+            'intitule' => $request->get('intitule')
+        ]);
+
+        return redirect()->route('niveau_etudes.index')->with('success', 'niveau d\'études bien enregistrées');
     }
 
     /**
@@ -57,7 +70,6 @@ class NiveauEtudeController extends Controller
      */
     public function edit(Niveau_etude $niveau_etude)
     {
-        //
     }
 
     /**
@@ -69,7 +81,15 @@ class NiveauEtudeController extends Controller
      */
     public function update(Request $request, Niveau_etude $niveau_etude)
     {
-        //
+        $request->session()->put('operation', 'update');
+
+        $request->validate([
+            'intitule' => 'required'
+        ]);
+
+        $niveau_etude->update($request->all());
+
+        return redirect()->route('niveau_etudes.index')->with('success', 'modification valide');
     }
 
     /**
@@ -80,10 +100,13 @@ class NiveauEtudeController extends Controller
      */
     public function destroy(Niveau_etude $niveau_etude)
     {
-        //
+        $niveau_etude->delete();
+
+        return redirect()->route('niveau_etudes.index')->with('success', 'suppression valide');
     }
 
-    public function renderNiveau(){
+    public function renderNiveau()
+    {
         $Niveau = Niveau_etude::all();
         return  response()->json($Niveau, 200);
     }

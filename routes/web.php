@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('candidature/{id}', 'CandidatureController@editValidation')->name('candidatures.editValidation');
 
+    Route::resource('/niveau_etudes', 'NiveauEtudeController');
     Route::resource('/cursus_universitaire', 'CursusUniversitaireController');
     Route::resource('/administrateurs', 'AdministrateurController');
     Route::resource('/professeurs', 'ProfesseurController');
