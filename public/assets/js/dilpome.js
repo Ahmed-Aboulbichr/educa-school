@@ -20,9 +20,9 @@ function alertFunction(e, btn) {
 }
 
 $('#nvEtude').on('change', function (event) {
-    var value = $(this).val();
+    var value = $('#nvEtude :selected').text();
     var divs = $('.col-lg-6');
-    if (value == "BAC+2" || value == "BAC+4" || value == "BAC+5") {
+    if (value == "BAC+2" || value == "BAC+3" || value == "BAC+5") {
         if (divs.length == 8) {
             var val = divs.last().clone();
             var label = val.find('label');

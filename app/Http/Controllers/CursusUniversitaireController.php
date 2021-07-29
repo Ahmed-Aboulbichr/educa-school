@@ -219,7 +219,7 @@ class CursusUniversitaireController extends Controller
             'specialite' => 'required|max:255',
             'note_S1' =>  [ 'required', 'numeric', 'between:0,20'],
             'note_S2' => [ 'required', 'numeric', 'between:0,20'],
-            'files' => ['required','image'],
+            'files' => ['image'],
         ]);
         Cursus_universitaire::where('id', $cursus_universitaire->id)
             ->update([

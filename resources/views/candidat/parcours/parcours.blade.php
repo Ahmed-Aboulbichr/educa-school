@@ -7,7 +7,7 @@
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
 
     
-    <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css"></link>
+    <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
     <!--<style>
         .card {
           /* Add shadows to create the "card" effect */
@@ -123,7 +123,7 @@
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
                                         <option value="-1"></option>
                                         @foreach ($data['niveaux'] as $niveau)
-                                            <option value="{{ $niveau->intitule }}">{{ $niveau->intitule }}</option>
+                                            <option value="{{ $niveau->id }}">{{ $niveau->intitule }}</option>
                                         @endforeach
                                     </select>
                                 </div>
