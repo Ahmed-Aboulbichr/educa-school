@@ -92,7 +92,7 @@ class CursusUniversitaireController extends Controller
             'note_S1' => $request->input('note_S1'),
             'note_S2' => $request->input('note_S2'),
             'Annee_univ' => $request->input('Annee_univ'),
-            'niveau_etude_id' => DB::table('niveau_etudes')->where('intitule', '=', $request->input('niveau_etude_id'))->get('id')->first()->id,
+            'niveau_etude_id' => $request->input('niveau_etude_id'),
             'candidat_id' => $candidat
         ]);
         $cursus->save();
