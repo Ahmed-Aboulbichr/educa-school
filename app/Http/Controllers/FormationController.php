@@ -25,7 +25,8 @@ class FormationController extends Controller
             ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
             ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
             ->select(['formations.*', 'sessions.date_session', 'sessions.annee_univ', 'type_formations.designation', 'niveau_etudes.intitule'])
-            ->orderByRaw('sessions.date_session DESC')
+            ->orderBy('sessions.date_session', 'DESC')
+            ->orderBy('formations.dateLimite', 'ASC')
             ->get();
         //return  response()->json($formations, 200);
         return view('admin.formation.index', compact('formations'));

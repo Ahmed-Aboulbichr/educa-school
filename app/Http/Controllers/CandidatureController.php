@@ -7,8 +7,6 @@ use App\Formation;
 use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
-use App\CandidaturesCursusUniversitaire;
-use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -247,7 +245,7 @@ class CandidatureController extends Controller
 
         $candidature->delete();
         $candidature->Cursus_universitaires()->detach();
-        return redirect()->route('mesCandidatures')->with('success', 'Votre candidature a été supprimé');;
+        return redirect()->route('mesCandidatures')->with('success', 'Votre candidature a été annulée');;
     }
 
     /* public function setValidate(Request $request){

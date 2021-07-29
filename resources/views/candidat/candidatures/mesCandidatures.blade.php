@@ -53,7 +53,7 @@
                                         {{$candidature->niveau_acces}}ére année </br>({{$candidature->duree}} ans d'études)
                                     @else
                                         {{$candidature->niveau_acces}}ème année </br>({{$candidature->duree}} ans d'études)
-                                    @endif    
+                                    @endif
                                 </td>
                                 @if($candidature->valide === 1)
                                     <td> Validé </td>
@@ -62,7 +62,7 @@
                                     </a></td>
                                 @else
                                     <td>Pas encours</td>
-                                    <td> NaN</td>
+                                    <td>Pas encours</td>
                                 @endif
                                 <td>
                                     <button class="btn btn-danger btn-sm btn-rounded waves-effect waves-light btn-delete"  data-toggle="modal" data-action="{{ route('candidatures.destroy', $candidature->id) }}" data-target="#annule">

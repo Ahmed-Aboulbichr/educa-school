@@ -23,64 +23,12 @@
             <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
                 <i class="ri-menu-2-line align-middle"></i>
             </button>
-    
-            <!-- App Search-->
-            <form class="app-search d-none d-lg-block">
-                <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="@lang('translation.Search')...">
-                    <span class="ri-search-line"></span>
-                </div>
-            </form>
+
         </div>
-        
 
-      
+
+
         <div class="d-flex">
-            <div class="dropdown d-inline-block d-lg-none ml-2">
-                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="ri-search-line"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
-                    aria-labelledby="page-header-search-dropdown">
-                    
-                    <form class="p-3">
-                        <div class="form-group m-0">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search ...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit"><i class="ri-search-line"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="dropdown d-none d-sm-inline-block">
-                <button type="button" class="btn header-item waves-effect"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    @php $locale = session()->get('locale'); @endphp
-                    @switch($locale)
-                        @case('en')
-                        <img src="{{ URL::asset('/assets/images/flags/us.jpg')}}" alt="Header Language" height="16">
-                        @break
-                        @default
-                        <img src="{{ URL::asset('/assets/images/flags/french.jpg')}}" alt="Header Language" height="16">
-                    @endswitch
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <!-- item-->
-                    <a href="{{ url('index/en') }}" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('/assets/images/flags/us.jpg')}}" alt="user-image" class="mr-1" height="12"> <span class="align-middle">English</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="{{ url('index/fr') }}" class="dropdown-item notify-item">
-                        <img src="{{ URL::asset('/assets/images/flags/french.jpg')}}" alt="user-image" class="mr-1" height="12"> <span class="align-middle">@lang('translation.francais')</span>
-                    </a>
-                </div>
-            </div>
            <div class="dropdown d-none d-lg-inline-block ml-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                     <i class="ri-fullscreen-line"></i>
