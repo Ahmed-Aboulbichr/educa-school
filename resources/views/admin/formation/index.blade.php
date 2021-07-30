@@ -60,7 +60,7 @@
                         <tbody>
                             @foreach ($formations as $formation)
                                 <tr>
-                                    <td>{{$formation->annee_univ}}</td>
+                                    <td>{{$formation->date_session}}</td>
                                     <td>{{$formation->dateLimite}}</td>
                                     <td>{{$formation->specialite}}</td>
                                     <td>{{$formation->designation}}</td>
@@ -69,7 +69,7 @@
                                             {{$formation->niveau_acces}}ére année </br>({{$formation->duree}} ans d'études)
                                         @else
                                             {{$formation->niveau_acces}}ème année </br>({{$formation->duree}} ans d'études)
-                                        @endif    
+                                        @endif
                                     </td>
                                     <td>{{$formation->intitule}}</td>
                                     <td>
@@ -289,7 +289,7 @@
         <script>$('#editModal').modal('toggle');</script>
     @endif
     <script>
-        
+
         function getTypeFormations(formation){
             var formations = null;
             $.ajax({
@@ -306,9 +306,9 @@
                     if(formation != null){
                         for(type of response){
                             (formation.type_formation_id == type.id)?option = "<option selected value="+type.id+">"+type.designation+"</option>":option = "<option value='"+type.id+"'>"+type.designation+"</option>";
-                             $("#typeFormations_selected").append(option); 
+                             $("#typeFormations_selected").append(option);
                         }
-                    }    
+                    }
                 }
             });
         }
@@ -328,9 +328,9 @@
                     if(formation != null){
                         for(niveau of response){
                             (formation.niveau_preRequise == niveau.id)?option = "<option selected value="+niveau.id+">"+niveau.intitule+"</option>":option = "<option value='"+niveau.id+"'>"+niveau.intitule+"</option>";
-                             $("#niveaupreRequise_selected").append(option); 
+                             $("#niveaupreRequise_selected").append(option);
                         }
-                    }  
+                    }
                 }
             });
         }
@@ -350,9 +350,9 @@
                     if(formation != null){
                         for(session of response){
                             (formation.session_id == session.id)?option = "<option selected value="+session.id+">"+session.date_session+"</option>":option = "<option value='"+session.id+"'>"+session.date_session+"</option>";
-                             $("#dateSession_selected").append(option); 
+                             $("#dateSession_selected").append(option);
                         }
-                    }  
+                    }
                 }
             });
         }
