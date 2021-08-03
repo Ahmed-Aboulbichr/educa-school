@@ -123,8 +123,8 @@ class CandidatController extends Controller
                 'prenom_ar' => ['required', 'string', 'max:20'],
                 'lieu_naiss_fr' => ['nullable', 'string', 'max:50'],
                 'lieu_naiss_ar' => ['nullable', 'string', 'max:50'],
-                'CIN' => ['required', 'string', 'max:10'],
-                'CNE' => ['required', 'string', 'max:20'],
+                'CIN' => ['required', 'string', 'max:10',!Rule::exists('candidats', 'CIN')->where('CIN', $req->input('CIN'))->where('user_id','!=', Auth::id())->where('editor_id','!=',Auth::id())],
+                'CNE' => ['required', 'string', 'max:20',!Rule::exists('candidats', 'CNE')->where('CNE', $req->input('CNE'))->where('user_id','!=', Auth::id())->where('editor_id','!=',Auth::id())],
                 'date_naiss' => ['required', 'date_format:Y-m-d'],
                 'tel' => ['required', 'numeric'],
                 'situation_familiale' => ['nullable', 'string', 'max:20'],
@@ -141,7 +141,7 @@ class CandidatController extends Controller
             }else {
             $fields = $req->all();
 
-            $candidat = Candidat::where('CIN', '=', $fields['CIN'])->first();
+            $candidat = Candidat::where('user_id',Auth::id())->orWhere('editor_id',Auth::id())->first();
 
             if ($candidat === null) {
                 // user doesn't exist
@@ -166,7 +166,7 @@ class CandidatController extends Controller
 
                 $candidat->save();
             } else {
-                $candidat->editor_id = Auth::id();
+
                 $candidat->nom_fr = $fields['nom_fr'];
                 $candidat->nom_ar = $fields['nom_ar'];
                 $candidat->prenom_fr = $fields['prenom_fr'];

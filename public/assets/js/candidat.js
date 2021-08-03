@@ -21,7 +21,7 @@ $("#infoCandidat ").on('submit',function(e){
 
         },
         error: function(response) {
-
+           console.log(response)
          $.each(response.responseJSON.errors,(prefix,error) => {
             $('span.'+prefix+'_error').text(error);
            });

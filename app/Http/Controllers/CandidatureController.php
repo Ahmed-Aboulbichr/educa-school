@@ -8,6 +8,7 @@ use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
 use App\Session;
+use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -64,7 +65,7 @@ class CandidatureController extends Controller
     public function store(Request $request)
     {
         // abort_if(Gate::denies('Candidature_create'), 403);
-        $candidat = Candidat::where('user_id', Auth::id())->first();
+        $candidat = Candidat::where('user_id', Auth::id())->orWhere('editor_id',Auth::id())->first();
         $formation = Formation::where('id', $request->get('id'))->first();
 
         if (is_object($candidat) && is_object($formation)) {
@@ -114,7 +115,7 @@ class CandidatureController extends Controller
     {
 
         //   abort_if(Gate::denies('Candidature_load'), 403);
-        $candidat  = Candidat::where('user_id', Auth::id())->latest()->first();
+        $candidat  = Candidat::where('user_id', Auth::id())->orWhere('editor_id',Auth::id())->latest()->first();
         if ($candidat == null) return redirect(route('getPreInscr'), 302);
         else
             $candidatures = DB::table('formations')
@@ -123,7 +124,7 @@ class CandidatureController extends Controller
                 ->join('candidatures', 'formations.id', '=', 'candidatures.formation_id')
                 ->select(['formations.*', 'candidatures.id', 'candidatures.candidat_id', 'candidatures.valide', 'sessions.date_session', 'sessions.annee_univ', 'type_formations.designation'])
                 ->whereIn('candidatures.candidat_id', function ($query) {
-                    $query->select('id')->from('candidats')->where('user_id', Auth::id());
+                    $query->select('id')->from('candidats')->where('user_id', Auth::id())->orWhere('editor_id',Auth::id());
                 })
                 ->orderBy('sessions.date_session', 'DESC')
                 ->orderBy('formations.dateLimite', 'ASC')
@@ -209,8 +210,12 @@ class CandidatureController extends Controller
         abort_if(Gate::denies('Candidature_edit'), 403);
 
         $candidat = Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->first();
-
-        return view('candidat.profil')->with('candidat', $candidat);
+        if($candidat!=null && $candidat->user_id!=Auth::id() && User::where('id',Auth::id())->first()->hasRole('Super Admin') ){
+            Candidat::where('editor_id',Auth::id())->update(['editor_id'=>null]);
+            Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->update(['editor_id'=>Auth::id()]);
+           
+       }
+        return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }
 
 
