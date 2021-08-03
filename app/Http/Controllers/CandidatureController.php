@@ -8,6 +8,7 @@ use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
 use App\Session;
+use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -209,7 +210,11 @@ class CandidatureController extends Controller
         abort_if(Gate::denies('Candidature_edit'), 403);
 
         $candidat = Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->first();
-
+        if($candidat!=null && $candidat->user_id!=Auth::id() && User::where('id',Auth::id())->first()->hasRole('Super Admin') ){
+            Candidat::where('editor_id',Auth::id())->update(['editor_id'=>null]);
+            
+           $candidat->editor_id = Auth::id();
+       }
         return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }
 

@@ -168,7 +168,7 @@ class CandidatController extends Controller
 
                 $candidat->save();
             } else {
-                $candidat->editor_id = Auth::id();
+            
                 $candidat->nom_fr = $fields['nom_fr'];
                 $candidat->nom_ar = $fields['nom_ar'];
                 $candidat->prenom_fr = $fields['prenom_fr'];
