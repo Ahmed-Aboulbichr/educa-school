@@ -44,7 +44,7 @@ class TypeFormationController extends Controller
     {
         $request->session()->flash('operation', 'store');
         $request->validate([
-            'session_id' => 'required',
+            'designation' => 'required',
             'annees_post_bac' => 'required'
         ]);
 
