@@ -113,8 +113,6 @@ class CandidatController extends Controller
         //
     }
 
-
-
     public function saveStepOne(Request $req)
     {
         if ($req->ajax()) {
@@ -144,7 +142,7 @@ class CandidatController extends Controller
             $fields = $req->all();
 
             $candidat = Candidat::where('CIN', '=', $fields['CIN'])->first();
-            
+
             if ($candidat === null) {
                 // user doesn't exist
                 $candidat =  new Candidat;
@@ -196,8 +194,6 @@ class CandidatController extends Controller
        }
     }
 
-
-
     public function saveStepTwo(Request $request)
     {
         if ($request->ajax()) {
@@ -248,7 +244,6 @@ class CandidatController extends Controller
         }
         }
     }
-
 
     public function saveStepThree(Request $request)
     {
@@ -358,7 +353,6 @@ class CandidatController extends Controller
 
         return  response()->json("nothing to update" . $request, 200);
     }
-
 
     public function handleUploadedImage($file)
     {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class SessionController extends Controller
@@ -134,7 +135,7 @@ class SessionController extends Controller
 
     public function renderSessions()
     {
-        $sessions = Session::all();
+        $sessions = DB::table('sessions')->select('annee_univ')->distinct()->get();
         return  response()->json($sessions, 200);
     }
 }

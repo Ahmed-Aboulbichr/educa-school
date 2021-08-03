@@ -60,7 +60,7 @@
                         <tbody>
                             @foreach ($formations as $formation)
                                 <tr>
-                                    <td>{{$formation->date_session}}</td>
+                                    <td>{{$formation->annee_univ}}</td>
                                     <td>{{$formation->dateLimite}}</td>
                                     <td>{{$formation->specialite}}</td>
                                     <td>{{$formation->designation}}</td>
@@ -111,12 +111,12 @@
                                 <label class="col-md-3 col-form-label">Session</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="session_id" id="date_session">
-                                        <option>--- Date session ---</option>
+                                        <option>--- Année universitaire ---</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Date Limite</label>
+                                <label class="col-md-3 col-form-label">Date limite</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="date" name="dateLimite" id="date_limite">
                                 </div>
@@ -343,13 +343,13 @@
 
                     if(formation === null){
                         for(var i=0; i<response.length; i++){
-                            option = "<option value='"+response[i].id+"'>"+response[i].date_session+"</option>";
+                            option = "<option value='"+response[i].id+"'>"+response[i].annee_univ+"</option>";
                             $("#date_session").append(option);
                         }
                     }
                     if(formation != null){
                         for(session of response){
-                            (formation.session_id == session.id)?option = "<option selected value="+session.id+">"+session.date_session+"</option>":option = "<option value='"+session.id+"'>"+session.date_session+"</option>";
+                            (formation.session_id == session.id)?option = "<option selected value="+session.id+">"+session.annee_univ+"</option>":option = "<option value='"+session.id+"'>"+session.annee_univ+"</option>";
                              $("#dateSession_selected").append(option);
                         }
                     }
