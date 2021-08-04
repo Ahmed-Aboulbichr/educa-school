@@ -70,7 +70,7 @@ class CursusUniversitaireController extends Controller
         DB::beginTransaction();
 
         $candidat = Candidat::where('user_id', Auth::user()->id)->orWhere('editor_id',Auth::id())->first()->id;
-
+        
         $request->validate([
             'niveau_etude_id' => [ 'required', 'integer', 'max:255',Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_etude_id'))],
             'Annee_univ' => 'required',
@@ -78,10 +78,8 @@ class CursusUniversitaireController extends Controller
             'specialite' => 'required|max:255',
             'note_S1' =>  [ 'required', 'numeric', 'between:0,20'],
             'note_S2' => [ 'required', 'numeric', 'between:0,20'],
-            'files.*' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'files.*' => ['required','mimes:jpeg,png,jpg','max:2048']
         ]);
-
-
         if ($this->isExists($request->input('niveau_etude_id'), $candidat)) {
             $request->session()->flash('exists', 'Ce Diplôme exists déja, Si vous voulez le modifier cliquer sur le bouton edit ');
             return redirect()->route('cursus_universitaire.index');
@@ -102,7 +100,7 @@ class CursusUniversitaireController extends Controller
             foreach ($request->file('files') as $key => $file) {
                 $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation_de_Reussite'));
                 /* $filesize = $file->getClientSize(); */
-
+                
                 $filepath = $this->handleUploadedImage($file);
                 $doc_files = new docFile([
                     'type' => $filename,

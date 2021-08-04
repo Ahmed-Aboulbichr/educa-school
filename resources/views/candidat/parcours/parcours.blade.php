@@ -122,8 +122,13 @@
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
                                         <option value="-1"></option>
-                                        @foreach ($data['niveaux'] as $niveau)
-                                            <option value="{{ $niveau->id }}">{{ $niveau->intitule }}</option>
+                                        @foreach ($data['niveaux'] as $index=>$niveau)
+                                            @if ($niveau->intitule!=="BAC")
+                                                @if($niveau->intitule=== $cur->intitule )
+                                                    <option value="{{ $niveau->id }}">{{ $data['niveaux'][$index+1]['intitule'] }}</option>
+                                                    @break
+                                                @endif
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -178,7 +183,8 @@
                             <div class="form-group row align-items-center">
                                 <label for="fileS1" class="col-md-3 col-form-label">Relevé de notes S1</label>
                                 <div class="col-md-9">
-                                    <input type="file" class="custom-file-input" name="files[]" id="fileS1" accept="image/*" value="Releve_Note_S1" onchange="getName(event,this)">
+                                    <input type="hidden" name="type" value="Releve_Note_S1">
+                                    <input type="file" class="custom-file-input" name="files[]" id="fileS1" accept="image/*"  onchange="getName(event,this)">
                                     <label class="custom-file-label" for="fileS2">Choose file</label>
                                     <span class="text-muted" >only images</span>
                                 </div>
@@ -189,7 +195,8 @@
                                 <label for="fileS2" class="col-md-3 col-form-label">Relevé de notes S2</label>
                                 <div class="col-md-9">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="files[]" id="fileS2" accept="image/*" value='Releve_Note_S2' onchange="getName(event,this)">
+                                        <input type="hidden" name="type"  value='Releve_Note_S2'>
+                                        <input type="file" class="custom-file-input" name="files[]" id="fileS2" accept="image/*" onchange="getName(event,this)">
                                         <label class="custom-file-label" for="fileS2">Choose file</label>
                                     </div>
                                     {{-- <input class="form-control" type="file" name="files[]" id="fileS2" accept="image/*"  onchange="getName(event, 1)"> --}}
@@ -227,9 +234,8 @@
 
     <script>
         function getName(e, elementCourant){
-            alert($(elementCourant).attr('value'));
             var name=e.target.files[0].name;
-            $(elementCourant).siblings('label').html($(elementCourant).attr('value'));
+            $(elementCourant).siblings('label').html($(elementCourant).siblings('input').val());
         }
     </script>
 @endsection
