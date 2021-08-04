@@ -64,12 +64,10 @@ class SessionController extends Controller
         $request->session()->flash('operation', 'store');
         $request->validate([
             'annee_univ' => 'required|in:' . implode(',', $t),
-            'date_session' => ['required', 'date_format:Y-m-d']
         ]);
 
         Session::create([
             'annee_univ' => $request->get('annee_univ'),
-            'date_session' => $request->get('date_session')
         ]);
 
         return redirect()->route('session.index')
@@ -107,12 +105,10 @@ class SessionController extends Controller
         $request->session()->flash('operation', 'update');
         $request->validate([
             'annee_univ' => 'required|in:' . implode(',', $t),
-            'date_session' => ['required', 'date_format:Y-m-d']
         ]);
 
         Session::where('id', $id)->update([
             'annee_univ' => $request->get('annee_univ'),
-            'date_session' => $request->get('date_session')
         ]);
         return redirect()->route('session.index')
             ->with('success', 'La session a été modifié');

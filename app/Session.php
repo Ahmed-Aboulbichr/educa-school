@@ -8,7 +8,6 @@ class Session extends Model
 {
     protected $fillable = [
         'annee_univ',
-        'date_session',
     ];
 
     public function formations()
