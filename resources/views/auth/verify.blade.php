@@ -18,26 +18,26 @@ Recover Password
                         <div class="row justify-content-center">
                             <div class="col-lg-9">
                                 <div>
-                                
+
                                     <div class="text-center">
                                         <div>
-                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
+                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="180" width="180" alt="logo"></a>
                                         </div>
 
-                                        <h4 class="font-size-18 mt-4">Verfier votre email</h4>
+                                        <h4 class="font-size-18">Verfier votre email</h4>
                                     </div>
                                        <div class="p-2 mt-5">
-                                         
+
                                               <div class="card">
                                                 <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-                                
+
                                                 <div class="card-body">
                                                     @if (session('resent'))
                                                         <div class="alert alert-success" role="alert">
                                                             {{ __('A fresh verification link has been sent to your email address.') }}
                                                         </div>
                                                     @endif
-                                
+
                                                     {{ __('Before proceeding, please check your email for a verification link.') }}
                                                     {{ __('If you did not receive the email') }},
                                                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
@@ -46,13 +46,13 @@ Recover Password
                                                     </form>
                                                 </div>
                                             </div>
-                                    
+
                                             <div class="mt-4 text-center">
                                                 <p><a href="{{url('register')}}" class="font-weight-medium text-primary"> Créer votre compte</a> </p>
-                                                <p><script>document.write(new Date().getFullYear())</script>© ENCGF</p>
+                                                <p><script>document.write(new Date().getFullYear())</script>© Educa School</p>
                                             </div>
                                     </div>
-    
+
                                 </div>
                             </div>
                         </div>

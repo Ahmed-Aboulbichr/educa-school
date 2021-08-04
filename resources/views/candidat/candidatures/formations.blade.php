@@ -50,7 +50,7 @@
                         <tbody>
                             @foreach ($formations as $formation)
                             <tr>
-                                <td>{{$formation->date_session}}</td>
+                                <td>{{$formation->annee_univ}}</td>
                                 <td>{{$formation->dateLimite}}</td>
                                 <td>{{$formation->specialite}}</td>
                                 <td>{{$formation->designation}}</td>
@@ -59,7 +59,7 @@
                                         {{$formation->niveau_acces}}ére année </br>({{$formation->duree}} ans d'études)
                                     @else
                                         {{$formation->niveau_acces}}ème année </br>({{$formation->duree}} ans d'études)
-                                    @endif    
+                                    @endif
                                 </td>
                                 @php $currentDate = date("Y-m-d"); @endphp
                                 @if ($formation->dateLimite < $currentDate)

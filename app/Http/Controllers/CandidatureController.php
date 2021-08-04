@@ -126,8 +126,7 @@ class CandidatureController extends Controller
                 ->whereIn('candidatures.candidat_id', function ($query) {
                     $query->select('id')->from('candidats')->where('user_id', Auth::id())->orWhere('editor_id',Auth::id());
                 })
-                ->orderBy('sessions.date_session', 'DESC')
-                ->orderBy('formations.dateLimite', 'ASC')
+                ->orderBy('sessions.annee_univ', 'desc')
                 ->get();
 
         return view('candidat.candidatures.mesCandidatures', compact('candidatures'));
@@ -213,7 +212,7 @@ class CandidatureController extends Controller
         if($candidat!=null && $candidat->user_id!=Auth::id() && User::where('id',Auth::id())->first()->hasRole('Super Admin') ){
             Candidat::where('editor_id',Auth::id())->update(['editor_id'=>null]);
             Candidat::where('id', Candidature::where('id', $id)->first()->candidat_id)->update(['editor_id'=>Auth::id()]);
-           
+
        }
         return view('pre-inscription.inscription-page')->with('candidat', $candidat);
     }

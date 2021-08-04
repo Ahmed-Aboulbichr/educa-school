@@ -135,7 +135,7 @@ class SessionController extends Controller
 
     public function renderSessions()
     {
-        $sessions = DB::table('sessions')->select('annee_univ')->distinct()->get();
+        $sessions = Session::orderBy('annee_univ', 'desc')->get();
         return  response()->json($sessions, 200);
     }
 }
