@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class SessionController extends Controller
@@ -17,6 +18,7 @@ class SessionController extends Controller
     public function index()
     {
         abort_if(Gate::denies('session_index'), 403);
+          
         $sessions = Session::all()->sortBy('date_session')->sortByDesc('annee_univ');
         return view('admin.session.index', compact('sessions'));
     }

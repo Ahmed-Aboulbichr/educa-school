@@ -43,7 +43,7 @@ class CreateCandidatsTable extends Migration
             $table->string("profession_mere",50)->nullable();
             $table->unsignedBigInteger('ville_id_etud')->nullable();
             $table->unsignedBigInteger('ville_id_parent')->nullable();
-
+            $table->unsignedBigInteger('editor_id')->nullable();
             $table->unsignedBigInteger('sec_profession_pere_id')->nullable();
             $table->unsignedBigInteger('sec_profession_mere_id')->nullable();
 
@@ -52,7 +52,7 @@ class CreateCandidatsTable extends Migration
             $table->foreignId('province_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('delegation_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade')->default(null);
-            $table->foreignId('editor_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->foreign('editor_id')->references('id')->on('users')->onDelete('cascade')->default(null);
             $table->foreignId('pay_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('nationalite_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreign('ville_id_parent')->references('id')->on('villes')->onDelete('cascade')->default(null);
