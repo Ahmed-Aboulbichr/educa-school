@@ -30,7 +30,7 @@ $('#nvEtude').on('change', function (event) {
             label.attr('for', 'attestation');
             var input = val.find('input[type=file]');
             input.attr('id', 'attestation')
-            input.attr('value', 'Attestation_Reussite');
+            input.siblings('input:hidden').val('Attestation_Reussite');
             $(val).insertAfter($('.col-lg-6').last());
         }
     } else {
