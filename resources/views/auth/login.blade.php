@@ -20,10 +20,9 @@ Connexion
                                 <div>
                                     <div class="text-center">
                                         <div>
-                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
+                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="180" width="180" alt="logo"></a>
                                         </div>
-
-                                        <h4 class="font-size-18 mt-4">S'authentifier</h4>
+                                        <h4 class="font-size-18">S'authentifier</h4>
                                     </div>
 
                                     <div class="p-2 mt-4">
@@ -70,7 +69,7 @@ Connexion
 
                                     <div class="mt-4 text-center">
                                         <p><a href="{{url('register')}}" class="font-weight-medium text-primary"> Créer votre compte</a> </p>
-                                        <p><script>document.write(new Date().getFullYear())</script>© ENCGF</p>
+                                        <p><script>document.write(new Date().getFullYear())</script>© Educa School</p>
                                     </div>
                                 </div>
                             </div>

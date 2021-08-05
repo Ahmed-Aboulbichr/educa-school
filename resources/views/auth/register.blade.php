@@ -20,9 +20,9 @@ Register
                                 <div>
                                     <div class="text-center ">
                                         <div>
-                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
+                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="180" width="180" alt="logo"></a>
                                         </div>
-                                        <h4 class="font-size-18 mt-5">S'inscrire</h4>
+                                        <h4 class="font-size-18">S'inscrire</h4>
                                     </div>
 
                                     <div class="p-2 mt-5">
@@ -107,7 +107,7 @@ Register
                                     </div>
 
                                     <div class="mt-3 text-center">
-                                        <p><script>document.write(new Date().getFullYear())</script>© ENCGF</p>
+                                        <p><script>document.write(new Date().getFullYear())</script>© Educa School</p>
                                     </div>
                                 </div>
                             </div>

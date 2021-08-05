@@ -20,15 +20,15 @@ class FormationController extends Controller
     public function index()
     {
         abort_if(Gate::denies('formation_index'), 403);
+
         $formations = DB::table('formations')
-            ->join('sessions', 'session_id', '=', 'sessions.id')
-            ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
-            ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
-            ->select(['formations.*', 'sessions.date_session', 'sessions.annee_univ', 'type_formations.designation', 'niveau_etudes.intitule'])
-            ->orderBy('sessions.date_session', 'DESC')
-            ->orderBy('formations.dateLimite', 'ASC')
-            ->get();
-        //return  response()->json($formations, 200);
+        ->join('sessions', 'session_id', '=', 'sessions.id')
+        ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
+        ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
+        ->select(['formations.*', 'sessions.annee_univ', 'type_formations.designation', 'niveau_etudes.intitule'])
+        ->orderBy('sessions.annee_univ', 'desc')
+        ->get();
+       // return  response()->json($formations, 200);
         return view('admin.formation.index', compact('formations'));
     }
 
@@ -101,7 +101,7 @@ class FormationController extends Controller
             ->join('sessions', 'session_id', '=', 'sessions.id')
             ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
             ->join('niveau_etudes', 'niveau_preRequise', '=', 'niveau_etudes.id')
-            ->select(['formations.*', 'sessions.date_session', 'sessions.annee_univ', 'type_formations.designation', 'niveau_etudes.intitule'])
+            ->select(['formations.*',  'sessions.annee_univ', 'type_formations.designation', 'niveau_etudes.intitule'])
             ->get()
             ->first();
 
@@ -162,28 +162,18 @@ class FormationController extends Controller
 
     public function renderFormations()
     {
-        /*if ($request->ajax()) {
-
-        $formations = Formation::with(['session','typeFormation', 'niveauEtude'])
-        ->orderBy('niveau_etude_intitule')
-        ->get();
-        return  response()->json($formations, 200);
-        }
-        */
-
         $candidat  = Candidat::where('user_id', Auth::id())->orWhere('editor_id',Auth::id())->latest()->first();
         if ($candidat == null) return redirect(route('getPreInscr'), 302);
         else
             $formations = DB::table('formations')
                 ->join('sessions', 'session_id', '=', 'sessions.id')
                 ->join('type_formations', 'type_formation_id', '=', 'type_formations.id')
-                ->select(['formations.*', 'sessions.date_session', 'sessions.annee_univ', 'type_formations.designation'])
+                ->select(['formations.*','sessions.annee_univ', 'type_formations.designation'])
                 ->whereNotIn('formations.id', function ($query) {
                     $candidat  = Candidat::where('user_id', Auth::id())->orWhere('editor_id',Auth::id())->latest()->first();
                     $query->select('formation_id')->from('candidatures')->where('candidat_id', $candidat->id);
                 })
-                ->orderBy('sessions.date_session', 'DESC')
-                ->orderBy('formations.dateLimite', 'ASC')
+                ->orderBy('sessions.annee_univ', 'desc')
                 ->get();
 
         return view('candidat.candidatures.formations', compact('formations'));

@@ -1,5 +1,5 @@
 @extends('layouts.master-educa')
-@section('title') Candidature @endsection
+@section('title') Etudiant @endsection
 @section('css')
     <!-- DataTables -->
     <link href="{{ URL::asset('/assets/libs/jquery-vectormap/jquery-vectormap.min.css')}}" rel="stylesheet" type="text/css" />
@@ -8,8 +8,8 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-    @slot('title') Candidature @endslot
-    @slot('li_1') Candidature @endslot
+    @slot('title')  @endslot
+    @slot('li_1') Etudiant @endslot
     @slot('li_2') Re-inscription @endslot
 @endcomponent
     <div class="row">

@@ -44,7 +44,7 @@
                         <tbody>
                             @foreach ($candidatures as $candidature)
                             <tr>
-                                <td>{{$candidature->date_session}}</td>
+                                <td>{{$candidature->annee_univ}}</td>
                                 <td>{{$candidature->dateLimite}}</td>
                                 <td>{{$candidature->specialite}}</td>
                                 <td>{{$candidature->designation}}</td>

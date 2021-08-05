@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DateSession;
 use App\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -18,15 +19,25 @@ class SessionController extends Controller
     public function index()
     {
         abort_if(Gate::denies('session_index'), 403);
-          
-        $sessions = Session::all()->sortBy('date_session')->sortByDesc('annee_univ');
+        $sessions = Session::all()->sortByDesc('annee_univ');
         return view('admin.session.index', compact('sessions'));
+    }
+
+    public function getSessionsByAnneeUniv($date = 0)
+    {
+        $date_sessions = DateSession::where('session_id', Session::where('annee_univ', $date)->first('id')->id)->get();
+
+        $response = [
+            'date' => $date_sessions
+        ];
+
+        return response()->json($response, 200);
     }
 
     public function all(Request $req)
     {
-        $sessions = Session::all()->sortByDesc('date_session');
-
+        /* $sessions = Session::all()->sortByDesc('date_session'); */
+        $sessions = Session::all();
         return view('admin.candidature.sessions')->with('sessions', $sessions);
     }
     /**
@@ -65,12 +76,10 @@ class SessionController extends Controller
         $request->session()->flash('operation', 'store');
         $request->validate([
             'annee_univ' => 'required|in:' . implode(',', $t),
-            'date_session' => ['required', 'date_format:Y-m-d']
         ]);
 
         Session::create([
             'annee_univ' => $request->get('annee_univ'),
-            'date_session' => $request->get('date_session')
         ]);
 
         return redirect()->route('session.index')
@@ -108,12 +117,10 @@ class SessionController extends Controller
         $request->session()->flash('operation', 'update');
         $request->validate([
             'annee_univ' => 'required|in:' . implode(',', $t),
-            'date_session' => ['required', 'date_format:Y-m-d']
         ]);
 
         Session::where('id', $id)->update([
             'annee_univ' => $request->get('annee_univ'),
-            'date_session' => $request->get('date_session')
         ]);
         return redirect()->route('session.index')
             ->with('success', 'La session a été modifié');
@@ -136,7 +143,7 @@ class SessionController extends Controller
 
     public function renderSessions()
     {
-        $sessions = Session::all();
+        $sessions = Session::orderBy('annee_univ', 'desc')->get();
         return  response()->json($sessions, 200);
     }
 }

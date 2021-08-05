@@ -51,7 +51,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Année universitaire</th>
-                                <th>Date session</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -63,7 +62,6 @@
                                 <tr>
                                     <td>{{++$i}}</td>
                                     <td>{{$session->annee_univ}}</td>
-                                    <td>{{$session->date_session}}</td>
                                     <td>
                                         <form action="{{ route('session.destroy', $session->id) }}" method="POST">
                                             <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('session.edit', $session->id)}}" ><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
@@ -116,12 +114,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Date session</label>
-                                <div class="col-md-9">
-                                    <input class="form-control" type="date" name="date_session" >
-                                </div>
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Fermer</button>
@@ -168,12 +160,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Date session</label>
-                                <div class="col-md-9">
-                                    <input class="form-control" type="date" id="date_session" name="date_session">
-                                </div>
-                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Fermer</button>
@@ -216,10 +202,10 @@
                 type: 'get',
                 dataType: 'json',
                 success: function(response){
-                    $("#editModal").modal('show');
                     $("#editForm").attr("action",response.route);
-                    $('select').find('option[value="'+response.session.annee_univ+'"]').attr('selected','selected');
-                    $("#date_session").val(response.session.date_session);
+                    $("#anneUniv option:selected").removeProp("selected");
+                    $('#anneUniv').find('option[value="'+response.session.annee_univ+'"]').attr('selected','selected');
+                    $("#editModal").modal('show');
                 },
                 error: function(response){
                     console.log(response.responseText);

@@ -20,10 +20,10 @@ Recover Password
                                 <div>
                                     <div class="text-center">
                                         <div>
-                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="70" alt="logo"></a>
+                                            <a href="{{url('index')}}" class="logo"><img src="{{ URL::asset('/assets/images/logo.png')}}" height="180" width="180" alt="logo"></a>
                                         </div>
 
-                                        <h4 class="font-size-18 mt-4">Réinitialisation du mot de passe</h4>
+                                        <h4 class="font-size-18">Réinitialisation du mot de passe</h4>
                                     </div>
                                     <div class="p-2 mt-5">
                                         <div class="alert alert-success mb-4" role="alert">
@@ -50,7 +50,7 @@ Recover Password
                                         </form>
                                         <div class="mt-4 text-center">
                                             <p><a href="{{url('register')}}" class="font-weight-medium text-primary"> Créer votre compte</a> </p>
-                                            <p><script>document.write(new Date().getFullYear())</script>© ENCGF</p>
+                                            <p><script>document.write(new Date().getFullYear())</script>© Educa School</p>
                                         </div>
                                     </div>
                                 </div>

@@ -27,9 +27,6 @@
                         <span>Candidature</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{url('admin.candidature.inscription')}}>Inscription</a></li>
-                        <li><a href={{url('admin.candidature.re-inscription')}}>Réinscription</a></li>
-                        <li><a href={{url('admin.candidature.reclamation')}}>Reclamation</a></li>
                         <li><a href={{ url('all_sessions') }}>Liste Candidatures</a></li>
                     </ul>
                 </li>
@@ -40,7 +37,9 @@
                         <span>Etudiant</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a>Liste Etudiants</a></li>
+                        <li><a href={{url('admin.etudiant.liste_etudiant')}}>Liste Etudiants</a></li>
+                        <li><a href={{url('admin.etudiant.re-inscription')}}>Réinscription</a></li>
+                        <li><a href={{url('admin.etudiant.reclamation')}}>Reclamation</a></li>
                     </ul>
                 </li>
 

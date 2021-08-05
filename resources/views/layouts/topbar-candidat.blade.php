@@ -4,7 +4,7 @@
             <div class="navbar-brand-box" style="background-color: #f1f5f7;">
                 <a href="{{url('index')}}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('/assets/images/favicon-USMBA.png')}}" alt="" height="22">
+                        <img src="{{ URL::asset('/assets/images/Icon-180x180.png')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
                         <img src="{{ URL::asset('/assets/images/logo-dark.png')}} " alt="" height="20">
@@ -13,10 +13,10 @@
 
                 <a href="{{url('index')}}" class="logo logo-light">
                     <span class="logo-sm"  style="margin-left:-8px;">
-                        <img src="{{ URL::asset('/assets/images/favicon-USMBA.png')}}" alt="" height="35">
+                        <img src="{{ URL::asset('/assets/images/Icon-180x180.png')}}" alt="" height="35">
                     </span>
-                    <span class="logo-lg">
-                        <img src="{{ URL::asset('/assets/images/logo.png')}}" alt="" height="50">
+                    <span class="logo-lg" >
+                        <img src="{{ URL::asset('/assets/images/logo-topBar.png')}}"  height="35">
                     </span>
                 </a>
             </div>
