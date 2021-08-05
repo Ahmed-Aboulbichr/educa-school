@@ -13,66 +13,39 @@
     @slot('li_2') Candidatures @endslot
 @endcomponent
 
-<div class="row">
-     
-       <div class="col-12 bg-light">
-                <div class="d-flex">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                                <select class="form-control select2" id="annee_univ" name="annee_univ">
-                                    <option value="-1">Séléctionner l'année universitaire</option>
-                                    @foreach($sessions as $session)
-                                        <option value="{{$session->annee_univ}}">{{$session->annee_univ}}</option>
-                                    @endforeach
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                                <select class="form-control select2" id="date_sessions" onchange="$('#session').val(this.value)">
-                                    <option value="-1">Séléctionner la date de la session</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="col-12">
-                    <form action="{{ route('all_type_formations')}}" >
-                        <input type="text" class="form-control" id="session" name="session">
-                        <button type="submit" class="btn btn-secondary waves-effect waves-light mt-2 w-100">les formations</button>
-                    </form>
-                </div>
+        <div class="row">
+            <div class="col-6">
+                <select class="form-control select2" name ="session" id="session" onchange="afficheTypeFormation()">
+                    <option value="-1">Séléctionner la session</option>
+                        @foreach($sessions as $session)
+                            <option value="{{$session->annee_univ}}">{{$session->annee_univ}}</option>
+                        @endforeach
+                </select>
+            </div>
         </div>
-        
-                
-</div>
+        <div class="row mt-5" id="formations">
+
+        </div>
 
 @endsection
 @section('script')
+
     <script>
-        $(document).ready(function(){
-            $('#annee_univ').change(function(){
-                var anne_univ = $(this).val();
-                $('#date_sessions').find('option').not(':first').remove();
+            function afficheTypeFormation(){
+                var route = "{{route('all_type_formations')}}"
                 $.ajax({
-                    url : '/getSessionsByAnneeUniv/'+anne_univ,
-                    
+                    url: route,
                     type: 'get',
-                    dataType: 'json',
-                    success: function( result )
-                    {
-                        $.each( result['date'], function(index,value) {
-                            $('#date_sessions').append($('<option>', {value:value.date_session, text:value.date_session}));
-                        });
+                    data: "session="+$("#session").val(),
+                    dataType : 'json',
+                    success: function (data){
+                        $("#formations").html(data);
                     },
-                    error: function()
-                    {
-                        alert('error...');
+                    error: function(response) {
+                        console.log(response.responseText)
                     }
                 });
-            });
-        });
+            }
     </script>
+
 @endsection

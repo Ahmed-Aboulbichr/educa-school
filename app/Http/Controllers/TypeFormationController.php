@@ -142,9 +142,8 @@ class TypeFormationController extends Controller
     public function all(Request $request)
     {
         $session = Session::where('annee_univ', $request->input('session'))->first();
-
         $Type_formations = Formation::where('session_id', $session->id)->get();
-
-        return view('admin.candidature.type_formation')->with('type_formation', $Type_formations);
+        $html =  view('admin.candidature.type_formation', compact('Type_formations'))->render();
+        return response()->json($html, 200);
     }
 }

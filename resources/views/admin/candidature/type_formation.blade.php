@@ -1,47 +1,25 @@
-@extends('layouts.master-educa')
-@section('title') Editable Tables @endsection
-@section('css')
-
-    <!-- DataTables -->
-    <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
-
-@endsection
-@section('content')
-@component('components.breadcrumb')
-    @slot('title') candidatures @endslot
-    @slot('li_1') Liste @endslot
-    @slot('li_2') Candidatures @endslot
-@endcomponent
-
-<div class="row">
-     
-    @foreach($type_formation as $type)
-        <div class="col-lg-4">
-            <div class="card border border-primary">
-                <div class="card-header bg-transparent border-primary">
-                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow mr-3"></i>{{$type->specialite}}</h5>
-                </div>
-                <div class="card-body">
-                    {{-- <h5 class="card-title mt-0">card title</h5> --}}
-                    <p class="card-text">Cliquer pour voir toutes les candidatures du formation {{$type->specialite}}.</p>
-                    
-                </div>
-                <a href="{{ route('candidatures.show', [$type->id]) }}" class="btn btn-primary waves-effect waves-light m-3">Les candidatures</a>
+@forelse($Type_formations as $type)
+    <div class="col-lg-4">
+        <div class="card border border-primary">
+            <div class="card-header bg-transparent border-primary">
+                <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow mr-3"></i>{{$type->specialite}}</h5>
             </div>
+            <div class="card-body">
+                {{-- <h5 class="card-title mt-0">card title</h5> --}}
+                <p class="card-text">Cliquer pour voir toutes les candidatures du formation {{$type->specialite}}.</p>
+
+            </div>
+            <a href="{{ route('candidatures.show', [$type->id]) }}" class="btn btn-primary waves-effect waves-light m-3">Les candidatures</a>
         </div>
-    @endforeach
+    </div>
+@empty
+<div class="col-12">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="mdi mdi-check-all mr-2"></i>
+            Aucun formation trouvé dans cette session universitaire
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 </div>
-
-@endsection
-@section('script')
-
-<!-- Required datatable js -->
-            <!-- {{--
-
-<script src="{{ URL::asset('/assets/libs/datatables/dataTables.min.js')}}"></script>
-
-<script src="{{ URL::asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.js')}}"></script>
---}} -->
-
-
-@endsection
+@endforelse

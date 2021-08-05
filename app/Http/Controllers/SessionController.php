@@ -22,7 +22,7 @@ class SessionController extends Controller
         $sessions = Session::all()->sortByDesc('annee_univ');
         return view('admin.session.index', compact('sessions'));
     }
-
+    /*
     public function getSessionsByAnneeUniv($date = 0)
     {
         $date_sessions = DateSession::where('session_id', Session::where('annee_univ', $date)->first('id')->id)->get();
@@ -33,7 +33,7 @@ class SessionController extends Controller
 
         return response()->json($response, 200);
     }
-
+    */
     public function all(Request $req)
     {
         /* $sessions = Session::all()->sortByDesc('date_session'); */
