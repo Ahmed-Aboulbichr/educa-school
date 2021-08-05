@@ -109,6 +109,69 @@
       Contact: themesdesign.in@gmail.com
       File: Datatables Js File
       */
+
+
+      
+      $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+        var filterKey = $('.filter-key');
+        var filterOperator = $('.filter-operator');
+        var filterValue = $('.filter-value');
+        let valid = filterKey.length ;
+        for(let i =0 ; i < filterKey.length  ; i++ )
+        {
+             const keyColumn = filterKey[i].value;
+            
+           var ToCompareWith ;
+           for (let index = 0; index < settings.aoColumns.length; index++) {
+               const element = settings.aoColumns[index];
+               //console.log(element.sTitle)
+               //console.log(filterKey[i].value)
+              if(element.sTitle ==keyColumn){ 
+                  ToCompareWith =  data[element.idx] ;
+                  index = settings.aoColumns.length;
+              }else { 
+                  ToCompareWith = null;
+              } 
+             
+           }
+           console.log( data+'  '+i +'   '  +filterValue[i].value+' '+filterOperator[i].value+' '+ToCompareWith);
+          
+             var fn 
+           if(filterOperator[i].value == "="){
+              fn = (filterValue[i].value==ToCompareWith) ;
+           }else if(filterOperator[i].value == "<"){
+              fn = (filterValue[i].value<ToCompareWith) ;
+           }else if(filterOperator[i].value == ">"){
+              fn = (filterValue[i].value>ToCompareWith) ;
+           }else if(filterOperator[i].value == "!="){
+              fn = (filterValue[i].value!=ToCompareWith) ;
+           }else{
+              fn = true ;
+           }
+         if (!fn) {
+          --valid  ;
+         }
+            
+
+
+
+         //table.column( ).search( this.value ).draw();
+     
+     }
+     if (valid==filterKey.length) {
+          return true ;
+         }else{
+
+          return false ;
+         }
+ }
+   ); 
+
+
+
+
+
       $(document).ready(function () {
         $('#datatable').DataTable({
           "language": {
@@ -119,24 +182,32 @@
           },
           "drawCallback": function drawCallback() {
             $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
-          }
-        }); //Buttons examples
-        var table = $('#datatable-buttons1').DataTable({
-          lengthChange: false,
-          "language": {
-            "paginate": {
-              "previous": "<i class='mdi mdi-chevron-left'>",
-              "next": "<i class='mdi mdi-chevron-right'>"
-            }
           },
-          "drawCallback": function drawCallback() {
-            $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
-          },
-          buttons: ['copy', 'excel', 'pdf', 'colvis']
-        });
-        table.buttons().container().appendTo('#datatable-buttons1_wrapper .col-md-6:eq(0)');
+          
+          buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
 
-        var table = $('#datatable-buttons').DataTable({
+        }); //Buttons examples
+     var table1 = $('#datatable-buttons').DataTable({
           lengthChange: false,
           "language": {
             "paginate": {
@@ -147,9 +218,71 @@
           "drawCallback": function drawCallback() {
             $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
           },
-          buttons: ['copy', 'excel', 'pdf', 'colvis']
+          buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
         });
-        table.buttons().container().appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)'); // Multi Selection Datatable
+        table1.buttons().container().appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+        
+     
+     $('.filter').on('submit', function (e) {
+      e.preventDefault();    
+  
+      table1.draw();
+ 
+     } );
+        var table2 = $('#datatable-buttons1').DataTable({
+          lengthChange: false,
+          "language": {
+            "paginate": {
+              "previous": "<i class='mdi mdi-chevron-left'>",
+              "next": "<i class='mdi mdi-chevron-right'>"
+            }
+          },
+          "drawCallback": function drawCallback() {
+            $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+          },
+          buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+        });
+        table2.buttons().container().appendTo('#datatable-buttons1_wrapper .col-md-6:eq(0)'); // Multi Selection Datatable
 
         $('#selection-datatable').DataTable({
           select: {
@@ -178,7 +311,7 @@
             $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
           }
         });
-        table.buttons().container().appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)'); // Alternative Pagination Datatable
+        table2.buttons().container().appendTo('#datatable-buttons1_wrapper .col-md-6:eq(0)'); // Alternative Pagination Datatable
 
         $('#alternative-page-datatable').DataTable({
           "pagingType": "full_numbers",
