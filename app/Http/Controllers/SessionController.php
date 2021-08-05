@@ -18,7 +18,7 @@ class SessionController extends Controller
     public function index()
     {
         abort_if(Gate::denies('session_index'), 403);
-        $sessions = Session::all()->sortBy('date_session')->sortByDesc('annee_univ');
+        $sessions = Session::all()->sortByDesc('annee_univ');
         return view('admin.session.index', compact('sessions'));
     }
 
