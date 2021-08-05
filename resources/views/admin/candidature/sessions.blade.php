@@ -15,37 +15,64 @@
 
 <div class="row">
      
-       <div class="d-flex col-12 bg-light">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                            <select class="form-control select2" onchange="$('#session').val(this.value)">
-                                <option value="-1">Séléctionner la session</option>
-                                @foreach($sessions as $session)
-                                    <option value="{{$session->annee_univ}}">{{$session->annee_univ}}</option>
-                                @endforeach
-                            </select>
-                        </label>
+       <div class="col-12 bg-light">
+                <div class="d-flex">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <select class="form-control select2" id="annee_univ" name="annee_univ">
+                                    <option value="-1">Séléctionner l'année universitaire</option>
+                                    @foreach($sessions as $session)
+                                        <option value="{{$session->annee_univ}}">{{$session->annee_univ}}</option>
+                                    @endforeach
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                                <select class="form-control select2" id="date_sessions" onchange="$('#session').val(this.value)">
+                                    <option value="-1">Séléctionner la date de la session</option>
+                                </select>
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <hr>
+                <div class="col-12">
                     <form action="{{ route('all_type_formations')}}" >
                         <input type="text" class="form-control" id="session" name="session">
                         <button type="submit" class="btn btn-secondary waves-effect waves-light mt-2 w-100">les formations</button>
                     </form>
                 </div>
         </div>
+        
+                
 </div>
 
 @endsection
 @section('script')
-
-<!-- Required datatable js -->
-            <!-- {{--
-
-<script src="{{ URL::asset('/assets/libs/datatables/dataTables.min.js')}}"></script>
-
-<script src="{{ URL::asset('/assets/libs/bootstrap-editable/bootstrap-editable.min.js')}}"></script>
---}} -->
-
-
+    <script>
+        $(document).ready(function(){
+            $('#annee_univ').change(function(){
+                var anne_univ = $(this).val();
+                $('#date_sessions').find('option').not(':first').remove();
+                $.ajax({
+                    url : '/getSessionsByAnneeUniv/'+anne_univ,
+                    
+                    type: 'get',
+                    dataType: 'json',
+                    success: function( result )
+                    {
+                        $.each( result['date'], function(index,value) {
+                            $('#date_sessions').append($('<option>', {value:value.date_session, text:value.date_session}));
+                        });
+                    },
+                    error: function()
+                    {
+                        alert('error...');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

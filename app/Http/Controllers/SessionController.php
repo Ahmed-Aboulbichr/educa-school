@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DateSession;
 use App\Session;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -22,10 +23,21 @@ class SessionController extends Controller
         return view('admin.session.index', compact('sessions'));
     }
 
+    public function getSessionsByAnneeUniv($date = 0)
+    {
+        $date_sessions = DateSession::where('session_id', Session::where('annee_univ', $date)->first('id')->id)->get();
+
+        $response = [
+            'date' => $date_sessions
+        ];
+
+        return response()->json($response, 200);
+    }
+
     public function all(Request $req)
     {
-        $sessions = Session::all()->sortByDesc('date_session');
-
+        /* $sessions = Session::all()->sortByDesc('date_session'); */
+        $sessions = Session::all();
         return view('admin.candidature.sessions')->with('sessions', $sessions);
     }
     /**
