@@ -70,7 +70,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($data['cursus'] as $cur)
-                                <tr>
+                                <tr class="tr">
                                     <td>{{$cur->intitule}}</td>
                                     <td>{{$cur->specialite}}</td>
                                     <td>{{ $cur->note_S1 }}</td>
@@ -121,15 +121,7 @@
                                 <label class="col-md-3 col-form-label">Niveau Etude</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
-                                        <option value="-1"></option>
-                                        @foreach ($data['niveaux'] as $index=>$niveau)
-                                            @if ($niveau->intitule!=="BAC")
-                                                @if($niveau->intitule=== $cur->intitule )
-                                                    <option value="{{ $niveau->id }}">{{ $data['niveaux'][$index+1]['intitule'] }}</option>
-                                                    @break
-                                                @endif
-                                            @endif
-                                        @endforeach
+                                        <option value="{{ $data['niveaux']->id }}">{{ $data['niveaux']->intitule }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -138,7 +130,17 @@
                             <div class="form-group row align-items-center">
                                 <label for="annee" class="col-md-3 col-form-label">Année universitaire</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" id="annee" name="Annee_univ">
+                                    <select class="form-control" id="annee" name="Annee_univ">
+                                        <option value="{{date('Y')}}-{{date('Y')+1}}">{{date('Y')}}-{{date('Y')+1}}</option>
+                                        @for ($i = 0; $i <20; $i++)
+                                            @php
+                                                $currentYear = date('Y');
+                                                $year = $currentYear - $i;
+                                                $lastYear = $currentYear-($i+1);
+                                            @endphp
+                                            <option  value="{{$lastYear}}-{{$year}}">{{$lastYear}}-{{$year}}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                             </div>
                         </div>

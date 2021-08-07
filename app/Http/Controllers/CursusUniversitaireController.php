@@ -25,7 +25,7 @@ class CursusUniversitaireController extends Controller
     public function index()
     {
 
-        $candidat = Candidat::where('user_id', Auth::user()->id)->orWhere('editor_id',Auth::id())->get('id')->first();
+        $candidat = Candidat::where('user_id', Auth::user()->id)->orWhere('editor_id', Auth::id())->get('id')->first();
         if ($candidat == null) {
             return redirect()->route('getPreInscr');
         }
@@ -37,7 +37,14 @@ class CursusUniversitaireController extends Controller
 
         $universities = Universite::all();
 
-        $niveaux = Niveau_etude::all();
+        $niveaux = DB::table('niveau_etudes')
+            ->leftJoin('cursus_universitaires', function ($join) {
+                $join->on('niveau_etudes.id', '=', 'cursus_universitaires.niveau_etude_id');
+                $join->where('cursus_universitaires.candidat_id', '=', Candidat::where('user_id', Auth::user()->id)->orWhere('editor_id', Auth::id())->get('id')->first()->id);
+            })
+            ->whereNull('cursus_universitaires.niveau_etude_id')
+            ->where('niveau_etudes.intitule', '!=', 'BAC')
+            ->first('niveau_etudes.*');
 
         $data = [
             'cursus' => $cursus,
@@ -69,16 +76,16 @@ class CursusUniversitaireController extends Controller
 
         DB::beginTransaction();
 
-        $candidat = Candidat::where('user_id', Auth::user()->id)->orWhere('editor_id',Auth::id())->first()->id;
-        
+        $candidat = Candidat::where('user_id', Auth::user()->id)->orWhere('editor_id', Auth::id())->first()->id;
+
         $request->validate([
-            'niveau_etude_id' => [ 'required', 'integer', 'max:255',Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_etude_id'))],
+            'niveau_etude_id' => ['required', 'integer', 'max:255', Rule::exists('niveau_etudes', 'id')->where('id', $request->input('niveau_etude_id'))],
             'Annee_univ' => 'required',
-            'universite_id' =>  [ 'required', 'integer', 'max:255',Rule::exists('universites', 'id')->where('id', $request->input('universite_id'))],
+            'universite_id' =>  ['required', 'integer', 'max:255', Rule::exists('universites', 'id')->where('id', $request->input('universite_id'))],
             'specialite' => 'required|max:255',
-            'note_S1' =>  [ 'required', 'numeric', 'between:0,20'],
-            'note_S2' => [ 'required', 'numeric', 'between:0,20'],
-            'files.*' => ['required','mimes:jpeg,png,jpg','max:2048']
+            'note_S1' =>  ['required', 'numeric', 'between:0,20'],
+            'note_S2' => ['required', 'numeric', 'between:0,20'],
+            'files.*' => ['required', 'mimes:jpeg,png,jpg', 'max:2048']
         ]);
         if ($this->isExists($request->input('niveau_etude_id'), $candidat)) {
             $request->session()->flash('exists', 'Ce Diplôme exists déja, Si vous voulez le modifier cliquer sur le bouton edit ');
@@ -100,7 +107,7 @@ class CursusUniversitaireController extends Controller
             foreach ($request->file('files') as $key => $file) {
                 $filename = (($key == 0) ? 'Releve_Note_S1' : (($key == 1) ? 'Releve_Note_S2' : 'Attestation_de_Reussite'));
                 /* $filesize = $file->getClientSize(); */
-                
+
                 $filepath = $this->handleUploadedImage($file);
                 $doc_files = new docFile([
                     'type' => $filename,
@@ -213,10 +220,10 @@ class CursusUniversitaireController extends Controller
 
         $request->validate([
             'Annee_univ' => 'required',
-            'universite_id' =>  [ 'required', 'integer', 'max:255',Rule::exists('universites', 'id')->where('id', $request->input('universite_id'))],
+            'universite_id' =>  ['required', 'integer', 'max:255', Rule::exists('universites', 'id')->where('id', $request->input('universite_id'))],
             'specialite' => 'required|max:255',
-            'note_S1' =>  [ 'required', 'numeric', 'between:0,20'],
-            'note_S2' => [ 'required', 'numeric', 'between:0,20'],
+            'note_S1' =>  ['required', 'numeric', 'between:0,20'],
+            'note_S2' => ['required', 'numeric', 'between:0,20'],
             'files' => ['image'],
         ]);
         Cursus_universitaire::where('id', $cursus_universitaire->id)
