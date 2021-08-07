@@ -8,7 +8,7 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ URL::asset('/assets/images/favicon-USMBA.png')}}">
+        <link rel="shortcut icon" href="{{ URL::asset('/assets/images/Icon-180x180.png')}}">
         @include('layouts.head')
         <style>
             body[data-layout=horizontal] .page-content {
