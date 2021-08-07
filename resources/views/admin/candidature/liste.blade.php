@@ -49,12 +49,31 @@
                             <th>Action</th>
                         </tr>
                         <tr>
-                            <td><input type="text" name="addMoreInputFields[0][column]" placeholder="Enter column"
-                                    class="filter-key form-control" />
+                            <td>
+                                    <select name="addMoreInputFields[0][column]" id="" class="filter-key form-control">
+                                        <option value=''>Select Column</option>
+                                        <option value="ID">ID</option>
+                                        <option value="Labelle">Labelle</option>
+                                        <option value="Valide">Valide</option>
+                                        <option value="Candidat">Candidat</option>
+                                        <option value="Formation">Formation</option>
+                                        <option value="Action">Action</option>
+                                    </select>
+
                             </td>
-                            <td><input type="text" name="addMoreInputFields[0][operator]" placeholder="select operator"
-                                    class="filter-operator form-control" />
+                            <td> 
+                                <select name="addMoreInputFields[0][operator]" id="" class="filter-operator form-control">
+                                    <option value=''>Select Operator</option>
+                                    <option value="=">=</option>
+                                    <option value="!=">!=</option>
+                                    <option value="<="><=</option>
+                                    <option value=">=">>=</option>
+                                    <option value="<"><</option>
+                                    <option value=">">></option>
+                                </select>
+                                
                             </td>
+                            
                             <td><input type="text" name="addMoreInputFields[0][value]" placeholder="Enter value"
                                     class="filter-value form-control" />
                             </td>
@@ -189,9 +208,7 @@
     var i = 0;
         $("#dynamic-ar").click(function () {
             ++i;
-            $("#dynamicAddRemove").append('<tr><td><input type="text" name="addMoreInputFields[' + i +
-                '][column]" placeholder="Enter column" class=" filter-key form-control" /></td><td><input type="text" name="addMoreInputFields[' + i +
-                '][operator]" placeholder="Select operator" class=" filter-operator form-control" /></td><td><input type="text" name="addMoreInputFields[' + i +
+            $("#dynamicAddRemove").append('<tr> <td> <select name="addMoreInputFields['+i+'][column]" id="" class="filter-key form-control"> <option value="null">Select column</option> <option value="ID">ID</option> <option value="Labelle">Labelle</option> <option value="Valide">Valide</option> <option value="Candidat">Candidat</option> <option value="Formation">Formation</option> <option value="Action">Action</option> </select> </td> <td> <select name="addMoreInputFields['+i+'][operator]" id="" class="filter-operator form-control"><option value="">Select Operator</option> <option value="=">=</option> <option value="!=">!=</option> <option value="<="><=</option> <option value=">=">>=</option> <option value="<"><</option> <option value=">">></option> </select> </td><td><input type="text" name="addMoreInputFields[' + i +
                 '][value]" placeholder="Enter value" class="filter-value form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>'
                 );
             

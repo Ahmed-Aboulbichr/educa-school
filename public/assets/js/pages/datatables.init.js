@@ -135,17 +135,21 @@
               } 
              
            }
-           console.log( data+'  '+i +'   '  +filterValue[i].value+' '+filterOperator[i].value+' '+ToCompareWith);
+           console.log( data+'  '+i +'   '  +ToCompareWith+' '+filterOperator[i].value+' '+filterValue[i].value);
           
              var fn 
            if(filterOperator[i].value == "="){
-              fn = (filterValue[i].value==ToCompareWith) ;
+              fn = (ToCompareWith==filterValue[i].value) ;
            }else if(filterOperator[i].value == "<"){
-              fn = (filterValue[i].value<ToCompareWith) ;
+              fn = (Number(ToCompareWith)<Number(filterValue[i].value)) ;
            }else if(filterOperator[i].value == ">"){
-              fn = (filterValue[i].value>ToCompareWith) ;
+              fn = (Number(ToCompareWith)>Number(filterValue[i].value)) ;
+           }else if(filterOperator[i].value == "<="){
+              fn = (Number(ToCompareWith)<=Number(filterValue[i].value)) ;
+           }else if(filterOperator[i].value == ">="){
+              fn = (Number(ToCompareWith)>=Number(filterValue[i].value)) ;
            }else if(filterOperator[i].value == "!="){
-              fn = (filterValue[i].value!=ToCompareWith) ;
+              fn = (ToCompareWith!=filterValue[i].value) ;
            }else{
               fn = true ;
            }

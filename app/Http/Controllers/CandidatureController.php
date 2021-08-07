@@ -170,7 +170,7 @@ class CandidatureController extends Controller
         $candidat = Candidat::where('id', $candidature->candidat_id)->first();
 
         $profileImg = base64_encode(Storage::get($candidat->docFiles()->where('type', '=', 'profileImg')->first()->path));
-        return view('pre-inscription.attestationPDF')->with('candidat', $candidat)->with('profileImg', $profileImg)->with('candidature', $candidature);
+        return view('pre-inscription.attestation')->with('candidat', $candidat)->with('profileImg', $profileImg)->with('candidature', $candidature);
     }
 
     function show(Request $req, $candidature)
