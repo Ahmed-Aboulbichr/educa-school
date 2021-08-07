@@ -121,6 +121,7 @@
                                 <label class="col-md-3 col-form-label">Niveau Etude</label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="niveau_etude_id" id="nvEtude">
+                                        <option value="">Sélectionner un niveau </option>
                                         <option value="{{ $data['niveaux']->id }}">{{ $data['niveaux']->intitule }}</option>
                                     </select>
                                 </div>

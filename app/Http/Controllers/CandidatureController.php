@@ -73,7 +73,9 @@ class CandidatureController extends Controller
             //récupérer le niveau pre requise
             $niveauPreRequise = Niveau_etude::where('id', $formation->niveau_preRequise)->first()->intitule;
             //récupérer le derniére cursus de candidat
-            $cursusUniv = Cursus_universitaire::where('candidat_id', $candidat->id)->latest()->first();
+            $maxniv = Niveau_etude::where('intitule', Niveau_etude::whereIn('id', Cursus_universitaire::where('candidat_id', $candidat->id)->get('niveau_etude_id'))->max('intitule'))->first();     
+            $cursusUniv = Cursus_universitaire::where('candidat_id', $candidat->id)->where('niveau_etude_id', $maxniv->id)->first();
+
             $check = false;
 
             if ($cursusUniv === null) {
