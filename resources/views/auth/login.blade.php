@@ -77,7 +77,7 @@ Connexion
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8" style="background-repeat: no-repeat;background-image:url('/assets/images/ENCG-Fes.jpg');background-size: cover;">
+            <div class="col-lg-8" style="background-repeat: no-repeat;background-image:url('/assets/images/bg.jpg');background-size: cover;">
                 <div class="authentication-bg">
                 <div class="bg-overlay"></div>
             </div>

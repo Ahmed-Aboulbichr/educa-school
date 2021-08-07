@@ -196,6 +196,7 @@
     @endif
     <script>
         $('.btn-edit').on('click', function () {
+            $("option").removeAttr("selected");
             var route = $(this).data('route');
             $.ajax({
                 url: route,
@@ -203,7 +204,6 @@
                 dataType: 'json',
                 success: function(response){
                     $("#editForm").attr("action",response.route);
-                    $("#anneUniv option:selected").removeProp("selected");
                     $('#anneUniv').find('option[value="'+response.session.annee_univ+'"]').attr('selected','selected');
                     $("#editModal").modal('show');
                 },
