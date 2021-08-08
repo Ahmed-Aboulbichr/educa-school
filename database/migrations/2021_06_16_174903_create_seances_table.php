@@ -15,7 +15,13 @@ class CreateSeancesTable extends Migration
     {
         Schema::create('seances', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('matiere_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('salle_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('semestre_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('sous_groupe_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('groupe_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->enum('jour', ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche']);
+            $table->integer('duree');
             $table->timestamps();
         });
     }

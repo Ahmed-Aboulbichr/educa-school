@@ -15,7 +15,9 @@ class CreateMatieresTable extends Migration
     {
         Schema::create('matieres', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('module_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->foreignId('professeur_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->string('intitule');
             $table->timestamps();
         });
     }
