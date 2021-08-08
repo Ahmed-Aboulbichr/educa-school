@@ -74,10 +74,13 @@
                 </li>
 
                 <li>
-                    <a  class="waves-effect">
+                    <a  href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-user-tie"></i>
                         <span>Proffeseurs</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{route('professeurs.index')}}>Liste Professeurs</a></li>
+                    </ul>
                 </li>
 
                 <li>

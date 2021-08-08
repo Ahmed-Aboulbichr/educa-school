@@ -15,7 +15,16 @@ class CreateProfesseursTable extends Migration
     {
         Schema::create('professeurs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->string('nom', 50);
+            $table->string('prenom', 50);
+            $table->string('matricule', 30);
+            $table->string('etat_civile');
+            $table->string('sexe');
+            $table->string('tel');
+            $table->string('adresse');
+            $table->foreignId('ville_id')->constrained();
+            $table->foreignId('matiere_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

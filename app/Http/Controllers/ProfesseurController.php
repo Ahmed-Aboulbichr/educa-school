@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Matiere;
+use App\Professeur;
+use App\ville;
 use Illuminate\Http\Request;
 
 class ProfesseurController extends Controller
@@ -13,7 +16,13 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        //
+        $professeurs =  Professeur::all();
+
+        $villes = ville::all();
+
+        $matieres = Matiere::all();
+
+        return view('admin.professeur.index', compact('professeurs', 'villes', 'matieres'));
     }
 
     /**
@@ -34,7 +43,7 @@ class ProfesseurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
