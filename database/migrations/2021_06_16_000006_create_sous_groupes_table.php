@@ -15,7 +15,7 @@ class CreateSousGroupesTable extends Migration
     {
         Schema::create('sous_groupes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('intitule');
             $table->foreignId('groupe_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
