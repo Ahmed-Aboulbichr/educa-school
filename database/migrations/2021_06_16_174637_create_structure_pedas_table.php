@@ -15,8 +15,8 @@ class CreateStructurePedasTable extends Migration
     {
         Schema::create('structure_pedas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->timestamps();
+            $table->foreignId('session_id')->constrained()->onDelete('cascade');
+            $table->integer("niveau_études");
         });
     }
 
