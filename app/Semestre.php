@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Semestre extends Model
 {
     protected $fillable = [
-        
+
         'session_id',
+        'formation_id',
         'intitule',
     ];
 
@@ -16,7 +17,12 @@ class Semestre extends Model
     {
         return $this->belongsTo(Session::class);
     }
-   
+
+    public function formation()
+    {
+        return $this->belongsTo(Formation::class);
+    }
+
     public function seances()
     {
         return $this->hasMany(Seance::class);
@@ -26,5 +32,5 @@ class Semestre extends Model
     {
         return $this->hasMany(Module::class);
     }
-   
+
 }

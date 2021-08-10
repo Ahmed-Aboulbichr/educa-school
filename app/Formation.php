@@ -26,6 +26,10 @@ class Formation extends Model
         return $this->hasMany(Candidature::class);
     }
 
+    public function semestres(){
+        return $this->hasMany(Semestre::class);
+    }
+
     public function niveauEtude(){
         return $this->belongsTo(Niveau_etude::class);
     }

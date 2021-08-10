@@ -89,6 +89,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/type_formations', 'TypeFormationController', [
         'except' => ['update']
     ]);
+    Route::resource('/semestre', 'SemestreController');
+    //
+
+    Route::get('/FormationsBySession', 'FormationController@getFormationsBySession')->name('getFormationsBySession');
+    Route::get('/semestreConfig', function(){
+        return view('admin.structure_formation.semestre.config');
+    });
+
 
     Route::post('/formation/update/{id}', 'FormationController@update')->name('formation.update');
     Route::post('/type_formations/update/{id}', 'TypeFormationController@update')->name('type_formations.update');

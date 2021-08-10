@@ -16,7 +16,8 @@ class CreateModulesTable extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('semestre_id')->nullable()->constrained()->onDelete('cascade')->default(null);
-            $table->string('nom_module');
+            $table->string('id_module');
+            $table->string('intitule_module');
             $table->timestamps();
         });
     }
