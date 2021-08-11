@@ -7,6 +7,11 @@
     <link href="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
+    <style>
+        input.form-control, select.form-control{
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('body')
@@ -200,43 +205,132 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-
+                @if( session()->has('success') )
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="mdi mdi-check-all mr-2"></i>
+                    {{ session()->get('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
+                @foreach($errors->all() as $error)
+                    <div class="col-6-auto">
+                        <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                    </div>
+                @endforeach
                 <div class="row">
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                             
                             <a class="btn btn-outline-success waves-effect waves-light nav-link mb-2 active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a>
                             <a class="btn btn-outline-success waves-effect waves-light nav-link mb-2" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Séances</a>
-                        {{-- <a class="btn btn-outline-success waves-effect waves-light nav-link mb-2" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                        <a class="btn btn-outline-success waves-effect waves-light nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a> --}}
+                        <a class="btn btn-outline-success waves-effect waves-light nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a> 
                         </div>
                     </div>
                     <div class="col-9">
                         <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
-                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                <div class="col-md-6">
-                                    <div>
+                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                    <form action="{{ route('professeur',['professeur'=>$prof->id]) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                    <div class="col-12">
+                                        <div class="modal-header">
+                                            <a class="close p-2" id="btnEdit" title="modifier" style="background-color: rgb(226, 216, 216);border-radius:50%"><i class="ri-pencil-fill"></i></a>
+                                        </div>
+                                        <div>
+                                            <ul class="list-unstyled product-desc-list">
+
+                                                <li class="form-group row align-items-center">
+                                                    <i class="mdi mdi-credit-card mr-1 align-middle"></i>Matricule : <strong>{{ $prof->matricule }}</strong>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" name="matricule" id="matricule" value="{{ $prof->matricule }}">
+                                                    </div>
+                                                </li>
+                                                <li class="form-group row align-items-center">
+                                                    <i class="mdi mdi-barcode mr-1 align-middle"></i>Nom : <strong>{{ $prof->nom }}</strong>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" name="nom" id="nom" value="{{ $prof->nom }}">
+                                                    </div>
+                                                </li>
+                                                <li class="form-group row align-items-center">
+                                                    <i class="mdi mdi-calendar mr-1 align-middle"></i>Prénom : <strong>{{ $prof->prenom }}</strong>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" name="prenom" id="prenom" value="{{ $prof->prenom }}">
+                                                    </div>
+                                                </li>
+                                                <li class="form-group row align-items-center">
+                                                    <i class="mdi mdi-map-marker-radius mr-1 align-middle"></i>Etat Civile : <strong>{{ $prof->etat_civile }}</strong>
+                                                    <div class="col-md-6">
+                                                        <select value="{{$prof->etat_civile}}" class="form-control" name="etat_civile">
+                                                            <option></option>
+                                                            <option {{$prof->etat_civile=='marié (M)'?'selected':''}}>marié (M)</option>
+                                                            <option {{$prof->etat_civile=='pacsé (O)'?'selected':''}}>pacsé (O)</option>
+                                                            <option {{$prof->etat_civile=='divorcé (D)'?'selected':''}}>divorcé (D)</option>
+                                                            <option {{$prof->etat_civile=='séparé (D)'?'selected':''}}>séparé (D)</option>
+                                                            <option {{$prof->etat_civile=='célibataire (C)'?'selected':''}}>célibataire (C)</option>
+                                                            <option {{$prof->etat_civile=='veuf (V)'?'selected':''}}>veuf (V)</option>
+                                                        </select>
+                                                    </div>
+                                                </li>
+                                                <li class="form-group row align-items-center">
+                                                    <i class="mdi mdi-phone mr-1 align-middle"></i>Téléphone : <strong>{{ $prof->tel }}</strong>
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" name="tel" id="tel" value="{{ $prof->tel }}">
+                                                    </div>
+                                                </li>
+                                                <li class="form-group row align-items-center">
+                                                    <i class="mdi mdi-gender-male-female mr-1 align-middle"></i>Sexe :  <strong>{{ $prof->sexe }}</strong>
+                                                    <div class="col-md-6">
+                                                        <select class="form-control" name="sexe" id="sexe" value="{{ $prof->sexe }}">
+                                                            <option {{$prof->sexe=='Homme'?'selected':''}}>Homme</option>
+                                                            <option {{$prof->sexe=='Femme'?'selected':''}}>Femme</option>
+                                                        </select>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
                                         <ul class="list-unstyled product-desc-list">
 
-                                            <li><i class="mdi mdi-credit-card mr-1 align-middle"></i>Matricule : {{ $prof->matricule }}</li>
-                                            <li><i class="mdi mdi-barcode mr-1 align-middle"></i>Nom : {{ $prof->nom }}</li>
-                                            <li><i class="mdi mdi-calendar mr-1 align-middle"></i>Prénom : {{ $prof->prenom }}</li>
-                                            <li><i class="mdi mdi-map-marker-radius mr-1 align-middle"></i>Etat Civile : {{ $prof->etat_civile }}</li>
-                                            <li><i class="mdi mdi-phone mr-1 align-middle"></i>Téléphone : {{ $prof->tel }}</li>
-                                            <li><i class="mdi mdi-gender-male-female mr-1 align-middle"></i>Sexe :  {{ $prof->sexe }}</li>
-                                           </ul>
-
+                                            <li class="form-group row align-items-center">
+                                                <i class="mdi mdi-map-marker-radius align-middle"></i>Adresse : <strong>{{ $prof->adresse }} </strong>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control" name="adresse" id="adresse" value="{{ $prof->adresse }} ">
+                                                </div>
+                                            </li>
+                                            <li class="form-group row align-items-center">
+                                                <i class="mdi mdi-map-marker-radius align-middle"></i>Ville : <strong>{{ $villePro->name}} </strong>
+                                                <div class="col-md-6">
+                                                    <select name="ville_id" class="form-control" id="ville" value="{{$villePro->name}}">
+                                                        <option value="-1">---Selectionner Ville---</option>
+                                                        @foreach ($villes as $ville)
+                                                            <option value="{{$ville->id}}" {{$ville->name==$villePro->name? 'selected' : ''}}>{{$ville->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            
+                                            <li class="form-group row align-items-center">
+                                                <i class="mdi mdi-school mr-1 align-middle"></i>Matière : <strong>{{ $matiere }}</strong>
+                                                <div class="col-md-6">
+                                                    <select name="matiere_id" class="form-control" id="matiere" value="{{ $matiere }}">
+                                                        <option value="-1">---Selectionner Matiere---</option>
+                                                        @foreach($matieres as $mat)
+                                                            <option value="{{$mat->id}}" {{$mat->intitule== $matiere ? "selected" : ""}}>{{$mat->intitule}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary waves-effect waves-light" type="submit">Confirmer</button>
+                                    </div>
+                                </form>
                                 </div>
-                                <div class="col-md-6">
-                                    <ul class="list-unstyled product-desc-list">
-
-                                        <li><i class="mdi mdi-map-marker-radius align-middle"></i>Adresse : {{ $prof->adresse }} </li>
-                                        <li><i class="mdi mdi-school mr-1 align-middle"></i>Matière : {{ $matiere }}</li>
-                                        <li><i class="mdi mdi-email mr-1 align-middle"></i>Email : {{ $prof->email }}</li>
-                                       </ul>
-                                </div>
-                            </div>
+                            
                             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                 
                                 <div id='calendar'></div>
@@ -253,17 +347,22 @@
 </div>
 @endsection
 @section('script')
-    <!-- Required datatable js -->
-    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
 
-    <!-- Datatable init js -->
-    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
-
-        <!-- Sweet Alerts js -->
-    <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
-
-    <!-- Sweet alert init js-->
-    <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#btnEdit').on('click',function(event){
+                $.each($('form  input[type=text]'), function(index,element){
+                    $(element).val($(element).parents('li').find('strong').text());
+                    $(element).parents('li').find('strong').toggle();
+                    $(element).toggle(1000);
+                });
+                $.each($('form select'),function(index,element){
+                    $(element).val($(element).find('option:selected').val()); 
+                    $(element).toggle(1000);
+                })
+            });
+        });
+    </script>
     
     <!-- plugin js -->
     <script src="{{ URL::asset('/assets/libs/moment/moment.min.js')}}"></script>

@@ -31,18 +31,8 @@
 
         <div class="d-flex">
 
-            <div class="dropdown d-inline-block d-lg-none ml-2">
-                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="ri-list-unordered"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{{route('cursus_universitaire.index')}}"><i class="ri-number-1 align-middle mr-1"></i> Consulter Mon cursus</a>
-                    <a class="dropdown-item" href="{{route('getFormations')}}"><i class="ri-number-2 align-middle mr-1"></i> Postuler aux formations ouverts</a>
-                    <a class="dropdown-item" href="{{route('mesCandidatures')}}"><i class="ri-number-3 align-middle mr-1"></i> Voir mes Candidatures</a>
-                </div>
-            </div>
 
-            <div class="dropdown d-none d-lg-inline-block ml-1">
+            <div class="dropdown d-lg-inline-block ml-1">
                  <a class="dropdown-item text-danger" href={{route('logout')}}><i class="ri-shut-down-line align-middle mr-1 text-danger"></i>Déconnexion</a>
             </div>
 
