@@ -18,9 +18,13 @@
             window.location.href = "{{route('getPreInscr')}}"; //"/pre-ins";
         </script>
     @endif        
+@elseif(Auth::check() && Auth::user()->hasRole('professeur'))
+        <script type="text/javascript">
+            window.location.href="{{route('professeur',['professeur'=>Auth::user()->id])}}";
+        </script>
 @else
     {{-- si le cas d'un admin ou bien etudiant --}}
-
+        
         @extends('layouts.master-educa')
         @section('title') Dashboard  @endsection
         @section('css')

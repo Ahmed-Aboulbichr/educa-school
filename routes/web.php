@@ -53,7 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('saveCandidatStepTwo', 'CandidatController@saveStepTwo')->name('saveCandidatStepTwo');
     Route::post('saveCandidatStepThree', 'CandidatController@saveStepThree')->name('saveCandidatStepThree');
     Route::post('saveCandidatStepFour/{type}', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
-
+    Route::get('/professeur/{professeur}', 'ProfesseurController@affiche')->name('professeur');
+    Route::post('/professeur', 'ProfesseurController@insert')->name('insertprofesseur');
     Route::get('/getSessionsByAnneeUniv/{date}', 'SessionController@getSessionsByAnneeUniv')->name('getSessionsByAnneeUniv');
     Route::get('/all_type_formations', 'TypeFormationController@all')->name('all_type_formations');
     Route::get('/all_sessions', 'SessionController@all')->name('all_sessions');

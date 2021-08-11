@@ -29,13 +29,6 @@
             <div class="page-content">
                 <!-- Start content -->
                 <div class="container-fluid">
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="page-title-box d-flex align-items-center">
-                                <span class="badge badge-pill badge-info" style="margin-right: 1em;">---</span><h4 class="mb-0" style="text-transform: none;">@yield('title')</h4>
-                            </div>
-                        </div>
-                    </div>
                     @yield('content')
                 </div> <!-- content -->
             </div>

@@ -3,16 +3,17 @@
 @section('title') Professeurs @endsection
 @section('css')
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Plugin css -->
+    <link href="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet" type="text/css" />
 
-    
     <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('body')
-<body data-topbar="dark" data-layout="horizontal">
+<body data-topbar="light" data-layout="horizontal">
 @endsection
 @section('content')
-<div class="row">
+{{-- <div class="row">
     <div class="col-12">
         {{-- @if( session()->has('success') )
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -35,7 +36,7 @@
                 <i class="mdi mdi-block-helper mr-2"></i>
                  {{ session()->get('exists') }}
                 </div>
-            @endif --}}
+            @endif -
     <div class="card">
             <div class="row mb-2 mt-4">
                 <div class="col-xl-2 offset-xl-10 offset-lg-9" style="padding-left: 4em;">
@@ -81,7 +82,7 @@
             </div> <!-- end card body-->
         </div>
 
-        {{-- Modal pour l'ajout d'un prof --}}
+        {{-- Modal pour l'ajout d'un prof 
          <div id="ajoutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -194,6 +195,61 @@
             </div><!-- /.modal-dialog -->
         </div>
 
+</div> --}}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            
+                            <a class="btn btn-outline-success waves-effect waves-light nav-link mb-2 active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a>
+                            <a class="btn btn-outline-success waves-effect waves-light nav-link mb-2" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Séances</a>
+                        {{-- <a class="btn btn-outline-success waves-effect waves-light nav-link mb-2" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+                        <a class="btn btn-outline-success waves-effect waves-light nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a> --}}
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                <div class="col-md-6">
+                                    <div>
+                                        <ul class="list-unstyled product-desc-list">
+
+                                            <li><i class="mdi mdi-credit-card mr-1 align-middle"></i>Matricule : {{ $prof->matricule }}</li>
+                                            <li><i class="mdi mdi-barcode mr-1 align-middle"></i>Nom : {{ $prof->nom }}</li>
+                                            <li><i class="mdi mdi-calendar mr-1 align-middle"></i>Prénom : {{ $prof->prenom }}</li>
+                                            <li><i class="mdi mdi-map-marker-radius mr-1 align-middle"></i>Etat Civile : {{ $prof->etat_civile }}</li>
+                                            <li><i class="mdi mdi-phone mr-1 align-middle"></i>Téléphone : {{ $prof->tel }}</li>
+                                            <li><i class="mdi mdi-gender-male-female mr-1 align-middle"></i>Sexe :  {{ $prof->sexe }}</li>
+                                           </ul>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled product-desc-list">
+
+                                        <li><i class="mdi mdi-map-marker-radius align-middle"></i>Adresse : {{ $prof->adresse }} </li>
+                                        <li><i class="mdi mdi-school mr-1 align-middle"></i>Matière : {{ $matiere }}</li>
+                                        <li><i class="mdi mdi-email mr-1 align-middle"></i>Email : {{ $prof->email }}</li>
+                                       </ul>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                
+                                <div id='calendar'></div>
+
+                                <div style='clear:both'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
 </div>
 @endsection
 @section('script')
@@ -208,6 +264,13 @@
 
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
+    
+    <!-- plugin js -->
+    <script src="{{ URL::asset('/assets/libs/moment/moment.min.js')}}"></script>
+    <script src="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.js')}}"></script>
+
+    <!-- Calendar init -->
+    <script src="{{ URL::asset('/assets/js/pages/calendar.init.js')}}"></script>
 
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
     <script>$('#ajoutModal').modal('toggle');</script>
