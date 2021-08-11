@@ -51,6 +51,7 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(Gate::denies('type_formation_access'), 403);
         $request->session()->flash('operation', 'store');
         $request->validate([
             'session_id' => ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],

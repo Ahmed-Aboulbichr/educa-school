@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Semestre;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Builder;
 class SemestreController extends Controller
 {
     /**
@@ -14,19 +16,10 @@ class SemestreController extends Controller
      */
     public function index(Request $request)
     {
+        //abort_if(Gate::denies('semestre_index'), 403);
         $semestres = Semestre::with(['session'])->where('formation_id',$request->input('formation_id'))->get();
-        return view('admin.structure_formation.semestre.index', ['semestres' => $semestres]);
+        return view('admin.structure_formation.semestre.index', ['semestres' => $semestres, 'formation_id' => $request->input('formation_id')]);
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -37,7 +30,22 @@ class SemestreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //abort_if(Gate::denies('semestre_create'), 403);
+        $request->session()->flash('operation', 'store');
+        $request->validate([
+            'session_id' => ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
+            'formation_id' => ['required', 'integer', Rule::exists('formations', 'id')->where('id', $request->input('formation_id'))],
+            'intitule' => ['required', 'string', 'max:255']
+        ]);
+
+        Semestre::create([
+            'session_id' => $request->get('session_id'),
+            'formation_id' => $request->get('formation_id'),
+            'intitule' => $request->get('intitule')
+        ]);
+
+        return redirect()->route('semestre.index', ["formation_id" => $request->input('formation_id')])
+            ->with('success', 'Le semestre a été enregistrée');
     }
 
     /**
@@ -48,19 +56,16 @@ class SemestreController extends Controller
      */
     public function show($id)
     {
-        //
+        $semestre = Semestre::with(['session'])->where('id',$id)->first();
+
+        $response = [
+            'semestre' => $semestre,
+            'route' =>  route('semestre.update', [$id])
+        ];
+
+        return response()->json($response, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -71,7 +76,22 @@ class SemestreController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //abort_if(Gate::denies('semestre_edit'), 403);
+        $request->session()->flash('operation', 'update');
+        $request->validate([
+            'session_id' => ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
+            'formation_id' => ['required', 'integer', Rule::exists('formations', 'id')->where('id', $request->input('formation_id'))],
+            'intitule' => ['required', 'string', 'max:255']
+        ]);
+
+        Semestre::where('id', $id)->first()->update([
+            'session_id' => $request->get('session_id'),
+            'formation_id' => $request->get('formation_id'),
+            'intitule' => $request->get('intitule')
+        ]);
+
+        return redirect()->route('semestre.index', ["formation_id" => $request->input('formation_id')])
+            ->with('success', 'Le semestre a été modifié');
     }
 
     /**
@@ -80,8 +100,12 @@ class SemestreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Semestre $semestre)
     {
-        //
+        //abort_if(Gate::denies('semestre_delete'), 403);
+        $semestre->delete();
+        $formation_id = $semestre->formation_id;
+        return redirect()->route('semestre.index', ["formation_id" =>  $formation_id])
+            ->with('success', 'Le semestre a été supprimée');
     }
 }
