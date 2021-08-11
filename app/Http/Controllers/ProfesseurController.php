@@ -7,6 +7,7 @@ use App\Professeur;
 use App\ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class ProfesseurController extends Controller
@@ -18,8 +19,10 @@ class ProfesseurController extends Controller
      */
     public function index()
     {
-        $professeurs =  Professeur::all();
-
+        $professeurs =  DB::table('professeurs')
+            ->join('villes', 'villes.id', '=', 'professeurs.ville_id')
+            ->join('matieres', 'matieres.id', '=', 'professeurs.matiere_id')
+            ->get();
         $villes = ville::all();
 
         $matieres = Matiere::all();
@@ -95,7 +98,7 @@ class ProfesseurController extends Controller
         $matieres = Matiere::all();
 
         $matiere = Matiere::where('id', $prof->matiere_id)->first('intitule')->intitule;
-        return $prof == null ? view('admin.professeur.addProf', compact('villes', 'matieres')) : view('admin.professeur.index', compact('prof', 'villePro', 'matiere', 'villes', 'matieres'));
+        return $prof == null ? view('professeur.professeur.addProf', compact('villes', 'matieres')) : view('professeur.professeur.index', compact('prof', 'villePro', 'matiere', 'villes', 'matieres'));
     }
     public function insert(Request $request)
     {
