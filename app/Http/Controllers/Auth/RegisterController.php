@@ -72,10 +72,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         $token = $user->createToken("publictoken")->plainTextToken;
-      ($data['email']=="admin@gmail.com")?$user->assignRole('Super Admin'):$user->assignRole('User');
+        ($data['email'] == "admin@gmail.com") ? $user->assignRole('Super Admin') : (preg_match('/\w+@prof.com/', $data['email']) == 1 ? $user->assignRole('professeur') : $user->assignRole('User'));
 
-
+        dd($user);
         return $user;
-
     }
 }

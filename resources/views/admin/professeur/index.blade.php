@@ -1,17 +1,17 @@
-@extends('layouts.master-educa')
+@extends('layouts.master-layout-prof')
+
 @section('title') Professeurs @endsection
 @section('css')
-    <!-- DataTables -->
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+
+    
+    <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
+@endsection
+
+@section('body')
+<body data-topbar="dark" data-layout="horizontal">
 @endsection
 @section('content')
-@component('components.breadcrumb')
-    @slot('title') Professeurs @endslot
-    @slot('li_1') Liste @endslot
-    @slot('li_2') Professeurs @endslot
-@endcomponent
-
 <div class="row">
     <div class="col-12">
         {{-- @if( session()->has('success') )
@@ -95,38 +95,32 @@
                         @csrf
                         <div class="modal-body">
                             @if($errors->any() && session()->has('operation') && session()->get('operation') =="store")
-                            @foreach($errors->all() as $error)
-                                <div class="col-6-auto">
-                                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
-                                </div>
-                            @endforeach
-                        @endif
+                                @foreach($errors->all() as $error)
+                                    <div class="col-6-auto">
+                                        <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                    </div>
+                                @endforeach
+                            @endif
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Matricule <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Matricule </label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="matricule">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Nom <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Nom </label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="nom">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Prénom <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Prénom </label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="prenom">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Post <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="post">
-                                </div>
-                            </div>
-                            <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Etat Civile <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Etat Civile </label>
                                 <div class="col-md-9">
                                     <select class="form-control" name="etat_civile">
                                         <option></option>
@@ -140,40 +134,38 @@
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Sexe <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Sexe </label>
                                 <div class="col-md-9 d-flex justify-content-around">
                                     <div class="row" style="justify-content: space-around">
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="masculin" name="sexe" value="Homme" class="custom-control-input">
                                             <label class="custom-control-label" for="masculin">Masculin</label>
-                                            <span class="text-danger error-text sexe_error"></span>
                                         </div>
                                     </div>
                                     <div class="row" style="justify-content: space-around">
                                         <div class="custom-control custom-radio mb-3">
                                             <input type="radio" id="masculin" name="sexe" value="Homme" class="custom-control-input">
                                             <label class="custom-control-label" for="masculin">Masculin</label>
-                                            <span class="text-danger error-text sexe_error"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Télephone <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Télephone </label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="tel">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Adresse <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Adresse </label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="adresse">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Ville <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Ville </label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="ville">
+                                    <select class="form-control" name="ville_id">
                                         <option></option>
                                         @foreach ($villes as $ville)
                                             <option value="{{$ville->id}}">{{$ville->name}}</option>
@@ -182,9 +174,9 @@
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Matière <i class="fas fa-asterisk" style="color: red;font-size: 10px;"></i></label>
+                                <label class="col-md-3 col-form-label">Matière</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="matiere">
+                                    <select class="form-control" name="matiere_id">
                                         <option></option>
                                         @foreach ($matieres as $mat)
                                             <option value="{{$mat->id}}">{{$mat->name}}</option>
@@ -216,4 +208,11 @@
 
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
+
+    @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
+    <script>$('#ajoutModal').modal('toggle');</script>
+    @endif
+    @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="update")
+    <script>$('#editModal').modal('toggle');</script>
+    @endif
 @endsection

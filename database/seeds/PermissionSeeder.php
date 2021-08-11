@@ -67,9 +67,14 @@ class PermissionSeeder extends Seeder
             'DocFile_show',
             'DocFile_edit',
             'DocFile_delete',
+            'professeur_access',
+            'professeur_create',
+            'professeur_show',
+            'professeur_edit',
+            'professeur_delete'
         ];
 
-        foreach ($permissions as $permission)   {
+        foreach ($permissions as $permission) {
             Permission::create([
                 'name' => $permission
             ]);
@@ -101,8 +106,21 @@ class PermissionSeeder extends Seeder
             'DocFile_delete',
         ];
 
-        foreach ($userPermissions as $permission)   {
+        foreach ($userPermissions as $permission) {
             $Role->givePermissionTo($permission);
+        }
+
+        $role = Role::create(['name' => 'professeur']);
+
+        $professeurPermissions = [
+            'professeur_access',
+            'professeur_create',
+            'professeur_show',
+            'professeur_edit',
+            'professeur_delete'
+        ];
+        foreach ($professeurPermissions as $permission) {
+            $role->givePermissionTo($permission);
         }
     }
 }
