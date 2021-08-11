@@ -6,8 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Professeur extends Model
 {
-     protected $fillable = [
-        
+    protected $fillable = [
+
+        'nom',
+        'prenom',
+        'matricule',
+        'etat_civile',
+        'sexe',
+        'tel',
+        'adresse',
+        'ville_id',
+        'matiere_id',
         'user_id',
     ];
 
@@ -19,5 +28,4 @@ class Professeur extends Model
     {
         return $this->hasMany(Matiere::class);
     }
-
 }

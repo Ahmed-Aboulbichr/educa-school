@@ -15,10 +15,10 @@
                         <span>Formation</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{url('formation')}}>Liste Formations</a></li>
-                        <li><a href={{url('session')}}>Sessions</a></li>
-                        <li><a href={{url('type_formations')}}>Types Formation</a></li>
-                        <li><a href={{url('niveau_etudes')}}>Niveau Etudes</a></li>
+                        <li><a href={{ url('formation') }}>Liste Formations</a></li>
+                        <li><a href={{ url('session') }}>Sessions</a></li>
+                        <li><a href={{ url('type_formations') }}>Types Formation</a></li>
+                        <li><a href={{ url('niveau_etudes') }}>Niveau Etudes</a></li>
                     </ul>
                 </li>
                 <li>
@@ -37,9 +37,9 @@
                         <span>Etudiant</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{url('admin.etudiant.liste_etudiant')}}>Liste Etudiants</a></li>
-                        <li><a href={{url('admin.etudiant.re-inscription')}}>Réinscription</a></li>
-                        <li><a href={{url('admin.etudiant.reclamation')}}>Reclamation</a></li>
+                        <li><a href={{ url('admin.etudiant.liste_etudiant') }}>Liste Etudiants</a></li>
+                        <li><a href={{ url('admin.etudiant.re-inscription') }}>Réinscription</a></li>
+                        <li><a href={{ url('admin.etudiant.reclamation') }}>Reclamation</a></li>
                     </ul>
                 </li>
 
@@ -49,10 +49,9 @@
                         <span>E-Document</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a>Liste Demandes</a></li>
-                        <li><a>Suivi Doucments</a></li>
-                        <li><a>Recu Documents</a></li>
-
+                        <li><a href="{{ route('edocument.index') }}">Liste Demandes</a></li>
+                        <li><a href="{{ url('/edocument/archive') }}">Archive</a></li>
+                        <li><a href="{{ url('/edocument/parametre') }}">Parametre</a></li>
                     </ul>
                 </li>
                 <li>
@@ -75,35 +74,38 @@
                 </li>
 
                 <li>
-                    <a  class="waves-effect">
+                    <a class="waves-effect">
                         <i class="ri-contacts-book-line"></i>
                         <span>E-biblio</span>
                     </a>
                 </li>
 
                 <li>
-                    <a  class="waves-effect">
+                    <a  href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-user-tie"></i>
                         <span>Proffeseurs</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{route('professeurs.index')}}>Liste Professeurs</a></li>
+                    </ul>
                 </li>
 
                 <li>
-                    <a  class=" waves-effect">
+                    <a class=" waves-effect">
                         <i class="ri-clipboard-line"></i>
                         <span>Planification</span>
                     </a>
                 </li>
 
                 <li>
-                    <a  class=" waves-effect">
+                    <a class=" waves-effect">
                         <i class="ri-settings-2-line"></i>
                         <span>Paramettrage</span>
                     </a>
                 </li>
 
                 <li>
-                    <a  class=" waves-effect">
+                    <a class=" waves-effect">
                         <i class="ri-exchange-funds-line"></i>
                         <span>E-DAQIQ</span>
                     </a>

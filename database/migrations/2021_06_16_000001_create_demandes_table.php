@@ -17,8 +17,10 @@ class CreateDemandesTable extends Migration
             $table->id();
 
             //columns
-            $table->char('statut', 20);
-            $table->text('remarque');
+            $table->char('statut', 20)->default('att'); //att =>en attend *** com => complete *** rej=>reject 
+            $table->text('remarque')->nullable();
+            $table->text('motif')->nullable();
+            $table->integer('seen')->default('0');
 
             $table->timestamps();
         });

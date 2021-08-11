@@ -53,7 +53,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('saveCandidatStepTwo', 'CandidatController@saveStepTwo')->name('saveCandidatStepTwo');
     Route::post('saveCandidatStepThree', 'CandidatController@saveStepThree')->name('saveCandidatStepThree');
     Route::post('saveCandidatStepFour/{type}', 'CandidatController@saveStepFour')->name('saveCandidatStepFour');
-
+    Route::get('/professeur/{professeur}', 'ProfesseurController@affiche')->name('professeur');
+    Route::post('/professeur', 'ProfesseurController@insert')->name('insertprofesseur');
+    Route::put('/professeur/{professeur}', 'ProfesseurController@modify')->name('modifyProf');
     Route::get('/getSessionsByAnneeUniv/{date}', 'SessionController@getSessionsByAnneeUniv')->name('getSessionsByAnneeUniv');
     Route::get('/all_type_formations', 'TypeFormationController@all')->name('all_type_formations');
     Route::get('/all_sessions', 'SessionController@all')->name('all_sessions');
@@ -69,6 +71,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/professeurs', 'ProfesseurController');
     Route::resource('/etudiants', 'EtudiantController');
     Route::resource('/candidats', 'CandidatController');
+
+    //E-document
+    Route::get('/edocument/archive', 'EdocumentGestionController@archive')->name('archive');
+    Route::get('/edocument/parametre', 'EdocumentGestionController@parametre');
+    Route::resource('/edocument', 'EdocumentGestionController');
+
     Route::get('/profile', 'CandidatController@profile')->name('profile');
     Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
 
@@ -114,6 +122,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('pages-404', 'NazoxController@index');
     Route::any('/', 'HomeController@root');
+    Route::get('{any}', 'HomeController@index');
     Route::get('{any}', 'HomeController@index');
     Route::get('{any}', 'HomeController@index');
 });
