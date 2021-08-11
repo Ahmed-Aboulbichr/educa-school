@@ -19,7 +19,6 @@ class CreateMatieresTable extends Migration
             $table->foreignId('professeur_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->string('id_matiere');
             $table->string('intitule_matiere');
-            $table->string('intitule');
             $table->timestamps();
         });
     }
