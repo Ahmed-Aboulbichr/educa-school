@@ -13,6 +13,7 @@ class NationaliteSeeder extends Seeder
     public function run()
     {
         DB::insert("INSERT INTO `nationalites` (`alpha_2_code`, `alpha_3_code`, `en_short_name`, `name`) VALUES
+                ( 'MA', 'MAR', 'Morocco', 'Moroccan'),
                 ( 'AF', 'AFG', 'Afghanistan', 'Afghan'),
                 ( 'AX', 'ALA', 'Åland Islands', 'Åland Island'),
                 ( 'AL', 'ALB', 'Albania', 'Albanian'),

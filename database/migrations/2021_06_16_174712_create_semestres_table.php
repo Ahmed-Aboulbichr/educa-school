@@ -17,6 +17,7 @@ class CreateSemestresTable extends Migration
             $table->id();
             $table->foreignId('session_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->string('intitule');
+            $table->integer("niveau_études");
             $table->timestamps();
         });
     }

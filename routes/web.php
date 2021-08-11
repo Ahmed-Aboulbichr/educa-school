@@ -69,6 +69,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/professeurs', 'ProfesseurController');
     Route::resource('/etudiants', 'EtudiantController');
     Route::resource('/candidats', 'CandidatController');
+
+    //E-document
+    Route::get('/edocument/archive', 'EdocumentGestionController@archive')->name('archive');
+    Route::get('/edocument/parametre', 'EdocumentGestionController@parametre');
+    Route::resource('/edocument', 'EdocumentGestionController');
+
     Route::get('/profile', 'CandidatController@profile')->name('profile');
     Route::get('mesCandidatures', 'CandidatureController@renderMyCandidatures')->name('mesCandidatures');
 
@@ -106,6 +112,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('pages-404', 'NazoxController@index');
     Route::any('/', 'HomeController@root');
+    Route::get('{any}', 'HomeController@index');
     Route::get('{any}', 'HomeController@index');
     Route::get('{any}', 'HomeController@index');
 });
