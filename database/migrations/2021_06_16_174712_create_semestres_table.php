@@ -17,7 +17,7 @@ class CreateSemestresTable extends Migration
             $table->id();
             $table->foreignId('session_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('formation_id')->nullable()->constrained()->onDelete('cascade')->default(null);
-            $table->string('intitule');
+            $table->string('intitule_semestre');
             $table->timestamps();
         });
     }

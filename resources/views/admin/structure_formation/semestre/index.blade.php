@@ -49,7 +49,7 @@
                                 <tr>
                                     <td>{{++$i}}</td>
                                     <td>{{$semestre->session->annee_univ}}</td>
-                                    <td>{{$semestre->intitule}}</td>
+                                    <td>{{$semestre->intitule_semestre}}</td>
                                     <td class="text-center">
                                         <form action="{{ route('semestre.destroy', $semestre->id) }}" method="POST">
                                             <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('semestre.update', $semestre->id)}}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
@@ -97,7 +97,7 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Intitulé</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" name="intitule" >
+                                    <input class="form-control" type="text" name="intitule_semestre" >
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Intitulé</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" id="modify-intitule" name="intitule">
+                                    <input class="form-control" type="text" id="modify-intitule_semestre" name="intitule_semestre">
                                 </div>
                             </div>
                         </div>
@@ -203,7 +203,7 @@
                     $("#dateSession_selected").empty();
                     semestre = response.semestre
                     getSessions(semestre);
-                    $('#modify-intitule').val(semestre.intitule);
+                    $('#modify-intitule_semestre').val(semestre.intitule_semestre);
                     $("#editForm").attr("action",response.route);
                     $("#editModal").modal('show');
                 },

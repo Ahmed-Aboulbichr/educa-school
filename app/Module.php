@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Module extends Model
 {
     protected $fillable = [
-        
+
         'semestre_id',
-        'intitule',
+        'id_module',
+        'intitule_module',
     ];
 
     public function semestre()

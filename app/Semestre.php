@@ -10,7 +10,7 @@ class Semestre extends Model
 
         'session_id',
         'formation_id',
-        'intitule',
+        'intitule_semestre',
     ];
 
     public function session()

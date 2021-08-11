@@ -35,13 +35,13 @@ class SemestreController extends Controller
         $request->validate([
             'session_id' => ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
             'formation_id' => ['required', 'integer', Rule::exists('formations', 'id')->where('id', $request->input('formation_id'))],
-            'intitule' => ['required', 'string', 'max:255']
+            'intitule_semestre' => ['required', 'string', 'max:255']
         ]);
 
         Semestre::create([
             'session_id' => $request->get('session_id'),
             'formation_id' => $request->get('formation_id'),
-            'intitule' => $request->get('intitule')
+            'intitule_semestre' => $request->get('intitule_semestre')
         ]);
 
         return redirect()->route('semestre.index', ["formation_id" => $request->input('formation_id')])
@@ -81,13 +81,13 @@ class SemestreController extends Controller
         $request->validate([
             'session_id' => ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
             'formation_id' => ['required', 'integer', Rule::exists('formations', 'id')->where('id', $request->input('formation_id'))],
-            'intitule' => ['required', 'string', 'max:255']
+            'intitule_semestre' => ['required', 'string', 'max:255']
         ]);
 
         Semestre::where('id', $id)->first()->update([
             'session_id' => $request->get('session_id'),
             'formation_id' => $request->get('formation_id'),
-            'intitule' => $request->get('intitule')
+            'intitule_semestre' => $request->get('intitule_semestre')
         ]);
 
         return redirect()->route('semestre.index', ["formation_id" => $request->input('formation_id')])
