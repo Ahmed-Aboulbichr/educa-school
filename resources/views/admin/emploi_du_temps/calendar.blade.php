@@ -272,7 +272,7 @@ function afficheSemestres(){
                         var options =' <option value="null">Séléctionner le semestre</option>';
                         for (let index = 0; index < data.length; index++) {
                             const element = data[index];
-                            options += ' <option value="'+data[index].id+'">'+data[index].intitule+'</option>'
+                            options += ' <option value="'+data[index].id+'">'+data[index].intitule_semestre+'</option>'
                         }
                         $("#semestre").html(options);
                     },
@@ -292,7 +292,7 @@ function afficheSemestres(){
                         var options =' <option value="null">Séléctionner le groupe</option>';
                         for (let index = 0; index < data.length; index++) {
                             const element = data[index];
-                            options += ' <option value="'+data[index].id+'">'+data[index].intitule+'</option>'
+                            options += ' <option value="'+data[index].id+'">'+data[index].intitule_groupe+'</option>'
                         }
 
                         $("#groupe").html(options);
@@ -313,7 +313,7 @@ function afficheSemestres(){
                         var options =' <option value="null">Séléctionner le sous groupe</option>';
                         for (let index = 0; index < data.length; index++) {
                             const element = data[index];
-                            options += ' <option value="'+data[index].id+'">'+data[index].intitule+'</option>'
+                            options += ' <option value="'+data[index].id+'">'+data[index].intitule_sous_groupe+'</option>'
                         }
 
                         $("#sousGroupe").html(options);

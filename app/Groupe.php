@@ -8,7 +8,7 @@ class Groupe extends Model
 {
     protected $fillable = [
         
-        'intitule',
+        'intitule_groupe',
     ];
 
     public function etudiants()
