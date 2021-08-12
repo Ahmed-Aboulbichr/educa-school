@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Formation;
-use App\Semestre;
+use App\Module;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
-class SemestreController extends Controller
+
+class ModuleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class SemestreController extends Controller
     public function index(Request $request)
     {
         //abort_if(Gate::denies('semestre_index'), 403);
-        $semestres = Semestre::with(['session'])->where('formation_id',$request->input('formation_id'))->get();
-        return view('admin.structure_formation.semestre.index', ['semestres' => $semestres, 'formation_id' => $request->input('formation_id')]);
+        $semestres = Module::with(['session'])->where('formation_id',$request->input('formation_id'))->get();
+        return view('admin.structure_formation.module.index', ['semestres' => $semestres, 'formation_id' => $request->input('formation_id')]);
 
     }
 
@@ -39,46 +39,15 @@ class SemestreController extends Controller
             'intitule_semestre' => ['required', 'string', 'max:255']
         ]);
 
-        Semestre::create([
+        Module::create([
             'session_id' => $request->get('session_id'),
             'formation_id' => $request->get('formation_id'),
             'intitule_semestre' => $request->get('intitule_semestre')
         ]);
 
-        return redirect()->route('semestre.index', ["formation_id" => $request->input('formation_id')])
-            ->with('success', 'Le semestre a été enregistrée');
+        return redirect()->route('module.index', ["formation_id" => $request->input('formation_id')])
+            ->with('success', 'Le module a été enregistrée');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show_multi(Request $request)
-    {
-        if ($request->ajax()) {
-
-            $Semestres = Semestre::where('session_id', $request->session)->get();
-
-
-            return response()->json($Semestres);
-        }
-    }
-
 
 
     /**
@@ -91,11 +60,11 @@ class SemestreController extends Controller
     {
 
 
-        $semestre = Semestre::with(['session'])->where('id',$id)->first();
+        $module = Module::with(['session'])->where('id',$id)->first();
 
         $response = [
-            'semestre' => $semestre,
-            'route' =>  route('semestre.update', [$id])
+            'module' => $module,
+            'route' =>  route('module.update', [$id])
         ];
 
         return response()->json($response, 200);
@@ -119,14 +88,14 @@ class SemestreController extends Controller
             'intitule_semestre' => ['required', 'string', 'max:255']
         ]);
 
-        Semestre::where('id', $id)->first()->update([
+        Module::where('id', $id)->first()->update([
             'session_id' => $request->get('session_id'),
             'formation_id' => $request->get('formation_id'),
             'intitule_semestre' => $request->get('intitule_semestre')
         ]);
 
-        return redirect()->route('semestre.index', ["formation_id" => $request->input('formation_id')])
-            ->with('success', 'Le semestre a été modifié');
+        return redirect()->route('module.index', ["formation_id" => $request->input('formation_id')])
+            ->with('success', 'Le module a été modifié');
     }
 
     /**
@@ -135,19 +104,12 @@ class SemestreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Semestre $semestre)
+    public function destroy(Module $module)
     {
         //abort_if(Gate::denies('semestre_delete'), 403);
-        $semestre->delete();
-        $formation_id = $semestre->formation_id;
-        return redirect()->route('semestre.index', ["formation_id" =>  $formation_id])
-            ->with('success', 'Le semestre a été supprimée');
-    }
-
-    public function getSemestresByFormation(Request $request)
-    {
-        $formation = Formation::where('id', $request->input('formation'))->first();
-        $semestres = Semestre::where('formation_id', $formation->id)->get();
-        return response()->json($semestres, 200);
+        $module->delete();
+        $formation_id = $module->formation_id;
+        return redirect()->route('module.index', ["formation_id" =>  $formation_id])
+            ->with('success', 'Le module a été supprimée');
     }
 }
