@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class sousGroupe extends Model
 {
     protected $fillable = [
-        
+
         'groupe_id',
-        'intitule',
+        'intitule_sous_groupe',
     ];
 
     public function groupe()
@@ -20,7 +20,7 @@ class sousGroupe extends Model
     {
         return $this->hasMany(Etudiant::class);
     }
-    
+
     public function seances()
     {
         return $this->hasMany(Seance::class);
