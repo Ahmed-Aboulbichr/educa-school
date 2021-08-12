@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Candidat;
 use App\Formation;
+use App\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -50,6 +51,7 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(Gate::denies('type_formation_access'), 403);
         $request->session()->flash('operation', 'store');
         $request->validate([
             'session_id' => ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
@@ -177,5 +179,12 @@ class FormationController extends Controller
                 ->get();
 
         return view('candidat.candidatures.formations', compact('formations'));
+    }
+
+    public function getFormationsBySession(Request $request)
+    {
+        $session = Session::where('id', $request->input('session'))->first();
+        $formations = Formation::where('session_id', $session->id)->get();
+        return response()->json($formations, 200);
     }
 }

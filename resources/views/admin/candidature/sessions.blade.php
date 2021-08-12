@@ -42,7 +42,7 @@
                         $("#formations").html(data);
                     },
                     error: function(response) {
-                        console.log(response.responseText)
+                        console.log("erreur de la sélectionne");
                     }
                 });
             }
