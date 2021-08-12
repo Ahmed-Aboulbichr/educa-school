@@ -21,6 +21,7 @@ class CreateSeancesTable extends Migration
             $table->foreignId('sous_groupe_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->foreignId('groupe_id')->nullable()->constrained()->onDelete('cascade')->default(null);
             $table->enum('jour', ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche']);
+            $table->time('heure');
             $table->integer('duree');
             $table->timestamps();
         });

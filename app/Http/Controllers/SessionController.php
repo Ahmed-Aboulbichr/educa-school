@@ -86,6 +86,22 @@ class SessionController extends Controller
             ->with('success', 'La session a été enregistrée');
     }
 
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show_multi(Request $request)
+    {
+        //
+    }
+
+
+    
     /**
      * Show the form for editing the specified resource.
      *

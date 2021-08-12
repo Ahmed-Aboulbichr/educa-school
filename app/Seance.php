@@ -14,6 +14,7 @@ class Seance extends Model
         'sous_groupe_id',
         'groupe_id',
         'jour',
+        'heure',
         'duree',
     ];
 

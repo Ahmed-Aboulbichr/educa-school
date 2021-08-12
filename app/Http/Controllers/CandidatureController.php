@@ -175,12 +175,12 @@ class CandidatureController extends Controller
         return view('pre-inscription.attestation')->with('candidat', $candidat)->with('profileImg', $profileImg)->with('candidature', $candidature);
     }
 
-    function show(Request $req, $candidature)
+    function show(Request $req, $formation)
     {
         $candidatures = DB::table('candidatures')
             ->join('candidats', 'candidats.id', '=', 'candidat_id')
             ->join('formations', 'formations.id', '=', 'formation_id')
-            ->where('formation_id', '=', $candidature)
+            ->where('formation_id', '=', $formation)
             ->select('candidatures.id', 'candidatures.labelle', 'candidatures.valide', 'formations.specialite', 'candidats.nom_fr', 'candidats.prenom_fr')
             ->get();
 

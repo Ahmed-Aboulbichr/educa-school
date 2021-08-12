@@ -1,6 +1,7 @@
 <?php
 
 use App\Candidat;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -103,7 +104,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('candidature/downloadPDF/{id}', 'CandidatureController@downloadPDF')->name('downloadPDF');
 
     //Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
+  
+    Route::get('calendar', 'emploiDuTempsController@index');
+    Route::get('custom_semestres', 'SemestreController@show_multi')->name('custom_semestres');
+     Route::get('custom_groupes', 'GroupeController@show_multi')->name('custom_groupes');
+    Route::get('custom_sousgroupes', 'sousGroupeController@show_multi')->name('custom_sousgroupes');
 
+    Route::any('calendar/action','emploiDuTempsController@action');
+    
     Route::get('pages-404', 'NazoxController@index');
     Route::any('/', 'HomeController@root');
     Route::get('{any}', 'HomeController@index');
