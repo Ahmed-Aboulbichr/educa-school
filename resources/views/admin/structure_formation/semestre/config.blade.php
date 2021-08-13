@@ -20,7 +20,7 @@
                 </select>
             </div>
         </div>
-        <div class="row mt-5" id="formations">
+        <div class="mt-5" id="formations">
 
         </div>
 
@@ -36,9 +36,9 @@
             }
         }
 
-        var html = '';
 
         function getFormations(){
+            let html = '<div class="row">';
             $("#formations").empty();
             $.ajax({
                 url: config.routes.getFormations,
@@ -47,7 +47,12 @@
                 dataType : 'json',
                 success: function(response) {
                     for(var i=0; i<response.length; i++){
-                        html += '<div class="col-lg-4"><div class="card border border-primary"><div class="card-header bg-transparent border-primary"><h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow mr-3"></i>'+response[i].specialite+'</h5></div><div class="card-body"><p class="card-text">Cliquer pour voir toutes les semestres du formation '+response[i].specialite+' </p></div><form action="'+"{{route('semestre.index')}}"+'"><input type="hidden" name="formation_id" value="'+response[i].id+'"><button type="submit" class="btn btn-primary waves-effect waves-light m-3">Les semestres</button></div>';
+                        var c = i+1;
+                        html += '<div class="col-lg-4"><div class="card border border-primary"><div class="card-header bg-transparent border-primary"><h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow mr-3"></i>'+response[i].specialite+'</h5></div><div class="card-body"><p class="card-text">Cliquer pour voir toutes les semestres du formation '+response[i].specialite+' </p></div><form action="'+"{{route('semestre.index')}}"+'"><input type="hidden" name="formation_id" value="'+response[i].id+'"><button type="submit" class="btn btn-primary waves-effect waves-light m-3">Les semestres</button></form></div></div>';
+                        if(c === 3){
+                            html +='</div><div class="row">';
+                            c = 0;
+                        }
                     }
                     $("#formations").append(html);
                     html = '';

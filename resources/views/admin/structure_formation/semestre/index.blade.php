@@ -52,7 +52,7 @@
                                     <td>{{$semestre->intitule_semestre}}</td>
                                     <td class="text-center">
                                         <form action="{{ route('semestre.destroy', $semestre->id) }}" method="POST">
-                                            <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('semestre.update', $semestre->id)}}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                            <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('semestre.edit', $semestre->id)}}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-warning p-1 btn-delete" type="submit"><i class="mdi mdi-24px mdi-delete"></i></button>
@@ -203,7 +203,7 @@
                     $("#dateSession_selected").empty();
                     semestre = response.semestre
                     getSessions(semestre);
-                    $('#modify-intitule_semestre').val(semestre.intitule_semestre);
+                    $('#modify-intitule_semestre').val(response.semestre.intitule_semestre);
                     $("#editForm").attr("action",response.route);
                     $("#editModal").modal('show');
                 },

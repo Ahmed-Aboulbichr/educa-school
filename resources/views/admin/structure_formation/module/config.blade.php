@@ -25,7 +25,7 @@
                 </select>
             </div>
         </div>
-        <div class="row mt-5" id="semestres">
+        <div class="mt-5" id="semestres">
 
         </div>
 
@@ -42,9 +42,9 @@
             }
         }
 
-        var html = '';
 
         function getSemestres(){
+            let html = '<div class="row">';
             $("#semestres").empty();
             $.ajax({
                 url: config.routes.getSemestres,
@@ -53,7 +53,12 @@
                 dataType : 'json',
                 success: function(response) {
                     for(var i=0; i<response.length; i++){
-                        html += '<div class="col-lg-4"><div class="card border border-primary"><div class="card-header bg-transparent border-primary"><h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow mr-3"></i>'+response[i].intitule_semestre+'</h5></div><div class="card-body"><p class="card-text">Cliquer pour voir toutes les modules du formation '+response[i].intitule_semestre+' </p></div><form action="'+"{{route('module.index')}}"+'"><input type="hidden" name="formation_id" value="'+response[i].id+'"><button type="submit" class="btn btn-primary waves-effect waves-light m-3">Les modules</button></div>';
+                        var c = i+1;
+                        html += '<div class="col-lg-4"><div class="card border border-primary"><div class="card-header bg-transparent border-primary"><h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow mr-3"></i>'+response[i].intitule_semestre+'</h5></div><div class="card-body"><p class="card-text">Cliquer pour voir toutes les modules du formation '+response[i].intitule_semestre+' </p></div><form action="'+"{{route('module.index')}}"+'"><input type="hidden" name="semestre_id" value="'+response[i].id+'"><button type="submit" class="btn btn-primary waves-effect waves-light m-3">Les modules</button></form></div></div>';
+                        if(c === 3){
+                            html +='</div><div class="row">';
+                            c = 0;
+                        }
                     }
                     $("#semestres").append(html);
                     html = '';
@@ -66,6 +71,7 @@
 
         function getFormations(){
             $("#formation").empty();
+            $("#formation").append('<option value="-1">Séléctionner la formation</option>');
             $.ajax({
                 url: config.routes.getFormations,
                 data: "session="+$("#session").val(),

@@ -49,17 +49,6 @@ class SemestreController extends Controller
             ->with('success', 'Le semestre a été enregistrée');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
 
 
     /**

@@ -18,8 +18,8 @@ class ModuleController extends Controller
     public function index(Request $request)
     {
         //abort_if(Gate::denies('semestre_index'), 403);
-        $semestres = Module::with(['session'])->where('formation_id',$request->input('formation_id'))->get();
-        return view('admin.structure_formation.module.index', ['semestres' => $semestres, 'formation_id' => $request->input('formation_id')]);
+        $modules = Module::where('semestre_id',$request->input('semestre_id'))->get();
+        return view('admin.structure_formation.module.index', ['modules' => $modules, 'semestre_id' => $request->input('semestre_id')]);
 
     }
 
@@ -34,18 +34,18 @@ class ModuleController extends Controller
         //abort_if(Gate::denies('semestre_create'), 403);
         $request->session()->flash('operation', 'store');
         $request->validate([
-            'session_id' => ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
-            'formation_id' => ['required', 'integer', Rule::exists('formations', 'id')->where('id', $request->input('formation_id'))],
-            'intitule_semestre' => ['required', 'string', 'max:255']
+            'semestre_id' => ['required', 'integer', Rule::exists('semestres', 'id')->where('id', $request->input('semestre_id'))],
+            'id_module' => ['required', 'string', 'max:255'],
+            'intitule_module' => ['required', 'string', 'max:255']
         ]);
 
         Module::create([
-            'session_id' => $request->get('session_id'),
-            'formation_id' => $request->get('formation_id'),
-            'intitule_semestre' => $request->get('intitule_semestre')
+            'semestre_id' => $request->get('semestre_id'),
+            'id_module' => $request->get('id_module'),
+            'intitule_module' => $request->get('intitule_module')
         ]);
 
-        return redirect()->route('module.index', ["formation_id" => $request->input('formation_id')])
+        return redirect()->route('module.index', ["semestre_id" => $request->input('semestre_id')])
             ->with('success', 'Le module a été enregistrée');
     }
 
@@ -59,8 +59,7 @@ class ModuleController extends Controller
     public function edit($id)
     {
 
-
-        $module = Module::with(['session'])->where('id',$id)->first();
+        $module = Module::where('id',$id)->first();
 
         $response = [
             'module' => $module,
@@ -83,18 +82,18 @@ class ModuleController extends Controller
         //abort_if(Gate::denies('semestre_edit'), 403);
         $request->session()->flash('operation', 'update');
         $request->validate([
-            'session_id' => ['required', 'integer', Rule::exists('sessions', 'id')->where('id', $request->input('session_id'))],
-            'formation_id' => ['required', 'integer', Rule::exists('formations', 'id')->where('id', $request->input('formation_id'))],
-            'intitule_semestre' => ['required', 'string', 'max:255']
+            'semestre_id' => ['required', 'integer', Rule::exists('semestres', 'id')->where('id', $request->input('semestre_id'))],
+            'id_module' => ['required', 'string', 'max:255'],
+            'intitule_module' => ['required', 'string', 'max:255']
         ]);
 
         Module::where('id', $id)->first()->update([
-            'session_id' => $request->get('session_id'),
-            'formation_id' => $request->get('formation_id'),
-            'intitule_semestre' => $request->get('intitule_semestre')
+            'semestre_id' => $request->get('semestre_id'),
+            'id_module' => $request->get('id_module'),
+            'intitule_module' => $request->get('intitule_module')
         ]);
 
-        return redirect()->route('module.index', ["formation_id" => $request->input('formation_id')])
+        return redirect()->route('module.index', ["semestre_id" => $request->input('semestre_id')])
             ->with('success', 'Le module a été modifié');
     }
 
@@ -108,8 +107,8 @@ class ModuleController extends Controller
     {
         //abort_if(Gate::denies('semestre_delete'), 403);
         $module->delete();
-        $formation_id = $module->formation_id;
-        return redirect()->route('module.index', ["formation_id" =>  $formation_id])
+        $semestre_id = $module->semestre_id;
+        return redirect()->route('module.index', ["semestre_id" =>  $semestre_id])
             ->with('success', 'Le module a été supprimée');
     }
 }

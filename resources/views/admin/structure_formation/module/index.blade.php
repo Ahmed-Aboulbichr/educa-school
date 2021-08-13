@@ -36,7 +36,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>#</th>
-                                <th>Année universitaire</th>
+                                <th>Ref Module</th>
                                 <th>Intitulé</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -48,11 +48,11 @@
                             @foreach ($modules as $module)
                                 <tr>
                                     <td>{{++$i}}</td>
-                                    <td>{{$module->session->annee_univ}}</td>
-                                    <td>{{$module->intitule_semestre}}</td>
+                                    <td>{{$module->id_module}}</td>
+                                    <td>{{$module->intitule_module}}</td>
                                     <td class="text-center">
                                         <form action="{{ route('module.destroy', $module->id) }}" method="POST">
-                                            <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('module.update', $module->id)}}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                            <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('module.edit', $module->id)}}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-warning p-1 btn-delete" type="submit"><i class="mdi mdi-24px mdi-delete"></i></button>
@@ -85,19 +85,17 @@
                                     </div>
                                 @endforeach
                             @endif
-                            <input type="hidden" name ="formation_id" value="{{$formation_id}}">
+                            <input type="hidden" name ="semestre_id" value="{{$semestre_id}}">
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Session</label>
+                                <label class="col-md-3 col-form-label">Réference</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="session_id" id="date_session">
-                                        <option>--- Année universitaire ---</option>
-                                    </select>
+                                    <input class="form-control" type="text" name="id_module" >
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Intitulé</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" name="intitule_semestre" >
+                                    <input class="form-control" type="text" name="intitule_module" >
                                 </div>
                             </div>
                         </div>
@@ -125,24 +123,23 @@
                         @method('PATCH')
                         <div class="modal-body">
                             @if($errors->any() && session()->has('operation') && session()->get('operation') =="update")
-                            @foreach($errors->all() as $error)
-                                <div class="col-6-auto">
-                                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
-                                </div>
-                            @endforeach
-                        @endif
-                            <input type="hidden" name ="formation_id" value="{{$formation_id}}">
+                                @foreach($errors->all() as $error)
+                                    <div class="col-6-auto">
+                                        <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            <input type="hidden" name ="semestre_id" value="{{$semestre_id}}">
                             <div class="form-group row align-items-center">
-                                <label class="col-md-3 col-form-label">Session</label>
+                                <label class="col-md-3 col-form-label">Réference</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="session_id" id="dateSession_selected">
-                                    </select>
+                                    <input class="form-control" type="text" name="id_module" value="" id="idModule_modifier">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Intitulé</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" id="modify-intitule_semestre" name="intitule_semestre">
+                                    <input class="form-control" type="text" name="intitule_module" value="" id="intituleModule_modifier">
                                 </div>
                             </div>
                         </div>
@@ -165,10 +162,7 @@
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
     <script>
-        $('#document').ready(function(){
-            module = null;
-            getSessions(module);
-        });
+
 
         $('#ajoutButton').on('click', function(){
             $("#ajoutModal").modal('show');
@@ -200,10 +194,8 @@
                 type: 'get',
                 dataType: 'json',
                 success: function(response){
-                    $("#dateSession_selected").empty();
-                    module = response.module
-                    getSessions(module);
-                    $('#modify-intitule_semestre').val(module.intitule_semestre);
+                    $('#idModule_modifier').val(response.module.id_module);
+                    $('#intituleModule_modifier').val(response.module.intitule_module);
                     $("#editForm").attr("action",response.route);
                     $("#editModal").modal('show');
                 },
@@ -214,27 +206,7 @@
         });
 
 
-        function getSessions(module){
-            $.ajax({
-                url: "{{route('getSessions')}}",
-                type: 'get',
-                dataType : 'json',
-                success: function(response) {
-                    if(module === null){
-                        for(var i=0; i<response.length; i++){
-                            option = "<option value='"+response[i].id+"'>"+response[i].annee_univ+"</option>";
-                            $("#date_session").append(option);
-                        }
-                    }
-                    if(module != null){
-                        for(session of response){
-                            (module.session_id == session.id)?option = "<option selected value="+session.id+">"+session.annee_univ+"</option>":option = "<option value='"+session.id+"'>"+session.annee_univ+"</option>";
-                             $("#dateSession_selected").append(option);
-                        }
-                    }
-                }
-            });
-        }
+
     </script>
 
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
