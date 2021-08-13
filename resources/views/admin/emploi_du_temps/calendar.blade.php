@@ -14,11 +14,17 @@
     <form id="getEvents" >
         <div class="row">
     <div class="col-3">
-        <select class="form-control select2" required name ="session" id="session" onchange="afficheSemestres()">
+        <select class="form-control select2" required name ="session" id="session" onchange="afficheFormations()">
             <option value="null">Séléctionner la session</option>
                 @foreach($sessions as $session)
                     <option value="{{$session->id}}">{{$session->annee_univ}}</option>
                 @endforeach
+        </select>
+    </div>
+    <div class="col-3">
+        <select class="form-control select2" required name ="formation" id="formation" onchange="afficheSemestres()">
+            <option value="null">Séléctionner la formation</option>
+    
         </select>
     </div>
     <div class="col-3">
@@ -85,7 +91,7 @@
                                 <select class="form-control" name="matiere" id="matiere">
                                     <option>--- Matières ---</option>
                                     @foreach($matieres as $matiere)
-                                        <option value="{{$matiere->id}}">{{$matiere->intitule}}</option>
+                                        <option value="{{$matiere->id}}">{{$matiere->intitule_matiere}}</option>
                                      @endforeach
                                 </select>
                             </div>
@@ -260,13 +266,41 @@ $('#getEvents').on('submit',function(){
 
 
 });
-
+var config = {
+            routes: {
+                getFormations : "{{route('getFormationsBySession')}}" ,
+            }
+        }
+function afficheFormations(){
+               
+                $.ajax({
+                    url: config.routes.getFormations,
+                    type: 'get',
+                    data: "session="+$("#session").val(),
+                    dataType : 'json',
+                    success: function (data){
+                        var options =' <option value="null">Séléctionner la formation</option>';
+                        for (let index = 0; index < data.length; index++) {
+                            const element = data[index];
+                            options += ' <option value="'+data[index].id+'">'+data[index].specialite+'</option>'
+                        }
+                        $("#formation").html(options);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText)
+                    }
+                });
+            }
 function afficheSemestres(){
                 var route = "{{route('custom_semestres')}}"
                 $.ajax({
                     url: route,
                     type: 'get',
-                    data: "session="+$("#session").val(),
+                    data: {
+                        formation :$("#formation").val(),
+                        session : $("#session").val(),
+
+                    } , 
                     dataType : 'json',
                     success: function (data){
                         var options =' <option value="null">Séléctionner le semestre</option>';

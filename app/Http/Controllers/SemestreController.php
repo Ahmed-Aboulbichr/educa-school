@@ -71,7 +71,7 @@ class SemestreController extends Controller
     {
         if ($request->ajax()) {
             
-            $Semestres = Semestre::where('session_id', $request->session)->get();
+            $Semestres = Semestre::where('session_id', $request->session)->where('formation_id', $request->formation)->get();
 
 
             return response()->json($Semestres);

@@ -9,7 +9,7 @@ class sousGroupe extends Model
     protected $fillable = [
         
         'groupe_id',
-        'intitule',
+        'intitule_sous_groupe',
     ];
 
     public function groupe()
