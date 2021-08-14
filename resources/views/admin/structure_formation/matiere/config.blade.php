@@ -45,7 +45,6 @@
                 getFormations : "{{route('getFormationsBySession')}}" ,
                 getSemestres: "{{route('getSemestresByFormation')}}" ,
                 getModules: "{{route('getModulesBySemestre')}}" ,
-
             }
         }
 

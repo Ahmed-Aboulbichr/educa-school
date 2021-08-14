@@ -106,6 +106,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/FormationsBySession', 'FormationController@getFormationsBySession')->name('getFormationsBySession');
     Route::get('/SemestresByFormation', 'SemestreController@getSemestresByFormation')->name('getSemestresByFormation');
     Route::get('/ModulesBySemestre', 'ModuleController@getModulesBySemestre')->name('getModulesBySemestre');
+    Route::get('/getProfesseurs', 'ProfesseurController@renderProfesseurs')->name('getProfesseurs');
 
     Route::get('/semestreConfig', function(){
         return view('admin.structure_formation.semestre.config');

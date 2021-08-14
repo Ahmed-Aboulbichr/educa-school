@@ -1,5 +1,5 @@
 @extends('layouts.master-educa')
-@section('title') Semestres @endsection
+@section('title') Modules @endsection
 @section('css')
     <!-- DataTables -->
     <!-- Sweet Alert-->
@@ -7,9 +7,9 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-    @slot('title') Semestres @endslot
+    @slot('title') Modules @endslot
     @slot('li_1') Liste @endslot
-    @slot('li_2') Semestres @endslot
+    @slot('li_2') Modules @endslot
 @endcomponent
 
 <div class="row">
@@ -36,7 +36,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>#</th>
-                                <th>Ref Module</th>
+                                <th>Ref Matiere</th>
                                 <th>Intitulé</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -45,14 +45,14 @@
                             @php
                                 $i = 0;
                             @endphp
-                            @foreach ($modules as $module)
+                            @foreach ($matieres as $matiere)
                                 <tr>
                                     <td>{{++$i}}</td>
-                                    <td>{{$module->id_module}}</td>
-                                    <td>{{$module->intitule_module}}</td>
+                                    <td>{{$matiere->id_matiere}}</td>
+                                    <td>{{$matiere->intitule_matiere}}</td>
                                     <td class="text-center">
-                                        <form action="{{ route('module.destroy', $module->id) }}" method="POST">
-                                            <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('module.edit', $module->id)}}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                        <form action="{{ route('matiere.destroy', $matiere->id) }}" method="POST">
+                                            <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('matiere.edit', $matiere->id)}}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-warning p-1 btn-delete" type="submit"><i class="mdi mdi-24px mdi-delete"></i></button>
@@ -70,12 +70,12 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myModalLabel">L'ajout du module</h5>
+                        <h5 class="modal-title mt-0" id="myModalLabel">L'ajout de matiere</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('module.store') }}" method="POST">
+                    <form action="{{ route('matiere.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             @if($errors->any() && session()->has('operation') && session()->get('operation') =="store")
@@ -85,17 +85,25 @@
                                     </div>
                                 @endforeach
                             @endif
-                            <input type="hidden" name ="semestre_id" value="{{$semestre_id}}">
+                            <input type="hidden" name ="module_id" value="{{$module_id}}">
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Réference</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" name="id_module" >
+                                    <input class="form-control" type="text" name="id_matiere" >
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Intitulé</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" name="intitule_module" >
+                                    <input class="form-control" type="text" name="intitule_matiere" >
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Professeur</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" name="professeur_id" id="professeur">
+                                        <option>--- Enseigné par ---</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +121,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myModalLabel">Modifier le module</h5>
+                        <h5 class="modal-title mt-0" id="myModalLabel">Modifier la matiere</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -129,17 +137,25 @@
                                     </div>
                                 @endforeach
                             @endif
-                            <input type="hidden" name ="semestre_id" value="{{$semestre_id}}">
+                            <input type="hidden" name ="module_id" value="{{$module_id}}">
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Réference</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" name="id_module" value="" id="idModule_modifier">
+                                    <input class="form-control" type="text" name="id_matiere" value="" id="idMatiere_modifier">
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Intitulé</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" name="intitule_module" value="" id="intituleModule_modifier">
+                                    <input class="form-control" type="text" name="intitule_matiere" value="" id="intituleMatiere_modifier">
+                                </div>
+                            </div>
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Professeur</label>
+                                <div class="col-md-9">
+                                    <select class="form-control" name="professeur_id" id="professeur_selected">
+                                        <option>--- Enseigné par ---</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -194,8 +210,11 @@
                 type: 'get',
                 dataType: 'json',
                 success: function(response){
-                    $('#idModule_modifier').val(response.module.id_module);
-                    $('#intituleModule_modifier').val(response.module.intitule_module);
+                    $("#professeur_selected").empty();
+                    matiere = response.matiere
+                    getProfesseurs(matiere);
+                    $('#idMatiere_modifier').val(response.matiere.id_matiere);
+                    $('#intituleMatiere_modifier').val(response.matiere.intitule_matiere);
                     $("#editForm").attr("action",response.route);
                     $("#editModal").modal('show');
                 },
@@ -205,6 +224,32 @@
             })
         });
 
+        function getProfesseurs(matiere){
+            $.ajax({
+                url: "{{route('getProfesseurs')}}",
+                type: 'get',
+                dataType : 'json',
+                success: function(response) {
+                    if(matiere === null){
+                        for(var i=0; i<response.length; i++){
+                            option = "<option value='"+response[i].id+"'>Pr "+response[i].nom.toUpperCase()+" "+response[i].prenom+"</option>";
+                            $("#professeur").append(option);
+                        }
+                    }
+                    if(matiere != null){
+                        for(professeur of response){
+                            (matiere.professeur_id == professeur.id)?option = "<option selected value='"+professeur.id+"'>Pr "+professeur.nom.toUpperCase()+" "+professeur.prenom+"</option>":option = "<optionvalue='"+professeur.id+"'>Pr "+professeur.nom.toUpperCase()+" "+professeur.prenom+"</option>";
+                             $("#professeur_selected").append(option);
+                        }
+                    }
+                }
+            });
+        }
+
+        $('#document').ready(function(){
+            matiere = null;
+            getProfesseurs(matiere);
+        });
 
 
     </script>
