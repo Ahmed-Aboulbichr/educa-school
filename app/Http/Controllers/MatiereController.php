@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
 
-class ModuleController extends Controller
+class MatiereController extends Controller
 {
     /**
      * Display a listing of the resource.

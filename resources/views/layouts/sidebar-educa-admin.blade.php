@@ -65,6 +65,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{url('moduleConfig')}}>Module</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{url('matiereConfig')}}>Matiere</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

@@ -100,16 +100,21 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
     Route::resource('/semestre', 'SemestreController');
     Route::resource('/module', 'ModuleController');
+    Route::resource('/matiere', 'MatiereController');
 
     //
-
-    Route::get('/SemestresByFormation', 'SemestreController@getSemestresByFormation')->name('getSemestresByFormation');
     Route::get('/FormationsBySession', 'FormationController@getFormationsBySession')->name('getFormationsBySession');
+    Route::get('/SemestresByFormation', 'SemestreController@getSemestresByFormation')->name('getSemestresByFormation');
+    Route::get('/ModulesBySemestre', 'ModuleController@getModulesBySemestre')->name('getModulesBySemestre');
+
     Route::get('/semestreConfig', function(){
         return view('admin.structure_formation.semestre.config');
     });
     Route::get('/moduleConfig', function(){
         return view('admin.structure_formation.module.config');
+    });
+    Route::get('/matiereConfig', function(){
+        return view('admin.structure_formation.matiere.config');
     });
 
     Route::post('/formation/update/{id}', 'FormationController@update')->name('formation.update');
