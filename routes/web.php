@@ -99,13 +99,24 @@ Route::group(['middleware' => 'auth'], function () {
         'except' => ['update']
     ]);
     Route::resource('/semestre', 'SemestreController');
-    //
+    Route::resource('/module', 'ModuleController');
+    Route::resource('/matiere', 'MatiereController');
 
+    //
     Route::get('/FormationsBySession', 'FormationController@getFormationsBySession')->name('getFormationsBySession');
+    Route::get('/SemestresByFormation', 'SemestreController@getSemestresByFormation')->name('getSemestresByFormation');
+    Route::get('/ModulesBySemestre', 'ModuleController@getModulesBySemestre')->name('getModulesBySemestre');
+    Route::get('/getProfesseurs', 'ProfesseurController@renderProfesseurs')->name('getProfesseurs');
+
     Route::get('/semestreConfig', function(){
         return view('admin.structure_formation.semestre.config');
     });
-
+    Route::get('/moduleConfig', function(){
+        return view('admin.structure_formation.module.config');
+    });
+    Route::get('/matiereConfig', function(){
+        return view('admin.structure_formation.matiere.config');
+    });
 
     Route::post('/formation/update/{id}', 'FormationController@update')->name('formation.update');
     Route::post('/type_formations/update/{id}', 'TypeFormationController@update')->name('type_formations.update');
@@ -120,7 +131,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('candidature/downloadPDF/{id}', 'CandidatureController@downloadPDF')->name('downloadPDF');
 
     //Route::post('/setValidate', 'CandidatureController@setValidate')->name('setValidate');
-  
+
     Route::get('calendar', 'emploiDuTempsController@index');
     Route::get('custom_semestres', 'SemestreController@show_multi')->name('custom_semestres');
      Route::get('custom_groupes', 'GroupeController@show_multi')->name('custom_groupes');
@@ -130,7 +141,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('addSeance', 'SeanceController@store')->name('addSeance');
 
     Route::any('calendar/action','emploiDuTempsController@action');
-    
+
     Route::get('pages-404', 'NazoxController@index');
     Route::any('/', 'HomeController@root');
     Route::get('{any}', 'HomeController@index');

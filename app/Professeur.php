@@ -16,7 +16,6 @@ class Professeur extends Model
         'tel',
         'adresse',
         'ville_id',
-        'matiere_id',
         'user_id',
     ];
 

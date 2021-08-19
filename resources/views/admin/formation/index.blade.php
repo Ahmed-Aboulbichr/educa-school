@@ -340,7 +340,6 @@
                 type: 'get',
                 dataType : 'json',
                 success: function(response) {
-
                     if(formation === null){
                         for(var i=0; i<response.length; i++){
                             option = "<option value='"+response[i].id+"'>"+response[i].annee_univ+"</option>";

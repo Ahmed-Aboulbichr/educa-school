@@ -7,7 +7,6 @@ use App\Formation;
 use App\Candidature;
 use App\Cursus_universitaire;
 use App\Niveau_etude;
-use App\Session;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +72,7 @@ class CandidatureController extends Controller
             //récupérer le niveau pre requise
             $niveauPreRequise = Niveau_etude::where('id', $formation->niveau_preRequise)->first()->intitule;
             //récupérer le derniére cursus de candidat
-            $maxniv = Niveau_etude::where('intitule', Niveau_etude::whereIn('id', Cursus_universitaire::where('candidat_id', $candidat->id)->get('niveau_etude_id'))->max('intitule'))->first();     
+            $maxniv = Niveau_etude::where('intitule', Niveau_etude::whereIn('id', Cursus_universitaire::where('candidat_id', $candidat->id)->get('niveau_etude_id'))->max('intitule'))->first();
             $cursusUniv = Cursus_universitaire::where('candidat_id', $candidat->id)->where('niveau_etude_id', $maxniv->id)->first();
 
             $check = false;
