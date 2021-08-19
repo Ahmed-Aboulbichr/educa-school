@@ -33,4 +33,10 @@ class Semestre extends Model
         return $this->hasMany(Module::class);
     }
 
+
+    public function groupes()
+    {
+        return $this->hasMany(Groupe::class);
+    }
+
 }

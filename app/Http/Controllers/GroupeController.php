@@ -60,9 +60,10 @@ class GroupeController extends Controller
      */
     public function show_multi(Request $request)
     {
+       
         if ($request->ajax()) {
             
-            $Groupe = Groupe::all();
+            $Groupe = Groupe::where('semestre_id', $request->semestre)->get();
 
 
             return response()->json($Groupe);

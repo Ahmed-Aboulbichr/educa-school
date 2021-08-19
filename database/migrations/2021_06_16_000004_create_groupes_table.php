@@ -16,6 +16,7 @@ class CreateGroupesTable extends Migration
         Schema::create('groupes', function (Blueprint $table) {
             $table->id();
             $table->string('intitule_groupe');
+            $table->foreignId('semestre_id')->constrained()->onDelete('cascade'); 
             $table->timestamps();
         });
     }

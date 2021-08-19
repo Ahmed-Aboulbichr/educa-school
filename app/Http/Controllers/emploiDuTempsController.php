@@ -9,40 +9,40 @@ use DateTime;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\New_;
 
+
 class emploiDuTempsController extends Controller
 {    
 
       private function generateData($Seances){
         $data[][] = '';
         foreach ($Seances as $key => $Seance) {
-
-            if($Seance->jour == "Sunday"){
-                
-              $day =  0 ;
-            }else if($Seance->jour == "Monday"){
-                
-                
-                $day =  1 ;
             
-            }else if($Seance->jour == "Tuesday"){
+            if($Seance->jour == "Dimanche"){
+                
+              $day =  7 ;
+            }else if($Seance->jour == "Lundi"){
+                
+                
+              $day =  1 ;
+            
+            }else if($Seance->jour == "Mardi"){
                 
                 $day = 2 ;
             
-            }else if($Seance->jour == "'Wednesday"){
+            }else if($Seance->jour == "'Mercredi"){
                 
                 $day = 3 ;
             
-            }else if($Seance->jour == "Thursday"){
+            }else if($Seance->jour == "Jeudi"){
                 
                 
                 $day =  4 ;
-            
-            
-            }else if($Seance->jour == "Friday"){
+           
+            }else if($Seance->jour == "Vendredi"){
                 
                 $day =  5 ;
             
-            }else if($Seance->jour == "Saturday"){
+            }else if($Seance->jour == "Samedi"){
                 
                 $day = 6 ;
             
@@ -59,7 +59,7 @@ class emploiDuTempsController extends Controller
             $data[$key]['id'] = $Seance->id;
             $data[$key]['start'] = $tempstart->format('Y-m-d H:i:s');
             $data[$key]['end'] = $temp->modify("+$Seance->duree minutes")->format('Y-m-d H:i:s') ;
-            $data[$key]['title'] = $Seance->heure;
+            $data[$key]['title'] = $Seance->salle->label.' '.$Seance->groupe->intitule_groupe;
         }
         return response()->json($data) ;
 
@@ -74,7 +74,7 @@ class emploiDuTempsController extends Controller
                        ->whereDate('duree',   '<=', round(abs(strtotime($request->end) - strtotime($request->start)) / 60,2) )
                        ->get();*/
     		$Seances = Seance::all();
-            $this->generateData($Seances);
+            return  $this->generateData($Seances);
         }
         $matieres = Matiere::all();
         $sessions = Session::all();

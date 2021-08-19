@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @section('title') Calendar @endsection
 @section('css')
+<style>
+    .fc-content{
+        display: inline-flex !important;
+    }
+</style>
     <!-- Plugin css -->
     <link href="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
@@ -33,7 +38,7 @@
         </select>
     </div>
     <div class="col-3">
-        <select class="form-control select2" required name ="groupe" id="groupe" onchange="afficheSousGroupes()">
+        <select class="form-control select2" required name ="groupe" id="groupe" onchange="afficheSousGroupes();">
             <option value="null">Séléctionner le groupe</option>
         </select>
     </div>
@@ -82,24 +87,26 @@
                                 </div>
                             @endforeach
                         @endif
-                         <input type="hidden" name="semestre">
-                         <input type="hidden" name="groupe">
-                         <input type="hidden" name="sousGroupe">
                          <div class="form-group row align-items-center">
-                            <label class="col-md-3 col-form-label">Matières</label>
+                            <label class="col-md-3 col-form-label">Jours</label>
                             <div class="col-md-9">
-                                <select class="form-control" name="matiere" id="matiere">
-                                    <option>--- Matières ---</option>
-                                    @foreach($matieres as $matiere)
-                                        <option value="{{$matiere->id}}">{{$matiere->intitule_matiere}}</option>
-                                     @endforeach
+                                <select class="form-control" required name="jour" id="jour">
+                                    <option>--- Jours ---</option>
+                                        <option value="Lundi">Lundi</option>
+                                        <option value="Mardi">Mardi</option>
+                                        <option value="Mercredi">Mercredi</option>
+                                        <option value="Jeudi">Jeudi</option>
+                                        <option value="Vendredi">Vendredi</option>
+                                        <option value="Samedi">Samedi</option>
+                                        <option value="Dimanche">Dimanche</option>
+                                
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
                             <label class="col-md-3 col-form-label">Heure début de Séance</label>
                             <div class="col-md-9">
-                                <input class="form-control" type="time" name="startSeance" id="startSeance">
+                                <input class="form-control" type="time" name="heureSeance" id="heureSeance">
                             </div>
                         </div>
                         <div class="form-group row align-items-center">
@@ -108,20 +115,30 @@
                                 <input class="form-control" type="number" name="dureeSeance" min="0" id="dureeSeance">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary waves-effect waves-light"><i class="ri-refresh-line"> Recharger les Salles disponibles </i></button>
+                        <span   onclick="afficheSalles(); afficheMatieres();" class="btn btn-primary waves-effect waves-light"><i class="ri-refresh-line"> Recharger les Salles/Matières disponibles </i></span>
                         <div class="form-group row align-items-center">
                             <label class="col-md-3 col-form-label">Salles</label>
                             <div class="col-md-9">
-                                <select class="form-control" name="salle" id="salle">
+                                <select class="form-control" required name="salle" id="salle">
                                     <option>---  Salle  ---</option>
                                    
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row align-items-center">
+                            <label class="col-md-3 col-form-label">Matières</label>
+                            <div class="col-md-9">
+                                <select class="form-control" required name="matiere" id="matiere">
+                                    <option>--- Matières ---</option>
+                                
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
+                        <span id="addSeance" class="btn btn-primary waves-effect waves-light">Ajouter</span>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -133,7 +150,9 @@
     <!-- plugin js -->
     <script src="{{ URL::asset('/assets/libs/moment/moment.min.js')}}"></script>
     <script src="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.js')}}"></script>
-
+    <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
+    
     <!-- Calendar init -->
     <script src="{{ URL::asset('/assets/js/pages/emploi_calendar.init.js')}}"></script>
 
@@ -152,11 +171,15 @@ var calendar = $('#calendar-1').fullCalendar({
     header:{
         left:'prev,next today',
         center:'title',
-        right:'month,agendaWeek,agendaDay'
+        right:'agendaWeek,agendaDay'
     },
+    height:'100%',
+    firstDay:1,
     events:'/calendar',
     selectable:true,
     selectHelper: true,
+    axisFormat: 'HH:mm',
+    timeFormat: 'HH:mm' ,
     select:function(start, end, allDay)
     {
         var title = prompt('Event Title:');
@@ -259,7 +282,39 @@ var calendar = $('#calendar-1').fullCalendar({
     }
 });
 
+$('#addSeance').on('click',function(){
+
+    var route = "{{route('addSeance')}}"
+               
+               $.ajax({
+                   url: route,
+                   type: 'post',
+                   data: {
+
+                       semestre :$("#semestre").val(),
+                       salle:$("#salle").val(),
+                       matiere:$("#matiere").val(),
+                       groupe:$("#groupe").val(),
+                       sousGroupe:$("#sousGroupe").val(),
+                       jour:$("#jour").val(),
+                       heure:$("#heureSeance").val(),
+                       duree:$("#dureeSeance").val(),
+} 
+,
+                   dataType : 'json',
+                   success: function (data){
+                       calendar.fullCalendar('refetchEvents');
+                      
+                   },
+                   error: function(response) {
+                       console.log(response)
+                   }
+               });
+           });
+
+
 });
+
 
 $('#getEvents').on('submit',function(){
 
@@ -344,7 +399,7 @@ function afficheSemestres(){
                     data: "groupe="+$("#groupe").val(),
                     dataType : 'json',
                     success: function (data){
-                        var options =' <option value="null">Séléctionner le sous groupe</option>';
+                        var options =' <option value=null>Séléctionner le sous groupe</option>';
                         for (let index = 0; index < data.length; index++) {
                             const element = data[index];
                             options += ' <option value="'+data[index].id+'">'+data[index].intitule_sous_groupe+'</option>'
@@ -358,10 +413,76 @@ function afficheSemestres(){
                 });
             }
 
+            function afficheSalles(){
+                var route = "{{route('custom_salles')}}"
+          
+                $.ajax({
+                    url: route,
+                    type: 'get',
+                    data: {
+                        
+                        
+                        jour:$("#jour").val(),
+                        heure:$("#heureSeance").val(),
+                        duree:$("#dureeSeance").val(),
+                    
 
+                    }
+                    ,
+                    dataType : 'json',
+                    success: function (data){
+                        console.log(data)
+                        var options =' <option value="null">---  Salle  ---</option>';
+                        for (let index = 0; index < data.length; index++) {
+                            const element = data[index];
+                            options += ' <option value="'+data[index].id+'">'+data[index].label+'</option>'
+                        }
+
+                        $("#salle").html(options);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText)
+                    }
+                });
+            }
+
+            function afficheMatieres(){
+                var route = "{{route('custom_matieres')}}"
+               
+                $.ajax({
+                    url: route,
+                    type: 'get',
+                    data: {
+
+                        semestre :$("#semestre").val(),
+                        jour:$("#jour").val(),
+                        heure:$("#heureSeance").val(),
+                        duree:$("#dureeSeance").val(),
+                    } 
+                    ,
+                    dataType : 'json',
+                    success: function (data){
+                        
+                        var options =' <option value="null">---  Matiere  ---</option>';
+                        for (let index = 0; index < data.length; index++) {
+                            const element = data[index];
+                            options += ' <option value="'+data[index].id+'">'+data[index].intitule_matiere+'</option>'
+                        }
+
+                        $("#matiere").html(options);
+                    },
+                    error: function(response) {
+                        console.log(response.responseText)
+                    }
+                });
+            }
+
+         
 $('#ajoutButton').on('click', function(){
             $("#ajoutModal").modal('show');
         });
+
+
         </script>
 @endsection
    

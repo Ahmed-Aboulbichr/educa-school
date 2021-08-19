@@ -125,6 +125,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('custom_semestres', 'SemestreController@show_multi')->name('custom_semestres');
      Route::get('custom_groupes', 'GroupeController@show_multi')->name('custom_groupes');
     Route::get('custom_sousgroupes', 'sousGroupeController@show_multi')->name('custom_sousgroupes');
+    Route::get('custom_salles', 'SalleController@show_multi')->name('custom_salles');
+    Route::get('custom_matieres', 'MatiereController@show_multi')->name('custom_matieres');
+    Route::post('addSeance', 'SeanceController@store')->name('addSeance');
 
     Route::any('calendar/action','emploiDuTempsController@action');
     

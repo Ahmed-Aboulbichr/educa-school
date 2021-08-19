@@ -9,6 +9,7 @@ class Groupe extends Model
     protected $fillable = [
         
         'intitule_groupe',
+        'semestre_id',
     ];
 
     public function etudiants()
@@ -19,6 +20,12 @@ class Groupe extends Model
     public function seances()
     {
         return $this->hasMany(Seance::class);
+    }
+    
+    
+    public function semestre()
+    {
+        return $this->belongsTo(Semestre::class);
     }
     
     
