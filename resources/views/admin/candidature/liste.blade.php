@@ -61,7 +61,7 @@
                                     </select>
 
                             </td>
-                            <td> 
+                            <td>
                                 <select name="addMoreInputFields[0][operator]" id="" class="filter-operator form-control">
                                     <option value=''>Select Operator</option>
                                     <option value="=">=</option>
@@ -71,9 +71,9 @@
                                     <option value="<"><</option>
                                     <option value=">">></option>
                                 </select>
-                                
+
                             </td>
-                            
+
                             <td><input type="text" name="addMoreInputFields[0][value]" placeholder="Enter value"
                                     class="filter-value form-control" />
                             </td>
@@ -143,6 +143,7 @@
             <h4 class="card-title bg-success p-2 text-light text-center">Candidatures Validé</h4>
             <div class="table-responsive">
                 <table class="table table-editable table-nowrap" id="datatable-buttons1">
+                    <button onclick="affiche()">Make as Etudiant</button>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -158,7 +159,7 @@
                     @endif --}}
                     @foreach ($candidatures as $candidature)
                     @if ($candidature->valide!==0)
-                    <tr>
+                    <tr class="ligne" data-id="{{ $candidature->id }}" >
                         <td>{{ $candidature->id }}</td>
                         <td data-original-value="11">{{ $candidature->labelle }}</td>
                         <td data-original-value="11">
@@ -201,24 +202,43 @@
 <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js')}}"></script>
 <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js')}}"></script>
 <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{ URL::asset('/assets/libs/datatables/dataTables.select.min.js')}}"></script>
 
 <!-- Datatable init js -->
-<script src="{{ URL::asset('/assets/js/pages/datatables.init.js')}}"></script>
 <script type="text/javascript">
     var i = 0;
-        $("#dynamic-ar").click(function () {
-            ++i;
-            $("#dynamicAddRemove").append('<tr> <td> <select name="addMoreInputFields['+i+'][column]" id="" class="filter-key form-control"> <option value="null">Select column</option> <option value="ID">ID</option> <option value="Labelle">Labelle</option> <option value="Valide">Valide</option> <option value="Candidat">Candidat</option> <option value="Formation">Formation</option> <option value="Action">Action</option> </select> </td> <td> <select name="addMoreInputFields['+i+'][operator]" id="" class="filter-operator form-control"><option value="">Select Operator</option> <option value="=">=</option> <option value="!=">!=</option> <option value="<="><=</option> <option value=">=">>=</option> <option value="<"><</option> <option value=">">></option> </select> </td><td><input type="text" name="addMoreInputFields[' + i +
-                '][value]" placeholder="Enter value" class="filter-value form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>'
-                );
-            
+
+    let candidatValid = [];
+    let rowsCandidatValid = document.querySelectorAll('.ligne');
+
+    function affiche(){
+        for(tr of rowsCandidatValid){
+            if(tr.classList.contains("selected")){
+                candidatValid.push(tr.getAttribute('data-id'));
+            }
+        }
+        alert("Etudiant id "+candidatValid);
+        candidatValid = [];
+    }
+
+    $("#dynamic-ar").click(function () {
+        ++i;
+        $("#dynamicAddRemove").append('<tr> <td> <select name="addMoreInputFields['+i+'][column]" id="" class="filter-key form-control"> <option value="null">Select column</option> <option value="ID">ID</option> <option value="Labelle">Labelle</option> <option value="Valide">Valide</option> <option value="Candidat">Candidat</option> <option value="Formation">Formation</option> <option value="Action">Action</option> </select> </td> <td> <select name="addMoreInputFields['+i+'][operator]" id="" class="filter-operator form-control"><option value="">Select Operator</option> <option value="=">=</option> <option value="!=">!=</option> <option value="<="><=</option> <option value=">=">>=</option> <option value="<"><</option> <option value=">">></option> </select> </td><td><input type="text" name="addMoreInputFields[' + i +
+            '][value]" placeholder="Enter value" class="filter-value form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>'
+            );
+    });
+
+    $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('tr').remove();
+    });
+
+    $(document).ready(function() {
+        $('#datatable-buttons1').DataTable({
+            select: {
+                style: 'multi'
+            }
         });
+    });
 
-         
-
-
-        $(document).on('click', '.remove-input-field', function () {
-            $(this).parents('tr').remove();
-        });
 </script>
 @endsection

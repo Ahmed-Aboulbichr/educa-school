@@ -51,7 +51,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-warning p-1 btn-delete" type="submit"><i class="mdi mdi-24px mdi-delete"></i></button>
-                                        
+
                                     </form>
                                 </td>
                             <tr>
