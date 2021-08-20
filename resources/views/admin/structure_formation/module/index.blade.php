@@ -1,5 +1,5 @@
 @extends('layouts.master-educa')
-@section('title') Niveau Etudes @endsection
+@section('title') Semestres @endsection
 @section('css')
     <!-- DataTables -->
     <!-- Sweet Alert-->
@@ -7,9 +7,9 @@
 @endsection
 @section('content')
 @component('components.breadcrumb')
-    @slot('title') Sessions @endslot
+    @slot('title') Semestres @endslot
     @slot('li_1') Liste @endslot
-    @slot('li_2') Sessions @endslot
+    @slot('li_2') Semestres @endslot
 @endcomponent
 
 <div class="row">
@@ -35,26 +35,30 @@
                     <table id="datatable" class="table mt-4">
                         <thead class="thead-light">
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
+                                <th>Ref Module</th>
                                 <th>Intitulé</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($niveaux as $niveau)
-                            <tr>
-                                <td>{{$niveau->id}}</td>
-                                <td>{{ $niveau->intitule }}</td>
-                                <td class="text-center">
-                                    <form action="{{ route('niveau_etudes.destroy', $niveau->id) }}" method="POST">
-                                        <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('niveau_etudes.update', $niveau->id)}}" onclick="affiche(this,'{{$niveau->intitule}}', '{{$niveau->id}}')"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-warning p-1 btn-delete" type="submit"><i class="mdi mdi-24px mdi-delete"></i></button>
-
-                                    </form>
-                                </td>
-                            <tr>
+                            @php
+                                $i = 0;
+                            @endphp
+                            @foreach ($modules as $module)
+                                <tr>
+                                    <td>{{++$i}}</td>
+                                    <td>{{$module->id_module}}</td>
+                                    <td>{{$module->intitule_module}}</td>
+                                    <td class="text-center">
+                                        <form action="{{ route('module.destroy', $module->id) }}" method="POST">
+                                            <button class="btn btn-info p-1 btn-edit" type="button" data-route="{{route('module.edit', $module->id)}}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-warning p-1 btn-delete" type="submit"><i class="mdi mdi-24px mdi-delete"></i></button>
+                                        </form>
+                                    </td>
+                                <tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -66,25 +70,32 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myModalLabel">L'ajout du niveau d'étude</h5>
+                        <h5 class="modal-title mt-0" id="myModalLabel">L'ajout du module</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('niveau_etudes.store') }}" method="POST">
+                    <form action="{{ route('module.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             @if($errors->any() && session()->has('operation') && session()->get('operation') =="store")
-                            @foreach($errors->all() as $error)
-                                <div class="col-6-auto">
-                                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                @foreach($errors->all() as $error)
+                                    <div class="col-6-auto">
+                                        <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            <input type="hidden" name ="semestre_id" value="{{$semestre_id}}">
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Réference</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" name="id_module" >
                                 </div>
-                            @endforeach
-                        @endif
+                            </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Intitulé</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" name="intitule" >
+                                    <input class="form-control" type="text" name="intitule_module" >
                                 </div>
                             </div>
                         </div>
@@ -102,26 +113,33 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myModalLabel">Modifier le niveau d'études</h5>
+                        <h5 class="modal-title mt-0" id="myModalLabel">Modifier le module</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form action="" id="editForm" method="POST">
                         @csrf
-                        @method('PUT')
+                        @method('PATCH')
                         <div class="modal-body">
                             @if($errors->any() && session()->has('operation') && session()->get('operation') =="update")
-                            @foreach($errors->all() as $error)
-                                <div class="col-6-auto">
-                                    <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                @foreach($errors->all() as $error)
+                                    <div class="col-6-auto">
+                                        <div class="alert alert-danger" role="alert">{{ $error }}</div>
+                                    </div>
+                                @endforeach
+                            @endif
+                            <input type="hidden" name ="semestre_id" value="{{$semestre_id}}">
+                            <div class="form-group row align-items-center">
+                                <label class="col-md-3 col-form-label">Réference</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" name="id_module" value="" id="idModule_modifier">
                                 </div>
-                            @endforeach
-                        @endif
+                            </div>
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">Intitulé</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" id="modify-intitule" name="intitule">
+                                    <input class="form-control" type="text" name="intitule_module" value="" id="intituleModule_modifier">
                                 </div>
                             </div>
                         </div>
@@ -144,6 +162,13 @@
     <!-- Sweet alert init js-->
     <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
     <script>
+
+
+        $('#ajoutButton').on('click', function(){
+            $("#ajoutModal").modal('show');
+        });
+
+
         $('.btn-delete').on('click', function(event){
             event.preventDefault();
             Swal.fire({
@@ -160,14 +185,29 @@
                 }
             });
         });
-        function affiche(element,intitule, id){
-            $('#modify-intitule').val(intitule);
-            $('#editModal').modal('toggle');
-            $('#editForm').attr('action', element.getAttribute('data-route'));
-        }
+
+
+        $('.btn-edit').on('click', function () {
+            var route = $(this).data('route');
+            $.ajax({
+                url: route,
+                type: 'get',
+                dataType: 'json',
+                success: function(response){
+                    $('#idModule_modifier').val(response.module.id_module);
+                    $('#intituleModule_modifier').val(response.module.intitule_module);
+                    $("#editForm").attr("action",response.route);
+                    $("#editModal").modal('show');
+                },
+                error: function(response){
+                    console.log(response.responseText);
+                }
+            })
+        });
+
+
+
     </script>
-
-
 
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="store")
     <script>$('#ajoutModal').modal('toggle');</script>
@@ -175,6 +215,5 @@
     @if (count($errors) > 0 && session()->has('operation') && session()->get('operation') =="update")
     <script>$('#editModal').modal('toggle');</script>
     @endif
-
 
 @endsection

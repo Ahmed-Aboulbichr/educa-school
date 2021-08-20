@@ -196,4 +196,10 @@ class ProfesseurController extends Controller
     {
         //
     }
+
+    public function renderProfesseurs()
+    {
+        $professeurs = Professeur::all();
+        return  response()->json($professeurs, 200);
+    }
 }

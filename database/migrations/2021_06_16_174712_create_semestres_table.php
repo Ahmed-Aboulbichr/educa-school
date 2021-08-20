@@ -16,8 +16,8 @@ class CreateSemestresTable extends Migration
         Schema::create('semestres', function (Blueprint $table) {
             $table->id();
             $table->foreignId('session_id')->nullable()->constrained()->onDelete('cascade')->default(null);
-            $table->string('intitule');
-            $table->integer("niveau_études");
+            $table->foreignId('formation_id')->nullable()->constrained()->onDelete('cascade')->default(null);
+            $table->string('intitule_semestre');
             $table->timestamps();
         });
     }

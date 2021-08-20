@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Salle;
-use App\Seance;
-use DateTime;
+use App\Groupe;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class SalleController extends Controller
+class GroupeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,7 +35,7 @@ class SalleController extends Controller
      */
     public function store(Request $request)
     {
-      
+        //
     }
 
     /**
@@ -54,26 +51,27 @@ class SalleController extends Controller
 
 
 
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show_multi(Request $request)
     {
        
         if ($request->ajax()) {
             
-            $tempstart = New DateTime() ;
-            $tempstart= $tempstart->setTime(date('H', strtotime($request->heure) ),date('i', strtotime($request->heure)));
-            $temp = $tempstart->modify("+$request->duree minutes")->format('H:i:s') ;
-         
-
-            $Salles = Salle::whereNotIn('id', Seance::where('jour',$request->jour)->where('heure','>=',$request->heure)->where('heure','<',$temp)->orWhere('jour',$request->jour)->where('heure','<',$request->heure)->where(DB::raw('DATE_ADD(heure,INTERVAL '.$request->duree.' MINUTE)'),'>=',$request->heure)->get('salle_id'))->get();
+            $Groupe = Groupe::where('semestre_id', $request->semestre)->get();
 
 
-            return response()->json($Salles);
+            return response()->json($Groupe);
         }
     }
 
 
-
-
+    
     /**
      * Show the form for editing the specified resource.
      *

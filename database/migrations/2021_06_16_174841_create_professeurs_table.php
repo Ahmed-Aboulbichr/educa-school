@@ -23,7 +23,6 @@ class CreateProfesseursTable extends Migration
             $table->string('tel');
             $table->string('adresse');
             $table->foreignId('ville_id')->constrained();
-            $table->foreignId('matiere_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
