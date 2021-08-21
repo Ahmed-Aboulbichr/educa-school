@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Matiere extends Model
 {
     protected $fillable = [
-
         'module_id',
         'professeur_id',
         'id_matiere',
@@ -20,7 +19,7 @@ class Matiere extends Model
     }
     public function professeurs()
     {
-        return $this->belongsToMany(Candidature::class);
+        return $this->belongsToMany(Professeur::class);
     }
 
     public function seances()

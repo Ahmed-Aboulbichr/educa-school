@@ -313,12 +313,17 @@
                                             </li>
                                             
                                             <li class="form-group row align-items-center">
-                                                <i class="mdi mdi-school mr-1 align-middle"></i>Matière : <strong>{{ $matiere }}</strong>
+                                                
+                                                <i class="mdi mdi-school mr-1 align-middle"></i>Matière : <ul>
+                                                @foreach($matiere as $matP) 
+                                                    <li><strong>{{ $matP->intitule_matiere }}</strong></li>
+                                                @endforeach
+                                                </ul>
                                                 <div class="col-md-6">
-                                                    <select name="matiere_id" class="form-control" id="matiere" value="{{ $matiere }}">
+                                                    <select name="matiere_id" class="form-control" id="matiere" multiple>
                                                         <option value="-1">---Selectionner Matiere---</option>
                                                         @foreach($matieres as $mat)
-                                                            <option value="{{$mat->id}}" {{$mat->intitule== $matiere ? "selected" : ""}}>{{$mat->intitule}}</option>
+                                                            <option value="{{$mat->id}}" {{$mat->intitule== $matiere ? "selected" : ""}}>{{$mat->intitule_matiere}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Matiere;
 use App\Professeur;
+use App\Professeur_Matiere;
 use App\ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,7 @@ class ProfesseurController extends Controller
             "tel" => "required|numeric",
             "adresse" => "required",
             "ville_id" => ['required', 'numeric', Rule::exists('villes', 'id')->where('id', $request->input('ville_id'))],
-            "matiere_id" => ['required', 'numeric', Rule::exists('matieres', 'id')->where('id', $request->input('matiere_id'))]
+            "matiere_id.*" => ['required', 'numeric', Rule::exists('matieres', 'id')->where('id', $request->input('matiere_id'))]
         ]);
 
         $prof = Professeur::create([
@@ -72,8 +73,9 @@ class ProfesseurController extends Controller
             'tel' => $request->input('tel'),
             'adresse' => $request->input('adresse'),
             'ville_id' => $request->input('ville_id'),
-            'matiere_id' => $request->input('matiere_id')
         ]);
+
+        $prof->matieres()->attach($request->input('matiere_id'));
 
         return redirect()->route('professeur.index')->with('succes', 'Professeur' . $prof->nom . ' ajouté avec succes');
     }
@@ -90,15 +92,22 @@ class ProfesseurController extends Controller
 
     public function affiche($professeur)
     {
+
         $prof = Professeur::where('user_id', $professeur)->first();
-        $villePro = ville::where('id', $prof->ville_id)->first();
 
         $villes = ville::all();
 
         $matieres = Matiere::all();
 
-        $matiere = Matiere::where('id', $prof->matiere_id)->first('intitule')->intitule;
-        return $prof == null ? view('professeur.professeur.addProf', compact('villes', 'matieres')) : view('professeur.professeur.index', compact('prof', 'villePro', 'matiere', 'villes', 'matieres'));
+        if ($prof == null) {
+            return view('professeur.professeur.addProf', compact('villes', 'matieres'));
+        }
+
+        $villePro = ville::where('id', $prof->ville_id)->first();
+
+        $matiere = $prof->matieres;
+
+        return view('professeur.professeur.index', compact('prof', 'villePro', 'matiere', 'villes', 'matieres'));
     }
     public function insert(Request $request)
     {
@@ -114,7 +123,7 @@ class ProfesseurController extends Controller
             "tel" => "required|numeric",
             "adresse" => "required",
             "ville_id" => ['required', 'numeric', Rule::exists('villes', 'id')->where('id', $request->input('ville_id'))],
-            "matiere_id" => ['required', 'numeric', Rule::exists('matieres', 'id')->where('id', $request->input('matiere_id'))]
+            "matiere_id.*" => ['required', 'numeric', Rule::exists('matieres', 'id')->where('id', $request->input('matiere_id'))]
         ]);
 
         $prof = Professeur::create([
@@ -127,8 +136,9 @@ class ProfesseurController extends Controller
             'adresse' => $request->input('adresse'),
             'ville_id' => $request->input('ville_id'),
             'user_id' => Auth::user()->id,
-            'matiere_id' => $request->input('matiere_id')
         ]);
+
+        $prof->matieres()->attach($request->input('matiere_id'));
 
         return redirect()->route('professeur', ['professeur' => $prof->user_id]);
     }

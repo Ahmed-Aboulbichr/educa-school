@@ -101,10 +101,9 @@
                             <div class="col-9 form-group row align-items-center ml-auto mr-auto">
                                 <label class="col-md-3 col-form-label">Matière</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" name="matiere_id">
-                                        <option></option>
+                                    <select class="form-control" name="matiere_id[]" multiple>
                                         @foreach ($matieres as $mat)
-                                            <option value="{{$mat->id}}">{{$mat->intitule}}</option>
+                                            <option value="{{$mat->id}}">{{$mat->intitule_matiere}}</option>
                                         @endforeach
                                     </select>
                                 </div>

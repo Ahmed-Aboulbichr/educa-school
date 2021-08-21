@@ -25,7 +25,6 @@ class Professeur extends Model
     }
     public function matieres()
     {
-        return $this->belongsToMany(Candidature::class);
+        return $this->belongsToMany(Matiere::class);
     }
-
 }
