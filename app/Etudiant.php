@@ -16,4 +16,9 @@ class Etudiant extends User
         return $this->belongsTo(Candidat::class);
     }
 
+    public function semestres()
+    {
+        return $this->belongsToMany(Semestre::class);
+    }
+
 }

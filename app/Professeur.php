@@ -23,8 +23,9 @@ class Professeur extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function matiere()
+    public function matieres()
     {
-        return $this->hasMany(Matiere::class);
+        return $this->belongsToMany(Candidature::class);
     }
+
 }
