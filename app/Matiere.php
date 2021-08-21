@@ -18,9 +18,9 @@ class Matiere extends Model
     {
         return $this->belongsTo(Module::class);
     }
-    public function professeur()
+    public function professeurs()
     {
-        return $this->belongsTo(Professeur::class);
+        return $this->belongsToMany(Candidature::class);
     }
 
     public function seances()
