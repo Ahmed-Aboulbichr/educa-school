@@ -77,7 +77,7 @@
                                             <button onclick="affiche(this,{{json_encode($prof)}},{{json_encode($prof->user)}},'{{$prof->user->password}}')" class="btn btn-info p-1 btn-edit" type="button" data-toggle="modal" data-target="#editModal" data-route="{{ route('professeurs.update', $prof->id ) }}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-warning p-1" name="archive" type="button"  ><i class="mdi mdi-24px mdi-delete"></i></button>
+                                            <button class="btn btn-warning p-1 btn-delete" type="submit" ><i class="mdi mdi-24px mdi-delete"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -342,7 +342,27 @@
     <script>$('#editModal').modal('toggle');</script>
     @endif
 
+    <script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+
+    <script src="{{ URL::asset('/assets/js/pages/sweet-alerts.init.js')}}"></script>
     <script>
+        $('.btn-delete').on('click', function(event){
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).parents('form').submit();
+                }
+            });
+        });
+
         function affiche(courant,data,second,third){
             $("#editForm").attr('action', courant.getAttribute('data-route'));
             $('input[name=matricule]').val(data.matricule);
