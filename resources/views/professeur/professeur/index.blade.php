@@ -4,11 +4,12 @@
 @section('css')
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Plugin css -->
+    <link href="{{ URL::asset('/assets/libs/select2/select2.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
     <style>
-        input.form-control, select.form-control{
+        input.form-control, select.form-control, #divM{
             display: none;
         }
     </style>
@@ -315,15 +316,15 @@
                                             <li class="form-group row align-items-center">
                                                 
                                                 <i class="mdi mdi-school mr-1 align-middle"></i>Matière : <ul>
-                                                @foreach($matiere as $matP) 
+                                                @foreach($matiere as $matP)
                                                     <li><strong>{{ $matP->intitule_matiere }}</strong></li>
                                                 @endforeach
                                                 </ul>
-                                                <div class="col-md-6">
-                                                    <select name="matiere_id" class="form-control" id="matiere" multiple>
+                                                <div class="col-md-6" id="divM">
+                                                    <select class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ..." name="matiere_id[]" id="matiere">
                                                         <option value="-1">---Selectionner Matiere---</option>
                                                         @foreach($matieres as $mat)
-                                                            <option value="{{$mat->id}}" {{$mat->intitule== $matiere ? "selected" : ""}}>{{$mat->intitule_matiere}}</option>
+                                                            <option value="{{$mat->id}}" >{{$mat->intitule_matiere}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -365,6 +366,7 @@
                     $(element).val($(element).find('option:selected').val()); 
                     $(element).toggle(1000);
                 })
+                $('#divM').toggle(1000);
             });
         });
     </script>
@@ -372,6 +374,8 @@
     <!-- plugin js -->
     <script src="{{ URL::asset('/assets/libs/moment/moment.min.js')}}"></script>
     <script src="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.js')}}"></script>
+    <script src="{{ URL::asset('/assets/libs/select2/select2.min.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/pages/form-advanced.init.js')}}"></script>
 
     <!-- Calendar init -->
     <script src="{{ URL::asset('/assets/js/pages/calendar.init.js')}}"></script>
