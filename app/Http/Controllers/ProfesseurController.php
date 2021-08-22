@@ -247,8 +247,10 @@ class ProfesseurController extends Controller
     public function destroy($id)
     {
         $prof =  Professeur::findOrFail($id);
-        $prof->delete();
 
+        $user = User::findOrFail($prof->user_id);
+
+        $user->delete();
         return redirect()->route('professeurs.index')
             ->with('success', 'prof deleted successfully');
     }

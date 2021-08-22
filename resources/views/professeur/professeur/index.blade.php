@@ -316,7 +316,9 @@
                                             <li class="form-group row align-items-center">
                                                 
                                                 <i class="mdi mdi-school mr-1 align-middle"></i>Matière : <ul>
+                                                    <script >list = [];</script>
                                                 @foreach($matiere as $matP)
+                                                    <script>list.push("{{ $matP->id}}")</script>
                                                     <li><strong>{{ $matP->intitule_matiere }}</strong></li>
                                                 @endforeach
                                                 </ul>
@@ -353,7 +355,9 @@
 </div>
 @endsection
 @section('script')
-
+    
+    <script src="{{ URL::asset('/assets/libs/select2/select2.min.js')}}"></script>
+    <script src="{{ URL::asset('/assets/js/pages/form-advanced.init.js')}}"></script>
     <script>
         $(document).ready(function(){
             $('#btnEdit').on('click',function(event){
@@ -364,9 +368,13 @@
                 });
                 $.each($('form select'),function(index,element){
                     $(element).val($(element).find('option:selected').val()); 
+                    $(element).parents('li').find('strong').toggle();
                     $(element).toggle(1000);
                 })
                 $('#divM').toggle(1000);
+                $('#matiere').val(list);
+                $('#matiere').select2(list);
+                
             });
         });
     </script>
