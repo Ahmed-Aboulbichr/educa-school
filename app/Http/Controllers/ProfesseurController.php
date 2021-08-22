@@ -207,7 +207,35 @@ class ProfesseurController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            "matricule" => "required|string|max:30",
+            "nom" => "required|string|max:50",
+            "prenom" => "required|string|max:50",
+            "etat_civile" => "required|string",
+            "sexe" => "required|string",
+            "tel" => "required|numeric",
+            "adresse" => "required",
+            "ville_id" => ['required', 'numeric', Rule::exists('villes', 'id')->where('id', $request->input('ville_id'))],
+            "matiere_id.*" => ['required', 'numeric', Rule::exists('matieres', 'id')->where('id', $request->input('matiere_id'))]
+        ]);
+
+        $prof = Professeur::findOrFail($id);
+
+        $prof->update([
+            'matricule' => $request->input('matricule'),
+            'nom' => $request->input('nom'),
+            'prenom' => $request->input('prenom'),
+            'etat_civile' => $request->input('etat_civile'),
+            'sexe' => $request->input('sexe'),
+            'tel' => $request->input('tel'),
+            'adresse' => $request->input('adresse'),
+            'ville_id' => $request->input('ville_id')
+        ]);
+        $prof->matieres()->sync($request->input('matiere_id'));
+
+        $request->getSession()->put('success', 'modification valide');
+
+        return redirect()->route('professeurs.index');
     }
 
     /**

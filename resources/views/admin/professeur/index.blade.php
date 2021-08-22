@@ -74,7 +74,7 @@
                                     </td>
                                     <td>
                                         <form action="{{ route('professeurs.destroy', $prof->id) }}" method="POST">
-                                            <button onclick="affiche({{json_encode($prof)}},{{json_encode($prof->user)}})" class="btn btn-info p-1 btn-edit" type="button" data-toggle="modal" data-target="#editModal"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
+                                            <button onclick="affiche(this,{{json_encode($prof)}},{{json_encode($prof->user)}},'{{$prof->user->password}}')" class="btn btn-info p-1 btn-edit" type="button" data-toggle="modal" data-target="#editModal" data-route="{{ route('professeurs.update', $prof->id ) }}"><i class="mdi mdi-24px mdi-file-document-edit-outline"></i></button>
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-warning p-1" name="archive" type="button"  ><i class="mdi mdi-24px mdi-delete"></i></button>
@@ -212,8 +212,9 @@
          <div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="{{ route('professeurs.store') }}" method="POST">
+                    <form action="" method="POST" id="editForm">
                         @csrf
+                        @method('PUT')
                         <div class="modal-body">
                             @if($errors->any() && session()->has('operation') && session()->get('operation') =="store")
                                 @foreach($errors->all() as $error)
@@ -237,7 +238,7 @@
                             <div class="form-group row align-items-center">
                                 <label class="col-md-3 col-form-label">password </label>
                                 <div class="col-md-9">
-                                    <input type="password" class="form-control" name="password">
+                                    <input type="text" class="form-control" name="password" disabled>
                                 </div>
                             </div>
                             <div class="form-group row align-items-center">
@@ -320,7 +321,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Ajouter</button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Modifier</button>
                         </div>
                     </form>
                 </div><!-- /.modal-content -->
@@ -342,11 +343,11 @@
     @endif
 
     <script>
-        function affiche(data,second){
-            alert(second.password);
+        function affiche(courant,data,second,third){
+            $("#editForm").attr('action', courant.getAttribute('data-route'));
             $('input[name=matricule]').val(data.matricule);
             $('input[name=email]').val(second.email);
-            $('input[type=password]').val(second.password);
+            $('input[name=password]').val(third);
             $('input[name=nom]').val(data.nom);
             $('input[name=prenom]').val(data.prenom);
             $('input[name=tel]').val(data.tel);
@@ -361,11 +362,12 @@
                     $(element).attr('selected','selected');
                 }
             });
-            $('#matiere').each(function(index,element){
-                if(data.matiere.includes($(element).val())){
-                    $(element).attr('selected','selected');
-                }
-            });
+            mat = [];
+            for(i=0; i< data.matieres.length;i++){
+                mat.push(data.matieres[i].id);
+            }
+             $('#matiere').val(mat);
+             $('#matiere').select2(mat);
             $('input[name=sexe]').each(function(index,element){
                 if($(element).val() === data.sexe){
                     $(element).attr('checked','checked');
